@@ -9,12 +9,21 @@ public class Film extends Media {
 	private int duree;
 	private LocalDate dateSortie;
 	
-	public Film(Integer id, String titre, String description, List<Genre> genres, List<Utilisateur> utilisateurs,
+	public Film(Integer id, String titre, String description, List<Genre> genres,
 			int duree, LocalDate dateSortie) {
-		super(id, titre, description, genres, utilisateurs);
+		super(id, titre, description, genres);
 		this.duree = duree;
 		this.dateSortie = dateSortie;
 	}
+	
+	
+	public Film(String titre, String description, List<Genre> genres,
+			int duree, LocalDate dateSortie) {
+		super(titre, description, genres);
+		this.duree = duree;
+		this.dateSortie = dateSortie;
+	}
+	
 	
 	public int getDuree() {
 		return duree;

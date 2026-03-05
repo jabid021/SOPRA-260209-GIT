@@ -8,14 +8,19 @@ public abstract class Media {
 	protected String titre;
 	protected String description;
 	protected List<Genre> genres;
-	protected List<Utilisateur> utilisateurs;
+	protected transient List<Utilisateur> utilisateurs;
 	
-	public Media(Integer id, String titre, String description, List<Genre> genres, List<Utilisateur> utilisateurs) {
+	public Media(Integer id, String titre, String description,List<Genre> genres) {
 		this.id = id;
 		this.titre = titre;
 		this.description = description;
-		this.genres = genres;
-		this.utilisateurs = utilisateurs;
+		this.genres=genres;
+	}
+	
+	public Media(String titre, String description,List<Genre> genres) {
+		this.titre = titre;
+		this.description = description;
+		this.genres=genres;
 	}
 
 	public Integer getId() {

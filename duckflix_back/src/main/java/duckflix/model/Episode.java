@@ -1,29 +1,46 @@
 package duckflix.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity//OBLIGATOIRE
 public class Episode 
 {
-	private int id;
+	@Id//OBLIGATOIRE
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //SEMI-OBLIGATOIRE (permet l'auto increment classique de SQL)
+	private Integer id;
 	private int duree;
 	private int numero;
 	private String titre;
-	private Saison saison;
+	private transient Saison saison;
 
-	public Episode(int id, int duree, int numero, String titre, Saison saison) 
+
+	public Episode() {}//CONSTRUCTEUR VIDE OBLIGATOIRE
+
+	public Episode(Integer id, int numero,int duree, String titre, Saison saison) 
 	{
-		super();
 		this.id = id;
 		this.duree = duree;
 		this.numero = numero;
 		this.titre = titre;
 		this.saison = saison;
-		
+	}
+	
+	public Episode(int numero,int duree, String titre, Saison saison) 
+	{
+		this.duree = duree;
+		this.numero = numero;
+		this.titre = titre;
+		this.saison = saison;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

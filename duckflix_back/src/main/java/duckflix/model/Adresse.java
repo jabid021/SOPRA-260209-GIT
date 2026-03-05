@@ -5,8 +5,8 @@ public class Adresse {
 	private String voie;
 	private String ville;
 	private String cp;
+	
 	public Adresse(String numero, String voie, String ville, String cp) {
-		super();
 		this.numero = numero;
 		this.voie = voie;
 		this.ville = ville;
