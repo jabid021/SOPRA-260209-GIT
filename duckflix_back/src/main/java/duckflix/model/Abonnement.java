@@ -2,12 +2,24 @@ package duckflix.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Abonnement {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDate dateDebut;
 	private LocalDate dateFin;
 	private Plan plan;
-	private Adresse adresse;
+	private transient Adresse adresse;
+	
+	
+	public Abonnement() {}
 	
 	public Abonnement(Integer id, LocalDate dateDebut, LocalDate dateFin, Plan plan, String numero, String voie, String ville, String cp) {
 		this.id = id;
@@ -17,13 +29,21 @@ public class Abonnement {
 		this.adresse = new Adresse(numero, voie, ville, cp);
 	}
 	
-	public Abonnement(Integer id, String numero, String voie, String ville, String cp) {
-		this.id = id;
+	public Abonnement(LocalDate dateDebut, LocalDate dateFin, Plan plan, String numero, String voie, String ville, String cp) {
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.plan = plan;
+		this.adresse = new Adresse(numero, voie, ville, cp);
+	}
+
+	public Abonnement(String numero, String voie, String ville, String cp) {
 		this.dateDebut = null;
 		this.dateFin = null;
 		this.plan = Plan.Free;
 		this.adresse = new Adresse(numero, voie, ville, cp);
 	}
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -66,6 +86,11 @@ public class Abonnement {
 		this.adresse.setNumero(numero);
 		this.adresse.setVille(ville);
 		this.adresse.setVoie(voie);
+	}
+
+	
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 	@Override

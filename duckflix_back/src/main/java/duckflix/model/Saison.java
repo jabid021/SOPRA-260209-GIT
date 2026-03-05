@@ -6,22 +6,30 @@ import java.util.List;
 
 public class Saison 
 {
-	private int id;
+	private Integer id;
 	private LocalDate dateSortie;
-	private List<Episode> episodes;
+	private transient Serie serie;
+	private transient List<Episode> episodes=new ArrayList();
 	
-	public Saison(int id, LocalDate dateSortie) 
+	public Saison(Integer id,LocalDate dateSortie, Serie serie) 
 	{
 		this.id = id;
 		this.dateSortie = dateSortie;
-		this.episodes = new ArrayList<>();
+		this.serie=serie;
+	}
+	
+	public Saison(LocalDate dateSortie, Serie serie) 
+	{
+		this.dateSortie = dateSortie;
+		this.serie=serie;
 	}
 
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -40,10 +48,21 @@ public class Saison
 	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;
 	}
+	
+	
+
+	public Serie getSerie() {
+		return serie;
+	}
+
+	public void setSerie(Serie serie) {
+		this.serie = serie;
+	}
 
 	@Override
 	public String toString() {
-		return "Saison [id=" + id + ", dateSortie=" + dateSortie + ", episodes=" + episodes + "]";
+		return "Saison [id=" + id + ", dateSortie=" + dateSortie + ", serie=" + serie + "]";
 	}
+
 	
 }
