@@ -75,7 +75,7 @@ public class Test {
 				Arrays.asList(Genre.Comedie, Genre.Documentaire), 115, LocalDate.parse("2015-12-15"));
 
 		Serie s1 = new Serie("DuckFlix Originals : The Pond", "Une série dramatique au bord d'un étang pas si calme...",
-				Arrays.asList(Genre.Policier, Genre.Horreur));
+				Arrays.asList(Genre.Policier, Genre.Horreur),15999.99);
 
 		// =========================
 		// 5) SAISONS + EPISODES
