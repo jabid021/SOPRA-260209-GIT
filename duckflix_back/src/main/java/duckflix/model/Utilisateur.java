@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @DiscriminatorValue("user")
@@ -30,7 +31,8 @@ public class Utilisateur extends Compte {
 	@JoinTable(
 			name="watchlist",
 			joinColumns = @JoinColumn(name="client"),
-			inverseJoinColumns =  @JoinColumn(name="media")
+			inverseJoinColumns =  @JoinColumn(name="media"),
+			uniqueConstraints = @UniqueConstraint(columnNames = {"client","media"})
 			)
 	private List<Media> watchlist = new ArrayList();
 

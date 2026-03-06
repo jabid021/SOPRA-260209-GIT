@@ -8,15 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity//OBLIGATOIRE
-@Table(name="episode")
+@Table(name="episode",uniqueConstraints = @UniqueConstraint(columnNames = {"numero_episode","saison"}))
 public class Episode 	
 {
 	@Id//OBLIGATOIRE
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //SEMI-OBLIGATOIRE (permet l'auto increment classique de SQL)
 	private Integer id;
 	private int duree;
+	
+	@Column(name="numero_episode")
 	private int numero;
 
 	@Column(columnDefinition = "DECIMAL(11,2)") // DECIMAL(11,2) => 2 pour le nombre de decimales et 11 => le nombre de decimal + le nombre de chiffre avant la virgule
