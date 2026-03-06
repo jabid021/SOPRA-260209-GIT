@@ -6,6 +6,7 @@ import duckflix.model.Abonnement;
 import duckflix.model.Admin;
 import duckflix.model.Episode;
 import duckflix.model.Plan;
+import duckflix.model.Saison;
 import duckflix.model.Utilisateur;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -19,13 +20,16 @@ public class TestJPA {
 		
 		EntityManager em = emf.createEntityManager();
 		
-		
-		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,null);
-		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,null);
-		Episode e3 = new Episode(3, 41, "Le reflet",250.99,null);
+		Saison saison1 = new Saison(LocalDate.parse("2022-04-01"),null);
+		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"),null);
 
-		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,null);
-		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.855574,null);
+		
+		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,saison1);
+		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,saison1);
+		Episode e3 = new Episode(3, 41, "Le reflet",250.99,saison1);
+
+		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,saison2);
+		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.855574,saison2);
 		
 		Abonnement aboFree = new Abonnement("12", "Rue des Canards", "Lille", "59000");
 
@@ -40,6 +44,8 @@ public class TestJPA {
 		em.getTransaction().begin();
 		
 		//Insert
+		em.persist(saison1);
+		em.persist(saison2);
 		em.persist(e1);
 		em.persist(e2);
 		em.persist(e3);
@@ -68,7 +74,7 @@ public class TestJPA {
 		
 		//delete
 		em.getTransaction().begin();
-		em.remove(episodeFromBdd);
+		//em.remove(episodeFromBdd);
 		em.getTransaction().commit();
 		
 		//findAll

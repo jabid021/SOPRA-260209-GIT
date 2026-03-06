@@ -4,12 +4,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Collate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="saison")
 public class Saison 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="date_sortie")
 	private LocalDate dateSortie;
 	private transient Serie serie;
+	
 	private transient List<Episode> episodes=new ArrayList();
+	
+	
+	
+	public Saison() {}
 	
 	public Saison(Integer id,LocalDate dateSortie, Serie serie) 
 	{

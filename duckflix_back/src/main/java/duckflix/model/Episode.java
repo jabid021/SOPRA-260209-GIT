@@ -1,12 +1,11 @@
 package duckflix.model;
 
-import org.hibernate.annotations.Collate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity//OBLIGATOIRE
@@ -21,8 +20,14 @@ public class Episode
 
 	@Column(columnDefinition = "DECIMAL(11,2)") // DECIMAL(11,2) => 2 pour le nombre de decimales et 11 => le nombre de decimal + le nombre de chiffre avant la virgule
 	private Double budget;
+	@Column(length =30,nullable=false)
 	private String titre;
-	private transient Saison saison;
+	
+	//One / Many
+	//X => Il faut connaitre la cardinalité dans dans l'autre entité de l'association. On est dans le lien entre Episode -> Saison (il faut trouver combien d'episode a une Saison)
+	//Y => Si on annote un attribut tableau (list/tab/set/map) => Many, sinon One
+	@ManyToOne
+	private Saison saison;
 
 
 	public Episode() {}//CONSTRUCTEUR VIDE OBLIGATOIRE

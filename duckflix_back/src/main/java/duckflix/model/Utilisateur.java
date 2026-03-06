@@ -6,13 +6,16 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("user")
 public class Utilisateur extends Compte {
 	@Column(name="mail",unique = true,length = 50)
 	private String email;
-	private transient Abonnement abonnement;
+	
+	@OneToOne
+	private Abonnement abonnement;
 	private transient List<Media> watchlist = new ArrayList();
 
 	public Utilisateur() {}

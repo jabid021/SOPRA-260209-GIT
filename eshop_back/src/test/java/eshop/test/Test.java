@@ -1,5 +1,10 @@
 package eshop.test;
 
+import java.time.LocalDate;
+
+import eshop.model.Client;
+import eshop.model.Fournisseur;
+import eshop.model.Genre;
 import eshop.model.Personne;
 import eshop.model.Produit;
 import jakarta.persistence.EntityManager;
@@ -13,9 +18,9 @@ public class Test {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
 		EntityManager em = emf.createEntityManager();
 		
-		Personne personne1 = new Personne("Abid","Jordan");
-		Personne personne2 = new Personne("Perrouault","Jeremy");
-		Personne personne3 = new Personne("Abid","Charly");
+		Personne personne1 = new Client("Abid","Jordan",Genre.homme, LocalDate.parse("1993-05-01"),"161","Avenu de Verdun","Ivry sur Seine","92400");
+		Personne personne2 = new Client("Perrouault","Jeremy",null, LocalDate.parse("1983-07-15"),"161","Avenu de Verdun","Ivry sur Seine","92400");
+		Personne personne3 = new Fournisseur("Abid","Charly",Genre.homme,"AJC Ingenierie");
 		
 
 		Produit produit1 = new Produit("Formation SQL",980);

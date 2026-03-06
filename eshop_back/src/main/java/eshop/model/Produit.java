@@ -1,17 +1,22 @@
 package eshop.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="product")
 public class Produit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="label",nullable = false,length = 30)
 	private String libelle;
+	@Column(name="price", columnDefinition = "DECIMAL(7,2)")
 	private double prix;
 	
 	public Produit() {}
