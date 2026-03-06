@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +23,11 @@ public class Abonnement {
 	private LocalDate dateDebut;
 	@Column(name="date_fin")
 	private LocalDate dateFin;
+	
+	
+	@Enumerated(EnumType.STRING)
+	//Dans les precedentes versions de JPA il fallait preciser : 
+	//@Column(columnDefinition = "ENUM('Free','Basic','Premium')")
 	private Plan plan;
 	
 	@Embedded

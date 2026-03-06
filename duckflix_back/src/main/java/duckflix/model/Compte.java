@@ -1,6 +1,7 @@
 package duckflix.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,13 +13,15 @@ import jakarta.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name="account")
+//Pour rename la colonne du discriminant (l'info pour savoir quel new faire, new Utilisateur ou new Admin)
+@DiscriminatorColumn(name = "type_compte",columnDefinition = "ENUM('adm','user')")
 public abstract class Compte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
-	@Column(unique = true,nullable = false,length = 50)
+	@Column(name="log",unique = true, nullable = false, length = 35)
 	protected String login;
-	@Column(nullable = false,length = 100)
+	@Column(name="pass",nullable = false,columnDefinition = "VARCHAR(100)")
 	protected String password;
 
 	public Compte() {}

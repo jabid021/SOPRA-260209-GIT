@@ -75,7 +75,7 @@ public class Test {
 				Arrays.asList(Genre.Comedie, Genre.Documentaire), 115, LocalDate.parse("2015-12-15"));
 
 		Serie s1 = new Serie("DuckFlix Originals : The Pond", "Une série dramatique au bord d'un étang pas si calme...",
-				Arrays.asList(Genre.Policier, Genre.Horreur),15999.99);
+				Arrays.asList(Genre.Policier, Genre.Horreur));
 
 		// =========================
 		// 5) SAISONS + EPISODES
@@ -86,12 +86,12 @@ public class Test {
 		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"),s1);
 
 
-		Episode e1 = new Episode(1, 42, "L'eau est froide",saison1);
-		Episode e2 = new Episode(2, 44, "Plumes disparues",saison1);
-		Episode e3 = new Episode(3, 41, "Le reflet",saison1);
+		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,saison1);
+		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,saison1);
+		Episode e3 = new Episode(3, 41, "Le reflet",250.99,saison1);
 
-		Episode e4 = new Episode(1, 45, "Retour à l'étang",saison2);
-		Episode e5 = new Episode(2, 43, "L'ombre du cygne",saison2);
+		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,saison2);
+		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.0,saison2);
 
 		// =========================
 		// 6) WATCHLISTS (add comme tu veux)

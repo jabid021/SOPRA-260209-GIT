@@ -1,10 +1,13 @@
 package duckflix.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Adresse {
+	@Column(name="num",length =10,nullable=false)
 	private String numero;
+	@Column(name="street",length =30,nullable=false)
 	private String voie;
 	private String ville;
 	private String cp;
