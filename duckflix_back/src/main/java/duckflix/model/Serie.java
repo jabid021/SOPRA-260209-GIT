@@ -2,7 +2,6 @@ package duckflix.model;
 
 import java.util.List;
 
-
 public class Serie extends Media {
 	
 	private transient List<Saison> saisons;
@@ -22,12 +21,15 @@ public class Serie extends Media {
 	public void setSaisons(List<Saison> saisons) {
 		this.saisons = saisons;
 	}
-
+	
+	
 	@Override
 	public String toString() {
-		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres + "s]";
+		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres
+				+ ", utilisateurs=" + utilisateurs + "]";
 	}
-	
+
+
 	/*@Override
 	public String toString() {
 		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres + ", nbSaisons =" + saisons.size() +"]";

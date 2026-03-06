@@ -3,12 +3,20 @@ package duckflix.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("user")
 public class Utilisateur extends Compte {
-	
+	@Column(name="mail",unique = true,length = 50)
 	private String email;
 	private transient Abonnement abonnement;
 	private transient List<Media> watchlist = new ArrayList();
 
+	public Utilisateur() {}
+	
 	public Utilisateur(Integer id, String login, String password,String email, Abonnement abonnement) {
 		super(id, login, password);
 		this.email=email;

@@ -3,8 +3,10 @@ package duckflix.test;
 import java.time.LocalDate;
 
 import duckflix.model.Abonnement;
+import duckflix.model.Admin;
 import duckflix.model.Episode;
 import duckflix.model.Plan;
+import duckflix.model.Utilisateur;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -18,12 +20,20 @@ public class TestJPA {
 		EntityManager em = emf.createEntityManager();
 		
 		
-		Episode e1 = new Episode(1, 50, "L'eau est froide",null);
-		Episode e2 = new Episode(2, 44, "Plumes disparues",null);
-		Episode e3 = new Episode(3, 41, "Le reflet",null);
+		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,null);
+		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,null);
+		Episode e3 = new Episode(3, 41, "Le reflet",250.99,null);
+
+		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,null);
+		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.855574,null);
+		
 		Abonnement aboFree = new Abonnement("12", "Rue des Canards", "Lille", "59000");
 
 		Abonnement aboPremium = new Abonnement(LocalDate.parse("2026-01-01"),LocalDate.parse("2026-12-31"),Plan.Premium, "8B", "Avenue Pixel", "Paris", "75011");
+
+		Admin admin = new Admin("admin", "admin123");
+		Utilisateur u1 = new Utilisateur("leo", "leo123", "leo@duckflix.com", aboFree);
+		Utilisateur u2 = new Utilisateur("maya", "maya123", "maya@duckflix.com", aboPremium);
 
 		
 		
@@ -33,9 +43,13 @@ public class TestJPA {
 		em.persist(e1);
 		em.persist(e2);
 		em.persist(e3);
+		em.persist(e4);
+		em.persist(e5);
 		em.persist(aboFree);
 		em.persist(aboPremium);
-		
+		em.persist(admin);
+		em.persist(u1);
+		em.persist(u2);
 		
 		em.getTransaction().commit();
 		

@@ -2,21 +2,36 @@ package duckflix.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="subscription")
 public class Abonnement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="date_debut")
 	private LocalDate dateDebut;
+	@Column(name="date_fin")
 	private LocalDate dateFin;
+	
+	
+	@Enumerated(EnumType.STRING)
+	//Dans les precedentes versions de JPA il fallait preciser : 
+	//@Column(columnDefinition = "ENUM('Free','Basic','Premium')")
 	private Plan plan;
-	private transient Adresse adresse;
+	
+	@Embedded
+	private Adresse adresse;
 	
 	
 	public Abonnement() {}

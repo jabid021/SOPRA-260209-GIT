@@ -1,7 +1,14 @@
 package duckflix.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("adm")
 public class Admin extends Compte {
 
+	public Admin() {}
+	
 	public Admin(Integer id, String login, String password) {
 		super(id, login, password);
 	}
