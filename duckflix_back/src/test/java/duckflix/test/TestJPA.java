@@ -61,16 +61,16 @@ public class TestJPA {
 
 		
 		
-		Saison saison1 = new Saison(LocalDate.parse("2022-04-01"),s1);
-		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"),s1);
+		Saison saison1 = new Saison(LocalDate.parse("2022-04-01"));
+		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"));
 
 		
-		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,saison1);
-		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,saison1);
-		Episode e3 = new Episode(3, 41, "Le reflet",250.99,saison1);
+		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,s1,saison1);
+		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,s1,saison1);
+		Episode e3 = new Episode(3, 41, "Le reflet",250.99,s1,saison1);
 
-		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,saison2);
-		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.855574,saison2);
+		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,s1,saison2);
+		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.855574,s1,saison2);
 		
 		Abonnement aboFree = new Abonnement("12", "Rue des Canards", "Lille", "59000");
 

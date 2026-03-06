@@ -8,6 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -20,6 +22,12 @@ public class Client extends Personne {
 	private Adresse adresse;
 	
 	@ManyToMany
+	@JoinTable
+	(
+			name="achats",
+			joinColumns = @JoinColumn(name="acheteur"),
+			inverseJoinColumns = @JoinColumn(name="produit") 
+	)
 	private List<Produit> achats = new ArrayList();
 	
 	public Client() {}

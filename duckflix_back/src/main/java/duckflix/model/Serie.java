@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name="serie")
 public class Serie extends Media {
 	
-	private transient List<Saison> saisons;
+	private transient List<Episode> episodes;
 
 	public Serie() {}
 	
@@ -23,15 +23,15 @@ public class Serie extends Media {
 	
 	
 
-	public List<Saison> getSaisons() {
-		return saisons;
+	
+	public List<Episode> getEpisodes() {
+		return episodes;
 	}
 
-	public void setSaisons(List<Saison> saisons) {
-		this.saisons = saisons;
+	public void setEpisodes(List<Episode> episodes) {
+		this.episodes = episodes;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres

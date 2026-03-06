@@ -23,26 +23,21 @@ public class Saison
 	private LocalDate dateSortie;
 	
 	
-	@ManyToOne
-	private Serie serie;
-	
 	private transient List<Episode> episodes=new ArrayList();
 	
 	
 	
 	public Saison() {}
 	
-	public Saison(Integer id,LocalDate dateSortie, Serie serie) 
+	public Saison(Integer id,LocalDate dateSortie) 
 	{
 		this.id = id;
 		this.dateSortie = dateSortie;
-		this.serie=serie;
 	}
 	
-	public Saison(LocalDate dateSortie, Serie serie) 
+	public Saison(LocalDate dateSortie) 
 	{
 		this.dateSortie = dateSortie;
-		this.serie=serie;
 	}
 
 
@@ -70,19 +65,10 @@ public class Saison
 		this.episodes = episodes;
 	}
 	
-	
-
-	public Serie getSerie() {
-		return serie;
-	}
-
-	public void setSerie(Serie serie) {
-		this.serie = serie;
-	}
 
 	@Override
 	public String toString() {
-		return "Saison [id=" + id + ", dateSortie=" + dateSortie + ", serie=" + serie + "]";
+		return "Saison [id=" + id + ", dateSortie=" + dateSortie + "]";
 	}
 
 	

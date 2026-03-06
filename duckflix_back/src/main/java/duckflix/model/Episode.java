@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity//OBLIGATOIRE
-@Table(name="episode",uniqueConstraints = @UniqueConstraint(columnNames = {"numero_episode","saison"}))
+@Table(name="episode",uniqueConstraints = @UniqueConstraint(columnNames = {"numero_episode","saison","serie"}))
 public class Episode 	
 {
 	@Id//OBLIGATOIRE
@@ -31,29 +31,24 @@ public class Episode
 	//X => Il faut connaitre la cardinalité dans dans l'autre entité de l'association. On est dans le lien entre Episode -> Saison (il faut trouver combien d'episode a une Saison)
 	//Y => Si on annote un attribut tableau (list/tab/set/map) => Many, sinon One
 	@ManyToOne
-	
 	@JoinColumn(name="saison", nullable = false)
 	private Saison saison;
+	
+	@ManyToOne
+	@JoinColumn(name="serie",nullable=false)
+	private Serie serie;
 
 
 	public Episode() {}//CONSTRUCTEUR VIDE OBLIGATOIRE
 
-	public Episode(Integer id, int numero,int duree, String titre,Double budget, Saison saison) 
-	{
-		this.id = id;
-		this.duree = duree;
-		this.numero = numero;
-		this.titre = titre;
-		this.budget=budget;
-		this.saison = saison;
-	}
-	
-	public Episode(int numero,int duree, String titre,Double budget, Saison saison) 
+
+	public Episode(int numero,int duree, String titre,Double budget,Serie serie, Saison saison) 
 	{
 		this.duree = duree;
 		this.numero = numero;
 		this.titre = titre;
 		this.budget=budget;
+		this.serie=serie;
 		this.saison = saison;
 	}
 
@@ -106,11 +101,25 @@ public class Episode
 		this.budget = budget;
 	}
 
+	
+	public Serie getSerie() {
+		return serie;
+	}
+
+
+	public void setSerie(Serie serie) {
+		this.serie = serie;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Episode [id=" + id + ", duree=" + duree + ", numero=" + numero + ", budget=" + budget + ", titre="
-				+ titre + "]";
+				+ titre + ", saison=" + saison + ", serie=" + serie + "]";
 	}
+
+
+	
 
 	
 }

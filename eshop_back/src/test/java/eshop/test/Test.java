@@ -2,7 +2,6 @@ package eshop.test;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.List;
 
 import eshop.model.Client;
 import eshop.model.Fournisseur;
