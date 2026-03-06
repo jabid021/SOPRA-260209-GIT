@@ -3,11 +3,19 @@ package duckflix.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="movie")
 public class Film extends Media {
 	
 	private int duree;
+	@Column(name="date_sortie")
 	private LocalDate dateSortie;
+	
+	public Film() {}
 	
 	public Film(Integer id, String titre, String description, List<Genre> genres,
 			int duree, LocalDate dateSortie) {

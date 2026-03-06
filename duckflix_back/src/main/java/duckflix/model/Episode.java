@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -27,6 +28,8 @@ public class Episode
 	//X => Il faut connaitre la cardinalité dans dans l'autre entité de l'association. On est dans le lien entre Episode -> Saison (il faut trouver combien d'episode a une Saison)
 	//Y => Si on annote un attribut tableau (list/tab/set/map) => Many, sinon One
 	@ManyToOne
+	
+	@JoinColumn(name="saison", nullable = false)
 	private Saison saison;
 
 

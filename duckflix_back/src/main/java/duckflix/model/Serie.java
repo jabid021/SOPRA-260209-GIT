@@ -2,10 +2,17 @@ package duckflix.model;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="serie")
 public class Serie extends Media {
 	
 	private transient List<Saison> saisons;
 
+	public Serie() {}
+	
 	public Serie(Integer id, String titre, String description, List<Genre> genres) {
 		super(id, titre, description, genres);
 	}
@@ -13,6 +20,8 @@ public class Serie extends Media {
 	public Serie(String titre, String description, List<Genre> genres) {
 		super(titre, description, genres);
 	}
+	
+	
 
 	public List<Saison> getSaisons() {
 		return saisons;

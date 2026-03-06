@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,11 +20,15 @@ public class Produit {
 	@Column(name="price", columnDefinition = "DECIMAL(7,2)")
 	private double prix;
 	
+	@ManyToOne
+	private Fournisseur fournisseur;
+	
 	public Produit() {}
 	
-	public Produit(String libelle, double prix) {
+	public Produit(String libelle, double prix,Fournisseur fournisseur) {
 		this.libelle = libelle;
 		this.prix = prix;
+		this.fournisseur=fournisseur;
 	}
 
 
@@ -57,10 +62,19 @@ public class Produit {
 	}
 
 
+	public Fournisseur getFournisseur() {
+		return fournisseur;
+	}
+
+	public void setFournisseur(Fournisseur fournisseur) {
+		this.fournisseur = fournisseur;
+	}
+
 	@Override
 	public String toString() {
-		return "Produit [id=" + id + ", libelle=" + libelle + ", prix=" + prix + "]";
+		return "Produit [id=" + id + ", libelle=" + libelle + ", prix=" + prix + ", fournisseur=" + fournisseur + "]";
 	}
+
 	
 	
 	
