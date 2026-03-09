@@ -26,7 +26,7 @@ public class TestJPA {
 		EntityManager em = emf.createEntityManager();
 		
 		
-		Film f1 = new Film("Duck Hard", "Un canard policier contre la mafia du pain.",
+		/*Film f1 = new Film("Duck Hard", "Un canard policier contre la mafia du pain.",
 				Arrays.asList(Genre.Policier, Genre.Comedie), 128, LocalDate.parse("2021-05-12"));
 
 		Film f2 = new Film("Quackception", "Des rêves imbriqués mais version canard.",
@@ -145,7 +145,7 @@ public class TestJPA {
 		em.close();
 		
 		
-		
+		*/
 		
 		
 		

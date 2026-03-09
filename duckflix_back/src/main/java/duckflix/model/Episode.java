@@ -19,7 +19,7 @@ public class Episode
 	private Integer id;
 	private int duree;
 	
-	@Column(name="numero_episode")
+	@Column(name="numero_episode", nullable=false, columnDefinition = "int(4) default 1")
 	private int numero;
 
 	@Column(columnDefinition = "DECIMAL(11,2)") // DECIMAL(11,2) => 2 pour le nombre de decimales et 11 => le nombre de decimal + le nombre de chiffre avant la virgule

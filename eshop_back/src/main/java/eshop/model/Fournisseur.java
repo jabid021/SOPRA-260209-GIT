@@ -1,13 +1,20 @@
 package eshop.model;
 
+import java.util.List;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("supplier")
 public class Fournisseur extends Personne {
 
 	private String societe;
+	
+	@OneToMany(mappedBy="fournisseur")
+	private List<Produit> stock;
+	
 	
 	public Fournisseur() {}
 

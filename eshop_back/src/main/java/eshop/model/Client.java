@@ -21,13 +21,13 @@ public class Client extends Personne {
 	@Embedded
 	private Adresse adresse;
 	
-	@OneToMany
-	@JoinTable
+	@OneToMany(mappedBy="client")
+	/*@JoinTable
 	(
 			name="achats",
 			joinColumns = @JoinColumn(name="acheteur"),
 			inverseJoinColumns = @JoinColumn(name="produit")
-	)
+	)*/
 	private List<Achat> achats = new ArrayList();
 	
 	public Client() {}

@@ -52,7 +52,6 @@ public class Test {
 		em.getTransaction().commit();
 		
 		
-		
 		em.close();
 		emf.close();
 	}
