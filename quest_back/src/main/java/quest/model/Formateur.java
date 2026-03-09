@@ -1,8 +1,12 @@
 package quest.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Formateur extends Personne {
 	private boolean admin;
 
+	public Formateur() {}
 	public Formateur(Integer id, String login, String password, String nom, String prenom, Genre civilite, boolean admin) {
 		super(id, login, password, nom, prenom,civilite);
 		this.admin = admin;

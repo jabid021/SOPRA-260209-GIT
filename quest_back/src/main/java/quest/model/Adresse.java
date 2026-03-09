@@ -1,11 +1,22 @@
 package quest.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Adresse {
 
+	@Column(length = 15)
 	private String numero;
+	@Column(length = 30)
 	private String voie;
+	@Column(length = 30)
 	private String ville;
+	@Column(length = 15)
 	private String cp;
+	
+	
+	public Adresse() {}
 	
 	public Adresse(String numero, String voie, String ville, String cp) {
 		this.numero = numero;

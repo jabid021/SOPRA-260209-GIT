@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
+import duckflix.context.Singleton;
 import duckflix.model.Abonnement;
 import duckflix.model.Admin;
 import duckflix.model.Episode;
@@ -15,18 +16,17 @@ import duckflix.model.Serie;
 import duckflix.model.Utilisateur;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class TestJPA {
 
 	public static void main(String[] args) {
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
+		EntityManagerFactory emf = Singleton.getInstance().getEmf();
 		
 		EntityManager em = emf.createEntityManager();
 		
 		
-		/*Film f1 = new Film("Duck Hard", "Un canard policier contre la mafia du pain.",
+		Film f1 = new Film("Duck Hard", "Un canard policier contre la mafia du pain.",
 				Arrays.asList(Genre.Policier, Genre.Comedie), 128, LocalDate.parse("2021-05-12"));
 
 		Film f2 = new Film("Quackception", "Des rêves imbriqués mais version canard.",
@@ -145,7 +145,6 @@ public class TestJPA {
 		em.close();
 		
 		
-		*/
 		
 		
 		
