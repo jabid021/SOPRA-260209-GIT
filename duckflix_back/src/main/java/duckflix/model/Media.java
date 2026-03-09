@@ -2,9 +2,9 @@ package duckflix.model;
 
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Embedded;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,12 +30,19 @@ public abstract class Media {
 	@Column(columnDefinition = "TEXT")
 	protected String description;
 	
+	
+	//Si on retire toutes les annotations, jpa gere la liste d'enum via un fichier binaire (serialize)
+	@ElementCollection(targetClass = Genre.class)
 	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "media_genres", joinColumns = @JoinColumn(name = "media"))
+	@Column(name = "libelle_genre")
 	protected List<Genre> genres;
 	
 	
 	
-	protected transient List<Utilisateur> utilisateurs;
+	
+	@ManyToMany(mappedBy="watchlist")
+	protected List<Utilisateur> utilisateurs;
 	
 	public Media(Integer id, String titre, String description,List<Genre> genres) {
 		this.id = id;

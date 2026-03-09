@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +22,8 @@ public class Saison
 	@Column(name="date_sortie")
 	private LocalDate dateSortie;
 	
-	
-	private transient List<Episode> episodes=new ArrayList();
+	@OneToMany(mappedBy="saison")
+	private List<Episode> episodes=new ArrayList();
 	
 	
 	

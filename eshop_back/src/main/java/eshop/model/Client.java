@@ -10,7 +10,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("customer")
@@ -21,14 +21,14 @@ public class Client extends Personne {
 	@Embedded
 	private Adresse adresse;
 	
-	@ManyToMany
+	@OneToMany
 	@JoinTable
 	(
 			name="achats",
 			joinColumns = @JoinColumn(name="acheteur"),
-			inverseJoinColumns = @JoinColumn(name="produit") 
+			inverseJoinColumns = @JoinColumn(name="produit")
 	)
-	private List<Produit> achats = new ArrayList();
+	private List<Achat> achats = new ArrayList();
 	
 	public Client() {}
 
@@ -55,11 +55,11 @@ public class Client extends Personne {
 	}
 
 	
-	public List<Produit> getAchats() {
+	public List<Achat> getAchats() {
 		return achats;
 	}
 
-	public void setAchats(List<Produit> achats) {
+	public void setAchats(List<Achat> achats) {
 		this.achats = achats;
 	}
 

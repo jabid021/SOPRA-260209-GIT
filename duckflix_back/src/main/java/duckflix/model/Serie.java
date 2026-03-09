@@ -3,13 +3,16 @@ package duckflix.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="serie")
 public class Serie extends Media {
 	
-	private transient List<Episode> episodes;
+	
+	@OneToMany(mappedBy="serie")
+	private List<Episode> episodes;
 
 	public Serie() {}
 	

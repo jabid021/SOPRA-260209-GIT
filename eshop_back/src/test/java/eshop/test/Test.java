@@ -1,8 +1,8 @@
 package eshop.test;
 
 import java.time.LocalDate;
-import java.util.Collections;
 
+import eshop.model.Achat;
 import eshop.model.Client;
 import eshop.model.Fournisseur;
 import eshop.model.Genre;
@@ -26,18 +26,28 @@ public class Test {
 		Produit produit1 = new Produit("Formation SQL",980,personne3);
 		Produit produit2 = new Produit("Formation Spring",1450.50,personne3);
 		
+		Achat a1 = new Achat(1,personne1,produit1);
+		Achat a2= new Achat(1,personne1,produit2,LocalDate.parse("2026-02-09"));
 		
-		personne1.getAchats().add(produit1);
+		
+		//personne1.getAchats().add(produit1);
 
-		Collections.addAll(personne2.getAchats(), produit1,produit2);
+		//Collections.addAll(personne2.getAchats(), produit1,produit2);
 		
 		em.getTransaction().begin();
 		
 			em.persist(personne1);
 			em.persist(personne2);
+
 			em.persist(personne3);
+			
+			
 			em.persist(produit1);
 			em.persist(produit2);
+			
+			
+			em.persist(a1);
+			em.persist(a2);
 			
 		em.getTransaction().commit();
 		
