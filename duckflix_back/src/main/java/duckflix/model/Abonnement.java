@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +25,8 @@ public class Abonnement {
 	@Column(name="date_fin")
 	private LocalDate dateFin;
 	
+	@OneToOne(mappedBy = "abonnement") //Permet de pointer sur l'attribut java permettant la jointure sql entre un user et son abonnement
+	private Utilisateur utilisateur;
 	
 	@Enumerated(EnumType.STRING)
 	//Dans les precedentes versions de JPA il fallait preciser : 
@@ -106,6 +109,16 @@ public class Abonnement {
 	
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+	
+	
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	@Override

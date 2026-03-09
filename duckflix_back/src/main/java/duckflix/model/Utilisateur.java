@@ -6,14 +6,35 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @DiscriminatorValue("user")
 public class Utilisateur extends Compte {
 	@Column(name="mail",unique = true,length = 50)
 	private String email;
-	private transient Abonnement abonnement;
-	private transient List<Media> watchlist = new ArrayList();
+	
+	@OneToOne
+	private Abonnement abonnement;
+	
+	//ManyToMany va generer une table de jointure avec l'id de la classe ou on se trouve (Client) + l'id de la classe associée (Media)
+	//1 (client) - 1(media)
+	//1 (client) - 5 (media)
+	
+	//(client) => id principal
+	//(media) => la cle inverse
+	@ManyToMany
+	@JoinTable(
+			name="watchlist",
+			joinColumns = @JoinColumn(name="client"),
+			inverseJoinColumns =  @JoinColumn(name="media"),
+			uniqueConstraints = @UniqueConstraint(columnNames = {"client","media"})
+			)
+	private List<Media> watchlist = new ArrayList();
 
 	public Utilisateur() {}
 	

@@ -1,24 +1,41 @@
 package eshop.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
 @Entity
-public class Personne {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_personne",columnDefinition = "ENUM('customer','supplier')")
+@Table(name="person")
+public abstract class Personne {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String nom;
-	private String prenom;
+	protected Integer id;
+	@Column(name="lastname",nullable = false,length = 30)
+	protected String nom;
+	@Column(name="firstname",nullable = false,length = 30)
+	protected String prenom;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="gender")
+	protected Genre civilite;
 	
 	public Personne() {}
 	
-	public Personne(String nom, String prenom) {
+	public Personne(String nom, String prenom,Genre civilite) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.civilite=civilite;
 	}
 
 	public Integer getId() {
@@ -45,12 +62,15 @@ public class Personne {
 		this.prenom = prenom;
 	}
 
-	@Override
-	public String toString() {
-		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+	
+	public Genre getCivilite() {
+		return civilite;
 	}
 
-	
+	public void setCivilite(Genre civilite) {
+		this.civilite = civilite;
+	}
+
 	
 	
 

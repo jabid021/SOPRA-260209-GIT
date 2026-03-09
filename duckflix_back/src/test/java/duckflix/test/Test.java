@@ -82,16 +82,16 @@ public class Test {
 		// Saison(dateSortie,serie) - épisodes ajoutés ensuite
 		// Episode(saison, numero, titre, duree)
 		// =========================
-		Saison saison1 = new Saison(LocalDate.parse("2022-04-01"),s1);
-		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"),s1);
+		Saison saison1 = new Saison(LocalDate.parse("2022-04-01"));
+		Saison saison2 = new Saison(LocalDate.parse("2023-04-01"));
 
 
-		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,saison1);
-		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,saison1);
-		Episode e3 = new Episode(3, 41, "Le reflet",250.99,saison1);
+		Episode e1 = new Episode(1, 42, "L'eau est froide",2500.00,s1,saison1);
+		Episode e2 = new Episode(2, 44, "Plumes disparues",1580.50,s1,saison1);
+		Episode e3 = new Episode(3, 41, "Le reflet",250.99,s1,saison1);
 
-		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,saison2);
-		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.0,saison2);
+		Episode e4 = new Episode(1, 45, "Retour à l'étang",1522.99,s1,saison2);
+		Episode e5 = new Episode(2, 43, "L'ombre du cygne",35000.0,s1,saison2);
 
 		// =========================
 		// 6) WATCHLISTS (add comme tu veux)
@@ -114,7 +114,7 @@ public class Test {
 		System.out.println("\nUser2: " + u2.getLogin() + " | " + u2.getAbonnement().getPlan());
 		System.out.println("Watchlist u2 size = " + u2.getWatchlist().size());
 
-		System.out.println("\nSerie: " + s1.getTitre() + " saisons=" + s1.getSaisons().size());
+		System.out.println("\nSerie: " + s1.getTitre() + " saisons=" + s1.getEpisodes().size());
 	}
 
 }

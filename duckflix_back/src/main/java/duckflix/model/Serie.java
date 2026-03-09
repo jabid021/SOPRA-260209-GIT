@@ -2,10 +2,20 @@ package duckflix.model;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="serie")
 public class Serie extends Media {
 	
-	private transient List<Saison> saisons;
+	
+	@OneToMany(mappedBy="serie")
+	private List<Episode> episodes;
 
+	public Serie() {}
+	
 	public Serie(Integer id, String titre, String description, List<Genre> genres) {
 		super(id, titre, description, genres);
 	}
@@ -13,16 +23,18 @@ public class Serie extends Media {
 	public Serie(String titre, String description, List<Genre> genres) {
 		super(titre, description, genres);
 	}
-
-	public List<Saison> getSaisons() {
-		return saisons;
-	}
-
-	public void setSaisons(List<Saison> saisons) {
-		this.saisons = saisons;
-	}
 	
 	
+
+	
+	public List<Episode> getEpisodes() {
+		return episodes;
+	}
+
+	public void setEpisodes(List<Episode> episodes) {
+		this.episodes = episodes;
+	}
+
 	@Override
 	public String toString() {
 		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres

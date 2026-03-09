@@ -1,48 +1,54 @@
 package duckflix.model;
 
-import org.hibernate.annotations.Collate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity//OBLIGATOIRE
-@Table(name="episode")
+@Table(name="episode",uniqueConstraints = @UniqueConstraint(columnNames = {"numero_episode","saison","serie"}))
 public class Episode 	
 {
 	@Id//OBLIGATOIRE
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //SEMI-OBLIGATOIRE (permet l'auto increment classique de SQL)
 	private Integer id;
 	private int duree;
+	
+	@Column(name="numero_episode", nullable=false, columnDefinition = "int(4) default 1")
 	private int numero;
 
 	@Column(columnDefinition = "DECIMAL(11,2)") // DECIMAL(11,2) => 2 pour le nombre de decimales et 11 => le nombre de decimal + le nombre de chiffre avant la virgule
 	private Double budget;
+	@Column(length =30,nullable=false)
 	private String titre;
-	private transient Saison saison;
+	
+	//One / Many
+	//X => Il faut connaitre la cardinalité dans dans l'autre entité de l'association. On est dans le lien entre Episode -> Saison (il faut trouver combien d'episode a une Saison)
+	//Y => Si on annote un attribut tableau (list/tab/set/map) => Many, sinon One
+	@ManyToOne
+	@JoinColumn(name="saison", nullable = false)
+	private Saison saison;
+	
+	@ManyToOne
+	@JoinColumn(name="serie",nullable=false)
+	private Serie serie;
 
 
 	public Episode() {}//CONSTRUCTEUR VIDE OBLIGATOIRE
 
-	public Episode(Integer id, int numero,int duree, String titre,Double budget, Saison saison) 
-	{
-		this.id = id;
-		this.duree = duree;
-		this.numero = numero;
-		this.titre = titre;
-		this.budget=budget;
-		this.saison = saison;
-	}
-	
-	public Episode(int numero,int duree, String titre,Double budget, Saison saison) 
+
+	public Episode(int numero,int duree, String titre,Double budget,Serie serie, Saison saison) 
 	{
 		this.duree = duree;
 		this.numero = numero;
 		this.titre = titre;
 		this.budget=budget;
+		this.serie=serie;
 		this.saison = saison;
 	}
 
@@ -95,11 +101,25 @@ public class Episode
 		this.budget = budget;
 	}
 
+	
+	public Serie getSerie() {
+		return serie;
+	}
+
+
+	public void setSerie(Serie serie) {
+		this.serie = serie;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Episode [id=" + id + ", duree=" + duree + ", numero=" + numero + ", budget=" + budget + ", titre="
-				+ titre + "]";
+				+ titre + ", saison=" + saison + ", serie=" + serie + "]";
 	}
+
+
+	
 
 	
 }
