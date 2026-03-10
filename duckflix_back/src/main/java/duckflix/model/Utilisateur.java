@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -18,7 +19,7 @@ public class Utilisateur extends Compte {
 	@Column(name="mail",unique = true,length = 50)
 	private String email;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Abonnement abonnement;
 	
 	//ManyToMany va generer une table de jointure avec l'id de la classe ou on se trouve (Client) + l'id de la classe associée (Media)

@@ -7,13 +7,16 @@ import java.util.Collections;
 import duckflix.context.Singleton;
 import duckflix.model.Abonnement;
 import duckflix.model.Admin;
+import duckflix.model.Carte;
 import duckflix.model.Episode;
 import duckflix.model.Film;
 import duckflix.model.Genre;
+import duckflix.model.Paypal;
 import duckflix.model.Plan;
 import duckflix.model.Saison;
 import duckflix.model.Serie;
 import duckflix.model.Utilisateur;
+import duckflix.model.Virement;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -90,6 +93,11 @@ public class TestJPA {
 
 		Collections.addAll(u2.getWatchlist(), f2,f3,f5,f7,f8,f9,s1);
 		
+		
+		Paypal paypal = new Paypal(LocalDate.now(),"email@paypal.fr");
+		Virement virement = new Virement(LocalDate.now(),"FR76 3000 xxxx 0112 3456 7890 xxxx xx","Paiement abonnement duckflix");
+		Carte cb = new Carte(LocalDate.now(),"1478","Visa");
+		
 		em.getTransaction().begin();
 		
 		//Insert
@@ -116,7 +124,9 @@ public class TestJPA {
 		em.persist(admin);
 		em.persist(u1);
 		em.persist(u2);
-		
+		em.persist(paypal);
+		em.persist(cb);
+		em.persist(virement);
 		em.getTransaction().commit();
 		
 		

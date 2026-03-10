@@ -5,10 +5,12 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="movie")
+@PrimaryKeyJoinColumn(name = "id_film")
 public class Film extends Media {
 	
 	private int duree;

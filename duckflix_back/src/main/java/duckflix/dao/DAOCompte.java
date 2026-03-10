@@ -4,6 +4,7 @@ import java.util.List;
 
 import duckflix.context.Singleton;
 import duckflix.model.Compte;
+import duckflix.model.Utilisateur;
 import jakarta.persistence.EntityManager;
 
 public class DAOCompte implements IDAOCompte{
@@ -66,6 +67,22 @@ public class DAOCompte implements IDAOCompte{
 		}catch(Exception e) {e.printStackTrace();}
 		em.close();
 		return compte;
+	}
+
+	@Override
+	public List<Utilisateur> findAllUtilisateurWithWatchList() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Utilisateur> utilisateurs = em.createQuery("SELECT u from Utilisateur u LEFT JOIN FETCH u.watchlist").getResultList();
+		em.close();
+		return utilisateurs;
+	}
+
+	@Override
+	public List<Utilisateur> findAllUtilisateur() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Utilisateur> utilisateurs = em.createQuery("FROM Utilisateur").getResultList();
+		em.close();
+		return utilisateurs;
 	}
 
 }

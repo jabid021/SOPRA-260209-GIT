@@ -15,7 +15,18 @@ public class DemoEntityManager {
 
 	public static void main(String[] args) {
 	
+		//Par defaut, dans toutes les entity, les liens en XToMany sont en mode "Lazy"
+		//JPA ne charge jamais par defaut les Liens en ToMany, le chargement est "Lazy" (!= Eager)
 		
+		//JPA ne chargera jamais vos liste, c'est à vous de changer le mode (ON NE FAIT JAMAIS CA)
+		//OU creer une fonction find...With... ou on fera nous meme un JOIN FETCH sur la liste en question
+		
+		
+		//	=>SELECT x From Class x JOIN FETCH x.liste
+		// JOIN permet de pointer sur la liste (pour faire du where dessus en general
+		// => SELECT s FROM Saison s JOIN s.episodes e WHERE e.duree > 25 => retourne toutes les saisons ayant un episode de + de 25min (La liste des episodes n'est pas return avec la / les Saisons
+		// => SELECT s FROM Saison s JOIN FETCH => Ca vous return  les Saisons avec leur liste d'episodes  dans le main (ne return pas les saisons SANS episode)
+		// => SELECT s FROM Saison s LEFT JOIN FETCH => Ca vous return les Saisons avec leur liste d'episodes dans le main (+ les saisons n'ayant PAS d'episodes)
 		
 		
 		IDAOCompte daoC = Singleton.getInstance().getDaoCompte();
@@ -23,7 +34,7 @@ public class DemoEntityManager {
 		IDAOSaison daoSaison = Singleton.getInstance().getDaoSaison();
 		
 		
-		//JPA ne charge jamais par defaut les Liens en ToMany, le chargement est "Lazy" (!= Eager)
+		
 		List<Saison> allSaisons = daoSaison.findAllWithEpisodes();
 		
 		System.out.println("---------Liste des saisons----------------");
