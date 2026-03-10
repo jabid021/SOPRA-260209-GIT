@@ -3,7 +3,9 @@ package duckflix.dao;
 import java.util.List;
 
 import duckflix.context.Singleton;
+import duckflix.model.Film;
 import duckflix.model.Media;
+import duckflix.model.Serie;
 import jakarta.persistence.EntityManager;
 
 public class DAOMedia implements IDAOMedia{
@@ -53,6 +55,22 @@ public class DAOMedia implements IDAOMedia{
 			em.remove(media);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@Override
+	public List<Film> findAllFilm() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Film> films = em.createQuery("from Film").getResultList();
+		em.close();
+		return films;
+	}
+
+	@Override
+	public List<Serie> findAllSerie() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Serie> series = em.createQuery("SELECT s from Serie s").getResultList();
+		em.close();
+		return series;
 	}
 
 }

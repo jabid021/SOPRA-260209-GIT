@@ -55,4 +55,25 @@ public class DAOSaison implements IDAOSaison{
 		em.close();
 	}
 
+	@Override
+	public List<Saison> findAllWithEpisodes() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Saison> saisons = em.createQuery("SELECT s from Saison s JOIN FETCH s.episodes").getResultList();
+		em.close();
+		return saisons;
+	}
+
+	@Override
+	public Saison findByIdWithEpisodes(Integer id) {
+		Saison saison = null;
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		try {
+		saison = em.createQuery("SELECT s from Saison s JOIN FETCH s.episodes where s.id=:id",Saison.class)
+				.setParameter("id", id)
+				.getSingleResult();
+		}catch(Exception e) {e.printStackTrace();}
+		em.close();
+		return saison;
+	}
+
 }

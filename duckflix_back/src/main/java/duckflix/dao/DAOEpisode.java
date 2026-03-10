@@ -58,7 +58,9 @@ public class DAOEpisode implements IDAOEpisode{
 	@Override
 	public List<Episode> findAllByDureeLowerThan(int duree) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Episode> episodes = em.createQuery("SELECT e from Episode e where e.duree < "+duree).getResultList();
+		List<Episode> episodes = em.createQuery("SELECT e from Episode e where e.duree < :duree")
+				.setParameter("duree", duree)
+				.getResultList();
 		em.close();
 		return episodes;
 	}
