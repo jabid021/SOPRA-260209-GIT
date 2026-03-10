@@ -28,6 +28,8 @@ public class Filiere {
 	@OneToMany(mappedBy="filiere")
 	private List<Module> cours;
 	
+	@OneToMany(mappedBy="filiere")
+	private List<Stagiaire> eleves;
 	
 	
 	
@@ -85,6 +87,13 @@ public class Filiere {
 	}
 	
 	
+	
+	public List<Stagiaire> getEleves() {
+		return eleves;
+	}
+	public void setEleves(List<Stagiaire> eleves) {
+		this.eleves = eleves;
+	}
 	@Override
 	public String toString() {
 		return "Filiere [id=" + id + ", libelle=" + libelle + ", debut=" + debut + ", fin=" + fin + "]";

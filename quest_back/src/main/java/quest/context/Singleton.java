@@ -5,14 +5,19 @@ import quest.dao.DAOMatiere;
 import quest.dao.DAOModule;
 import quest.dao.DAOOrdinateur;
 import quest.dao.DAOPersonne;
+import quest.dao.IDAOFiliere;
+import quest.dao.IDAOMatiere;
+import quest.dao.IDAOModule;
+import quest.dao.IDAOOrdinateur;
+import quest.dao.IDAOPersonne;
 
 public class Singleton {
 
-	private DAOFiliere daoFiliere=new DAOFiliere();
-	private DAOMatiere daoMatiere = new DAOMatiere();
-	private DAOModule daoModule = new DAOModule();
-	private DAOOrdinateur daoOrdinateur = new DAOOrdinateur();
-	private DAOPersonne daoPersonne = new DAOPersonne();
+	private IDAOFiliere daoFiliere=new DAOFiliere();
+	private IDAOMatiere daoMatiere = new DAOMatiere();
+	private IDAOModule daoModule = new DAOModule();
+	private IDAOOrdinateur daoOrdinateur = new DAOOrdinateur();
+	private IDAOPersonne daoPersonne = new DAOPersonne();
 	
 	private static Singleton instance=null;
 	
@@ -26,25 +31,27 @@ public class Singleton {
 		return instance;
 	}
 
-	public DAOFiliere getDaoFiliere() {
+	public IDAOFiliere getDaoFiliere() {
 		return daoFiliere;
 	}
 
-	public DAOMatiere getDaoMatiere() {
+	public IDAOMatiere getDaoMatiere() {
 		return daoMatiere;
 	}
 
-	public DAOModule getDaoModule() {
+	public IDAOModule getDaoModule() {
 		return daoModule;
 	}
 
-	public DAOOrdinateur getDaoOrdinateur() {
+	public IDAOOrdinateur getDaoOrdinateur() {
 		return daoOrdinateur;
 	}
 
-	public DAOPersonne getDaoPersonne() {
+	public IDAOPersonne getDaoPersonne() {
 		return daoPersonne;
 	}
+
+
 	
 	
 	

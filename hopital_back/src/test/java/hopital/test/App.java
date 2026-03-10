@@ -206,7 +206,7 @@ public class App {
 			String prenom = saisieString("Saisir votre prenom");
 			String nom = saisieString("Saisir votre nom");
 			patient = new Patient(id,prenom,nom);
-			daoPatient.insert(patient);
+			daoPatient.save(patient);
 		}
 		System.out.println("Le patient "+patient+" est ajouté dans la file d'attente");
 		fileAttente.add(patient);
@@ -295,7 +295,7 @@ public class App {
 		{
 			for(Visite v : medecin.getConsultations()) 
 			{
-				v=daoVisite.insert(v);
+				v=daoVisite.save(v);
 				System.out.println("Sauvegarde de la visite "+v);
 			}
 			medecin.getConsultations().clear();

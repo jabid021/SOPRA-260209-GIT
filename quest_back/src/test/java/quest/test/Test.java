@@ -1,23 +1,8 @@
 package quest.test;
 
-import java.time.LocalDate;
-
-import quest.dao.DAOFiliere;
-import quest.dao.DAOMatiere;
-import quest.dao.DAOModule;
-import quest.dao.DAOOrdinateur;
-import quest.dao.DAOPersonne;
-import quest.model.Filiere;
-import quest.model.Formateur;
-import quest.model.Genre;
-import quest.model.Matiere;
-import quest.model.Module;
-import quest.model.Ordinateur;
-import quest.model.Personne;
-import quest.model.Stagiaire;
 public class Test {
 
-	static DAOFiliere daoFiliere = new DAOFiliere();
+	/*static DAOFiliere daoFiliere = new DAOFiliere();
 	static DAOMatiere daoMatiere = new DAOMatiere();
 	static DAOOrdinateur daoOrdinateur = new DAOOrdinateur();
 	static DAOPersonne daoPersonne = new DAOPersonne();
@@ -61,7 +46,7 @@ public class Test {
 		daoMatiere.update(m);
 		
 		System.out.println(daoMatiere.findAll());
-		*/
+		
 		daoMatiere.deleteById(5);
 	}
 	
@@ -166,7 +151,7 @@ public class Test {
 		px.setCivilite(Genre.NB);
 		daoPersonne.update(px);
 		
-		daoPersonne.deleteById(4);*/
+		daoPersonne.deleteById(4);
 		
 	}
 	public static void main(String[] args) {
@@ -175,5 +160,5 @@ public class Test {
 
 		
 	}
-
+*/
 }
