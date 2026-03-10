@@ -37,8 +37,7 @@ public class Serie extends Media {
 
 	@Override
 	public String toString() {
-		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + ", genres=" + genres
-				+ ", utilisateurs=" + utilisateurs + "]";
+		return "Serie [id=" + id + ", titre=" + titre + ", description=" + description + "]";
 	}
 
 

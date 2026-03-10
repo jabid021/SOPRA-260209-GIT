@@ -1,11 +1,31 @@
 package quest.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="ordinateur")
 public class Ordinateur {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer numero;
+	@Column(nullable = false, columnDefinition = "VARCHAR(25) default 'Asus'")
 	private String marque;
+	@Column(nullable=false,columnDefinition = "int default 8")
 	private int ram;
+	
+	@OneToOne
+	@JoinColumn(name="utilisateur")
 	private Stagiaire utilisateur;
+	
+	public Ordinateur() {}
 	
 	public Ordinateur(Integer numero, String marque, int ram) {
 		this.numero = numero;

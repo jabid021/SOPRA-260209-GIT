@@ -2,14 +2,35 @@ package quest.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="module")
 public class Module {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private int quest;
 	private LocalDate debut;
 	private LocalDate fin;
+	
+	@ManyToOne
+	@JoinColumn(name="filiere",nullable = false)
 	private Filiere filiere;
+	
+	@ManyToOne
+	@JoinColumn(name="matiere",nullable = false)
 	private Matiere matiere;
+	
+	
+	public Module() {}
 	
 	public Module(Integer id, int quest, LocalDate debut, LocalDate fin, Filiere filiere, Matiere matiere) {
 		this.id = id;
