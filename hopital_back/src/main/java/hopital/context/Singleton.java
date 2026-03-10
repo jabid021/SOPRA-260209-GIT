@@ -1,6 +1,5 @@
 package hopital.context;
 
-import hopital.dao.DAOCompteJDBC;
 import hopital.dao.DAOPatient;
 import hopital.dao.DAOVisite;
 import hopital.dao.IDAOCompte;
@@ -9,7 +8,7 @@ import hopital.dao.IDAOVisite;
 
 public class Singleton {
 
-	private IDAOCompte daoCompte=new DAOCompteJDBC();
+	private IDAOCompte daoCompte=new DAOCompte();
 	private IDAOPatient daoPatient = new DAOPatient();
 	private IDAOVisite daoVisite = new DAOVisite();
 	
@@ -25,7 +24,6 @@ public class Singleton {
 		return instance;
 	}
 	
-	
 	public IDAOCompte getDaoCompte() {
 		return daoCompte;
 	}
@@ -35,7 +33,4 @@ public class Singleton {
 	public IDAOVisite getDaoVisite() {
 		return daoVisite;
 	}
-	
-	
-	
 }

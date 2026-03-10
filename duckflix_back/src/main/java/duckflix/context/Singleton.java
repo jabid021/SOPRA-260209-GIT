@@ -4,11 +4,13 @@ import duckflix.dao.DAOAbonnement;
 import duckflix.dao.DAOCompte;
 import duckflix.dao.DAOEpisode;
 import duckflix.dao.DAOMedia;
+import duckflix.dao.DAOPaiement;
 import duckflix.dao.DAOSaison;
 import duckflix.dao.IDAOAbonnement;
 import duckflix.dao.IDAOCompte;
 import duckflix.dao.IDAOEpisode;
 import duckflix.dao.IDAOMedia;
+import duckflix.dao.IDAOPaiement;
 import duckflix.dao.IDAOSaison;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -22,7 +24,7 @@ public class Singleton {
 	private IDAOCompte daoCompte = new DAOCompte();
 	private IDAOSaison daoSaison = new DAOSaison();
 	private IDAOEpisode daoEpisode = new DAOEpisode();
-	
+	private IDAOPaiement daoPaiement = new DAOPaiement();
 	
 	private static Singleton instance;
 	
@@ -74,6 +76,12 @@ public class Singleton {
 
 	public IDAOEpisode getDaoEpisode() {
 		return daoEpisode;
+	}
+
+
+
+	public IDAOPaiement getDaoPaiement() {
+		return daoPaiement;
 	}
 	
 	

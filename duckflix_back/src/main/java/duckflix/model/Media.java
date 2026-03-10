@@ -8,6 +8,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +25,7 @@ public abstract class Media {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_media")
 	protected Integer id;
 	@Column(length = 50, nullable = false)
 	protected String titre;
@@ -32,10 +34,11 @@ public abstract class Media {
 	
 	
 	//Si on retire toutes les annotations, jpa gere la liste d'enum via un fichier binaire (serialize)
-	@ElementCollection(targetClass = Genre.class)
+	@ElementCollection(targetClass = Genre.class,fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "media_genres", joinColumns = @JoinColumn(name = "media"))
 	@Column(name = "libelle_genre")
+	
 	protected List<Genre> genres;
 	
 	
