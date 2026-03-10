@@ -24,7 +24,7 @@ public class DemoEntityManager {
 		
 		
 		//JPA ne charge jamais par defaut les Liens en ToMany, le chargement est "Lazy" (!= Eager)
-		List<Saison> allSaisons = daoSaison.findByAllWithEpisodes();
+		List<Saison> allSaisons = daoSaison.findAllWithEpisodes();
 		
 		System.out.println("---------Liste des saisons----------------");
 		
