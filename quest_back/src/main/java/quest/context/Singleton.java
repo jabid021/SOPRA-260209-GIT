@@ -1,5 +1,7 @@
 package quest.context;
 
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import quest.dao.DAOFiliere;
 import quest.dao.DAOMatiere;
 import quest.dao.DAOModule;
@@ -12,6 +14,8 @@ import quest.dao.IDAOOrdinateur;
 import quest.dao.IDAOPersonne;
 
 public class Singleton {
+	
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
 
 	private IDAOFiliere daoFiliere=new DAOFiliere();
 	private IDAOMatiere daoMatiere = new DAOMatiere();
@@ -49,6 +53,10 @@ public class Singleton {
 
 	public IDAOPersonne getDaoPersonne() {
 		return daoPersonne;
+	}
+
+	public EntityManagerFactory getEmf() {
+		return emf;
 	}
 
 

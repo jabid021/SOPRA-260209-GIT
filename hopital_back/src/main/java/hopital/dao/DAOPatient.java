@@ -1,56 +1,57 @@
-package quest.dao;
+package hopital.dao;
 
 import java.util.List;
 
+import hopital.context.Singleton;
+import hopital.model.Patient;
 import jakarta.persistence.EntityManager;
-import quest.context.Singleton;
-import quest.model.Matiere;
 
-public class DAOMatiere implements IDAOMatiere{
+public class DAOPatient implements IDAOPatient{
 
 	@Override
-	public Matiere findById(Integer id) {
+	public Patient findById(Integer id) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Matiere matiere = em.find(Matiere.class, id); 
+		Patient patient = em.find(Patient.class, id); 
 		em.close();
-		return matiere;
+		return patient;
 	}
 
 	@Override
-	public List<Matiere> findAll() {
+	public List<Patient> findAll() {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Matiere> matieres = em.createQuery("from Matiere").getResultList();
+		List<Patient> patients = em.createQuery("from Patient").getResultList();
 		em.close();
-		return matieres;
+		return patients;
 	}
 
 	@Override
-	public Matiere save(Matiere matiere) {
+	public Patient save(Patient patient) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-			matiere=em.merge(matiere);
+			patient=em.merge(patient);
 		em.getTransaction().commit();
 		em.close();
-		return matiere;
+		return patient;
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Matiere matiere = em.find(Matiere.class, id);
+		Patient patient = em.find(Patient.class, id);
 		em.getTransaction().begin();
-			em.remove(matiere);
+			em.createQuery("UPDATE Visite v set v.patient=null where v.patient.id=:id").setParameter("id", id).executeUpdate();
+			em.remove(patient);
 		em.getTransaction().commit();
 		em.close();
 	}
 
 	@Override
-	public void delete(Matiere matiere) {
+	public void delete(Patient patient) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	
 		em.getTransaction().begin();
-			matiere=em.merge(matiere);
-			em.remove(matiere);
+			patient=em.merge(patient);
+			em.remove(patient);
 		em.getTransaction().commit();
 		em.close();
 	}

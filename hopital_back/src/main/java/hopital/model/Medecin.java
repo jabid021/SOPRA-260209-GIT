@@ -3,11 +3,18 @@ package hopital.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+//@DiscriminatorValue("Medecin")
 public class Medecin extends Compte {
 
 	private transient List<Visite> consultations = new ArrayList();
 	private transient int salle;
 
+	public Medecin() {}
+	
 	public Medecin(Integer id, String login, String password) {
 		super(id, login, password);
 	}

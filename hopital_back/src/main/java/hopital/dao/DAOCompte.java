@@ -1,70 +1,72 @@
-package quest.dao;
+package hopital.dao;
 
 import java.util.List;
 
+import hopital.context.Singleton;
+import hopital.model.Compte;
 import jakarta.persistence.EntityManager;
-import quest.context.Singleton;
-import quest.model.Filiere;
-import quest.model.Module;
 
-public class DAOModule implements IDAOModule{
+public class DAOCompte implements IDAOCompte{
 
 	@Override
-	public Module findById(Integer id) {
+	public Compte findById(Integer id) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Module module = em.find(Module.class, id); 
+		Compte compte = em.find(Compte.class, id); 
 		em.close();
-		return module;
+		return compte;
 	}
 
 	@Override
-	public List<Module> findAll() {
+	public List<Compte> findAll() {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Module> modules = em.createQuery("from Module").getResultList();
+		List<Compte> comptes = em.createQuery("from Compte").getResultList();
 		em.close();
-		return modules;
+		return comptes;
 	}
 
 	@Override
-	public Module save(Module module) {
+	public Compte save(Compte compte) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-			module=em.merge(module);
+			compte=em.merge(compte);
 		em.getTransaction().commit();
 		em.close();
-		return module;
+		return compte;
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Module module = em.find(Module.class, id);
+		Compte compte = em.find(Compte.class, id);
 		em.getTransaction().begin();
-			em.remove(module);
+			em.remove(compte);
 		em.getTransaction().commit();
 		em.close();
 	}
 
 	@Override
-	public void delete(Module module) {
+	public void delete(Compte compte) {
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 	
 		em.getTransaction().begin();
-			module=em.merge(module);
-			em.remove(module);
+			compte=em.merge(compte);
+			em.remove(compte);
 		em.getTransaction().commit();
 		em.close();
 	}
 
 	@Override
-	public Module findByQuest(int quest) {
-		Module module =null;
+	public Compte findByLoginAndPassword(String login, String password) {
+		Compte compte =null;
 		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		try {
-			module = em.createQuery("SELECT m from Module m where m.quest=:quest",Module.class).setParameter("quest", quest).getSingleResult();
+			compte = em.createQuery("SELECT c from Compte c where c.login=:login and c.password=:password",Compte.class)
+					.setParameter("login",login)
+					.setParameter("password", password)
+					.getSingleResult();
 		}catch(Exception e) {e.printStackTrace();};
 		
 		em.close();
-		return module;
+		return compte;
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,8 @@ import hopital.model.Medecin;
 import hopital.model.Patient;
 import hopital.model.Secretaire;
 import hopital.model.Visite;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 public class App {
 
@@ -158,6 +161,12 @@ public class App {
 		
 		int id = saisieInt("Saisir l'id du patient à supprimer");
 		//
+		/*List<Visite> visitesDuPatient = daoVisite.findByPatientId(id);
+		for(Visite v : visitesDuPatient) 
+		{
+			v.setPatient(null);
+			daoVisite.save(v);
+		}*/
 		daoPatient.deleteById(id);
 	}
 
@@ -303,16 +312,28 @@ public class App {
 	}
 
 	public static void consulterCA() {
-		String debut = saisieString("Saisir le debut de la periode");
-		String fin =saisieString("Saisir la fin de la periode");
-		double total = daoVisite.findByDateVisiteBetweenAndMedecinId(debut,fin,connected.getId());
-		System.out.println("Votre CA sur la période du "+debut+" au "+fin+" est de "+total+"€");
-		
+		 String debut = saisieString("Saisir le debut de la periode");
+	        String fin =saisieString("Saisir la fin de la periode");
+	        List<Visite> visites = daoVisite.findByDateVisiteBetweenAndMedecinId(LocalDate.parse(debut),LocalDate.parse(fin),connected.getId());
+
+	        double total = 0;
+	        for (Visite v : visites) {
+	            System.out.println(v);
+	            total+=v.getPrix();
+	        }
+	        
+	        total=daoVisite.sumPrixByDateVisiteBetweenAndMedecinId(LocalDate.parse(debut),LocalDate.parse(fin),connected.getId());
+	        
+	        total = visites.stream().mapToDouble(v->v.getPrix()).sum();
+	        
+	        
+	        System.out.println("Votre CA sur la période du "+debut+" au "+fin+" est de "+total+"€");
+	        System.out.println("(Calcul SUM JPA) Votre CA sur la période du "+debut+" au "+fin+" est de "+total+"€");
 	}
 
 	public static void main(String[] args) {
 		menuPrincipal();
-
+		Singleton.getInstance().getEmf().close();
 	}
 
 }
