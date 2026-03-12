@@ -1,0 +1,92 @@
+<meta charset="utf-8" />
+<style>
+
+.hidden-iframe {
+  /*width: 0px;
+  height: 0px;*/
+  border: none;
+  display: inline;
+}
+
+p,pbody {
+    font-family: sans-serif;
+    font-size: 15px;
+    color: #efefff;
+}
+
+body {
+    background-color: #eff6ff;
+}
+
+tr:nth-of-type(even) {
+    color: #4285f4;
+    background-color: #A1A1A150 ;
+}
+
+tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+th,
+td {
+    border: 1px solid #eff6ff;
+    /*background-color: #96D4D4;*/
+}
+
+table,
+th,
+td {
+    border-collapse: collapse;
+}
+
+th {
+    box-align: center;
+    font-family: Helvetica;
+    font-weight: 800;
+}
+</style>
+
+<h1 align="center">Liste de trucs</h1>
+
+<table border align="center">
+    <tr>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Année</th>
+        <th colspan="2">Commentaire</th>
+        <th>Truc</th>
+    </tr>
+
+    <tr>
+        <td>Giorgio by Moroder</td>
+        <td>Daft Punk</td>
+        <td>2013</td>
+        <td>Meilleur morceau du groupe</td>
+        <td>
+            Ouvert au débat : <br />
+            <input name="choixRadio" type="radio" id="oui" onclick="return false" />
+            <label for="oui">oui</label>
+            <br />
+            <input
+                name="choixRadio"
+                type="radio"
+                id="non"
+                checked
+                onclick="return false"
+            />
+            <label for="non">non</label>
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table>
+
+<p align="right">
+    Je découvre, j'ai pas d'idées et en plus je suis nul en design..<br />Donc
+    autant faire un truc pas très beau
+</p>
+
+<footer>
+    <iframe class="hidden-iframe" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A254112136&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/daftpunkofficialmusic" title="Daft Punk" target="_blank" style="color: #cccccc; text-decoration: none;">Daft Punk</a> · <a href="https://soundcloud.com/daftpunkofficialmusic/giorgio-by-moroder" title="Giorgio by Moroder" target="_blank" style="color: #cccccc; text-decoration: none;">Giorgio by Moroder</a></div>
+</footer>
