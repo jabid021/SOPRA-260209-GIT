@@ -1,0 +1,151 @@
+<p align="center"><img src="https://fontmeme.com/permalink/260312/df80ee8a.png" alt="police-pokemon"></p>
+
+<p align="center">(mais pas vraiment en vrai)</p>
+
+<table align="center" width="80%">
+
+	<tr>
+		<th>Image</th>
+		<th>GALLAME</th>
+		<th>NOCTALI</th>
+		<th>MAGIREVE</th>
+		<th>PAPILLUSION</th>
+		<th>HYPNOMADE</th>
+	</tr>
+
+	<tr>
+		<th>Nom</th>
+		<td><img title="Gallame" class="petite" src="img/animation/gallame.png" alt="Image de Gallame" onclick="ouvrir('img/grand/gallame.jpg')"/></td>
+		<td><img title="Noctali" class="petite" src="img/animation/noctali.png" alt="Image de Noctali" onclick="ouvrir('img/grand/noctali.jpg')"/></td>
+		<td><img title="Magireve" class="petite" src="img/animation/magireve.png" alt="Image de Magireve" onclick="ouvrir('img/grand/magireve.jpg')"/></td>
+		<td><img title="Papillusion" class="petite" src="img/animation/papillusion.png" alt="Image de Papillusion" onclick="ouvrir('img/grand/papillusion.jpg')"/></td>
+		<td><img title="Hypnomade" class="petite" src="img/animation/hypnomade.png" alt="Image de Hypnomade" onclick="ouvrir('img/grand/hypnomade.jpg')"/></td>
+	</tr>
+
+	<tr>
+		<th>Base Stats<br>hp/att/def<br>att.spe/def.spe/speed</th>
+		<td>68/125/65<br>65/115/80</td>
+		<td>95/65/110<br>60/130/65</td>
+		<td>60/60/60<br>105/105/105</td>
+		<td>60/45/50<br>90/80/70</td>
+		<td>85/73/70<br>73/115/67</td>
+	</tr>
+
+	<tr>
+		<th>Type(s)</th>
+		<td>Psy/Combat</td>
+		<td>Tenebres</td>
+		<td>Spectre</td>
+		<td>Insecte/Vol</td>
+		<td>Psy</td>
+	</tr>
+
+	<tr>
+		<th>Cri<br>(attention les oreilles)</th>
+		<td>
+			<audio controls>
+				<source src="sound/gallame.ogg" type="audio/ogg">
+			</audio>
+		</td>
+		<td>
+			<audio controls>
+				<source src="sound/noctali.ogg" type="audio/ogg">
+			</audio>
+		</td>
+		<td>
+			<audio controls>
+				<source src="sound/magireve.ogg" type="audio/ogg">
+			</audio>
+		</td>
+		<td>
+			<audio controls>
+				<source src="sound/papillusion.ogg" type="audio/ogg">
+			</audio>
+		</td>
+		<td>
+			<audio controls>
+				<source src="sound/hypnomade.ogg" type="audio/ogg">
+			</audio>
+		</td>
+	</tr>
+
+</table>
+
+<div id="popup" onclick="fermer()">
+	<p>Cliquez sur l'image pour quitter</p>
+    <img id="imagePopup" src="" width="400">
+</div>
+
+<style>
+	
+	@font-face {
+		font-family: 'Pokemon-GB';
+		src:url('fonts/Pokemon-GB.ttf.woff') format('woff'),
+			url('fonts/Pokemon-GB.ttf.svg#Pokemon-GB') format('svg'),
+			url('fonts/Pokemon-GB.ttf.eot'),
+			url('fonts/Pokemon-GB.ttf.eot?#iefix') format('embedded-opentype'); 
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	body
+	{
+		font-family: 'Pokemon-GB';
+		background-image: url("img/background.png");
+		color:3B6330;
+	}
+
+	h1
+	{
+		text-align:center;
+	}
+
+	table {
+		border-radius: 20px;
+		background-color: rgb(255 255 255 / 0.5);
+		padding: 20px;
+	}
+
+	tr
+	{
+		text-align:center;
+		padding: 25px;
+	}
+
+	td,th
+	{
+		padding: 20px 0px;
+	}
+
+	audio
+	{
+		width:200px;
+	}
+
+	#popup{
+		display:none;
+		position:fixed;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		background:white;
+		padding:20px;
+		border:1px solid black;
+	}
+
+	.petite:hover{
+		transform: scale(1.5);
+	}
+
+</style>
+
+<script>
+	function ouvrir(image){
+		document.getElementById("popup").style.display = "block";
+		document.getElementById("imagePopup").src = image;
+	}
+
+	function fermer(){
+		document.getElementById("popup").style.display = "none";
+	}
+</script>
