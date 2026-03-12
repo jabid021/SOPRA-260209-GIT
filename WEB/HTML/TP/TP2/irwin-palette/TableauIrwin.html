@@ -1,0 +1,117 @@
+<meta charset="UTF-8" />
+<head>
+  <title>Tableau Irwin</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(-90deg, #ffc272, #ff9d1d, #8490ff, #26267e);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s infinite;
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow:
+        -5px -5px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        3px 3px 0 #000;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      font-size: 60px;
+      font-family: "Chiller";
+      margin-bottom: 25px;
+    }
+
+    table {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      font-family: "Fredoka One", cursive;
+      box-shadow: 0 10px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    th {
+      color: #fff;
+      font-weight: bold;
+      background-color: #333;
+      border-radius: 15px;
+    }
+    td {
+      color: #fff;
+      background-color: #b8b8b8;
+      border-radius: 15px;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-family: cursive;
+    }
+  </style>
+  <h1 align="center">Générateur de palette de couleur</h1>
+</head>
+<body>
+  <table align="center" width="80%" cellpadding="5" cellspacing="1">
+    <thead>
+      <tr>
+        <th>Couleur</th>
+        <th>Plus d'informations</th>
+        <th>Code Hexadecimal</th>
+        <th>Visuel</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Argile ensolleilée</td>
+        <td> <a href="https://coolors.co/ffc272" target="_blank"><img src="assets/image/clic.png" alt="Logo lien clic" width="25" /></td>
+        </a>
+            <td>#ffc272</td>
+        <td style="background-color: #ffc272"></td>
+      </tr>
+
+      <tr>
+        <td>Lueur ambrée</td>
+        <td> <a href="https://coolors.co/ff9d1d" target="_blank"><img src="assets/image/clic.png" alt="Logo lien clic" width="25" /></td>
+        </a>
+        <td>#ff9d1d</td>
+        <td style="background-color: #ff9d1d"></td>
+      </tr>
+
+      <tr>
+        <td>Bleu glycine</td>
+        <td> <a href="https://coolors.co/8490ff" target="_blank"><img src="assets/image/clic.png" alt="Logo lien clic" width="25" /></td>
+        </a>
+        <td>#8490ff</td>
+        <td style="background-color: #8490ff"></td>
+      </tr>
+
+      <tr>
+        <td>Vrai cobalt</td>
+        <td> <a href="https://coolors.co/26267e" target="_blank"><img src="assets/image/clic.png" alt="Logo lien clic" width="25" /></td>
+        </a>
+        <td>#26267e</td>
+        <td style="background-color: #26267e"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<footer>
+  <p>© 2026 Irwin Hecker</p>
+</footer>

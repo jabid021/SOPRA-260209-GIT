@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Amiga Terminal Interactif</title>
+  <style>
+    body {
+      background: #0080c0;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+    }
+    .amiga-terminal {
+      background: #b8b8b8;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      border: 2px solid #404040;
+      box-shadow: 4px 4px 0 #606060, inset 1px 1px 0 #FFF, inset -2px -2px 0 #404040;
+      width: 600px;
+      margin: 40px auto;
+      padding: 24px 18px;
+      border-radius: 3px;
+    }
+    .title-bar {
+      background: #606060;
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 16px;
+      margin-bottom: 12px;
+      border-radius: 2px 2px 0 0;
+      letter-spacing: 1px;
+      font-weight: bold;
+      border-bottom: 2px solid #a0a0a0;
+      box-shadow: 0 2px 0 #404040;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: transparent;
+      font-size: 16px;
+    }
+    td.prompt {
+      color: #fada38;
+      font-weight: bold;
+      width: 40px;
+    }
+    td.cmd {
+      color: #383838;
+    }
+    td.output {
+      color: #383838;
+    }
+    input.shell-input {
+      border: none;
+      background: transparent;
+      color: #383838;
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+      width: 95%;
+      padding: 0;
+      margin: 0;
+    }
+
+    /*permet l'animation du / */
+    .blink {
+      color: #fada38;
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="amiga-terminal">
+    <div class="title-bar">Amiga Shell</div>
+    <table id="terminal-table">
+      <tbody>
+        <tr>
+          <td class="prompt">1&gt;</td>
+          <td class="cmd">echo "Welcome to Amiga Shell"</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="output">Welcome to Amiga Shell</td>
+        </tr>
+        <tr>
+          <td class="prompt">1&gt;</td>
+          <td class="cmd">help</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="output">Available commands: echo, dir, type, help</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="prompt">1&gt;</td>
+          <td>
+            <form id="shell-form" autocomplete="off" style="display:inline;">
+              <input type="text" id="shell-input" class="shell-input" autofocus />
+              <span class="blink">_</span>
+            </form>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <script>
+    // Fichiers fictifs pour la commande type
+    const files = {
+      "Disk.info": [
+        "Disk name: Work",
+        "Free space: 880 kB"
+      ],
+      "top_anime.txt":[
+        "1: psychopass",
+        "2: fullmetal alchemist",
+        "3: dragon ball",
+        "4: death note",
+        "5: Code geass"
+      ]
+    };
+
+    function amigaCommand(cmd) {
+      cmd = cmd.trim();
+      if (cmd.startsWith("echo ")) {
+        // Prend le texte entre guillemets ou juste après echo
+        let match = cmd.match(/echo\s+"(.*)"|echo\s+(.*)/i);
+        let text = match ? (match[1] || match[2]) : '';
+        return [text];
+      }
+      if (cmd === "help") {
+        return [
+          "Available commands: echo, dir, type, help"
+        ];
+      }
+      if (cmd === "dir") {
+        return [
+          "System    Tools    Work    Disk.info    top_anime.txt"
+        ];
+      }
+      if (cmd.startsWith("type ")) {
+        let filename = cmd.replace("type ", "").replace(/['"]/g, '').trim();
+        if (files[filename]) {
+          return files[filename];
+        } else {
+          return [
+            "Can't open \"" + filename + "\". File not found."
+          ];
+        }
+      }
+      if (!cmd) return [];
+      return ["Unknown command: " + cmd];
+    }
+
+    const table = document.getElementById('terminal-table');
+    const form = document.getElementById('shell-form');
+    const input = document.getElementById('shell-input');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const cmd = input.value;
+      if (cmd === "") return;
+      // Ajoute la ligne de commande
+      let cmdRow = table.insertRow(table.rows.length - 1); // pour insert avant le prompt
+      cmdRow.innerHTML = `<td class="prompt">1&gt;</td><td class="cmd">${escapeHtml(cmd)}</td>`;
+
+      // Ajoute la sortie
+      let outputs = amigaCommand(cmd);
+      outputs.forEach(out => {
+        let outRow = table.insertRow(table.rows.length - 1);
+        outRow.innerHTML = `<td></td><td class="output">${escapeHtml(out)}</td>`;
+      });
+      input.value = "";
+      // Scroll si besoin
+      table.parentElement.scrollTop = table.parentElement.scrollHeight;
+      input.focus();
+    });
+
+    // Petite fonction d'échappement HTML
+    function escapeHtml(text) {
+      return text.replace(/[&<>"' ]/g, function(m) {
+        return ({
+          "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;", " ": "&nbsp;"
+        })[m];
+      });
+    }
+  </script>
+</body>
+</html>
