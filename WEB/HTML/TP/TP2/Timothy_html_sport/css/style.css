@@ -1,0 +1,46 @@
+body
+{
+  background-repeat: no-repeat;
+  background-image:url("../asset/img/f1.png");
+  background-size: cover;
+  min-height: 100vh;
+}
+
+body-foot 
+{
+  background-repeat: no-repeat;
+  background-image:url("../asset/img/football.png");
+  background-size: cover;
+  min-height: 100vh;
+  
+}
+
+
+table
+{
+background-color:#ff9191;
+border-collapse: collapse;
+width: 100%;
+border-radius: 15px;
+
+}
+
+tr:nth-of-type(even)
+{
+  color:#4285f4;
+}
+
+tr:nth-of-type(odd)
+{
+  color:#0447d6;
+}
+
+tr
+
+
+th
+{
+  font-family:Roboto;
+    font-size:25px;
+
+}

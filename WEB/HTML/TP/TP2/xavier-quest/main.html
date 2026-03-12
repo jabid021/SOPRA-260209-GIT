@@ -1,0 +1,139 @@
+<style media="screen">
+
+  body {
+      background-color: #0d0d0d;
+      font-family: 'Courier New', monospace;
+      color: #00ff00;
+      padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    animation: glow 2s infinite;
+}
+tr:nth-of-type(even)
+{
+  color:#66C471;
+}
+
+tr:nth-of-type(odd)
+{
+  color:#C466B9;
+}
+
+th
+{
+  font-family:Roboto;
+  font-size:25px;
+}
+
+table {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+</style>
+
+
+
+
+
+
+<h1 align="center">Tableau des pires erreurs dans chaque module de la formation</h1>
+<table border align="center" width="90%">
+<tr>
+  <th>Module</th>
+  <th>Pire erreur possible</th>
+  <th>Description</th>
+  <th>Point positif</th>
+  <th>Solution</th>
+</tr>
+<tr>
+  <td>Algorithmie</td>
+  <td>Triple boucle imbriquée</td>
+  <td>Complexité catastrophique pour un problème simple</td>
+  <td>Faire une multiplication sans utiliser '*'</td>
+  <td>utiliser '*'</td>
+</tr>
+<tr>
+  <td rowspan="2">Java Objet</td>
+  <td>Tout mettre en static</td>
+  <td>Code illisible</td>
+  <td>Plus besoin d'instancier</td>
+  <td>Tout mettre dans un singleton</td>
+</tr>
+<tr>
+  <td>while (true)</td>
+  <td>Boucle infinie</td>
+  <td>Transforme le PC en chauffage</td>
+  <td>while (false)</td>
+</tr>
+
+<tr>
+  <td>Init BDD et SQL</td>
+  <td>DELETE FROM users</td>
+  <td>Oublier le WHERE dans un DELETE</td>
+  <td>Nettoyage rapide de la base</td>
+  <td>Expliquer aux utilisateurs qu'ils doivent se recréer un compte</td>
+</tr>
+
+
+
+<tr>
+  <td title = "RIP UML">UML</td>
+  <td>Diagramme avec 50 classes reliées entre elles</td>
+  <td title="Joke, ne le prends pas mal Jordan :) ">Un UML illisible, mais bon, on a jamais eu de cours sur les UMLs</td>
+  <td>Art abstrait</td>
+  <td>Changer de projet</td>
+</tr>
+
+<tr>
+  <td>XML et JSON</td>
+  <td>Mélanger XML et JSON</td>
+  <td>Créer un JSON contenant des balises XML</td>
+  <td>Création d'un nouveau langage</td>
+  <td>Faire un tableau Excel</td>
+</tr>
+
+<tr>
+<td>Unix</td>
+<td colspan="4"><a href="rm.html" title="Il semblerait que ça ait mangé le reste de la ligne">rm -rf /*</a></td>
+</tr>
+
+<tr>
+<td>Maven</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+  <td>Git</td>
+  <td>git push --force sur main</td>
+  <td>Sauvegarde efficace</td>
+  <td>Aucun conflit sur Git</td>
+  <td>Télétravail pour éviter les conflits au travail</td>
+</tr>
+
+<tr>
+  <td>JPA avec Hibernate</td>
+  <td>Tout mettre en fetch.EAGER</td>
+  <td>Permet de charger toute la base en un select</td>
+  <td>Découvrir les limites de son PC</td>
+  <td>Retourner sur JDBC</td>
+</tr>
+
+<tr>
+  <td>HTML / CSS / Bootstrap</td>
+  <td></td>
+  <td></td>
+  <td>i</td>
+  <td></td>
+</tr>
+
+</table>
+
+<p>Promis j'ai fait le CSS moi-même</p>
