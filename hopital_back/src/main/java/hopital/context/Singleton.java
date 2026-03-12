@@ -1,13 +1,17 @@
 package hopital.context;
 
+import hopital.dao.DAOCompte;
 import hopital.dao.DAOPatient;
 import hopital.dao.DAOVisite;
 import hopital.dao.IDAOCompte;
 import hopital.dao.IDAOPatient;
 import hopital.dao.IDAOVisite;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 public class Singleton {
 
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("contextJPA");
 	private IDAOCompte daoCompte=new DAOCompte();
 	private IDAOPatient daoPatient = new DAOPatient();
 	private IDAOVisite daoVisite = new DAOVisite();
@@ -33,4 +37,10 @@ public class Singleton {
 	public IDAOVisite getDaoVisite() {
 		return daoVisite;
 	}
+
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+	
+	
 }

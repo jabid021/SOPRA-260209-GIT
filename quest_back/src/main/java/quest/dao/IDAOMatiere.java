@@ -1,5 +1,7 @@
 package quest.dao;
 
-public interface IDAOMatiere {
+import quest.model.Matiere;
+
+public interface IDAOMatiere extends IDAO<Matiere,Integer> {
 
 }

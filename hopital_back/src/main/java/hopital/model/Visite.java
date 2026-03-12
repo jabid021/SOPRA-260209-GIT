@@ -2,16 +2,37 @@ package hopital.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Visite")
 public class Visite {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer numero;
-	private Patient patient;
-	private Medecin medecin;
 	private int salle;
 	private double prix;
+	@Column(name="date_visite",nullable=false)
 	private LocalDate dateVisite;
 
-
+	@ManyToOne
+	@JoinColumn(name="id_patient")
+	private Patient patient;
+	@ManyToOne
+	@JoinColumn(name="id_medecin",nullable = false)
+	private Medecin medecin;
+	
+	
+	public Visite() {}
 	public Visite(Integer numero, Patient patient, Medecin medecin, int salle, double prix, LocalDate dateVisite) {
 		this.numero = numero;
 		this.patient = patient;
@@ -28,7 +49,7 @@ public class Visite {
 		this.prix = 20;
 		this.dateVisite = LocalDate.now();
 	}
-	
+
 
 	public Integer getNumero() {
 		return numero;
@@ -41,7 +62,7 @@ public class Visite {
 	public Patient getPatient() {
 		return patient;
 	}
-	
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
@@ -88,7 +109,7 @@ public class Visite {
 				+ ", prix=" + prix + ", dateVisite=" + dateVisite + "]";
 	}
 
-	
-	
-	
+
+
+
 }

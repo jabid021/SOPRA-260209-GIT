@@ -1,11 +1,22 @@
 package hopital.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="patient")
 public class Patient {
  
+	@Id
 	private Integer id;
+	@Column(length = 50,nullable = false)
 	private String prenom;
+	@Column(length = 50,nullable = false)
 	private String nom;
 	
+	public Patient() {}
 	public Patient(Integer id, String prenom, String nom) {
 		this.id = id;
 		this.prenom = prenom;
