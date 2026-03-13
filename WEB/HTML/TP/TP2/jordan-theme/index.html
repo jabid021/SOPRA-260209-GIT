@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrou. top Jordan</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 900px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 20px 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 280px;
+      margin: 0 10px;
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .carousel-item h3 {
+      margin: 15px 0;
+      font-size: 1.1em;
+      color: #333;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 2;
+    }
+
+    .carousel-button:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+  </style>
+</head>
+<body>
+<div id="TopJordan">
+
+  <section>
+    <div class="title">
+      <h1>Alyssa présente<br /> ... </h1>
+        <audio id="fondAudio" src="assets/sounds/すずめ.mp3" loop style="display:none"></audio>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="parallax-one"></div>
+    <div class="title">
+  <h1> Mes top perso </h1>
+    </div>
+    </section>
+  <section>
+    <div class="block">
+      <div class="carousel-container">
+        <button class="carousel-button prev">&#10094;</button>
+        <div class="carousel-track">
+
+          <div class="carousel-item" onclick="window.location.href='top5JordanMoto.html'">
+            <img src="assets/image/motojp.jpg" alt="TopMoto">
+            <h3>Top 3 Moto</h3>
+          </div>
+
+        <div class="carousel-item" onclick="window.location.href='top5Jordan.html'">
+            <img src="assets/image/sala.jpg" alt="TopPokemon">
+            <h3>Top 5 Pokémon</h3>
+        </div>
+
+          <div class="carousel-item" onclick="window.location.href='menu.html'">
+            <img src="assets/image/soon.jpg" alt="soon">
+            <h3>A venir</h3>
+          </div>
+
+          <div class="carousel-item" onclick="window.location.href='menu.html'">
+            <img src="assets/image/soon.jpg" alt="soon">
+            <h3>A venir</h3>
+          </div>
+
+          <div class="carousel-item" onclick="window.location.href='menu.html'">
+            <img src="assets/image/soon.jpg" alt="soon">
+            <h3>A venir</h3>
+          </div>
+
+        </div>
+        <button class="carousel-button next">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="parallax-two"></div>
+  </section>
+
+  <section>
+    <div class="title">
+  <h1> Soon    </h1>
+    </div>
+    </section>
+
+  <section>
+    <div class="parallax-three"></div>
+  </section>
+
+  <section>
+    <div class="title">
+        <h1> Qui sommes nous ?    </h1>
+    </div>
+    <div class="block">
+      <p><span class="first-character ny">N</span>ous sommes des apprenties pour devenir les meilleures Dev. Full Stack chez Sopra Steria. Voici ma page pour le tp de Jordan, je me suis bien amusée à le faire ect blablabla.
+        Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. </p>
+      <p class="line-break margin-top-10"></p>
+      <p class="margin-top-10">Je remercie notre formateur Jordan, mes amis, ma famille... Je ne commence à ne plus avoir d'idée, en cours d'écriture !!! <br />  Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+
+ </p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const items = document.querySelectorAll('.carousel-item');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+
+let index = 0;
+const visibleItems = 3;
+const total = items.length;
+
+function updateCarousel() {
+  const itemWidth = items[0].offsetWidth + 20;
+  track.style.transform = `translateX(-${index * itemWidth}px)`;
+}
+
+next.addEventListener('click', () => {
+  if (index < total - visibleItems) index++;
+  updateCarousel();
+});
+
+prev.addEventListener('click', () => {
+  if (index > 0) index--;
+  updateCarousel();
+});
+
+window.addEventListener('resize', updateCarousel);
+</script>
+
+<script>
+  const audio = document.getElementById('fondAudio');
+  audio.volume = 0.1;
+
+  // Fonction pour démarrer le son
+  function playAudio() {
+    audio.play().catch(err => console.log("Lecture bloquée :", err));
+    document.removeEventListener('click', playAudio);
+  }
+
+  // Attend un clic n'importe où
+  document.addEventListener('click', playAudio);
+</script>
+</body>
+</html>
