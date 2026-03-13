@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+
+<form>
+  <fieldset>
+    <legend>Informations personnelles</legend>
+    <table>
+      <tr><td><label for="input-email">Email</label></td><td><input required id="input-email" type="email" name="email" placeholder="lorem@mail.fr"></td></tr>
+      <tr><td>Mot de passe</td><td><input required  type="password" name="password" placeholder="********"></td></tr>
+      <tr><td>Sexe</td><td>
+        <select name="civilite">
+          <option>Homme</option>
+          <option selected>Femme</option>
+          <option>NB</option>
+        </select>
+      </td></tr>
+      <tr><td>Date de naissance</td><td><input required type="date" name="naissance" value="2000-01-01"></td></tr>
+    </table>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Préférences</legend>
+    <table>
+      <tr><td>Couleur favorite</td>
+        <td>
+          <input checked id="input-couleur-rouge" name="couleur" value="Rouge" type="radio"> <label for="input-couleur-rouge">Rouge</label>
+          <input id="input-couleur-vert" name="couleur" value="Vert" type="radio"> <label for="input-couleur-vert">Vert</label>
+          <input id="input-couleur-bleu" name="couleur" value="Bleu" type="radio"> <label for="input-couleur-bleu">Bleu</label>
+        </td></tr>
+      <tr><td>Centres d"intérêts</td>
+        <td>
+          <label><input checked name="interets[]" value="Sport" type="checkbox">Sport</label>
+          <label><input name="interets[]" value="Danse" type="checkbox">Danse </label>
+          <label><input name="interets[]" value="Musique" type="checkbox"> Musique </label>
+          <label><input name="interets[]" value="Informatique" type="checkbox">Informatique</label>
+        </td></tr>
+    </table>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Commentaires</legend>
+    <table>
+      <tr><td>Message</td><td><textarea required name="commentaire" cols="25" rows="4"></textarea></td></tr>
+    </table>
+  </fieldset>
+  <input type="submit" value="Envoyer">
+</form>

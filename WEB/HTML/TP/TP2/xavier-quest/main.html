@@ -40,8 +40,8 @@ table {
 
 
 
-<h1 align="center">Tableaux des pires erreurs dans chaque modules de la formation</h1>
-<table border align="center" width="90%">
+<h1 align="center">Tableau des pires erreurs dans chaque module de la formation</h1>
+<table border align="center" width="98%">
 <tr>
   <th>Module</th>
   <th>Pire erreur possible</th>
@@ -54,18 +54,18 @@ table {
   <td>Triple boucle imbriquée</td>
   <td>Complexité catastrophique pour un problème simple</td>
   <td>Faire une multiplication sans utiliser '*'</td>
-  <td>utiliser '*'</td>
+  <td>Utiliser '*'</td>
 </tr>
 <tr>
   <td rowspan="2">Java Objet</td>
   <td>Tout mettre en static</td>
-  <td>Code ilisible</td>
+  <td>Code illisible</td>
   <td>Plus besoin d'instancier</td>
-  <td>Tout mettre dans un singleton</td>
+  <td>Tout mettre dans un Singleton</td>
 </tr>
 <tr>
   <td>while (true)</td>
-  <td>Boucle infini</td>
+  <td>Boucle infinie</td>
   <td>Transforme le PC en chauffage</td>
   <td>while (false)</td>
 </tr>
@@ -78,12 +78,10 @@ table {
   <td>Expliquer aux utilisateurs qu'ils doivent se recréer un compte</td>
 </tr>
 
-
-
 <tr>
-  <td title = "RIP UML">UML</td>
+  <td title="RIP UML">UML</td>
   <td>Diagramme avec 50 classes reliées entre elles</td>
-  <td title="Joke, ne le prends pas mal Jordan :) ">Un UML illisible, mais bon, on a jamais eu de cours sur les UMLs</td>
+  <td title="Joke, ne le prends pas mal Jordan :) ">Un UML illisible, mais bon, on n'a jamais eu de cours sur les UML</td>
   <td>Art abstrait</td>
   <td>Changer de projet</td>
 </tr>
@@ -93,46 +91,113 @@ table {
   <td>Mélanger XML et JSON</td>
   <td>Créer un JSON contenant des balises XML</td>
   <td>Création d'un nouveau langage</td>
-  <td>Faire un tableau excel</td>
+  <td>Faire un tableau Excel</td>
 </tr>
 
 <tr>
-<td>Unix</td>
-<td colspan="4"><a href="rm.html" title="Il semblerai que ca ai mangé le reste de la ligne">rm -rf /*</a></td>
+  <td rowspan="2">Unix</td>
+  <td colspan="4"><a href="assets/html/rm.html" title="Il semblerait que ça ait mangé le reste de la ligne">rm -rf /*</a></td>
+</tr>
+<tr>
+  <td><img src="assets/img/No_space.png" alt="bash terminal" title = "J'ai mis 30 mins à faire cette image
+svp faites l'effort d'essayer de la comprendre
+(1.4T = 1,4 TERRA octets)"width = 550></td>
+  <!--<td>Oublier echo devant du text<br>Découvrir que le mot yes est une commande<br>et que rediriger sa sortie dans un fichier c'est bof</td> -->
+  <td>
+    <ul>
+      <li>Oublier echo devant du text</li>
+      <li>Découvrir que le mot yes est une commande</li>
+      <li>et que rediriger sa sortie dans un fichier c'est bof</li>
+    </ul>
+  </td>
+  <td>Quand la commande a mis 5 minutes à s'executer je me suis douté qu'il y avais un soucis</td>
+  <td title="ca peut aussi servir de benchmark pour la vitesse d'un SSD">Acheter un SSD plus rapide pour pas avoir à attendre 5 minutes avant de comprendre qu'il y a un soucis</td>
 </tr>
 
 <tr>
 <td>Maven</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>Franchement j'ai pas d'idée... si vous en avez : </td>
+<td colspan="3"><form action="assets/html/sorry.html">
+  <input type="text" width="200" placeholder="Idée pour Maven" name="42">
+<input type="submit" value="Envoyer">
+</form>
+</td>
 </tr>
 
 <tr>
   <td>Git</td>
   <td>git push --force sur main</td>
   <td>Sauvegarde efficace</td>
-  <td>Aucun conflit sur git</td>
-  <td>Teletravail pour eviter les conflits au travail</td>
+  <td>Aucun conflit sur Git</td>
+  <td>Télétravail pour éviter les conflits avec son patron</td>
 </tr>
 
 <tr>
   <td>JPA avec Hibernate</td>
   <td>Tout mettre en fetch.EAGER</td>
-  <td>Permet de charger toute la base en un select</td>
-  <td>Découvrir les limites de son PC</td>
+  <td>Permet de charger toute la BDD en un select</td>
+  <td title = "RAM = Run Aout of Memory ?">Découvrerte du concept de "RAM"</td>
   <td>Retourner sur JDBC</td>
 </tr>
 
 <tr>
-  <td>HTML / CSS / Bootstrap</td>
+  <td>HTML</td>
+  <td>Faire un tableau dans un tableau</td>
+  <td>
+    <table border="1">
+      <tr>
+        <th>Problème</th>
+        <th>Conséquence</th>
+      </tr>
+      <tr>
+        <td>Lisibilité</td>
+        <td>Personne ne comprend la structure</td>
+      </tr>
+      <tr>
+        <td>Maintenance</td>
+        <td>Modifier une cellule casse 3 tableaux</td>
+      </tr>
+      <tr>
+        <td>Debug</td>
+        <td>Bon chance</td>
+      </tr>
+    </table>
+  </td>
+  <td align="center" title="Je suis pas fière de celle la">.+</td>
   <td></td>
+</tr>
+
+<tr style="background:white; color:black; font-family: serif; border:2px solid black;" title = "Promis j'ai fait le CSS moi-même" >
+  <td>CSS</td>
+  <td>Faire le CSS soi-même</td>
+  <td title = "Rien à dire
+y a pas de CSS"></td>
+  <td>Design retro</td>
+  <td>Demander à ChatGPT de faire le CSS</td>
+</tr>
+
+<tr title="Pourquoi y a pas le TypeScript dans la formation ??">
+  <td>JavaScript</td>
+  <td>Aucune erreur</td>
+  <td >Mais la variable est de type <a title="emoji kebab">"🥙"</a></td>
+  <td>Le programme continue quand même</td>
+  <td >Dire que c'est tout à fait normal (et chercher un café)</td>
+</tr>
+<tr>
+  <td>Bootstrap</td>
   <td></td>
-  <td>i</td>
+  <td>
+    C'est quoi ?
+  </td>
+  <td></td>
   <td></td>
 </tr>
 
 </table>
 
-<p>Promis j'ai fait le CSS moi même</p>
+<br><br>
+<p style="font-size:12" title="Message pour Jordan :
+T'a promis des points en + si ca te faire rire,
+oublie pas
+-> Xavier">
+L'appropriation, modification, et diffusion de ce tableau est autorisée sans restriction à condition d’en assumer la responsabilité si Jordan demande qui en est l’auteur.</p>

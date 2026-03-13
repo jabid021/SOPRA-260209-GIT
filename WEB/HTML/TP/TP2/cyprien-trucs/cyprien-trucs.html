@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+    <meta charset="utf-8" />
+    <title>euhhh...</title>
+    <style>
+    body {
+        align-items: center;
+        background: #fcf5e5;
+        color : oklch(0.286 0.07 91);
+        font-family: Helvetica;
+        text-align: center;
+    }
+
+    th {
+        background: oklch(0.943 0.063 91);
+        color: oklch(0.286 0.07 91);
+        box-align: center;
+        font-weight: 800;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    tr:nth-of-type(even) {
+        background-color: oklch(0.853 0.107 295);
+        color: oklch(0.33 0.105 295);
+    }
+
+    tr:nth-of-type(odd) {
+        background-color: oklch(0.849 0.107 252);
+        color: oklch(0.277 0.077 252);
+    }
+
+    tr:hover {
+        background: oklch(0.916 0.064 180);
+        color: oklch(0.27 0.078 180);
+    }
+
+    p {
+        font-family: sans-serif;
+        font-size: 10px;
+    }
+    
+    .pFooter{font-size: 3px}
+
+    .showHide{}
+    .hideItem{
+        display:none;
+        color: oklch(0.849 0.107 252);
+    }
+    .showHide:hover .hideItem{
+        display:block;
+        color: oklch(0.27 0.078 180);
+    }
+
+    .itemAlign{
+        text-align:left;
+    }
+
+    </style>
+
+    <body>
+        <h1>Liste de trucs</h1>
+        <h3>(oui, j'ai pas d'idées)</h3>
+
+        <div>
+            <table align="center">
+                <tr>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Année de sortie</th>
+                    <th colspan="2">Commentaire</th>
+                    <th>Truc</th>
+                </tr>
+
+                <tr>
+                    <td>Dune - David Lynch</td>
+                    <td>Film</td>
+                    <td><input type="date" value="1984-12-14" name="sortieCine" min="1984-12-14", max="1984-12-14"></td>
+                    <td><div class="showHide">3/5 <div class="hideItem">Musique par Toto (oui oui)</div></div></td>
+                    <td>J'ai pas encore lu les livres</td>
+                    <td>
+                        <audio src="assets/audio/Africa_Toto.webm" controls loop></audio>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Giorgio by Moroder - Daft Punk</td>
+                    <td>Musique</td>
+                    <td>2013</td>
+                    <td>Meilleur morceau du groupe</td>
+                    <td>
+                        Ouvert au débat : <br />
+                        <input
+                            name="choixRadio"
+                            type="radio"
+                            id="oui"
+                            onclick="return false"
+                        />
+                        <label for="oui">oui</label>
+                        <br />
+                        <input
+                            name="choixRadio"
+                            type="radio"
+                            id="non"
+                            checked
+                            onclick="return false"
+                        />
+                        <label for="non">non</label>
+                    </td>
+                    <td>
+                        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A254112136&color=%230b0f0e&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/daftpunkofficialmusic" title="Daft Punk" target="_blank" style="color: #cccccc; text-decoration: none;">Daft Punk</a> · <a href="https://soundcloud.com/daftpunkofficialmusic/giorgio-by-moroder" title="Giorgio by Moroder" target="_blank" style="color: #cccccc; text-decoration: none;">Giorgio by Moroder</a></div>                    </td>
+                </tr>
+
+                <tr>
+                    <td>Carottes</td>
+                    <td>Légume (racine)</td>
+                    <td>Il y a longtemps</td>
+                    <td colspan="2"><div class="showHide">C'est orange
+                        <div class="hideItem">(Comme un certain chef d'état)</div></td>
+                    <td>
+                        <img title="carotte" src="assets/img/carotte.png" width="100">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Moto</td>
+                    <td>Véhicule</td>
+                    <td>1868</td>
+                    <td>C'est pas une voiture</td>
+                    <td> Vroum ? <br>
+                    <select name="vroumMoto" text-align="center" >
+                        <option value="">---------</option>
+                        <option value="">Vroum</option>
+                        <option value="">Vrouuuum</option>
+                        <option value="">VROUUUUUUM</option>
+                    </select>
+                    </td>
+                    <td>
+                        <img title="moto" src="assets/img/moto.png" width="100">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Courses</td>
+                    <td>Liste</td>
+                    <td>Demain</td>
+                    <td>Les placards sont vides...</td>
+                    <td>
+                        <ul>
+                            <li><div class="itemAlign">Pâtes</div></li>
+                            <li><div class="itemAlign">Fromage</div></li>
+                            <li><div class="itemAlign">Café</div></li>
+                            <li><div class="itemAlign">Beurre</div></li>
+                            <li><div class="itemAlign">Fromage</div></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <button onclick="window.open('https://www.systeme-de-design.gouv.fr/version-courante/fr/composants/bouton/code-du-bouton','_blank')">Bouton</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        
+        <p align="left" si>Fait entièrement à la main et avec un choix approximatif des couleurs</p>
+
+        <p class="pFooter" align="right">
+            Je découvre, j'ai pas d'idées et en plus je suis nul en design
+            <br/>
+            Donc autant ne pas se prendre la tête sur ça
+        </p>
+
+    </body>
+</html>
