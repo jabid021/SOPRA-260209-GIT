@@ -1,0 +1,149 @@
+<!--
+
+enfants direct => x > y (toutes les balises y qui se trouve directement au niveau de x )
+enfant descendant  => x y (toutes les balises y qui se trouvent dans une balise x)
+balises suivantes => x + y (la balise y qui suit la balise x)
+
+-->
+<style>
+
+  body
+  {
+    margin:0
+  }
+
+  p span
+  {
+    color:red;
+    font-weight:bold;
+    font-style:italic;
+  }
+
+  #demoPointeur
+  {
+    background:cyan;
+  }
+
+  #demoPointeur div
+  {
+    color:red;
+  }
+
+  #demoPointeur>div
+  {
+    border:solid black 2px;
+  }
+
+  #demoPointeur>div>div
+  {
+    font-size:28px;
+    text-align:center;
+  }
+
+  #demoPointeur + div
+  {
+    background-color:yellow;
+  }
+
+  #demoPointeur + div + div
+  {
+    background-color:orange;
+  }
+
+  p:first-line
+  {
+    color:green;
+  }
+
+  p:first-letter
+  {
+    font-family:fantasy;
+    font-size:75px;
+  }
+
+  #demoPosition div
+  {
+    display:inline-block;
+    height:50px;
+    width:19.9%;
+    margin-left:-4px;
+    background-color:green;
+    border:solid black 1px;
+    text-align:center;
+  }
+
+  #demoPosition span
+  {
+    position:relative;
+    top:16px;
+  }
+
+
+
+  #demoPositionFLEX
+  {
+    display:flex;
+  }
+
+  #demoPositionFLEX div
+  {
+    display:flex;
+    height:50px;
+    background-color:green;
+    width:20%;
+    border:solid black 1px;
+    justify-content:center;
+    align-items:center;
+  }
+
+
+
+
+</style>
+
+
+
+<p>Lorem ipsum dolor sit amet, <span>consectetur adipisicing elit</span>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+<div>Avant</div>
+<div id="demoPointeur">
+  <div>Enfant direct 1</div>
+  <div>Enfant direct 2</div>
+  <div>Enfant direct 3</div>
+  <div>
+    <div> + enfant4 A</div>
+    <div> + enfant4 B</div>
+  </div>
+  <div>Enfant direct 5</div>
+</div>
+
+<div>Apres 1</div>
+<div>Apres 2</div>
+
+
+
+
+
+
+
+
+
+<div id="demoPosition">
+  <div><span>Div 1</span></div>
+  <div><span>Div 2</span></div>
+  <div><span>Div 3</span></div>
+  <div><span>Div 4</span></div>
+  <div><span>Div 5</span></div>
+</div>
+
+
+<hr>
+
+<div id="demoPositionFLEX">
+  <div>Div 1</div>
+  <div>Div 2</div>
+  <div>Div 3</div>
+  <div>Div 4</div>
+  <div>Div 5</div>
+</div>
