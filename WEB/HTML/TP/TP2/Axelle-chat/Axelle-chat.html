@@ -1,60 +1,304 @@
-<style>
-body
-{
-    background-color:#F4EFE7;
-}
-table
-{
-background-color:#F4EFE7;
-}
-</style>
+<!DOCTYPE html>
 
-<h1 align="center">50 nuances de chat</h1>
+<head>
+  <meta charset="utf-8">
+  <title>50 nuances de chat</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<table align="center" border="2">
-  <tr>
-    <th>Date</th>
-    <th>Age</th>
-    <th>Localisation</th>
-    <th>Description</th>
-    <th>Image</th>
-  </tr>
-    <tr>
-    <td>Octobre 2018</td>
-    <td>1 mois</td>
-    <td rowspan="2"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41174.688418077625!2d-2.5318051742455254!3d47.340253482146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48055754d0b29bb5%3A0x1e655f2a43c7a400!2sLa%20Turballe!5e1!3m2!1sfr!2sfr!4v1773328707593!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>    
-    <td>Chat-dorable</td>
-    <td><img src="img/IMG_2299.jpeg" alt="Bébé chat en gros plan" width="200px"></td>
-  </tr>
-  <tr>
-    <td>Novembre 2018</td>
-    <td>2 mois</td>
-    <td>Chat-bout de forces</td>
-    <td><img src="img/IMG_2281.jpeg" alt="Bébé chat qui dort" width="200px"></td>
-  </tr>
- <tr>
-    <td>Janvier 2019</td>
-    <td>4 mois</td>
-    <td rowspan="2"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82508.23670367146!2d-1.6427353833704152!3d47.23832026820842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ee81f0a8aead%3A0x40d37521e0ded30!2sNantes!5e1!3m2!1sfr!2sfr!4v1773328666637!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>    
-    <td>Chat-pardeur</td>
-    <td><img src="img/IMG_3814.jpeg" alt="Chat ayant volé un rouleau de papier toilette" width="200px"></td>
-  </tr>
-  <td>Février 2019</td>
-    <td>5 mois</td>
-    <td>Chat-brité</td>
-    <td><img src="img/IMG_4450.jpeg" alt="Chat caché dans un carton de bières" width="200px"></td>
-  </tr>
-  <tr>
-    <td>Août 2025</td>
-    <td>6 ans</td>
-    <td rowspan="2"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40179.832873796644!2d2.139187244421898!3d48.6031909105898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5d113ef688ff1%3A0x95f03dc06dc02f2c!2zQnJ1ecOocmVzLWxlLUNow6J0ZWw!5e1!3m2!1sfr!2sfr!4v1773327106431!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>
-    <td>Chat-mac</td>
-    <td><img src="img/IMG_5090.jpeg" alt="Chat dormant dans un hamac sur un radiateur" width="200px"></td>
-  </tr>
-   <tr>
-    <td>Janvier 2026</td>
-    <td>7 ans</td>
-    <td>Chat-sse neige</td>
-    <td><img src="img/IMG_6298.jpeg" alt="Chat dormant dans un hamac sur un radiateur" width="200px"></td>
-  </tr>
-</table>
+    body {
+      background-image: linear-gradient(rgba(10, 8, 5, 0.221), rgba(10, 8, 5, 0.221)), url("img/background.png");
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: 'Cormorant Garamond', serif;
+      padding: 40px 20px 60px;
+    }
+
+    .page-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    /* ── TITRE ── */
+    .title-block h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #f8e7c8;
+      text-shadow:
+        0 0 40px rgba(212, 175, 95, 0.45),
+        2px 3px 0px rgba(0, 0, 0, 0.6);
+      line-height: 1.1;
+    }
+
+    .title-block h1 em {
+      font-style: italic;
+      color: #f8cd6f;
+    }
+
+    .title-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .title-ornament span {
+      display: block;
+      height: 2px;
+      width: 200px;
+      background: linear-gradient(90deg, transparent, #d4af5f, transparent);
+    }
+
+    .title-ornament .paw {
+      font-size: 1.3rem;
+      color: #d4af5f;
+      animation: paw-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes paw-pulse {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(-5deg);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.5) rotate(5deg);
+        opacity: 1;
+      }
+    }
+
+    /* ── TABLEAU ── */
+
+    tr {
+            background: rgba(18, 14, 8, 0.568);
+
+    }
+
+    table {
+      width: auto;
+      margin: 0 auto;
+      border: 0.5px solid rgba(212, 175, 95, 0.12);
+      border-collapse: separate;
+      border-spacing: 0;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(212, 175, 95, 0.3),
+        0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    th {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #d4af5f;
+      background: linear-gradient(180deg, #221d1688 0%, #382d1b94 50%, #1a12088f 100%);
+      padding: 20px 24px;
+      text-align: center;
+      border-bottom: 2px solid rgba(212, 175, 95, 0.4);
+      position: relative;
+    }
+
+    th::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background: #d4af5f;
+      border-radius: 2px;
+    }
+
+    /* Lignes */
+    tbody tr {
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(212, 175, 95, 0.10);
+      transform: scale(1.005);
+    }
+
+    td {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      color: #f0e0b8;
+      font-size: 1.3rem;
+      padding: 18px 22px;
+      text-align: center;
+      vertical-align: middle;
+      border: rgba(212, 175, 95, 0.12) 0.2px solid;
+    }
+
+    /*Transition*/
+    #transition1 {
+      background: linear-gradient(180deg, rgba(18, 14, 8, 0.568) , rgba(0, 0, 0, 0) );
+      height: 40px;
+      border: none;
+    }
+#transition1 td {
+  border:none;
+}
+    #transition2 {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(18, 14, 8, 0.568));
+      height: 40px;
+    }
+#transition2 td {
+  border:none;
+}
+
+
+    /* Colonne Date */
+    td:first-child {
+      font-style: italic;
+      color: #c9a84c;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    /* Colonne image */
+    td img {
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(212, 175, 95, 0.2);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    td img:hover {
+      transform: scale(3) translateX(-100px);
+      transition-duration: 0.8s;
+    }
+
+    tr:last-of-type img:hover {
+      transform: scale(3) translateX(-100px) translateY(-65px);
+      transition-duration: 0.8s;
+    }
+
+    tr:first-of-type img:hover {
+      transform: scale(3) translateX(-100px) translateY(65px);
+      transition-duration: 0.8s;
+    }
+
+    /* iFrame map */
+    td iframe {
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(212, 175, 95, 0.2) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-div">
+    <div class="title-block">
+      <h1>50 nuances de <em>chat</em></h1>
+      <div class="title-ornament">
+        <span></span>
+        <div class="paw">🐾</div>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="table-div">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Age</th>
+            <th>Localisation</th>
+            <th>Description</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Octobre 2018</td>
+            <td>1 mois</td>
+            <td rowspan="2"><iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41174.688418077625!2d-2.5318051742455254!3d47.340253482146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48055754d0b29bb5%3A0x1e655f2a43c7a400!2sLa%20Turballe!5e1!3m2!1sfr!2sfr!4v1773328707593!5m2!1sfr!2sfr"
+                width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe></td>
+            <td>Chat-dorable</td>
+            <td><img src="img/IMG_2299.jpeg" alt="Bébé chat en gros plan" width="200px"></td>
+          </tr>
+          <tr>
+            <td>Novembre 2018</td>
+            <td>2 mois</td>
+            <td>Chat-bout de forces</td>
+            <td><img src="img/IMG_2281.jpeg" alt="Bébé chat qui dort" width="200px"></td>
+          </tr>
+          <tr>
+            <td>Janvier 2019</td>
+            <td>4 mois</td>
+            <td rowspan="2"><iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82508.23670367146!2d-1.6427353833704152!3d47.23832026820842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ee81f0a8aead%3A0x40d37521e0ded30!2sNantes!5e1!3m2!1sfr!2sfr!4v1773328666637!5m2!1sfr!2sfr"
+                width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe></td>
+            <td>Chat-pardeur</td>
+            <td><img src="img/IMG_3814.jpeg" alt="Chat ayant volé un rouleau de papier toilette" width="200px"></td>
+          </tr>
+          <tr>
+            <td>Février 2019</td>
+            <td>5 mois</td>
+            <td>Chat-brité</td>
+            <td><img src="img/IMG_4450.jpeg" alt="Chat caché dans un carton de bières" width="200px"></td>
+          </tr>
+          <tr id="transition1">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr id="transition2">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Août 2025</td>
+            <td>6 ans</td>
+            <td rowspan="2"><iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40179.832873796644!2d2.139187244421898!3d48.6031909105898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5d113ef688ff1%3A0x95f03dc06dc02f2c!2zQnJ1ecOocmVzLWxlLUNow6J0ZWw!5e1!3m2!1sfr!2sfr!4v1773327106431!5m2!1sfr!2sfr"
+                width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe></td>
+            <td>Chat-mac</td>
+            <td><img src="img/IMG_5090.jpeg" alt="Chat dormant dans un hamac sur un radiateur" width="200px"></td>
+          </tr>
+          <tr>
+            <td>Janvier 2026</td>
+            <td>7 ans</td>
+            <td>Chat-sse neige</td>
+            <td><img src="img/IMG_6298.jpeg" alt="Chat dormant dans un hamac sur un radiateur" width="200px"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
