@@ -1,0 +1,161 @@
+<!--
+
+Comment faire du CSS
+
+1) css inline (directement dans une balise avec style="prop:value;prop2:value2")  (A EVITER)
+2) CSS interne, une balise <style> a part dans la page html (css disponible uniquement sur cette page)
+3) CSS externe, un fichier a part x.css qui contient le css global du site et sera reutilisable partout
+
+plusieurs facons de pointer sur les balises et de leur appliquer du css :
+
+1) tags => le nom des balises : p, ul, li, h1, body
+2) id => #idDeLaBalise (un id est sensé etre unique sur la page....)
+3) class => .classDeLaBalise (plusieurs elements qui peuvent etre ciblés)
+
+
+s'il y a des conflits sur les prop, color : purple à la ligne 15 puis color : blue à la ligne 20, c'est le blue qui sera appliqué
+
+tag < class < id < inline
+
+
+-->
+
+
+<style>
+
+
+  #paragPrincipal
+  {
+    color:red;
+  }
+
+  p
+  {
+    background-color:orange;
+    color:purple;
+  }
+
+  .cssImportant,p:nth-of-type(4)
+  {
+    font-size:30px;
+  }
+
+  .uneAutreClass
+  {
+    border:solid black 1px;
+  }
+
+  .cssImportant:nth-of-type(odd)
+  {
+    font-family:Roboto;
+  }
+
+  p:nth-of-type(3n)
+  {
+    color:grey;
+  }
+
+p a:nth-of-type(1)
+{
+  text-decoration:unset;
+  color:green;
+  cursor:not-allowed;
+}
+
+
+
+p:first-of-type:hover
+{
+  font-size:35px;
+  background-color:grey;
+}
+
+img:hover
+{
+  transform : scale(1.5) rotate(180deg);
+  transition-duration : 0.8s;
+}
+
+
+p:active
+{
+  font-family:fantasy;
+}
+
+input:focus
+{
+  color:green;
+  background-color:cyan;
+}
+</style>
+
+<!--<link rel="stylesheet" href="style.css">-->
+
+
+<h1 align="center">Grand titre</h1>
+<h2 class="cssImportant uneAutreClass">ZogZog</h2>
+<h3>Hôpital</h3>
+<h4 style="color:red">Grand t<a href="bravo.html">i</a>tre</h4>
+<h5>Grand titre</h5>
+<p align="center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p id="paragPrincipal">Lorem <u>ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </u>incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<h6>plus petit</h6>
+<p class="cssImportant">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p title="paragraphe important...">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<input type="text" placeholder="Saisir votre login"><br>
+
+<img title="Le logo d'ajc" src="../HTML/assets/img/AJC_Ingenierie.png" width="100" alt="Logo AJC" /><br>
+
+<p>
+  <a href="../HTML/formulaire.html">Vers le formulaire</a><br>
+
+  <a href="">Un autre lien</a><br>
+</p>
+<table border align="center" width="80%">
+  <tr>
+    <th>Head-Index</th>
+    <th>Nom</th>
+    <th>Prenom</th>
+    <th class="cssImportant">Age</th>
+    <th>Ordinateur</th>
+    <th>Lien</th>
+  </tr>
+
+  <tr align="center">
+    <th>1</th>
+    <td>Abid</td>
+    <td>Jordan</td>
+    <td>32</td>
+    <td>1</td>
+    <td><a href="fichePersonne.html?id=1&prenom=jordan&age=32">Voir la fiche</a></td>
+  </tr>
+
+  <tr>
+    <th>2</th>
+    <td  rowspan="2" align="right">Doe</td>
+    <td>John</td>
+    <td align="center" colspan="2">42</td>
+    <!--td invisible grace au colspan -->
+    <td><a href="fichePersonne.html?id=2&prenom=John&age=42">Voir la fiche</a></td>
+  </tr>
+
+  <tr>
+    <th>3</th>
+    <!--<td>Doe</td>-->
+    <td>Jane</td>
+    <td>42</td>
+    <td>17</td>
+    <td><a href="fichePersonne.html?id=2&prenom=John&age=42">Voir la fiche</a></td>
+  </tr>
+
+
+  <tr>
+    <th>Index</th>
+    <th>Nom</th>
+    <th>Prenom</th>
+    <th>Age</th>
+    <th>Ordinateur</th>
+    <th>Lien</th>
+  </tr>
+</table>
