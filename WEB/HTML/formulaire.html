@@ -1,5 +1,5 @@
 <!--
-Champs de texte (input) => text, password, date, email
+Champs de texte (input) => text, password, date,time email, url, number, tel (affiche le clavier numerique sur un mobile), hidden
 
 Zone de texte : textarea
 
@@ -9,22 +9,57 @@ Choix : radio (0,1) / checkbox (0,*)
 
 buttons => submit / reset / button
 
+<input type="submit"> => valider et envoyer un formulaire
+<button>Valider</button> => Si on est dans un formulaire, fait office de submit, si en dehors d'un form, utilisable avec du JS
+<input type="button"> => uniquement en JS
 
 
- -->
+definir couleur =>
+  son nom(red,blue,lightgrey)
+  rbg(x,y,z) rgb(255,255,255)
+  hexa => #7c9155
+
+
+attributs de la balise form !
+
+action => page cible vers laquelle on send les données
+method =>
+  GET  => les parametres du formulaire passe par l'url
+  POST => (Uniquement avec les formulaire) les parametres du formulaire n'apparaissent pas dans l'url (transmission direct au serveur)
+  
+enctype => par default "application/x-www-form-urlencoded", si on veut upload un fichier, il faut passer en multipart/form-data
+
+
+
+
+Une requete :
+[protocol]://[domaine]/pageCible?param1=value1&param2=value2...  [GET / POST]
+
+https://www.goole.fr?query=votreRecherche [GET]
+http://localhost:8080/monProjet/ficheStagiaire?id=1 [GET]
+http://localhost:8080/monProjet/stagiaire   [POST]
+-->
 <meta charset="utf-8">
 
 <h1>Formulaire</h1>
 
-
-
-<form>
+<form action="pageCible.html" method="POST">
 <fieldset>
   <legend>Bloc 1</legend>
   <table>
-  <tr><td>Login : </td><td><input type="text" placeholder="Saisir votre login" value="Jaxx" name="login"></td></tr>
+  <tr><td>Login : </td><td><input  disabled type="text" minlength="5" maxlength="10"  placeholder="Saisir votre login" value="Jaxx" size="80" name="login"></td></tr>
+  <tr><td>Email : </td><td><input  type="email" placeholder="Saisir votre email" name="email"></td></tr>
   <tr><td>Password :</td><td><input type="password" placeholder="Saisir votre password" name="password"></td></tr>
   <tr><td>Date :</td><td><input type="date" value="2026-01-01"></td></tr>
+  <tr><td>Heure :</td><td><input type="time" step="900" min="08:45" max="17:30"></td></tr>
+  <tr><td>Week :</td><td><input type="Week"></td></tr>
+  <tr><td>Age :</td><td><input type="number" min="1" max="99" ></td></tr>
+  <tr><td>Tel :</td><td><input type="tel" placeholder="Saisir votre tel"></td></tr>
+  <tr><td>Salaire :</td><td><input type="number" min="0" step="0.01" ></td></tr>
+  <tr><td>Background ? :</td><td><input name="color" type="color"  value="#d22828"></td></tr>
+  <tr><td>Note (0-20)  :</td><td><input id="inputRange" type="range" name="note" min="0" max="20"><span id="valueRange">5</span></td></tr>
+  <tr><td>Salaire :</td><td><input type="number" min="0" step="0.01" ></td></tr>
+  <tr><td>CV :</td><td><input type="file"></td></tr>
 </table>
 
 </fieldset>
@@ -37,9 +72,29 @@ buttons => submit / reset / button
   <tr><td>OS pref :</td>
     <td>
     <select name="osSelect">
-      <option>MacOs</option>
+      <optgroup label="Unix">
+        <option>MacOs</option>
       <option selected>Linux</option>
-      <option>Windows</option>
+      <optgroup>
+      <optgroup label="MSDOS">
+          <option>Windows</option>
+      </optgroup>
+    </select>
+    </td>
+  </tr>
+
+
+
+  <tr><td>OS pref :</td>
+    <td>
+    <select multiple name="multiple-osSelect[]">
+      <optgroup label="Unix">
+        <option>MacOs</option>
+      <option selected>Linux</option>
+      <optgroup>
+      <optgroup label="MSDOS">
+          <option>Windows</option>
+      </optgroup>
     </select>
     </td>
   </tr>
@@ -52,6 +107,7 @@ buttons => submit / reset / button
 </fieldset>
 
 <input type="submit" value="Modifier">
+<!--<button>Modifier</button>-->
 <input type="reset" value="Reset">
 <!--
 Login : <input type="text"><br><br>
@@ -60,3 +116,35 @@ Password : <input type="password"><br>
 
 
 </form>
+
+
+
+<h1>Modifier Stagiaire 12</h1>
+<form>
+<input type="hidden" name="id" value="12">
+Prenom :  <input name="prenom" type="text" value="Jordan" placeholder="Saisir prenom"><br><br>
+Nom :  <input name="nom" type="text" value="Abid" placeholder="Saisir nom"><br><br>
+Filiere :
+  <select required name="filiere">
+    <option value="">CHOISIR VOTRE FILIERE</option>
+    <option value="1">Filiere 1 - Sopra JAVA 240209</option>
+    <option value="2">Filiere 2 - Sopra JAVA 250515</option>
+    <option value="3">Filiere 3 - Sopra JAVA 231114</option>
+    <option value="4">Filiere 4 - Sopra JAVA 260209</option>
+  </select>
+  <br><br>
+
+<input type="submit" value="Modifier">
+</form>
+
+
+
+
+<script>
+
+inputRange.oninput = function()
+{
+  valueRange.innerHTML=inputRange.value;
+}
+
+</script>
