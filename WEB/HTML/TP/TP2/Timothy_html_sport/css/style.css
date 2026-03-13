@@ -1,4 +1,20 @@
-body
+/*  HEADER  */
+
+header
+{
+  background-color: #812929b2;
+  text-align: center;
+  border-radius: 15px;
+  color: #ffffff;
+  padding: 20px;
+   font-family: 'Orbitron', sans-serif;
+}
+
+
+
+
+
+body.formule1
 {
   background-repeat: no-repeat;
   background-image:url("../asset/img/f1.png");
@@ -6,19 +22,27 @@ body
   min-height: 100vh;
 }
 
-body-foot 
+body.football
 {
   background-repeat: no-repeat;
-  background-image:url("../asset/img/football.png");
+  background-image:url("../asset/img/ol.jpg");
   background-size: cover;
   min-height: 100vh;
   
 }
 
-
 table
 {
-background-color:#ff9191;
+background-color:#812929b2;
+border-collapse: collapse;
+width: 100%;
+border-radius: 15px;
+
+}
+
+table.intable
+{
+background-color:#81292900;
 border-collapse: collapse;
 width: 100%;
 border-radius: 15px;
@@ -27,20 +51,18 @@ border-radius: 15px;
 
 tr:nth-of-type(even)
 {
-  color:#4285f4;
+  color:#0062ff;
 }
 
 tr:nth-of-type(odd)
 {
-  color:#0447d6;
+  color:#ffffff;
 }
-
-tr
-
 
 th
 {
-  font-family:Roboto;
-    font-size:25px;
+  
+    font-size:20px;
 
 }
+
