@@ -1,0 +1,64 @@
+<!--
+Le site complet doit avoir une hauteur de 120% de l'ecran
+Le header fait 12.5% de hauteur
+Le footer fait 10% de hauteur
+Le main prend le reste de la hauteur
+
+*header*
+La zone du logo fait 15% de largeur
+La zone accueil fait 85% de largeur
+La taille du texte Logo est de 60px et doit être en gras
+La taille du texte Accueil est de 40px, doit être en majuscule et avoir un fond "grey"
+
+*main*
+La zone de navigation fait 17% de largeur
+La zone de contenu principal fait 68% de largeur
+La zone d'archives fait 15% de largeur
+
+
+*footer*
+La zone de navigation fait 30% de largeur
+La zone copyright fait 50% de largeur
+La zone vide fait le reste de la largeur
+-->
+
+<style>
+
+body
+{
+  margin:0;
+  height:120%;
+}
+#header
+{
+  display:flex;
+  height:12.5%;
+  border:solid black 2px;
+
+}
+
+#header div:nth-of-type(1)
+{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:15%;
+}
+
+#header div:nth-of-type(2)
+{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:85%;
+  background-color:grey;
+}
+
+
+</style>
+
+
+<div id="header">
+  <div>Logo</div>
+  <div>Accueil</div>
+</div>
