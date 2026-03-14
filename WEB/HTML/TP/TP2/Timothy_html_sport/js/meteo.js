@@ -1,10 +1,3 @@
-
-// ============================================
-// MÉTÉO SIMULÉE
-// Pour utiliser la vraie API : remplace fetchFakeWeather par fetchRealWeather
-// et mets ta clé dans API_KEY
-// ============================================
-
 const API_KEY = 'd65c98bdd7ddf5947eeb5b9c36669bf6';
 
 const circuits = [

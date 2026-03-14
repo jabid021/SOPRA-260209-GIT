@@ -2,28 +2,38 @@
 
 header
 {
-  background-color: #812929b2;
+  font-size: 30px;
+  border: #000000 solid 3px;
   text-align: center;
   border-radius: 15px;
-  color: #ffffff;
+  color: #000000;
   padding: 20px;
-   font-family: 'Orbitron', sans-serif;
+  font-family: 'Orbitron';
+  text-transform: uppercase;
+  font-weight: 900;
 }
 
 
-
-
+/*  BODY  */
 
 body.formule1
 {
+  font-family: 'Orbitron';
   background-repeat: no-repeat;
   background-image:url("../asset/img/f1.png");
   background-size: cover;
-  min-height: 100vh;
+  background-attachment: fixed;
+
+  
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body.football
 {
+  font-family: 'Orbitron';
   background-repeat: no-repeat;
   background-image:url("../asset/img/ol.jpg");
   background-size: cover;
@@ -31,38 +41,141 @@ body.football
   
 }
 
-table
-{
-background-color:#812929b2;
-border-collapse: collapse;
-width: 100%;
-border-radius: 15px;
 
+main {
+  flex: 1;
+  padding: 40px 600px;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 450px;
+        }
+
+
+.map {
+ 
+ width: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-table.intable
-{
-background-color:#81292900;
-border-collapse: collapse;
-width: 100%;
-border-radius: 15px;
-
+.map iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
 }
 
-tr:nth-of-type(even)
-{
-  color:#0062ff;
+
+
+.circuit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(300px,400px));
+  gap: 20px;
+  justify-content: center;
 }
 
-tr:nth-of-type(odd)
-{
-  color:#ffffff;
+.circuit-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #812929b2;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 20px;
 }
 
-th
-{
+.card-body {
+color : #ffffff;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
   
-    font-size:20px;
-
 }
+.card-header:hover {
+  background-color: #ffffff55;
+}
+
+.circuit-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flag-emoji {
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 1.5rem;
+  display: inline-block;
+  animation: flagWave 2s ease-in-out infinite;
+  transform-origin: left center;
+  will-change: transform;
+        }
+
+@keyframes flagWave {
+  0%   { transform: rotate(-5deg); }
+  50%  { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
+
+
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 85%;
+}
+
+.stats-table tr:hover {
+  background-color: #ffffff55;
+}
+
+.stats-table tr {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  
+}
+
+.stats-table th
+{
+   padding: 6px;
+}
+
+.stats-table th:last-child
+{
+  text-align: right;
+}
+
+.stats-table tr:last-child { border-bottom: none; }
+
+.weather-block {
+   font-size: 12px;
+    margin-top: 10px;
+    padding: 5px 2px;
+    background: rgba(255,255,255,0.03);
+    border:2px solid #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.weather-icon { font-size: 1.8rem; }
+.weather-temp { font-size: 1.1rem; font-weight: 700; }
+.weather-desc { font-size: 0.75rem; color: #ffffff; }
+.weather-extra { font-size: 0.75rem; color: #ffffff; text-align: right; white-space: nowrap; }
+
+
+footer {
+  color: #ffffff;
+  margin-top: auto;
+  padding: 30px 40px;
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: #000000 solid 3px;
+  
+        }
 

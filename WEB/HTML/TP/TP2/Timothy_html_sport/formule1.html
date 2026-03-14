@@ -1,0 +1,162 @@
+  <!DOCTYPE html>
+  <html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <title>Document</title>
+  </head>
+
+  <script src="js/meteo.js"></script>
+
+  <body class="formule1">
+    <header>
+
+      <h1>Présentation de circuits de formule 1</h1>
+
+    </header>
+
+    <main>
+        
+        <div class="circuit-grid">
+         
+          <!--MONACO -->
+          <div class="circuit-card">
+            <!--map -->
+            <div class="map">
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2882.863835535545!2d7.41917147736083!3d43.73415544718937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdc3005bd9bc7f%3A0xc23c85e779aac89e!2sCircuit%20de%20Monaco!5e0!3m2!1sfr!2sfr!4v1773324449303!5m2!1sfr!2sfr"></iframe> 
+            </div>
+            
+            <div class="card-body">
+              
+              <div class="card-header">
+                <span class="circuit-name">Monaco</span>
+                <span class="flag-emoji fi fi-mc"></span>
+              </div>
+
+              <table class="stats-table">
+                <tr><th> Pays</th><th> Monaco </th>
+                <tr><th> Longueur</th><th> 3.337 km </th></tr>
+                <tr><th> Virages </th><th> 19 </th></tr>
+                <tr><th> Record Tour</th><th> 1:14.260 </th></tr>
+                <tr><th> 1er GP</th><th> 1929 </th></tr>
+              </table>
+
+              <div class="weather-block" id="weather-monaco">
+                    <span class="weather-loading">⏳ Chargement météo...</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!--SILVERSTONE -->
+          <div class="circuit-card">
+            <!--map -->
+            <div class="map">
+              <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.6377282789636!2d-1.0255679223908898!3d52.068119769585856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48771c5823926c25%3A0x1142afb591c324a6!2sCircuit%20de%20Silverstone!5e0!3m2!1sfr!2sfr!4v1773325122268!5m2!1sfr!2sfr" ></iframe>
+            </div>
+            
+            <div class="card-body">
+              
+              <div class="card-header">
+                <span class="circuit-name">Silverstone</span>
+                <span class="flag-emoji fi fi-gb"></span>
+              </div>
+
+              <table class="stats-table">
+                <tr><th> Pays</th><th> Angleterre </th>
+                <tr><th> Longueur</th><th> 5,891 km </th></tr>
+                <tr><th> Virages </th><th> 18 </th></tr>
+                <tr><th> Record Tour</th><th> 1:27.097 </th></tr>
+                <tr><th> 1er GP</th><th> 1950 </th></tr>
+              </table>
+
+              <div class="weather-block" id="weather-silverstone">
+                    <span>⏳ Chargement météo...</span>
+                </div>
+
+            </div>
+          </div>
+
+          <!--MONZA -->
+          <div class="circuit-card">
+             <!--map -->
+            <div class="map">
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.0200863510345!2d9.27569297741331!3d45.61024032368118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786ba360e48bd7d%3A0x645e7ef5a9d3a632!2sAutodromo%20Nazionale%20di%20Monza!5e0!3m2!1sfr!2sfr!4v1773325155061!5m2!1sfr!2sfr"></iframe>
+            </div>
+            
+            <div class="card-body">
+              
+              <div class="card-header">
+                <span class="circuit-name">Monza</span>
+                <span class="flag-emoji fi fi-it"></span>
+              </div>
+
+              <table class="stats-table">
+                <tr><th> Pays</th><th> Italie </th>
+                <tr><th> Longueur</th><th> 5,793 km </th></tr>
+                <tr><th> Virages </th><th> 11 </th></tr>
+                <tr><th> Record Tour</th><th> 1:21.046 </th></tr>
+                <tr><th> 1er GP</th><th> 1950 </th></tr>
+              </table>
+
+              <div class="weather-block" id="weather-monza">
+                    <span >⏳ Chargement météo...</span>
+              </div>
+
+            </div>
+          </div>
+        
+          <!--SPA-->
+          <div class="circuit-card">
+             <!--map -->
+            <div class="map">
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.861215395903!2d5.963586277557664!3d50.443685687849374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c07b5c0460f737%3A0x78105e8819c35c0e!2sCircuit%20de%20Spa-Francorchamps!5e0!3m2!1sfr!2sfr!4v1773325198526!5m2!1sfr!2sfr"></iframe>
+            </div>
+            
+            <div class="card-body">
+              
+              <div class="card-header">
+                <span class="circuit-name">SPA</span>
+                <span class="flag-emoji fi fi-be"></span>
+              </div>
+
+              <table class="stats-table">
+                <tr><th> Pays</th><th> Belgique </th>
+                <tr><th> Longueur</th><th> 7,004 km </th></tr>
+                <tr><th> Virages </th><th> 19 </th></tr>
+                <tr><th> Record Tour</th><th> 1:41.252 </th></tr>
+                <tr><th> 1er GP</th><th> 1950 </th></tr>
+              </table>
+
+              <div class="weather-block" id="weather-spa">
+                <span >⏳ Chargement météo...</span>
+              </div>
+
+            </div>
+          </div>          
+
+        </div>
+      
+
+    </main> 
+    <a href="./football.html">Lire la suite</a>
+     
+
+    
+  
+
+  <footer>
+    
+
+    <h3> Réalisation de cette page dans le cadre de la formation html AJC Ingénierie </h3>
+    <p> Réalisé par Timothy Labidi</p>
+  </footer>
+      
+  </body>
+
+
+  </html>
