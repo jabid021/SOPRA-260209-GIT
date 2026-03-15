@@ -29,7 +29,7 @@ box-sizing: border-box; /* Pour que la boîte inclut le padding et la bordure */
  
 }
 body {
-    background-color: #000000; /* mets le background sur body uniquement */
+    background-color: #000000; 
 }
 #footer-classement {
   color: #ffffff;
