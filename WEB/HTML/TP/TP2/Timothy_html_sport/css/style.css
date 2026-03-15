@@ -12,9 +12,7 @@ header
   text-transform: uppercase;
   font-weight: 900;
 }
-
-
-/*  BODY  */
+/*  Formule 1  */
 
 body.formule1
 {
@@ -31,18 +29,7 @@ body.formule1
   box-sizing: border-box;
 }
 
-body.football
-{
-  font-family: 'Orbitron';
-  background-repeat: no-repeat;
-  background-image:url("../asset/img/ol.jpg");
-  background-size: cover;
-  min-height: 100vh;
-  
-}
-
-
-main {
+#circuit_main {
   flex: 1;
   padding: 40px 600px;
   width: 100%;
@@ -62,8 +49,6 @@ main {
   border: none;
   border-radius: 10px;
 }
-
-
 
 .circuit-grid {
   display: grid;
@@ -119,8 +104,6 @@ color : #ffffff;
   50%  { transform: rotate(5deg); }
   100% { transform: rotate(-5deg); }
 }
-
-
 
 .stats-table {
   width: 100%;
@@ -179,3 +162,9 @@ footer {
   
         }
 
+
+a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 30px;
+}

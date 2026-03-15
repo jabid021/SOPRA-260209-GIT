@@ -1,0 +1,140 @@
+/* Classement */
+
+#classement_main {
+  flex: 1;
+  padding: 40px 60px;
+  width: 100%;
+  margin: auto;
+        }
+
+#header-classement {
+  font-size: 30px;
+  border: #ff0000 solid 3px;
+  text-align: center;
+  border-radius: 15px;
+  color: #ffffff;
+  padding: 20px;
+  font-family: 'Orbitron';
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+
+p {
+  color: #ffffff;
+  font-size: 10px;
+}
+* {
+box-sizing: border-box; /* Pour que la boîte inclut le padding et la bordure */
+ 
+}
+body {
+    background-color: #000000; /* mets le background sur body uniquement */
+}
+#footer-classement {
+  color: #ffffff;
+  margin-top: 1px;
+  padding: 30px 40px;
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: #ff0000 solid 3px;
+}
+
+#classement {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* augmente cette valeur */
+}
+.grille-ligne {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px; /* espace entre les deux colonnes */
+    margin-bottom: 0px;
+}
+
+.pilote-gauche, .pilote-droite {
+    background: #0a0a0a;
+    border: 2px solid #333;
+    border-left: 4px solid #e10600;
+    border-radius: 4px;
+    padding: 12px 16px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    gap: 12px; /* espace entre photo et infos */
+    box-sizing: border-box;   
+}
+
+#droite {
+  margin-top: 60px;
+  gap: 60px;
+}
+
+.pilote-droite {
+    margin-top: 60px;
+}
+
+.pilote-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e10600;
+    flex-shrink: 0; /* empêche la photo de rétrécir */
+}
+
+.pilote-infos {
+    flex: 1;
+    
+}
+
+.pilote-position {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #e10600;
+    margin-left: 150px;;
+}
+
+.pilote-nom {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.pilote-numero {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.pilote-nationalite {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.pilote-ecurie {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+}
+
+.pilote-points {
+    font-size: 0.8rem;
+    color: #e10600;
+    margin-top: 4px;
+}
+
+.pilote-victoires {
+    font-size: 0.8rem;
+    color: #f5c518;
+    margin-top: 2px;
+}
+
+
