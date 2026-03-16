@@ -1,14 +1,106 @@
 <style>
-    header
-    {
-        background-color:#7ea5be;;
-    }
+header
+{
+    background-color:#7ea5be;;
+}
+
+/* Menu*/
+nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    display: inline-block;
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    color: white;
+    background-color: #5c8aa5;
+}
+
+.menu a:hover {
+    background-color: #3f6f89;
+}
+
+/* Sous menu burger*/
+.sous-menu {
+    display: none;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #5c8aa5;
+    min-width: 200px;
+}
+
+.sous-menu li {
+    display: block;
+}
+
+.menu li:hover .sous-menu {
+    display: block;
+}
+/* ------------------------------------------------Body-----------------------------------*/
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #3a7bd5, #000000);
+    color:white;
+}
 
 
+.tableau-mascottes{
+    border-collapse: collapse;
+    background-color:#1f4e79;
+    color:white;
+}
 
+
+.tableau-mascottes th,
+.tableau-mascottes td{
+    border:1px solid white;
+    padding:10px;
+}
+
+
+.tableau-mascottes th{
+    background-color:#0d2a45;
+}
+
+
+.tableau-mascottes tr:nth-child(even){
+    background-color:#2f75b5;
+}
+
+.tableau-mascottes tr:nth-child(odd){
+    background-color:#1f4e79;
+}
+
+
+.tableau-mascottes tr:hover{
+    background-color:#4a90e2;
+}
+
+.tableau-mascottes a{
+    color:#ffd700;
+}
+
+/*-------------------------- Footer ------------------------*/
 </style>
 
 <header>
+    <meta charset="UTF-8">
     <table width="100%">
     <tr>
     <td align="left">
@@ -17,6 +109,27 @@
     
     <td align="center">
     <h1>Top 5 des mascottes sur World of Warcraft</h1>
+    <nav>
+        <ul class="menu">
+        
+        <li>
+        <a href="index.html">Accueil</a>
+        </li>
+        
+        <li>
+        <a href="#">Top 5</a>
+        
+        <ul class="sous-menu">
+        <li><a href="top5-mascottes.html">Top 5 Mascottes</a></li>
+        <li><a href="top5-montures.html">Top 5 Montures</a></li>
+        <li><a href="top5-raids.html">Top 5 Raids</a></li>
+        <li><a href="top5-personnages.html">Top 5 Personnages</a></li>
+        </ul>
+        
+        </li>
+        
+        </ul>
+        </nav>
     </td>
     
     <td align="right">
@@ -24,10 +137,12 @@
     </td>
     </tr>
     </table>
+
+    
 </header>
 
 <body>
-    <table border align="center" width="80%">
+    <table class="tableau-mascottes" border align="center" width="80%">
         <tr>
             <th>Classement</th>
             <th>Nom</th>
@@ -74,8 +189,9 @@
             <td>Baa'l</td>
             <td><img src="assets/baal.jpg" style="width:200px;height:200px;"></td>
             <td>Magique</td>
-            <td> Secret
-                <a target="_blank" href="">Secret</a></td>
+            <td> Secret de l'extension BFA :
+            <br>
+                <a target="_blank" href="https://www.mamytwink.com/guides/baal-guide-pour-obtenir-la-mascotte-secrete-de-bfa">Guide Mamytwink sur son obtention</a>
             </td>
         </tr>
 
@@ -84,8 +200,9 @@
             <td>Bonheur</td>
             <td><img src="assets/Bonheur.png" style="width:200px;height:200px;"></td>
             <td>Elémentaire</td>
-            <td> HF
-                <a target="_blank" href="">HF</a>
+            <td> Réaliser le haut-fait :
+            <br>
+                <a target="_blank" href="https://www.wowhead.com/fr/achievement=13469/raid-de-mascottes-vi-pr%C3%A9dateurs-de-pandarie">Raid de mascottes VI : prédateurs de Pandarie</a>
             </td>
         </tr>
 
