@@ -1,0 +1,242 @@
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(-90deg, #ffc272, #ff9d1d, #8490ff, #26267e);
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s infinite;
+      }
+
+      button {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+        background-color: #333;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 10px 16px #00000066;
+      }
+
+      h1 {
+        display: flex;
+        color: #fff;
+        text-shadow:
+          -5px -5px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          3px 3px 0 #000;
+        background-color: #00000040;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 4px 6px #00000066;
+        font-size: 60px;
+        padding: 10px;
+        font-family: "Creepster", cursive;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #palette {
+        margin: 10% auto;
+        background-color: #00000080;
+        border-radius: 15px;
+        font-family: "Fredoka One", cursive;
+        box-shadow: 0 10px 16px #00000066;
+      }
+
+      th {
+        color: #fff;
+        font-weight: bold;
+        background-color: #333;
+        border-radius: 15px;
+        padding-inline: 10px;
+      }
+
+      td {
+        text-align: center;
+        color: #fff;
+        background-color: #b8b8b8;
+        border-radius: 15px;
+        padding-inline: 10px;
+      }
+
+      td.swatch {
+        color: #fff;
+        background-color: #b8b8b8;
+        border-radius: 15px;
+        width: 60%;
+      }
+
+      .row-ffc272 td {
+        background-color: #ffc27266;
+      }
+      .row-ff9d1d td {
+        background-color: #ff9d1d66;
+      }
+      .row-8490ff td {
+        background-color: #8490ff66;
+      }
+      .row-26267e td {
+        background-color: #26267e66;
+      }
+
+      .row-ffc272 td.swatch {
+        background-color: #ffc272;
+      }
+      .row-ff9d1d td.swatch {
+        background-color: #ff9d1d;
+      }
+      .row-8490ff td.swatch {
+        background-color: #8490ff;
+      }
+      .row-26267e td.swatch {
+        background-color: #26267e;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-family: cursive;
+      }
+
+      .ludicolo {
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+        animation: spin 8s infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <title>Bourg Palette</title>
+  </head>
+
+  <body>
+    <h1>Générateur de palette de couleur</h1>
+
+    <table id="palette">
+      <thead>
+        <tr>
+          <th>Couleur</th>
+          <th>Plus d'informations</th>
+          <th>Code Hexadécimal</th>
+          <th>Visuel</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="row-ffc272">
+          <td>Argile ensoleillée</td>
+          <td>
+            <a href="https://coolors.co/ffc272" target="_blank">
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 20px; color: white"
+              ></i>
+            </a>
+          </td>
+          <td>#ffc272</td>
+          <td class="swatch"></td>
+        </tr>
+
+        <tr class="row-ff9d1d">
+          <td>Lueur ambrée</td>
+          <td>
+            <a href="https://coolors.co/ff9d1d" target="_blank">
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 20px; color: white"
+              ></i>
+            </a>
+          </td>
+          <td>#ff9d1d</td>
+          <td class="swatch"></td>
+        </tr>
+
+        <tr class="row-8490ff">
+          <td>Bleu glycine</td>
+          <td>
+            <a href="https://coolors.co/8490ff" target="_blank">
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 20px; color: white"
+              ></i>
+            </a>
+          </td>
+          <td>#8490ff</td>
+          <td class="swatch"></td>
+        </tr>
+
+        <tr class="row-26267e">
+          <td>Vrai cobalt</td>
+          <td>
+            <a href="https://coolors.co/26267e" target="_blank">
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 20px; color: white"
+              ></i>
+            </a>
+          </td>
+          <td>#26267e</td>
+          <td class="swatch"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button onclick="location.href = 'PageSecondaire.html'">
+      Palette suivante
+    </button>
+
+    <footer>
+      <p>
+        <span
+          ><img
+            class="ludicolo"
+            src="assets/image/ludicolo.png"
+            alt="Ludicolo" /></span
+        >© 2026 Irwin Hecker
+        <span
+          ><img class="ludicolo" src="assets/image/ludicolo.png" alt="Ludicolo"
+        /></span>
+      </p>
+    </footer>
+  </body>
+</html>

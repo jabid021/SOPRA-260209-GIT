@@ -2,7 +2,9 @@
 
 Balises semantiques : header, main, content, nav, aside, footer
 
+En css, plusieurs unités de mesures sont dispos, dans le programme on utilisera :
 
+px, %, vh (hauteur de l'ecran) et vw (largeur de l'ecran)
 
 Le site complet doit avoir une hauteur de 120% de l'ecran
 Le header fait 15% de hauteur
@@ -34,10 +36,17 @@ La zone vide fait le reste de la largeur
     margin:0;
   }
 
+
+  site
+  {
+    height:120vh;
+    display:grid;
+    grid-template-rows : 15% 1fr 10%;
+  }
   header
   {
-    display:flex;
-    height:15%;
+    display:grid;
+    grid-template-columns : 15% 85%;
     border:solid black 2px;
   }
 
@@ -46,7 +55,6 @@ La zone vide fait le reste de la largeur
     display:flex;
     justify-content:center;
     align-items:center;
-    width:15%;
     font-weight:bold;
     font-size:60px;
   }
@@ -56,36 +64,23 @@ La zone vide fait le reste de la largeur
     display:flex;
     justify-content:center;
     align-items:center;
-    width:85%;
     background-color:grey;
     text-transform : uppercase;
     font-size:40px;
   }
 
-
   main
   {
-    display:flex;
-    height:95%
+    display:grid;
+    grid-template-columns : 17% 68% 1fr;
   }
 
   main>nav
   {
-    width : 17%;
     display:flex;
     flex-direction:column;
     margin-top : 10px;
     align-items:center;
-  }
-
-  main > content
-  {
-    width : 68%;
-  }
-
-  main > aside
-  {
-    width : 15%
   }
 
   main > aside > nav > ul
@@ -95,105 +90,108 @@ La zone vide fait le reste de la largeur
 
   footer
   {
-    height:10%;
     background-color : yellow;
-    display:flex;
-    align-items:center;
+    display:grid;
+
+    grid-template-columns : 30% 50% 1fr
   }
 
   footer > nav
   {
-    width:30%;
     display:flex;
+    align-items:center;
     justify-content:space-around;
   }
 
   footer div:nth-of-type(1)
   {
-    width:50%;
     display:flex;
+    align-items:center;
     justify-content:center;
   }
 
 </style>
 
-<header>
-  <div>Logo</div>
-  <div>Accueil</div>
-</header>
 
-<main>
-  <nav>
-    <a href="">Accueil</a>
-    <a href="">Item 1</a>
-    <a href="">Item 2</a>
-    <a href="">Item 3</a>
-    <a href="">Contact</a>
-  </nav>
-  <content>
-    <h1>Sujet de la page</h1>
+<site>
+  <header>
+    <div>Logo</div>
+    <div>Accueil</div>
+  </header>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco</p>
-
-
-      <h3>Article 1</h3>
+  <main>
+    <nav>
+      <a href="">Accueil</a>
+      <a href="">Item 1</a>
+      <a href="">Item 2</a>
+      <a href="">Item 3</a>
+      <a href="">Contact</a>
+    </nav>
+    <content>
+      <h1>Sujet de la page</h1>
 
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco</p>
 
-        <h3>Article 2</h3>
+
+        <h3>Article 1</h3>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco rcitation ullamco</p>
+          quis nostrud exercitation ullamco</p>
 
-
-          <h3>Article 3</h3>
+          <h3>Article 2</h3>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco</p>
+            quis nostrud exercitation ullamco rcitation ullamco</p>
 
-            <h3>Article 4</h3>
+
+            <h3>Article 3</h3>
 
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
               quis nostrud exercitation ullamco</p>
-              <h3>Article 5</h3>
+
+              <h3>Article 4</h3>
 
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                 quis nostrud exercitation ullamco</p>
-
-                <h3>Article 6</h3>
+                <h3>Article 5</h3>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                   quis nostrud exercitation ullamco</p>
 
-                </content>
-                <aside>
-                  <p>Archives</p>
-                  <nav>
-                    <ul>
-                      <li><a href="">Août 2019</a></li>
-                      <li><a href="">Juillet 2019</a></li>
-                      <li><a href="">Juin 2019</a></li>
-                      <li><a href="">Mai 2019</a></li>
-                    </ul>
-                  </nav>
-                </aside>
-              </main>
+                  <h3>Article 6</h3>
 
-              <footer>
-                <nav>
-                  <a href="">Accueil</a>
-                  <a href="">Plan</a>
-                  <a href="">Contact</a>
-                  <a href="">CGU</a>
-                </nav>
-                <div>Gabarit - Copyrigth &#8471; 2019-2022</div>
-              </footer>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco</p>
+
+                  </content>
+                  <aside>
+                    <p>Archives</p>
+                    <nav>
+                      <ul>
+                        <li><a href="">Août 2019</a></li>
+                        <li><a href="">Juillet 2019</a></li>
+                        <li><a href="">Juin 2019</a></li>
+                        <li><a href="">Mai 2019</a></li>
+                      </ul>
+                    </nav>
+                  </aside>
+                </main>
+
+                <footer>
+                  <nav>
+                    <a href="">Accueil</a>
+                    <a href="">Plan</a>
+                    <a href="">Contact</a>
+                    <a href="">CGU</a>
+                  </nav>
+                  <div>Gabarit - Copyrigth &#8471; 2019-2022</div>
+                </footer>
+              </site>
