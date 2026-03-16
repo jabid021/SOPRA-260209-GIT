@@ -19,7 +19,7 @@ public class Utilisateur extends Compte {
 	@Column(name="mail",unique = true,length = 50)
 	private String email;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	private Abonnement abonnement;
 	
 	//ManyToMany va generer une table de jointure avec l'id de la classe ou on se trouve (Client) + l'id de la classe associée (Media)
