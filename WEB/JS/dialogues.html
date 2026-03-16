@@ -1,0 +1,66 @@
+<!--
+ JavaScript != Java...
+
+JavaScript JS =>  JS Vanilla
+  => Jquery
+  => Framework JS => Angular JS, Angular x, Node.js, React Js, Vue.js
+
+
+EcmaScript => Algo
+DOM => Document Object Model (comment modifier le contenu du document (le html))
+BOM => Browser Object Model (Agir sur le navigateur)
+-->
+
+
+<style>
+  /*Commentaire CSS */
+</style>
+
+
+<html>
+<!--Commentaire HTML -->
+</html>
+
+
+<script charset="utf-8">
+
+/*
+Commentaire JS (bloc)
+*/
+// Commentaire JS (ligne)
+
+var nom="Abid";
+var prenom = "Jordan"; // var en js => static en java, la portee est globale (scope)
+
+const pi = 3.14; //const en js = final en java
+let x; //variable avec un scope temporaire, si declare dans une foction, detruite apres la fonction
+
+
+//alert("CECI EST UNE ALERT !");
+alert("Hello, je suis "+prenom+" "+nom);
+
+
+var age = prompt("Saisir votre age");
+
+alert(`Hello, je suis ${prenom} ${nom}, j'ai ${age}ans`);
+age++;
+alert(`Dans un ans vous aurez ${(age)}`);
+
+if(confirm("Est ce que c'est bon pour vous ?!")==true)
+{
+  alert("Il a dit oui");
+}
+else
+{
+  alert("Il a dit non....");
+}
+
+console.log("Ceci est un test");
+
+for(let i=0;i<=10;i++)
+{
+  console.log(i);
+}
+
+
+</script>
