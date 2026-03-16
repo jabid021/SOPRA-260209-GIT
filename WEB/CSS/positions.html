@@ -1,0 +1,117 @@
+<!--
+
+5* positions sur les elements en html / css :
+inherit(de base dans le navigateur), relative, absolute, fixed, sticky => donne acces aux attributs top, left, right, bottom
+
+position relative : l'element peut etre deplacé sans impacter les elements autours
+position absolute : l'element peut etre deplacé, le reste prendra sa place comme s'il n'existait pas
+  par defaut, le top 0 / left 0 => le coin sup gauche de l'ecran
+  Si le parent est en position relative : top 0 / left 0 devient le coin sup du parent
+
+position fixed : l'element peut etre déplacer et restera FIXE sur votre ecran, les elements suivants prendront sa place
+  Top 0 / Left 0 => coin sup gauche de l'ecran
+
+
+-->
+
+<style>
+
+body
+{
+  margin:0;
+  height: 300vh;
+  background-color:#F4EFE7;
+}
+
+
+content
+{
+  width:80%;
+  margin-left : 10%;
+  background-color:lightgrey;
+  height:1250px;
+  display:block;
+  position:relative;
+}
+
+
+content div
+{
+  height:70px;
+}
+
+content div:nth-of-type(1)
+{
+  background-color:green;
+}
+
+content div:nth-of-type(2)
+{
+  background-color:blue;
+  position:relative;
+  left:30px;
+  top:45px;
+}
+
+content div:nth-of-type(3)
+{
+  background-color:red;
+}
+content div:nth-of-type(4)
+{
+  background-color:yellow;
+  position:fixed;
+  width : 50%;
+  top:0;
+  left:25%;
+}
+content div:nth-of-type(5)
+{
+  background-color:purple;
+}
+
+content div:nth-of-type(6)
+{
+  background-color:brown;
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:80%;
+}
+
+content div:nth-of-type(7)
+{
+  background-color:salmon;
+  position:sticky;
+  top:50;
+  left:50;
+}
+
+content div:nth-of-type(8)
+{
+  background-color:orange;
+}
+</style>
+<html>
+
+<head>
+  <title>Titre de l'onglet</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <br><br>
+
+  <content>
+    <div>Element 1</div>
+    <div>Element 2 (position relative)</div>
+    <div>Element 3</div>
+    <div>Element 4 (position fixed)</div>
+    <div>Element 5</div>
+    <div>Element 6 (position absolute)</div>
+    <div>Element 7( position sticky)</div>
+    <div>Element 8</div>
+  </content>
+</body>
+
+</html>
