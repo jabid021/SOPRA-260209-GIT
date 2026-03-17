@@ -1,0 +1,53 @@
+
+<meta charset="utf-8">
+
+<body style="background-color: lightyellow;">
+
+  <p id="paragPrinci" class="secondaire">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <p class="secondaire">Parag secondaire</p>
+
+  <p>Parag milieu</p>
+
+  <h3 class="secondaire">Titre secondaire</h3>
+
+  <p class="secondaire">Parag secondaire</p>
+  <p>Parag fin</p>
+
+
+</body>
+
+
+<script charset="utf-8">
+
+  do
+  {
+
+    var cible = prompt("Element à modifier ? (id/class/tag)");
+    var nomCible=prompt(`Quel est le nom de l'element ${cible}`);
+    var prop = prompt(`Quelle prop changer sur l'element ${nomCible} (${cible})`);
+    var valueProp = prompt(`Quelle value pour la prop : ${prop}`);
+
+
+    if(cible=="id")
+    {
+      document.getElementById(nomCible).style.setProperty(prop,valueProp);
+    }
+    else if(cible=="class")
+    {
+      for(b of document.getElementsByClassName(nomCible))
+      {b.style.setProperty(prop,valueProp);}
+    }
+
+    else if(cible=="tag")
+    {
+      for(b of document.getElementsByTagName(nomCible))
+      {b.style.setProperty(prop,valueProp);}
+    }
+    else
+    {
+      alert("Ce type d'element n'existe pas...");
+    }
+
+  }while(confirm("Faire une autre modif ?"));
+</script>

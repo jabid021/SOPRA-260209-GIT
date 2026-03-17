@@ -1,0 +1,86 @@
+<h1 id="message">Ce message s'autodetruira dans 50secondes....</h1>
+
+
+<input id="btnAmorcer" type="button" value="Amorcer">
+<input disabled id="btnDesamorcer" type="button" value="Desamorcer">
+
+<p id="sapin">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<input id="btnContinueSapin" type="button" value="Ne pas stop le sapin">
+<script>
+
+var colorSapin="red";
+var seconde=50;
+var intervalBombe;
+
+btnAmorcer.onclick=function()
+{
+  intervalBombe  = setInterval(decompteExplosion,1000);
+  btnAmorcer.disabled=true;
+  btnDesamorcer.disabled=false;
+}
+
+btnDesamorcer.onclick=function()
+{
+    clearInterval(intervalBombe);
+    message.style.color="green";
+    btnDesamorcer.disabled=true;
+}
+
+btnContinueSapin.onclick=function()
+{
+ clearTimeout(timeoutSapin);
+}
+
+
+function decompteExplosion()
+{
+  seconde--;
+  messageAffiche = `Ce message s'autodetruira dans ${seconde}secondes....`;
+  if(seconde==0)
+  {
+      messageAffiche="BOUM!...."
+      message.style.color="red";
+      clearInterval(intervalBombe);
+      btnDesamorcer.disabled=true;
+  }
+  message.innerHTML= messageAffiche;
+}
+
+
+
+
+
+
+
+
+
+
+/*setInterval(function()
+{
+  colorSapin = (colorSapin=="red") ? "green" : "red";
+  sapin.style.color=colorSapin;
+},1000);
+*/
+var nomDeLinterval=setInterval(changeColor,1000) //Va se lancer à interval regulier
+
+var timeoutSapin = setTimeout(stopSapin,5000); //Declenche une fonction DANS x secondes
+
+function changeColor()
+{
+  colorSapin = (colorSapin=="red") ? "green" : "red";
+  sapin.style.color=colorSapin;
+}
+
+function stopSapin()
+{
+  clearInterval(nomDeLinterval);
+  sapin.style.color="black";
+}
+
+
+
+
+
+
+</script>
