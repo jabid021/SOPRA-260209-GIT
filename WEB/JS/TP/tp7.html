@@ -1,0 +1,39 @@
+<h1>TP 7 Quizz Pays</h1>
+
+
+<script chartset="utf-8">
+
+
+  var tabPays = [
+  {"pays":"France","capitale":"Paris"},
+  {"pays":"Espagne","capitale":"Madrid"},
+  {"pays":"Luxembourg","capitale":"Luxembourg"},
+  {"pays":"UK","capitale":"Londres"},
+  {"pays":"Italie","capitale":"Rome"}
+  ];
+
+var score=0;
+var nbPays = tabPays.length;
+for(let index in tabPays)
+{
+  let p = tabPays[index];
+  let numero=parseInt(index)+1;
+  let reponse = prompt(`(Question ${numero}/${nbPays}) Quelle est la capitale du pays : ${p.pays}`);
+  if(reponse.toLowerCase()==p.capitale.toLowerCase())
+  {
+    alert("Bonne réponse !");
+    score++;
+  }
+  else
+  {
+    alert(`Mauvaise réponse, la capitale etait : ${p.capitale}`);
+  }
+}
+
+alert(`Fin du jeu, votre score est de ${score}/${nbPays}`);
+console.log(`Fin du jeu, votre score est de ${score}/${nbPays}`);
+
+
+
+
+</script>

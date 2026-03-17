@@ -1,0 +1,169 @@
+<style>
+
+
+.uneAutreClasse
+{
+  color:blue;
+  border:solid black 1px;
+  background-color:yellow;
+}
+</style>
+<html>
+<head>
+
+  <meta charset="utf-8"/>
+  <title>Demo DOM (Document Object Model)</title>
+</head>
+
+<body>
+
+  <h1 class="demoPointeur" id="header1">TITRE DE LA PAGE</h1>
+
+  <p class="demoPointeur" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <h2 id="header-2" title="Ceci est un titre qui apparait au survol de la balise h2">Sous titre</h2>
+
+  <div id="divParags">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor <b>sit amet, consectetur adipisicing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+
+
+  <div id="divParags2">Vide</div>
+
+  <input type="text" id="inputLogin" value="Jordan"><br>
+  <input type="checkbox" checked="checked" id="input-chexkbox-validate"> C'est VALIDE ?
+
+  <select id="selectDemo">
+    <option value="windows">Windows</option>
+    <option selected="selected" value="mac">MacOS</option>
+    <option value="linux">Linux</option>
+  </select>
+
+  <input type="submit" id="btnValidate">
+</body>
+</html>
+
+
+
+
+<script charset="utf-8">
+
+
+/*
+En JS, on peut pointer les elements de 3 facons sur notre page
+
+id => document.getElementById("header1"); => return l'element h1 qui a l'id header1
+class => document.getElementsByClassName("demoPointeur") => return un tableau avec TOUS les elements qui ont la classe demoPointeur
+tag => document.getElementsByTagName("p") => return un tableau avec TOUS les p de la page
+
+
+pour les id uniquement, 2 facon de pointer votre element :
+- document.getElementById("nomDeLid");
+- nomDeLid (si aucun espace, pas de tiret, underscore) Attention à ne pas avoir de variables / fonctions qui portent le meme nom coté JS
+
+
+
+Qu'est ce qu'on peut manipuler pour un element via le DOM
+- style
+- attributs
+- son contenu html
+- value
+- class
+*/
+var balise = document.getElementById("header1");
+console.log(balise);
+
+console.log(document.getElementById("header1"));
+console.log(header1);
+//console.log(document);
+
+
+document.getElementById("header1").style.color="red";
+document.getElementById("header1").style.backgroundColor="cyan";
+document.getElementById("header1").style.setProperty("font-size","35px");
+
+//var saisieProp=prompt("Choisir la prop à changer");
+//var saisieValue = prompt(`Saisir la value pour la prop ${saisieProp}`);
+//document.getElementById("header1").style.setProperty(saisieProp,saisieValue);
+
+console.log(`Contenu du titre : ${balise.innerHTML}`);
+balise.innerHTML="NOUVEAU TITRE !";
+
+
+divParags2.innerHTML= divParags.innerHTML; //Copy du contenu divParags dans divParags2;
+divParags2.innerHTML="<ul><li>Item1</li><li>Item2</li></ul>"; //Execute le script / les balises (Risque de faille XSS);
+divParags2.innerText="<ul><li>Item1</li><li>Item2</li></ul>"; //Considere le contenu comme un String uniquement
+
+console.log(inputLogin.value);
+inputLogin.value="John";
+selectDemo.value="linux";
+
+
+document.getElementById("input-chexkbox-validate").setAttribute("checked","checked");
+document.getElementById("input-chexkbox-validate").checked=true;
+
+
+btnValidate.setAttribute("value","Click ici");
+btnValidate.setAttribute("title","c'est un bouton"); //Modifer la value d'un attribut title, s'il existe deja, remplace, sinon va l'ajouter
+console.log(btnValidate.getAttribute("title")); //Return la value d'un attribut "title" dans l'exemple, s'il n'existe pas, retun null;
+btnValidate.removeAttribute("title"); //retirer l'attribut et sa value
+
+
+btnValidate.setAttribute("disabled","true");//Fait la meme chose que
+btnValidate.disabled=true;
+/*var saisie = prompt("Ecrire du html : ");
+divParags.innerHTML = saisie;*/
+
+console.log(balise.classList);
+balise.classList.add("uneAutreClasse");
+balise.classList.remove("uneAutreClasse");
+
+
+console.log(document.getElementsByClassName("demoPointeur"));
+
+//document.getElementsByClassName("demoPointeur").style.color="purple"; //Ne amrchera jamais, document.getElementsByTagName/ClassName retourne un tablau, il faut bouler dessus pour pointer chaque element un par un
+for(b of document.getElementsByClassName("demoPointeur"))
+{
+  b.style.color="purple";
+}
+
+
+for(b of document.getElementsByTagName("p"))
+{
+  b.style.fontSize="32px";
+}
+
+
+
+//On peut aussi selectionner des elements HTML via des pointeurs semblables au css
+
+console.log(document.querySelector("#divParags p")); // Return le 1er p qui se trouve dans la balise divParags
+console.log(document.querySelectorAll("#divParags p")); // Return tous les p qui se trouve dans la balise divParags
+document.querySelectorAll(".demoPointeur");
+
+
+
+//console.log(document.title);
+//document.title="Nouveau titre de l'onglet";
+
+setInterval(changeTitle,500);
+
+
+function changeTitle()
+{
+    if(document.title=="Demo DOM (Document Object Model)"){document.title="NEW MESSAGE(1)";}
+    else{document.title="Demo DOM (Document Object Model)";}
+
+    if(document.hasFocus()==false)
+    {
+      document.title="REVIENS STP...";
+    }
+
+}
+
+
+
+
+</script>
