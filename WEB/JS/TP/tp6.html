@@ -1,0 +1,22 @@
+<h1>Boites de dialogue JS </h1>
+
+
+
+
+
+
+
+<script chartset="utf-8">
+
+var message="mot de passe non changé";
+if(confirm("Changer de mot de passe ?"))
+{
+  let password = prompt("Saisir votre nouveau password");
+  message = `mot de passe changé (${password})`;
+  alert(message);
+}
+
+console.log(message);
+
+
+</script>
