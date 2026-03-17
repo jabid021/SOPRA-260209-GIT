@@ -20,31 +20,14 @@
 
 <script charset="utf-8">
 
-var cible = prompt("Element à modifier ? (id/class/tag)");
-var nomCible;
-var prop = "color";
-var valueProp = prompt(`Quelle value pour la prop : ${prop}`);
+  var nomCible=prompt(`Quel est le nom de l'element`);
+  var prop = prompt(`Quelle prop changer sur l'element ${nomCible}`);
+  var valueProp = prompt(`Quelle value pour la prop : ${prop}`);
 
-if(cible=="id")
-{
-  nomCible="paragPrinci";
-  document.getElementById(nomCible).style.setProperty(prop,valueProp);
-}
-else if(cible=="class")
-{
-  nomCible="secondaire";
-  for(b of document.getElementsByClassName(nomCible))
-  {b.style.setProperty(prop,valueProp);}
-}
+  for(b of document.querySelectorAll(nomCible))
+  {
+    b.style.setProperty(prop,valueProp);
+  }
 
-else if(cible=="tag")
-{
-  nomCible="p";
-  for(b of document.getElementsByTagName(nomCible))
-  {b.style.setProperty(prop,valueProp);}
-}
-else
-{
-  alert("Ce type d'element n'existe pas...");
-}
+
 </script>
