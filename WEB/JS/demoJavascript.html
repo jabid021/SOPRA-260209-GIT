@@ -1,0 +1,188 @@
+<h1>Demo Javascript (EcmaScript)</h1>
+
+
+
+
+<script chartset="utf-8">
+
+var age = "32";
+//age+=1 => age etant un string ("32") => "321"
+age = parseInt(age); //age devient bien un int !
+age+=1;
+//age++;
+var nb = "10";
+var prenom="Jordan";
+if(nb==10)
+{
+  console.log("10 vaut bien '10'");
+}
+
+if(nb===10)
+{
+    console.log("10 vaut bien (===) '10'");
+}
+else
+{
+    console.log("10 ne vaut pas  (===) '10'");
+}
+
+
+console.log(prenom.toLowerCase()=="jordan");
+
+console.log((age>=18)?"majeur":"Mineur");
+
+switch(nb)
+{
+  case 10 : console.log("c'est 10");break;
+  default : console.log("C'est pas 10...");
+}
+
+try{
+console.log("Affiche une variable qui n'existe pas "+test);
+}catch(e){console.log(e);}
+
+console.log("Suite du code");
+
+// dans un if, == => check le contenu
+// dans un if, ===   => check le contenu + le type
+
+
+console.log(age);
+
+
+/*var choix;
+do
+{
+  choix=prompt("SAY YES !");
+}while(choix!="yes");
+
+
+while(choix=="yes")
+{
+  choix=prompt("Don't say yes !");
+}*/
+
+for(let i=0;i<10;i++){console.log("tour "+i);}
+
+//for(Personne p : personnes) => En Java
+
+console.log("--------for each sur les lettres d'un prenom : ")
+for(index in prenom)
+{
+  console.log(index+" -> "+prenom[index]);
+}
+
+for(lettre of prenom)
+{
+  console.log(lettre);
+}
+
+
+console.log(maFonction(10)); //Si on oublie de preciser le nb, affichera undefined
+
+
+function maFonction(nb)
+{
+  console.log(nb);
+  console.log("C'est une fonction");
+  console.log(nb*"Jordan"); //=> Donne l'error  NaN => Not a Number
+  return "Ok";
+}
+
+
+
+var notes = [10,18,15,14,2,5,20];
+var bigblue=["Jordan","John","Jane","Adam","Audric","Axelle","Camille"];
+var tab = [10,true,"Toto",[],15.5];
+console.log(tab);
+
+console.log(bigblue[0]);
+
+console.log("Voici tous les prenoms :");
+for(p of bigblue)
+{
+  console.log(p);
+}
+
+
+//bigblue[52]="JS...";
+//bigblue[bigblue.length] = "Nouveau prenom";
+bigblue.push("Toto"); // Ajoute à la fin du tableau
+bigblue.pop() // Retire le dernier element du tableau
+bigblue.unshift("Toto")//Ajouter Adam au debut du tableau
+bigblue.shift(); //Retirer le premier element;
+
+console.log(bigblue);
+console.log("Tri du tableau AZ");
+bigblue.sort(); //Tri par ordre alphabetique
+
+console.log(bigblue);
+
+console.log("Tri du tableau ZA");
+bigblue.reverse();
+console.log(bigblue);
+
+
+bigblue.sort(triNbLettrePrenom);
+console.log(bigblue);
+
+
+
+
+console.log("Taille du tableau "+bigblue.length);
+
+
+
+console.log(notes);
+notes.sort(triNumerique);
+
+console.log(notes);
+
+
+var personne1=new Object();
+personne1.prenom="Jordan";
+personne1.nom="Abid";
+
+var personne2 = {prenom:"Jordan",nom:"Abid"};
+personne2.age=32;
+
+
+//personne.formateur=true; fait la meme chose que
+personne2["formateur"]=true;
+
+
+choix = prompt("Quel attribut afficher ?");
+
+console.log(personne2[choix]);
+
+console.log(personne1);
+
+console.log(personne2);
+
+
+
+var tabObj = [
+  personne1,
+  personne2,
+  {nom:"Doe",prenom:"Jane"},
+  {nom:"Toto",prenom:"Titi"}
+];
+
+
+
+
+
+
+function triNumerique(nbGauche,nbDroite)
+{
+  return nbGauche-nbDroite;
+}
+
+function triNbLettrePrenom(prenomGauche,prenomDroite)
+{
+  let difference=  prenomGauche.length - prenomDroite.length // Si difference est positif=> prenomDroite a + de lettre
+  return difference;
+}
+
+
+</script>
