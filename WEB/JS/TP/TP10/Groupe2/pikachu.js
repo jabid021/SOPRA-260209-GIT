@@ -10,6 +10,12 @@ var mouvement = 30;
 var pokemon = "pikachu";
 var direction = "Down";
 var anim = "1";
+
+let dureeDefense = 5;
+let dureeCooldown = (dureeDefense+2)*1000;
+let invincible = false;
+let lastDefense = 0;
+
 imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
 
 inputName.onkeyup = checkBtnValidate;
@@ -59,6 +65,8 @@ function deplacement(event) {
     posY -= mouvement;
     animState();
     direction = "Up";
+  } else if (event.key == " ") {
+    getDefense();
   }
 
   posX = Math.max(0, Math.min(grass.offsetWidth - imgPikachu.offsetWidth, posX));
@@ -67,4 +75,45 @@ function deplacement(event) {
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
   imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
+}
+
+function getDefense(event) {
+  let setDuree = dureeDefense;
+  
+  if (lastDefense >= (Date.now() - dureeCooldown)) {
+    console.log("No spam pls");
+    return;
+  }
+  lastDefense = Date.now();
+  
+  newTimer = setInterval(() => { countdown(setDuree--) }, 1000);
+  invincible = true;
+  console.log("I AM INVINCIBLE - "+ invincible)
+}
+
+function countdown(seconde) {
+  seconde--;
+
+  timer.style.color="black";
+  cooldown.style.color="black";
+  messageAffiche = `${seconde} secondes...`;
+  if(seconde<=0)
+    {
+      messageAffiche="timer"
+      timer.style.color = "red";
+      updateStatut();
+      clearInterval(newTimer);
+    }
+  timer.innerHTML = messageAffiche;
+}
+
+function updateStatut(invincible) {
+  // protection = (protection == "off") ? "on" : "off";
+  invincible = (invincible == false) ? true : false;
+  console.log("Oh shit... - "+ invincible)
+
+  // imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + protection + ".png");
+
+  cooldown.style.color = "red";
+  cooldown.innerHTML = "cooldown";
 }
