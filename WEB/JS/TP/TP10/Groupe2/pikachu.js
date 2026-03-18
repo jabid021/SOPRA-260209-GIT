@@ -9,7 +9,8 @@ var posY = 0;
 var mouvement = 30;
 var pokemon = "pikachu";
 var direction = "Down";
-imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + ".png");
+var anim = "1";
+imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction+ anim + ".png");
 
 document.getElementById("inputName").onkeyup = checkBtnValidate;
 
@@ -35,18 +36,31 @@ function checkBtnValidate(event) {
   }
 }
 
+function animState() {
+	switch(anim){
+	case "1" :anim = "2";break;
+	case "2" :anim ="3";break;
+	case "3" :anim ="4";break;
+	case "4" :anim ="1";break;
+	}
+}
+
 function deplacement(event) {
   if (event.key == "ArrowDown" || event.key == "s") {
     posY += mouvement;
+	animState();
     direction = "Down";
   } else if (event.key == "ArrowRight" || event.key == "d") {
     posX += mouvement;
+	animState();
     direction = "Right";
   } else if (event.key == "ArrowLeft" || event.key == "q") {
     posX -= mouvement;
+	animState();
     direction = "Left";
   } else if (event.key == "ArrowUp" || event.key == "z") {
     posY -= mouvement;
+	animState();
     direction = "Up";
   }
   const grass = document.getElementById("grass");
@@ -62,5 +76,5 @@ function deplacement(event) {
   );
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
-  imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + ".png");
+  imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
 }
