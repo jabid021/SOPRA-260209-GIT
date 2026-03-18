@@ -1,0 +1,29 @@
+html{
+  /*background-image: url("img/shf_back.jpg");*/
+  display:flex;
+  background-image: url('../img/shf_back.jpg');
+  background-size: 50%;
+  background-repeat: repeat;
+  background-position: center;
+  color: white;
+}
+
+video,a {
+  position:relative;
+  left:20%;
+  top: 100px;;
+}
+
+a {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color: white;
+}
+
+video {
+  box-shadow: 10px 10px 5px #888888;
+  border: ridge;
+  border-width: 5px;
+  border-color: lightslategray;
+}
