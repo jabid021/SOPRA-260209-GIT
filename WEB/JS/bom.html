@@ -1,0 +1,43 @@
+<h1>BOM (Browser Object Model) </h1>
+
+<noscript>
+  Attention, ce site necessite l'activation de JS pour fonctionnner
+</noscript>
+
+<input type="button" id="btnStart" value="Open">
+<input type="button" id="btnStop" value="Close">
+
+
+
+<script>
+var fenetre;
+
+btnStart.onclick=function()
+{
+
+  //PAS FOU...
+  //fenetre = window.open("http://www.ajc-ingenierie.fr");
+
+  //Pas mail
+  // location.reload(); //f5
+  // location.href="TP/tp9.html"; //redirect comme le click d'un <a href="">
+};
+
+//console.log(navigator.appName); donnera toujours NetScape
+
+btnStop.onclick=function()
+{
+
+  //PAS FOU...
+  //fenetre.close();
+
+  //history.back(2);
+  history.go(1);
+};
+
+
+console.log(screen);
+console.log(screen.width);
+console.log(screen.height);
+console.log(history);
+</script>

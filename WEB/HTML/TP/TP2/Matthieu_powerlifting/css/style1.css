@@ -1,0 +1,31 @@
+html{
+  background-color:#DCDCDC;
+}
+
+title, h1 {
+  font-size: 40px;
+  color: #D3D3D3;
+  text-shadow: 12px 12px 20px;
+  color: black;
+}
+
+table {
+  box-shadow: 10px 10px 5px #696969;
+  border: ridge;
+  border-width: 5px;
+  border-color: lightslategray;
+}
+
+#athlète{
+  width:40%;
+}
+
+img {
+  display:flex;
+  justify-content:center; 
+  width:12%;
+  box-shadow: 7px 7px 5px #696969;
+  border: ridge;
+  border-width: 5px;
+  border-color: lightslategray;
+}

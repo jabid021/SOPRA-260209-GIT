@@ -96,6 +96,61 @@ body{
     color:#ffd700;
 }
 
+/* Info-Bulle */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    color:#ffd700;
+    font-weight:bold;
+}
+
+/* Info-Bulle cachée tant que souris pas sur texte */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+
+    background: linear-gradient(to bottom, #0d2a45, #000000);
+    color: #ffffff;
+
+    text-align: left;
+    padding: 10px;
+    border-radius: 8px;
+
+    border: 2px solid #ffd700;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+
+    position: absolute;
+    bottom: 125%; 
+    left: 50%;
+    transform: translateX(-50%);
+
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-width: 6px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+}
+
+.tooltip:hover {
+    text-shadow: 0 0 5px #ffd700;
+}
+
+/* Apparition au survol */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
 /*-------------------------- Footer ------------------------*/
 
 /* Footer style WoW */
@@ -103,6 +158,7 @@ footer{
     margin-top:40px;
     padding:20px;
     text-align:center;
+    text-shadow: 0 0 5px rgba(255,215,0,0.6);
 
     background: linear-gradient(to top, #000000, #0d2a45);
     color:#ffd700;
@@ -113,22 +169,16 @@ footer{
     font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
-
-/* Texte du footer */
 footer p{
     margin:5px;
 }
 
-
-/* Image avatar */
 footer img{
     vertical-align:middle;
     border-radius:50%;
     border:2px solid #ffd700;
 }
 
-
-/* Liens dans le footer */
 footer a{
     color:#ffd700;
     text-decoration:none;
@@ -195,7 +245,18 @@ footer a:hover{
     
         <tr align="center">
             <td>1° Place</td>
-            <td>Xu Fu, petit de Xuen</td>
+            <td>
+                <span class="tooltip">
+                Xu Fu, petit de Xuen
+                <span class="tooltiptext">
+                Type : Bête<br>
+                PV : 1465<br>
+                Attaque : 289<br>
+                Vitesse : 244<br>
+                Très puissant avec <b>Esprit sauvage</b>
+                </span>
+                </span>
+                </td>
             <td><img src="assets/xu-fu-petit-de-xuen.jpg" style="width:200px;height:200px;"></td>
             <td>Bête</td>
             <td>
@@ -207,7 +268,18 @@ footer a:hover{
 
         <tr align="center">
             <td>2° Place</td>
-            <td>Val'kyr en herbe</td>
+            <td>
+                <span class="tooltip">
+                    Val'kyr en herbe
+                    <span class="tooltiptext">
+                        Type : Mort-vivant<br>
+                        PV : 1400<br>
+                        Attaque : 260<br>
+                        Vitesse : 280<br>
+                        <b>Malédiction Funeste</b> l'ennemi puis <b>Hanter</b>
+                    </span>
+                </span>
+            </td>
             <td><img src="assets/valkyr.jpg" style="width:200px;height:200px;"></td>
             <td>Mort-vivant</td>
             <td>Combat de mascottes en Norfendre
@@ -218,7 +290,18 @@ footer a:hover{
 
         <tr align="center">
             <td>3° Place</td>
-            <td>Groopy</td>
+            <td>
+                <span class="tooltip">
+                Groopy
+                <span class="tooltiptext">
+                Type : Bestiole<br>
+                PV : 1500<br>
+                Attaque : 240<br>
+                Vitesse : 260<br>
+                Mascotte fun et facile à obtenir
+                </span>
+                </span>
+                </td>
             <td><img src="assets/groopy.jpg" style="width:200px;height:200px;"></td>
             <td>Bestiole</td>
             <td>Réaliser le haut-fait : 
@@ -228,7 +311,18 @@ footer a:hover{
 
         <tr align="center">
             <td>4° Place</td>
-            <td>Baa'l</td>
+            <td>
+                <span class="tooltip">
+                Baa'l
+                <span class="tooltiptext">
+                Type : Magique<br>
+                PV : 1546<br>
+                Attaque : 260<br>
+                Vitesse : 260<br>
+                Mascotte secrète très rare !
+                </span>
+                </span>
+                </td>
             <td><img src="assets/baal.jpg" style="width:200px;height:200px;"></td>
             <td>Magique</td>
             <td> Secret de l'extension BFA :
@@ -239,7 +333,18 @@ footer a:hover{
 
         <tr align="center">
             <td>5° Place</td>
-            <td>Bonheur</td>
+            <td>
+                <span class="tooltip">
+                Bonheur
+                <span class="tooltiptext">
+                Type : Élémentaire<br>
+                PV : 1400<br>
+                Attaque : 270<br>
+                Vitesse : 260<br>
+                Obtenu via haut-fait
+                </span>
+                </span>
+                </td>
             <td><img src="assets/Bonheur.png" style="width:200px;height:200px;"></td>
             <td>Elémentaire</td>
             <td> Réaliser le haut-fait :
@@ -250,7 +355,18 @@ footer a:hover{
 
         <tr align="center">
             <td>Mention honorable</td>
-            <td>Canard Smaragdin</td>
+            <td>
+                <span class="tooltip">
+                Canard Smaragdin
+                <span class="tooltiptext">
+                Type : Aérien<br>
+                PV : 1300<br>
+                Attaque : 250<br>
+                Vitesse : 300<br>
+                Duck 3306 militant pour le cours UML
+                </span>
+                </span>
+                </td>
             <td> <img src="assets/canard_smagardin.jpg" style="width:200px;height:200px;"></td>
             <td>Aérien</td>
             <td>
