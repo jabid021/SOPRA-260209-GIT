@@ -78,6 +78,10 @@ function deplacement(event) {
 }
 
 function getDefense(event) {
+  /**
+   * Configure the timer and cooldown of the protection of the pokemon
+   * Update the value of invincible to true when countdown start
+   */
   let setDuree = dureeDefense;
   
   if (lastDefense >= (Date.now() - dureeCooldown)) {
@@ -86,14 +90,18 @@ function getDefense(event) {
   }
   lastDefense = Date.now();
   
-  newTimer = setInterval(() => { countdown(setDuree--) }, 1000);
-  invincible = true;
+  newTimer = setInterval(() => { countdown(setDuree--); }, 1000);
+  invincible=true;
   console.log("I AM INVINCIBLE - "+ invincible)
 }
 
 function countdown(seconde) {
+  /**
+   * Countdown and values displayed on screen
+   * Update the value of invincible to false when countdown reach zero
+   */
   seconde--;
-
+  
   timer.style.color="black";
   cooldown.style.color="black";
   messageAffiche = `${seconde} secondes...`;
@@ -101,19 +109,10 @@ function countdown(seconde) {
     {
       messageAffiche="timer"
       timer.style.color = "red";
-      updateStatut();
       clearInterval(newTimer);
+      
+      invincible=false;
+      console.log("Oh shit... - "+ invincible)
     }
   timer.innerHTML = messageAffiche;
-}
-
-function updateStatut(invincible) {
-  // protection = (protection == "off") ? "on" : "off";
-  invincible = (invincible == false) ? true : false;
-  console.log("Oh shit... - "+ invincible)
-
-  // imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + protection + ".png");
-
-  cooldown.style.color = "red";
-  cooldown.innerHTML = "cooldown";
 }
