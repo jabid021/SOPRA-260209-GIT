@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokécatch</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+<style>
+
+/* ══════════════════════════════
+   VARIABLES
+══════════════════════════════ */
+:root {
+  --accent:    #e63946;
+  --accent2:   #2dc653;
+  --panel-bg:  #12121e;
+  --panel-brd: #e63946;
+  --text:      #eee;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ══════════════════════════════
+   BODY / FOND
+══════════════════════════════ */
+body {
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background:
+    radial-gradient(ellipse at 20% 20%, #1a0a3e 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, #0a1a2e 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #12102a 0%, #060608 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg,  transparent, transparent 60px, rgba(123,47,255,0.055) 60px, rgba(123,47,255,0.015) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(0,180,216,0.055)  60px, rgba(0,180,216,0.015)  61px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;                  /* fine */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);  /* fond de la piste */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e63946;                 /* la poignée en rouge */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5566;                 /* plus clair au survol */
+}
+
+/* ══════════════════════════════
+   CONSOLE
+══════════════════════════════ */
+#console {
+  width: 100%;
+  max-width: 1060px;
+  background: linear-gradient(145deg, #1c1c2e 0%, #12121e 50%, #0e0e18 100%);
+  border-radius: 36px;
+  border: 1.5px solid #2e2e4e;
+  box-shadow:
+    0 0 0 1px #111,
+    inset 0 2px 0 rgba(255,255,255,0.04),
+    0 60px 120px rgba(0,0,0,0.9),
+    0 0 80px rgba(123,47,255,0.08);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* bande arc-en-ciel 
+background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, #7b2fff, #e63946);
+*/
+#bande {
+  height: 4px;
+  background: linear-gradient(90deg, #e63946, #6f1313, #280303, #7e1212, #cf7979, #efb7b7, #e63946);
+  background-size: 400% 100%;
+  animation: slide-bande 5s linear infinite;
+}
+@keyframes slide-bande { from{background-position:0%} to{background-position:400%} }
+
+/* ── header ── */
+#header {
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+#header::before {
+  content:'';
+  position:absolute;
+  top:0; left:50%; transform:translateX(-50%);
+  width:300px; height:100%;
+  background:radial-gradient(ellipse at 50% 0%, rgba(230,57,70,0.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* LEDs */
+#led { position:absolute; left:32px; top:50%; transform:translateY(-50%); display:flex; gap:7px; }
+.led-dot { width:8px; height:8px; border-radius:50%; animation:lpulse 2s ease-in-out infinite; }
+.led-r { background:#e63946; box-shadow:0 0 10px #e63946, 0 0 20px rgba(230,57,70,0.4); }
+.led-g { background:#ffffff; box-shadow:0 0 10px #ffffff, 0 0 20px rgba(250, 250, 250, 0.4);  animation-delay:.4s; }
+.led-b { background:#00b4d8; box-shadow:0 0 10px #00b4d8, 0 0 20px rgba(0,180,216,0.4);  animation-delay:.8s; }
+@keyframes lpulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.85)} }
+
+/* titre */
+#titre {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 22px;
+  color: #fff;
+  text-shadow:
+    0 0 12px rgba(230,57,70,1),
+    0 0 30px rgba(230,57,70,0.6),
+    0 0 60px rgba(230,57,70,0.2),
+    3px 3px 0 #8b0010;
+  letter-spacing: 3px;
+}
+
+/* pokéballs */
+.pokeball {
+  width:30px; height:30px;
+  border-radius:50%;
+  border:2.5px solid #555;
+  background:linear-gradient(to bottom, #e63946 50%, #fff 50%);
+  position:relative;
+  animation:spin-pb 5s linear infinite;
+  flex-shrink:0;
+}
+.pokeball::after {
+  content:'';
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:8px; height:8px;
+  background:#fff; border-radius:50%;
+  border:2.5px solid #555; z-index:2;
+}
+.pb-line { position:absolute; top:calc(50% - 1.5px); left:0; right:0; height:3px; background:#555; }
+@keyframes spin-pb { to{transform:rotate(360deg)} }
+
+#vtag {
+  position:absolute; right:32px; top:50%; transform:translateY(-50%);
+  font-size:8px; font-family:'Press Start 2P',monospace;
+  color:#2dc653; text-shadow:0 0 8px rgba(45,198,83,0.5);
+}
+
+/* ── écran ── */
+#ecran-wrap { padding: 14px 18px; }
+#ecran-bezel {
+  background:#060608;
+  border-radius:18px;
+  padding:10px;
+  border:2px solid #1a1a28;
+  box-shadow:inset 0 4px 16px rgba(0,0,0,1), 0 0 30px rgba(123,47,255,0.06);
+}
+
+/* ══════════════════════════════
+   ZONE DE JEU
+══════════════════════════════ */
+#jeu {
+  width: 100%;
+  height: 490px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  /* herbe vue du dessus */
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(0deg,  rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 20px),
+    radial-gradient(ellipse at 60% 40%, #5ab55a 0%, #3d963d 45%, #2a7a2a 100%);
+}
+
+/* scanlines CRT */
+#jeu::after {
+  content:'';
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(127, 122, 122, 0.022) 3px, rgba(0,0,0,0.022) 4px);
+  pointer-events:none;
+  z-index:100;
+}
+
+.coin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(3, 59, 15, 0.6);
+  border-style: solid;
+  z-index: 15;
+  pointer-events: none;
+}
+.coin-tl { top: 10px;    left: 10px;  border-width: 2px 0 0 2px; }
+.coin-tr { top: 10px;    right: 10px; border-width: 2px 2px 0 0; }
+.coin-bl { bottom: 10px; left: 10px;  border-width: 0 0 2px 2px; }
+.coin-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+/* chemins */
+#chemin-h {
+  position:absolute;
+  left:0; width:42%;
+  top:44%; height:9%;
+  background:#1a1a1a;
+  z-index:3;
+}
+
+#chemin-v {
+  position:absolute;
+  left:38%; width:4%;
+  top:0; bottom:0;
+  background:#1a1a1a;
+  z-index:3;
+}
+
+
+/* ══════════════════════════════
+   ZONES DE JEU
+══════════════════════════════ */
+.zone {
+  position: absolute;
+  border-radius: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: filter 0.2s, border-style 0.2s;
+}
+
+.zone.active { filter: brightness(1.35); border-style: solid !important; }
+
+.zlabel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  text-align: center;
+  line-height: 2;
+  padding: 12px 18px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.5);
+}
+
+/* Pokédex — haut gauche */
+#zone-pokedex {
+  left:3%; top:5%; width:23%; height:36%;
+  background:rgba(216, 0, 0, 0.14);
+  border:2px dashed #d8000e;
+  box-shadow:0 0 20px rgba(216, 0, 0, 0.15), inset 0 0 30px rgba(216, 0, 0, 0.04);
+}
+#zone-pokedex .zlabel { color:#ff7e7e; }
+
+/* Soin — haut, à droite du pokédex */
+#zone-soin {
+  left:28%; top:5%; width:8%; height:36%;
+  background:rgba(255, 50, 221, 0.14);
+  border:2px dashed #ff32d9;
+  box-shadow:0 0 20px rgba(255, 50, 224, 0.15), inset 0 0 30px rgba(255, 50, 217, 0.04);
+}
+#zone-soin .zlabel { color:#ff66e5; font-size:8px; }
+
+/* Parc — bas gauche */
+#zone-parc {
+  left:3%; top:56%; width:33%; height:40%;
+  background:rgba(180,80,220,0.14);
+  border:2px dashed #b450dc;
+  box-shadow:0 0 20px rgba(180,80,220,0.15), inset 0 0 30px rgba(180,80,220,0.04);
+}
+#zone-parc .zlabel { color:#e0a0ff; }
+
+/* Herbe — droite haute */
+#zone-herbe {
+  left:44%; top:5%; width:53%; height:62%;
+  background:rgba(45,198,83,0.12);
+  border:2px dashed #2dc653;
+  box-shadow:0 0 20px rgba(45,198,83,0.1);
+  overflow:hidden;
+}
+#zone-herbe .zlabel { color:#5dff8a; position:relative; z-index:2; }
+#zone-herbe::before {
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(170deg,
+    transparent 0px, transparent 6px,
+    rgba(30,120,50,0.25) 6px, rgba(30,120,50,0.25) 8px,
+    transparent 8px, transparent 14px);
+}
+
+/* Cariole — bas droite */
+#zone-cariole {
+  left:44%; top:71%; width:53%; height:25%;
+  background:rgba(180,110,60,0.14);
+  border:2px dashed #c07840;
+  box-shadow:0 0 20px rgba(180,110,60,0.15), inset 0 0 30px rgba(180,110,60,0.04);
+}
+#zone-cariole .zlabel { color:#ffcc88; }
+
+.zone .wlabel {
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════
+   PERSONNAGE
+══════════════════════════════ */
+/* ── personnage ── */
+#player {
+  position: absolute;
+  width: 28px;
+  height: 42px;
+  z-index: 30;
+}
+
+#player-sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════
+   BOUTON INTERAGIR
+══════════════════════════════ */
+#btn-interagir {
+  position: absolute;
+  z-index: 30;
+  background: linear-gradient(135deg, #e63946, #c0192a);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(230,57,70,0.5);
+  display: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  animation: pulse-btn 1.2s ease-in-out infinite;
+}
+@keyframes pulse-btn {
+  0%,100% { box-shadow:0 4px 20px rgba(230,57,70,0.5); transform:translateX(-50%) scale(1); }
+  50%     { box-shadow:0 4px 30px rgba(230,57,70,0.8); transform:translateX(-50%) scale(1.06); }
+}
+
+
+/* ══════════════════════════════
+   FOOTER CONSOLE
+══════════════════════════════ */
+#footer {
+  padding: 10px 32px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+#dpad { display:grid; grid-template-columns:22px 22px 22px; grid-template-rows:22px 22px 22px; gap:3px; }
+.db { background:linear-gradient(145deg,#252535,#1a1a28); border:1px solid #333; border-radius:4px; box-shadow:0 2px 0 #0a0a14; }
+.dc { background:#1e1e2e; border-radius:4px; }
+.de { background:transparent; }
+
+#route-footer { font-size:12px; color:#424242; font-family:'Press Start 2P',monospace; line-height:2.4; text-align:center; }
+
+#mid-btns { display:flex; flex-direction:column; gap:6px; align-items:center; }
+.small-btn { width:36px; height:10px; background:#1e1e2e; border:1px solid #2a2a3e; border-radius:5px; box-shadow:0 2px 0 #0a0a14; }
+
+#hint-footer { display:flex; flex-direction:column; gap:6px; align-items:center; }
+.btn-team-txt { font-size:12px; font-family:'Press Start 2P',monospace; line-height:2.4; text-align:center; color:#e63946; text-shadow:0 0 8px rgba(230,57,70,0.6);}
+.btn-team {
+  cursor:pointer; display:flex; align-items:center; justify-content: center; width:72px; height:22px;
+  font-size:8px; color:#ffffff96; font-family:'Press Start 2P',monospace; line-height:1.4;
+  border-radius:4px; background:radial-gradient(circle at 35% 35%,#ff5566,#c0192a);
+  border: none;
+  outline: none;
+
+  /* effet relief au repos : clair en haut/gauche, sombre en bas/droite */
+  box-shadow:
+    inset 2px 2px 0px rgba(255,120,130,0.6),   /* haut/gauche clair */
+    inset -2px -2px 0px rgba(100,0,10,0.8),     /* bas/droite sombre */
+    0 4px 0 #7b0010,
+    0 0 20px rgba(230,57,70,0.5);
+}
+.btn-team:active {
+  /* s'inverse au clic */
+  box-shadow:
+    inset 2px 2px 0px rgba(100,0,10,0.8),       /* haut/gauche sombre */
+    inset -2px -2px 0px rgba(255,120,130,0.6),   /* bas/droite clair */
+    0 2px 0 #7b0010,                             /* ombre réduite = s'enfonce */
+    0 0 20px rgba(230,57,70,0.5);
+  transform: translateY(2px);                    /* descend légèrement */
+}
+
+#btns { display:flex; gap:12px; align-items:center; }
+.btn-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.btn-ltr { font-size:8px; font-family:'Press Start 2P',monospace; }
+.btn-a-ltr { color:#e63946; text-shadow:0 0 8px rgba(230,57,70,0.6); }
+.btn-b-ltr { color:#555; }
+.btn-console { border-radius:50%; border:none; cursor:pointer; }
+.btn-a { width:34px; height:34px; background:radial-gradient(circle at 35% 35%,#ff5566,#c0192a); box-shadow:0 4px 0 #7b0010,0 0 20px rgba(230,57,70,0.5); }
+.btn-b { width:28px; height:28px; background:radial-gradient(circle at 35% 35%,#2a2a3e,#14141e); border:1px solid #333; box-shadow:0 4px 0 #0a0a0a; }
+
+/* ══════════════════════════════
+   OVERLAYS
+══════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.overlay.visible {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.panel {
+  background: var(--panel-bg);
+  border: 2px solid var(--panel-brd);
+  border-radius: 16px;
+  padding: 28px;
+  min-width: 320px;
+  max-width: 90vw;
+  color: var(--text);
+  box-shadow: 0 0 60px rgba(230,57,70,0.2);
+  animation: slideUp 0.25s ease;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.panel-header {
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:20px; padding-bottom:14px;
+  border-bottom:1px solid rgba(230,57,70,0.3);
+}
+.panel-icon  { font-size:28px; }
+.panel-title { font-size:18px; font-weight:800; letter-spacing:1px; font-family:'Press Start 2P',monospace; font-size:14px; }
+.panel-sub   { font-size:10px; color:rgba(255,255,255,0.4); margin-top:4px; letter-spacing:0.5px; font-family:'Press Start 2P',monospace; }
+
+.todo-box {
+  background:rgba(255,255,255,0.05);
+  border:1px dashed rgba(255,255,255,0.2);
+  border-radius:10px;
+  padding:18px;
+  text-align:center;
+  color:rgba(255,255,255,0.45);
+  font-size:13px;
+  margin:12px 0 18px;
+  line-height:1.9;
+}
+.todo-box strong { display:block; color:rgba(255,255,255,0.7); font-size:15px; margin-bottom:4px; }
+
+.btn-fermer {
+  background:transparent;
+  border:2px solid var(--accent);
+  color:var(--accent);
+  border-radius:10px;
+  padding:10px 20px;
+  font-size:12px;
+  font-family:'Press Start 2P',monospace;
+  cursor:pointer;
+  letter-spacing:1px;
+  width:100%;
+  transition:background 0.15s, color 0.15s;
+}
+.btn-fermer:hover, .btn-fermer:active { background:var(--accent); color:white; }
+
+/* flash combat */
+#flash {
+  position:fixed; inset:0;
+  background:white;
+  z-index:300;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.1s;
+}
+
+/* ══════════════════════════════
+   POKEDEX
+══════════════════════════════ */
+
+#pokedex-global {
+  display:flex; align-items:center;gap:12px;
+  margin-bottom:20px; padding-bottom:14px;
+  border-bottom:1px solid rgba(230,57,70,0.3);
+}
+
+#pokedex-liste
+{
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* Pour firefox */
+  scrollbar-color: #e63946 rgba(255,255,255,0.05); /* Pour firefox */
+}
+
+.pokedex-box {
+  display:flex; align-items:center;gap:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px dashed rgba(255,255,255,0.2);
+  border-radius:50px;
+  padding:10px 40px;
+  text-align:start;
+  color:rgba(255,255,255,0.80);
+  font-size:13px;
+  margin:10px 20px 10px 0;
+  line-height:1.9;
+  cursor:pointer;
+  transition:background 0.15s, color 0.15s;
+  width: 90%;
+}
+.pokedex-box:hover, .pokedex-box:active { background:var(--accent); color:white; }
+.pokedex-num {
+  width: 36px;
+  flex-shrink: 0;
+}
+.pokedex-captured {
+  width: 24px;
+  flex-shrink: 0;
+}
+.pokedex-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pokedex-visu-contains
+{
+  display:flex;
+}
+
+#pokedex-visu
+{
+  display:flex;
+  gap:12px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding:24px;
+  border-right:1px dashed rgba(255,255,255,0.2);
+}
+
+#pokedex-visu-name {font-size:18px; font-family:'Press Start 2P',monospace; line-height:2.4; text-align:center; color:#e63946; text-shadow:0 0 8px rgba(230,57,70,0.6);}
+
+#pokedex-visu-sprite {}
+
+#pokedex-visu-evol {padding-top:12px;width:100%;border-top:1px solid rgba(230,57,70,0.3);}
+
+#pokedex-visu-types {display:flex;}
+.pkmtype {margin:0 6px; padding:2px 12px; border-radius:12px;}
+
+.pkmtype-eau        { color: #4a9ee8; background: radial-gradient(circle at 35% 35%, rgba(74,158,232,0.15),  rgba(74,158,232,0.05));  border: 3px solid rgba(74,158,232,0.8); }
+.pkmtype-feu        { color: #e8610a; background: radial-gradient(circle at 35% 35%, rgba(232,97,10,0.15),   rgba(232,97,10,0.05));   border: 3px solid rgba(232,97,10,0.8); }
+.pkmtype-plante     { color: #4acc4a; background: radial-gradient(circle at 35% 35%, rgba(74,204,74,0.15),   rgba(74,204,74,0.05));   border: 3px solid rgba(74,204,74,0.8); }
+.pkmtype-psy        { color: #e84a8a; background: radial-gradient(circle at 35% 35%, rgba(232,74,138,0.15),  rgba(232,74,138,0.05));  border: 3px solid rgba(232,74,138,0.8); }
+.pkmtype-electrique { color: #f5d000; background: radial-gradient(circle at 35% 35%, rgba(245,208,0,0.15),   rgba(245,208,0,0.05));   border: 3px solid rgba(245,208,0,0.8); }
+.pkmtype-normal     { color: #aaaaaa; background: radial-gradient(circle at 35% 35%, rgba(170,170,170,0.15), rgba(170,170,170,0.05)); border: 3px solid rgba(170,170,170,0.8); }
+.pkmtype-sol        { color: #c8a840; background: radial-gradient(circle at 35% 35%, rgba(200,168,64,0.15),  rgba(200,168,64,0.05));  border: 3px solid rgba(200,168,64,0.8); }
+.pkmtype-combat     { color: #c05a1a; background: radial-gradient(circle at 35% 35%, rgba(192,90,26,0.15),   rgba(192,90,26,0.05));   border: 3px solid rgba(192,90,26,0.8); }
+.pkmtype-vol        { color: #88aaee; background: radial-gradient(circle at 35% 35%, rgba(136,170,238,0.15), rgba(136,170,238,0.05)); border: 3px solid rgba(136,170,238,0.8); }
+.pkmtype-insect     { color: #90c010; background: radial-gradient(circle at 35% 35%, rgba(144,192,16,0.15),  rgba(144,192,16,0.05));  border: 3px solid rgba(144,192,16,0.8); }
+.pkmtype-glace      { color: #88ddee; background: radial-gradient(circle at 35% 35%, rgba(136,221,238,0.15), rgba(136,221,238,0.05)); border: 3px solid rgba(136,221,238,0.8); }
+.pkmtype-tenebre    { color: #886655; background: radial-gradient(circle at 35% 35%, rgba(136,102,85,0.15),  rgba(136,102,85,0.05));  border: 3px solid rgba(136,102,85,0.8); }
+.pkmtype-spectre    { color: #7755aa; background: radial-gradient(circle at 35% 35%, rgba(119,85,170,0.15),  rgba(119,85,170,0.05));  border: 3px solid rgba(119,85,170,0.8); }
+.pkmtype-dragon     { color: #7040f0; background: radial-gradient(circle at 35% 35%, rgba(112,64,240,0.15),  rgba(112,64,240,0.05));  border: 3px solid rgba(112,64,240,0.8); }
+.pkmtype-poison     { color: #aa44aa; background: radial-gradient(circle at 35% 35%, rgba(170,68,170,0.15),  rgba(170,68,170,0.05));  border: 3px solid rgba(170,68,170,0.8); }
+.pkmtype-roche      { color: #b8a040; background: radial-gradient(circle at 35% 35%, rgba(184,160,64,0.15),  rgba(184,160,64,0.05));  border: 3px solid rgba(184,160,64,0.8); }
+.pkmtype-acier      { color: #aaaacc; background: radial-gradient(circle at 35% 35%, rgba(170,170,204,0.15), rgba(170,170,204,0.05)); border: 3px solid rgba(170,170,204,0.8); }
+
+#pokedex-visu-stats { padding-top:12px; width:100%; border-top:1px solid rgba(230,57,70,0.3);}
+#pokedex-visu-stats th, #pokedex-visu-stats td{padding:0 12px 0 12px; border-radius:6px; border:1px dashed rgba(255,255,255,0.2);}
+
+#pokedex-visu-attaques {display:flex;flex-direction: column;padding:24px;   max-height: 500px; overflow-y: auto; overflow-x: hidden;}
+.attaque-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 8px;
+}
+.attaques-titre {
+  font-family:'Press Start 2P',monospace; line-height:2.4;
+  padding-bottom: 12px;
+}
+
+/* ══════════════════════════════
+   SOIN
+══════════════════════════════ */
+
+#soin-panel {
+  display:flex; align-items:center;gap:12px;
+  margin-bottom:20px; padding-bottom:14px;
+}
+
+#soin-panel-sprite {transform: scale(-1, 1);}
+
+.soin-texte{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  position: relative;
+}
+
+.soin-texte::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 15px solid transparent;
+  border-right-color: rgba(255,255,255,0.05); /* couleur du fond de ta bulle */
+}
+
+.soin-panel-btn {
+  background:transparent;
+  border:2px solid var(--accent2);
+  color:var(--accent2);
+  border-radius:10px;
+  display: flex;
+  align-items:center; justify-content: center;
+  padding:18px;
+  font-size:12px;
+  font-family:'Press Start 2P',monospace;
+  cursor:pointer;
+  letter-spacing:1px;
+  height: 40px;
+  transition:background 0.15s, color 0.15s;
+}
+.soin-panel-btn:hover, .soin-panel-btn:active { background:var(--accent2); color:white; }
+
+#soin-panel-icon {
+  background:transparent;
+  display: flex;
+  align-items:center; justify-content: center;
+  padding:18px;
+  border-radius:10px;
+  height: 40px;
+  border:1px dashed rgba(255,255,255,0.2);
+  color:rgba(255,255,255,1);
+  font-size:14px;
+}
+
+.soin-panel-choix {
+  display:flex; align-items:center; justify-content: center;gap:12px;
+  margin-bottom:20px; padding-bottom:14px;
+}
+
+/* ══════════════════════════════
+   PARC
+══════════════════════════════ */
+/* ── layout parc ── */
+#parc-panel {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+}
+
+.parc-colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.parc-titre {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 1px;
+}
+
+/* ── grille parc ── */
+#stockage {
+  display: grid;
+  grid-template-columns: repeat(6, 56px);
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #e63946 rgba(255,255,255,0.05);
+}
+
+#stockage::-webkit-scrollbar       { width: 6px; }
+#stockage::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+#stockage::-webkit-scrollbar-thumb { background: #e63946; border-radius: 10px; }
+
+.stock {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  cursor: grab;
+  transition: background 0.15s, border-color 0.15s;
+}
+.stock:hover     { background: rgba(230,57,70,0.15); border-color: rgba(230,57,70,0.5); }
+.stock img       { width: 40px; height: 40px; object-fit: contain; pointer-events: none; max-width: 100%;}
+.stock.sortable-drag    { opacity: 0.4; }
+.stock.sortable-chosen  { cursor: grabbing; }
+
+/* ── équipe ── */
+#equipe-liste {
+  margin-top: 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 280px;
+}
+
+.equipe-slot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 16px;
+  height: 40px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.15);
+  cursor: grab;
+  transition: background 0.15s, border-color 0.15s;
+}
+.equipe-slot:hover           { background: rgba(230,57,70,0.12); border-color: rgba(230,57,70,0.4); }
+.equipe-slot.vide            { cursor: default; opacity: 0.4; }
+.equipe-slot img             { width: 32px; height: 32px; object-fit: contain; pointer-events: none; }
+.equipe-slot.sortable-drag   { opacity: 0.4; }
+.equipe-slot.sortable-chosen { cursor: grabbing; }
+
+.equipe-lvl { font-size: 10px; color: rgba(255,255,255,0.5); font-family: 'Press Start 2P', monospace; min-width: 50px; }
+.equipe-nom { font-size: 11px; color: rgba(255,255,255,0.85); font-family: 'Press Start 2P', monospace; }
+
+/* ── zone relâcher ── */
+#zone-relacher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 2px dashed rgba(230,57,70,0.4);
+  border-radius: 12px;
+  background: rgba(230,57,70,0.05);
+  color: rgba(230,57,70,0.5);
+  font-size: 9px;
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 1px;
+  transition: background 0.2s, border-color 0.2s;
+}
+#zone-relacher.drag-over {
+  background: rgba(230,57,70,0.2);
+  border-color: rgba(230,57,70,0.9);
+  color: #e63946;
+}
+
+#tri-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.btn-tri {
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-tri:hover, .btn-tri:active {
+  background: rgba(230,57,70,0.2);
+  border-color: rgba(230,57,70,0.6);
+  color: #e63946;
+}
+
+.btn-tri.actif {
+  background: rgba(230,57,70,0.2);
+  border-color: rgba(230,57,70,0.6);
+  color: #e63946;
+}
+
+.parc-titre-ligne {
+  display: flex;
+  align-items: flex-start; 
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ══════════════════════════════
+   CARIOLE
+══════════════════════════════ */
+#overlay-cariole .panel {
+  width: 80vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#cariole-panel {
+  display:flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto; overflow-x: hidden;  
+}
+
+.route {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 36px;
+  color: rgba(255,255,255,0.8);
+  border-radius: 24px;
+  margin: 6px 24px 6px 0;
+  gap:12px;
+  font-size: 13px;
+  background: rgba(255,255,255,0.03);
+}
+.route.debloque { cursor: pointer; border: 1px solid var(--accent2);}
+.route.debloque:hover { cursor: pointer; filter: brightness(1.2); background: rgba(45,198,83,0.15);}
+.route.bloque { opacity: 0.5; filter: grayscale(0.5) brightness(0.8); cursor: not-allowed; border: 1px solid var(--accent);}
+.route:last-of-type {margin-bottom: 24px;}
+
+.route-gauche { display: flex; gap:24px; align-items: center;}
+.route-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  font-size: 32px;
+  padding:32px;
+}
+.route.debloque .route-icone {background: rgba(45,198,83,0.15);  color: var(--accent2);}
+.route.bloque .route-icone {background: rgba(198, 68, 45, 0.15);  color: var(--accent);}
+
+.route-texte {
+  display: flex;
+  font-family:'Press Start 2P',monospace;
+  font-size: 12px;
+}
+.route-status {
+  display: flex;
+  background: rgba(45,198,83,0.15);  color: #2dc653; border: 1px solid rgba(45,198,83,0.4);
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+.route.debloque .route-status {background: rgba(45,198,83,0.15);  border: 1px solid rgba(45,198,83,0.4); color: var(--accent2);}
+.route.bloque .route-status {background: rgba(230, 68, 45, 0.15);  border: 1px solid rgba(230, 45, 45, 0.4); color: var(--accent);}
+
+.route-droite {
+  margin-left: auto;
+}
+
+/* ══════════════════════════════
+   HERBE
+══════════════════════════════ */
+#overlay-herbe .panel {
+  width: 80vw;
+}
+
+#herbe-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 0px;  
+  align-items: center;
+}
+
+/* Zone images et pokémons */
+.todo-herbe-combat {
+  background:rgba(255,255,255,0.05);
+  border:1px dashed rgba(255,255,255,0.2);
+  border-radius:10px;
+  padding:18px;
+  text-align:center;
+  color:rgba(255,255,255,0.45);
+  font-size:13px;
+  margin-bottom:18px;
+  line-height:1.9;
+  font-family:'Press Start 2P',monospace; line-height:1.4;
+  min-height: 200px;
+  gap:12px;
+  display: flex;
+  flex-direction: column;
+  background:radial-gradient(ellipse 90% 20% at 50% 88%, rgba(114, 183, 131, 0.4) 0%, transparent 30%),
+  radial-gradient(ellipse 80% 20% at 50% 88%, rgba(0, 0, 0, 1) 0%, transparent 15%),
+  radial-gradient(ellipse 100% 40% at 50% 90%, rgba(0, 0, 0, 0.2) 0%, transparent 100%),
+  radial-gradient(ellipse 90% 25% at 50% 90%, rgba(181, 255, 177, 0.1) 0%, transparent 100%);
+}
+.combat-nom-lvl {
+  display: flex;
+  justify-content: space-between;
+}
+.combat-pv-vie {
+  display: flex;
+  justify-content: space-between;
+}
+.combat-barre-vie {
+  width:100%; height: 12px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.07);
+}
+.combat-barre-vie .barre-interne {
+  width: 100%; height: 100%;
+  border-radius:8px;
+  background: rgba(230, 13, 13, 0.826);
+}
+.combat-sprite {
+  width: 128px; height: 128px;
+}
+
+/* Zone attaques */
+#herbe-panel button:hover {filter: brightness(1.5);transform: scale(1.05);}
+
+.btn-attaque {
+  cursor:pointer;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  border-radius:10px;
+  padding:12px 18px;
+  margin-bottom:6px;
+  background:transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  outline: none;
+}
+.att-icon {
+  padding:6px;
+  font-size: 36px;
+  border-radius: 6px;
+}
+.att-infos {
+  display: flex;
+  flex-direction: column;
+  gap:6px;
+}
+.att-pp {
+  display: flex;
+  flex-direction: column;
+  gap:6px;
+}
+
+</style>
+</head>
+<body>
+
+<div id="console">
+  <div id="bande"></div>
+
+  <!-- header -->
+  <div id="header">
+    <div id="led">
+      <div class="led-dot led-r"></div>
+      <div class="led-dot led-g"></div>
+      <div class="led-dot led-b"></div>
+    </div>
+    <div class="pokeball"><div class="pb-line"></div></div>
+    <div id="titre">Pokécatch</div>
+    <div class="pokeball"><div class="pb-line"></div></div>
+    <div id="vtag">v0.1</div>
+  </div>
+
+  <!-- écran -->
+  <div id="ecran-wrap">
+    <div id="ecran-bezel">
+      <div id="jeu">
+
+        <!-- coins -->
+        <div class="coin coin-tl"></div>
+        <div class="coin coin-tr"></div>
+        <div class="coin coin-bl"></div>
+        <div class="coin coin-br"></div>
+
+        <!-- chemins -->
+        <div id="chemin-h"></div>
+        <div id="chemin-v"></div>
+
+        <!-- zones -->
+        <div id="zone-pokedex" class="zone" data-type="pokedex">
+          <div class="zlabel">🔴 POKÉDEX<br><span class="wlabel">pupitre + livre</span></div>
+        </div>
+        <div id="zone-soin" class="zone" data-type="soin">
+          <div class="zlabel">💊<br>SOIN</div>
+        </div>
+        <div id="zone-parc" class="zone" data-type="parc">
+          <div class="zlabel">🌳 PARC<br><span class="wlabel">stockage</span></div>
+        </div>
+        <div id="zone-herbe" class="zone" data-type="herbe">
+          <div class="zlabel">🌿 HERBE<br><span class="wlabel">combats aléatoires</span></div>
+        </div>
+        <div id="zone-cariole" class="zone" data-type="cariole">
+          <div class="zlabel">🐎 CARIOLE<br><span class="wlabel">changer de route</span></div>
+        </div>
+
+        <!-- personnage -->
+        <div id="player"><img id="player-sprite" src="../img/8324.png"></div>
+
+        <!-- bouton interagir -->
+        <button id="btn-interagir">[ENTRÉE] INTERAGIR</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div id="footer">
+    <div id="dpad">
+      <div class="de"></div><div class="db"></div><div class="de"></div>
+      <div class="db"></div><div class="dc"></div><div class="db"></div>
+      <div class="de"></div><div class="db"></div><div class="de"></div>
+    </div>
+    <div id="route-footer">ROUTE 1<br>Pokédex 10/202</div>
+    <div id="mid-btns">
+      <div class="small-btn"></div>
+      <div class="small-btn"></div>
+    </div>
+    <div id="hint-footer">
+        <button class="btn-team">start</button>
+        <div class="btn-team-txt">MA TEAM</div>
+    </div>
+    <div id="btns">
+      <div class="btn-wrap">
+        <div class="btn-console btn-b"></div>
+        <div class="btn-ltr btn-b-ltr">B</div>
+      </div>
+      <div class="btn-wrap">
+        <div class="btn-console btn-a"></div>
+        <div class="btn-ltr btn-a-ltr">A</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- flash -->
+<div id="flash"></div>
+
+<!-- ══ OVERLAY HERBE ══ -->
+<div id="overlay-herbe" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">⚔️</span>
+      <div>
+        <div class="panel-title">Combat !</div>
+        <div class="panel-sub">UN POKÉMON SAUVAGE APPARAÎT</div>
+      </div>
+    </div>
+
+    <div id="herbe-panel">
+      <div class="todo-herbe-combat" id="vie-joueur">
+        <div class="combat-nom-lvl"><span>Pikachu</span><span>LvL 100</span></div>
+        <div class="combat-pv-vie"><span>PV</span><span class="vie" data-vie="80" data-vie-max="160">0/0</span></div>
+        <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        <div><img class="combat-sprite" src="../img/pkmAnim/Spr_3e_025.png"></div>
+      </div>
+      <div class="todo-herbe-combat" id="vie-ennemy">
+        <div class="combat-nom-lvl"><span>Florizarre</span><span>LvL 9</span></div>
+        <div class="combat-pv-vie"><span>PV</span><span class="vie" data-vie="5" data-vie-max="360">0/0</span></div>
+        <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        <div><img class="combat-sprite" src="../img/pkmAnim/Spr_3e_003.png"></div>
+      </div>
+
+      <button class="btn-attaque">
+        <div class="att-icon pkmtype-electrique" >⚡</div>
+        <div class="att-infos">
+          <span class="att-infos-nom">Eclair</span>
+          <div class="att-infos-details">
+            <span class="att-infos-detail-tag">Pui 40</span>
+            <span class="att-infos-detail-tag">Pré 100</span>
+            <span class="att-infos-detail-tag">Spécial</span>
+          </div>
+        </div>
+        <div class="att-pp">
+          <span class="att-pp-label">PP</span>
+          <span class="att-pp-val">20/25</span>
+          <div class="att-pp-bar"><div class="att-pp-fill" style="width:85%"></div></div>
+        </div>
+      </button>
+
+      <button class="btn-attaque">
+        <div class="att-icon pkmtype-normal">⚪</div>
+        <div class="att-infos">
+          <span class="att-infos-nom">Charge</span>
+          <div class="att-infos-details">
+            <span class="att-infos-detail-tag">Pui 30</span>
+            <span class="att-infos-detail-tag">Pré 100</span>
+            <span class="att-infos-detail-tag">Physique</span>
+          </div>
+        </div>
+        <div class="att-pp">
+          <span class="att-pp-label">PP</span>
+          <span class="att-pp-val">9/30</span>
+          <div class="att-pp-bar"><div class="att-pp-fill" style="width:30%"></div></div>
+        </div>
+      </button>
+
+      <button class="btn-attaque">
+        <div class="att-icon pkmtype-electrique">⚡</div>
+        <div class="att-infos">
+          <span class="att-infos-nom">Tonnerre</span>
+          <div class="att-infos-details">
+            <span class="att-infos-detail-tag">Pui 80</span>
+            <span class="att-infos-detail-tag">Pré 100</span>
+            <span class="att-infos-detail-tag">Spécial</span>
+          </div>
+        </div>
+        <div class="att-pp">
+          <span class="att-pp-label">PP</span>
+          <span class="att-pp-val">2/10</span>
+          <div class="att-pp-bar"><div class="att-pp-fill" style="width:20%"></div></div>
+        </div>
+      </button>
+
+      <button class="btn-attaque">
+        <div class="att-icon pkmtype-dragon">🐉</div>
+        <div class="att-infos">
+          <span class="att-infos-nom">Griffe Dragon</span>
+          <div class="att-infos-details">
+            <span class="att-infos-detail-tag">Pui 90</span>
+            <span class="att-infos-detail-tag">Pré 80</span>
+            <span class="att-infos-detail-tag">Physique</span>
+          </div>
+        </div>
+        <div class="att-pp">
+          <span class="att-pp-label">PP</span>
+          <span class="att-pp-val">9/15</span>
+          <div class="att-pp-bar"><div class="att-pp-fill" style="width:80%"></div></div>
+        </div>
+      </button>
+
+      <div id="combat-pkm-change">
+        <span>EQUIPE</span>
+        <button class="combat-equipe actif"><img src="../img/pkmAnim/Spr_3e_025.png"></button>
+        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_343.png"></button>
+        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_230.png"></button>
+        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_116.png"></button>
+        <button class="combat-equipe vide"><img src=""></button>
+        <button class="combat-equipe vide"><img src=""></button>
+      </div>
+
+      <button class="combat-balls"><img src="../img/pokeball.png">5</button>
+    </div>
+
+
+    <button class="btn-fermer" onclick="fermerOverlay('herbe')">✕ FUIR LE COMBAT</button>
+  </div>
+</div>
+
+<!-- ══ OVERLAY POKÉDEX ══ -->
+ <div id="overlay-pokedex" class="overlay">
+  <div class="panel">
+      <div class="panel-header">
+        <span class="panel-icon">📖</span>
+        <div>
+          <div class="panel-title">Pokédex</div>
+          <div class="panel-sub">ENCYCLOPÉDIE DES POKÉMON</div>
+        </div>
+      </div>
+      <div id="pokedex-global">
+        <div id="pokedex-liste">
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#260</div>
+            <div class="pokedex-captured">⚪</div>
+            <div class="pokedex-name">Raichu</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#24</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Graaaaaaaaaaaaaaaaand</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#24</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Pikachu</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#77</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Rayquaza</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+          <button class="pokedex-box">
+            <div class="pokedex-num">#2</div>
+            <div class="pokedex-captured">🔴</div>
+            <div class="pokedex-name">Petit</div>
+          </button >
+        </div>
+
+        <div class="todo-box pokedex-visu-contains">
+          <div id="pokedex-visu">
+            <div id="pokedex-visu-name">#25 Pikachu</div>
+            <div><img id="pokedex-visu-sprite" src="../img/pkmAnim/Spr_3e_025.png"></div>
+            <div id="pokedex-visu-evol">Evolue niveau 28</div>
+            <div id="pokedex-visu-types">
+              <div class="pkmtype pkmtype-electrique">Electrique</div>
+              <div class="pkmtype pkmtype-plante">Plante</div>
+            </div>
+            <table id="pokedex-visu-stats">
+              <tr>
+                <th>Vie</th>
+                <td>80</th>
+                <th>Vitesse</th>
+                <td>110</th>
+              </tr>
+              <tr>
+                <th>Attaque</th>
+                <td>150</th>
+                <th>Att. Speciale</th>
+                <td>150</th>
+              </tr>
+              <tr>
+                <th>Defense</th>
+                <td>20</th>
+                <th>Def. Speciale</th>
+                <td>50</th>
+              </tr>
+              <tr>
+                <th colspan="3">Total</th>
+                <td>620</th>
+              </tr>
+            </table>
+          </div>
+          <div id="pokedex-visu-attaques">
+            <div class="attaques-titre">ATTAQUES</div>
+
+            <div class="attaque-row">
+              <span class="pkmtype pkmtype-electrique">Éclair</span>
+              <span class="attaque-lvl">Lv 2</span>
+            </div>
+            <div class="attaque-row">
+              <span class="pkmtype pkmtype-normal">Charge</span>
+              <span class="attaque-lvl">Lv 5</span>
+            </div>
+            <div class="attaque-row">
+              <span class="pkmtype pkmtype-electrique">Tonnerre</span>
+              <span class="attaque-lvl">Lv 14</span>
+            </div>
+            <div class="attaque-row">
+              <span class="pkmtype pkmtype-poison">Poing-Poison-Long-Nom</span>
+              <span class="attaque-lvl">Lv 20</span>
+            </div>
+          </div>
+      </div>
+    </div>
+    <button class="btn-fermer" onclick="fermerOverlay('pokedex')">✕ FERMER LE POKÉDEX</button>
+  </div>
+</div>
+
+<!--
+<div id="overlay-pokedex" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">📖</span>
+      <div>
+        <div class="panel-title">Pokédex</div>
+        <div class="panel-sub">ENCYCLOPÉDIE DES POKÉMON</div>
+      </div>
+    </div>
+    <div class="todo-box">
+      <strong>Liste des Pokémon</strong>
+      À connecter à la base de données 🔧<br>
+      Nom · Type · Stats · Description
+    </div>
+    <button class="btn-fermer" onclick="fermerOverlay('pokedex')">✕ FERMER LE POKÉDEX</button>
+  </div>
+</div>
+-->
+
+<!-- ══ OVERLAY SOIN ══ -->
+<div id="overlay-soin" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">💊</span>
+      <div>
+        <div class="panel-title">Soin</div>
+        <div class="panel-sub">JOELLE TE PROPOSE SES SERVICES</div>
+      </div>
+    </div>
+
+    <div id="soin-panel">
+      <div><img id="soin-panel-sprite" src="../img/joelle.png"></div>
+      <div id="soin-panel-conv">
+        <div class="todo-box soin-texte">
+          <strong>Bonjour !</strong>
+          Veux tu soigner tes pokémons ?<br><br><br>
+          <em>(Tu gagnes 1 pillule toutes les x secondes de jeu)</em>
+        </div>
+        <div class="soin-panel-choix">
+          <button class="soin-panel-btn">Oui merci !</button>
+          <div id="soin-panel-icon">💊 1</div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn-fermer" onclick="fermerOverlay('soin')">✕ Non (QUITTER)</button>
+  </div>
+</div>
+
+<!-- ══ OVERLAY PARC ══ -->
+<div id="overlay-parc" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">🌳</span>
+      <div>
+        <div class="panel-title">Parc</div>
+        <div class="panel-sub">LAISSE DES POKÉMONS JOUER DANS LE PARC</div>
+      </div>
+    </div>
+
+    <div id="parc-panel">
+
+      <!-- colonne gauche : parc -->
+      <div class="parc-colonne">
+        <div class="parc-titre-ligne">
+          <strong class="parc-titre">Parc</strong>
+          <div id="tri-buttons">
+            <button class="btn-tri" onclick="trierParc('lvl')">LvL</button>
+            <button class="btn-tri" onclick="trierParc('id')">Num</button>
+            <button class="btn-tri" onclick="trierParc('nom')">Nom</button>
+          </div>
+        </div>
+        <div id="stockage">
+          <div class="stock" data-id="4"   data-nom="Salamèche"  data-lvl="12" data-src="../img/pkmAnim/Spr_3e_004.png"><img src="../img/pkmAnim/Spr_3e_004.png"></div>
+          <div class="stock" data-id="384" data-nom="Rayquaza"   data-lvl="60" data-src="../img/pkmAnim/Spr_3e_384.png"><img src="../img/pkmAnim/Spr_3e_384.png"></div>
+          <div class="stock" data-id="3"   data-nom="Florizarre"  data-lvl="36" data-src="../img/pkmAnim/Spr_3e_003.png"><img src="../img/pkmAnim/Spr_3e_003.png"></div>
+          <div class="stock" data-id="25"  data-nom="Pikachu"    data-lvl="18" data-src="../img/pkmAnim/Spr_3e_025.png"><img src="../img/pkmAnim/Spr_3e_025.png"></div>
+          <div class="stock" data-id="6"   data-nom="Dracaufeu"  data-lvl="45" data-src="../img/pkmAnim/Spr_3e_006.png"><img src="../img/pkmAnim/Spr_3e_006.png"></div>
+          <div class="stock" data-id="9"   data-nom="Tortank"    data-lvl="42" data-src="../img/pkmAnim/Spr_3e_009.png"><img src="../img/pkmAnim/Spr_3e_009.png"></div>
+          <div class="stock" data-id="130" data-nom="Léviator"   data-lvl="55" data-src="../img/pkmAnim/Spr_3e_130.png"><img src="../img/pkmAnim/Spr_3e_130.png"></div>
+          <div class="stock" data-id="376" data-nom="Métalosse"  data-lvl="50" data-src="../img/pkmAnim/Spr_3e_376.png"><img src="../img/pkmAnim/Spr_3e_376.png"></div>
+          <div class="stock" data-id="373" data-nom="Drattak"    data-lvl="52" data-src="../img/pkmAnim/Spr_3e_373.png"><img src="../img/pkmAnim/Spr_3e_373.png"></div>
+          <div class="stock" data-id="381" data-nom="Latios"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_381.png"><img src="../img/pkmAnim/Spr_3e_381.png"></div>
+          <div class="stock" data-id="380" data-nom="Latias"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_380.png"><img src="../img/pkmAnim/Spr_3e_380.png"></div>
+          <div class="stock" data-id="350" data-nom="Milobellus" data-lvl="28" data-src="../img/pkmAnim/Spr_3e_350.png"><img src="../img/pkmAnim/Spr_3e_350.png"></div>
+          <div class="stock" data-id="282" data-nom="Gardevoir"  data-lvl="35" data-src="../img/pkmAnim/Spr_3e_282.png"><img src="../img/pkmAnim/Spr_3e_282.png"></div>
+          <div class="stock" data-id="260" data-nom="Laggron"    data-lvl="48" data-src="../img/pkmAnim/Spr_3e_260.png"><img src="../img/pkmAnim/Spr_3e_260.png"></div>
+          <div class="stock" data-id="257" data-nom="Braségali"  data-lvl="48" data-src="../img/pkmAnim/Spr_3e_257.png"><img src="../img/pkmAnim/Spr_3e_257.png"></div>
+          <div class="stock" data-id="254" data-nom="Jungko"     data-lvl="48" data-src="../img/pkmAnim/Spr_3e_254.png"><img src="../img/pkmAnim/Spr_3e_254.png"></div>
+          <div class="stock" data-id="383" data-nom="Groudon"    data-lvl="70" data-src="../img/pkmAnim/Spr_3e_383.png"><img src="../img/pkmAnim/Spr_3e_383.png"></div>
+          <div class="stock" data-id="382" data-nom="Kyogre"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_382.png"><img src="../img/pkmAnim/Spr_3e_382.png"></div>
+          <div class="stock" data-id="385" data-nom="Jirachi"    data-lvl="70" data-src="../img/pkmAnim/Spr_3e_385.png"><img src="../img/pkmAnim/Spr_3e_385.png"></div>
+          <div class="stock" data-id="376" data-nom="Métalosse"  data-lvl="50" data-src="../img/pkmAnim/Spr_3e_376.png"><img src="../img/pkmAnim/Spr_3e_376.png"></div>
+          <div class="stock" data-id="373" data-nom="Drattak"    data-lvl="52" data-src="../img/pkmAnim/Spr_3e_373.png"><img src="../img/pkmAnim/Spr_3e_373.png"></div>
+          <div class="stock" data-id="381" data-nom="Latios"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_381.png"><img src="../img/pkmAnim/Spr_3e_381.png"></div>
+          <div class="stock" data-id="380" data-nom="Latias"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_380.png"><img src="../img/pkmAnim/Spr_3e_380.png"></div>
+          <div class="stock" data-id="350" data-nom="Milobellus" data-lvl="28" data-src="../img/pkmAnim/Spr_3e_350.png"><img src="../img/pkmAnim/Spr_3e_350.png"></div>
+          <div class="stock" data-id="282" data-nom="Gardevoir"  data-lvl="35" data-src="../img/pkmAnim/Spr_3e_282.png"><img src="../img/pkmAnim/Spr_3e_282.png"></div>
+          <div class="stock" data-id="260" data-nom="Laggron"    data-lvl="48" data-src="../img/pkmAnim/Spr_3e_260.png"><img src="../img/pkmAnim/Spr_3e_260.png"></div>
+          <div class="stock" data-id="257" data-nom="Braségali"  data-lvl="48" data-src="../img/pkmAnim/Spr_3e_257.png"><img src="../img/pkmAnim/Spr_3e_257.png"></div>
+          <div class="stock" data-id="254" data-nom="Jungko"     data-lvl="48" data-src="../img/pkmAnim/Spr_3e_254.png"><img src="../img/pkmAnim/Spr_3e_254.png"></div>
+          <div class="stock" data-id="383" data-nom="Groudon"    data-lvl="70" data-src="../img/pkmAnim/Spr_3e_383.png"><img src="../img/pkmAnim/Spr_3e_383.png"></div>
+          <div class="stock" data-id="382" data-nom="Kyogre"     data-lvl="70" data-src="../img/pkmAnim/Spr_3e_382.png"><img src="../img/pkmAnim/Spr_3e_382.png"></div>
+        </div>
+
+        <!-- zone relâcher -->
+        <div id="zone-relacher">
+          <span>RELACHER ICI</span>
+        </div>
+      </div>
+
+      <!-- colonne droite : équipe -->
+      <div class="parc-colonne">
+        <strong class="parc-titre">Ton équipe</strong>
+        <div id="equipe-liste">
+          <div class="equipe-slot" data-id="25" data-nom="Pikachu" data-lvl="100">
+            <img src="../img/pkmAnim/Spr_3e_025.png">
+            <span class="equipe-lvl">Lv 100</span>
+            <span class="equipe-nom">Pikachu</span>
+          </div>
+          <div class="equipe-slot" data-id="1" data-nom="Herbizarre" data-lvl="12">
+            <img src="../img/pkmAnim/Spr_3e_001.png">
+            <span class="equipe-lvl">Lv 12</span>
+            <span class="equipe-nom">Herbizarre</span>
+          </div>
+          <div class="equipe-slot" data-id="182" data-nom="Joliflor" data-lvl="7">
+            <img src="../img/pkmAnim/Spr_3e_182.png">
+            <span class="equipe-lvl">Lv 7</span>
+            <span class="equipe-nom">Joliflor</span>
+          </div>
+          <!-- slots vides -->
+          <div class="equipe-slot vide"></div>
+          <div class="equipe-slot vide"></div>
+          <div class="equipe-slot vide"></div>
+        </div>
+      </div>
+
+    </div>
+    <button class="btn-fermer" onclick="fermerOverlay('parc')">✕ QUITTER LE PARC</button>
+  </div>
+</div>
+
+<!-- ══ OVERLAY CARIOLE ══ -->
+<div id="overlay-cariole" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">🐎</span>
+      <div>
+        <div class="panel-title">Cariole</div>
+        <div class="panel-sub">CHANGER DE ROUTE</div>
+      </div>
+    </div>
+
+    <div id="cariole-panel">
+      <button class="route debloque" data-id="1">
+        <div class="route-gauche">
+          <span class="route-icone">🦆</span>
+          <span class="route-texte">Route 1</span>
+          <span class="route-status">Débloquée</span>          
+        </div>
+        <div class="route-droite">Disponible dès le départ</div>
+      </button>
+
+      <button class="route bloque" data-id="2">
+        <div class="route-gauche">
+          <span class="route-icone">🔒</span>
+          <span class="route-texte">Route 2</span>
+          <span class="route-status">Bloquée</span>          
+        </div>
+        <div class="route-droite">Combattez 5 pokémons</div>
+      </button>
+
+      <button class="route bloque" data-id="2">
+        <div class="route-gauche">
+          <span class="route-icone">🔒</span>
+          <span class="route-texte">Route 3</span>
+          <span class="route-status">Bloquée</span>          
+        </div>
+        <div class="route-droite">Attrapez un Pikachu</div>
+      </button>
+
+      <button class="route bloque" data-id="2">
+        <div class="route-gauche">
+          <span class="route-icone">🔒</span>
+          <span class="route-texte">Route 4</span>
+          <span class="route-status">Bloquée</span>          
+        </div>
+        <div class="route-droite">Attrape 10 pokémons</div>
+      </button>
+
+      <button class="route bloque" data-id="2">
+        <div class="route-gauche">
+          <span class="route-icone">🔒</span>
+          <span class="route-texte">Route 5</span>
+          <span class="route-status">Bloquée</span>          
+        </div>
+        <div class="route-droite">Possède 15 pokémons différents</div>
+      </button>
+    </div>
+
+    <button class="btn-fermer" onclick="fermerOverlay('cariole')">✕ ANNULER</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+//  TESTS
+// ══════════════════════════════════════
+
+// ══════════════════════════════════════
+// Cumuler des pills pour se faire soigner par Joelle
+let pills = 1
+let temps = 0
+
+setInterval(() => {
+    if(document.hasFocus()==true)
+    {
+      temps++
+
+      if(temps >= 30)
+      {
+        pills++
+        document.getElementById("soin-panel-icon").textContent = `💊 ${pills}`
+        temps = 0
+      }
+    }
+}, 1000)
+
+// ══════════════════════════════════════
+// Mettre à jour les barres de vie
+
+
+function actualiserBarreVie(bv) {
+  const elVie = document.querySelector(`${bv} .vie`)
+  const elBarre = document.querySelector(`${bv} .barre-interne`)
+  const vie = parseInt(elVie.dataset.vie)
+  const vieMax = parseInt(elVie.dataset.vieMax)
+  const percVie = Math.ceil(vie/vieMax*100)
+
+  elVie.textContent = `${vie}/${vieMax}`
+  elBarre.style.setProperty("width",`${percVie}%`)
+  elBarre.style.setProperty("background",`hsl(${percVie}, 80%, 45%)`)
+}
+
+actualiserBarreVie('#vie-ennemy')
+actualiserBarreVie('#vie-joueur')
+
+// ══════════════════════════════════════
+//  ÉTAT DU JEU
+// ══════════════════════════════════════
+
+const jeu          = document.getElementById('jeu')
+const player       = document.getElementById('player')
+const btnInteragir = document.getElementById('btn-interagir')
+const flash        = document.getElementById('flash')
+
+let x = jeu.offsetWidth  * 0.02
+let y = jeu.offsetHeight * 0.41
+let targetX = x
+let targetY = y
+const speed = 16
+
+let keys           = {}
+let menuOuvert     = false
+let zoneActiveType = null
+let dernierHerbe   = 0
+
+// ══════════════════════════════════════
+//  CLAVIER
+// ══════════════════════════════════════
+
+document.addEventListener('keydown', e => {
+  keys[e.key] = true
+  if (e.key === 'Enter' && btnInteragir.style.display === 'block' && !menuOuvert) {
+    ouvrirOverlay(zoneActiveType)
+  }
+  if (e.key === 'Escape' && menuOuvert) fermerTous()
+})
+
+document.addEventListener('keyup', e => { keys[e.key] = false })
+
+// ══════════════════════════════════════
+//  DÉPLACEMENT TACTILE / CLIC
+// ══════════════════════════════════════
+
+function setTarget(cx, cy) {
+  if (menuOuvert) return
+  const rect = jeu.getBoundingClientRect()
+  targetX = (cx - rect.left)  - player.offsetWidth  / 2
+  targetY = (cy - rect.top)   - player.offsetHeight / 2
+}
+
+jeu.addEventListener('click', e => {
+  if (e.target.closest('#btn-interagir')) return
+  setTarget(e.clientX, e.clientY)
+})
+
+jeu.addEventListener('touchstart', e => {
+  e.preventDefault()
+  setTarget(e.touches[0].clientX, e.touches[0].clientY)
+}, { passive: false })
+
+jeu.addEventListener('touchmove', e => {
+  e.preventDefault()
+  setTarget(e.touches[0].clientX, e.touches[0].clientY)
+}, { passive: false })
+
+// ══════════════════════════════════════
+//  BOUTON INTERAGIR
+// ══════════════════════════════════════
+
+btnInteragir.addEventListener('click', () => {
+  if (zoneActiveType && !menuOuvert) ouvrirOverlay(zoneActiveType)
+})
+
+// ══════════════════════════════════════
+//  OVERLAYS
+// ══════════════════════════════════════
+
+function ouvrirOverlay(type) {
+  if (menuOuvert) return
+  menuOuvert = true
+  if (type === 'herbe') {
+    flash.style.opacity = '1'
+    setTimeout(() => {
+      flash.style.opacity = '0'
+      document.getElementById('overlay-herbe').classList.add('visible')
+    }, 180)
+    dernierHerbe = Date.now()
+  } else {
+    document.getElementById('overlay-' + type).classList.add('visible')
+  }
+}
+
+function fermerOverlay(type) {
+  document.getElementById('overlay-' + type).classList.remove('visible')
+  menuOuvert = false
+  dernierHerbe = Date.now()
+}
+
+function fermerTous() {
+  document.querySelectorAll('.overlay.visible').forEach(o => o.classList.remove('visible'))
+  menuOuvert = false
+  dernierHerbe = Date.now()
+}
+
+// ══════════════════════════════════════
+//  BOUCLE DE JEU
+// ══════════════════════════════════════
+
+function update() {
+
+  if (!menuOuvert) {
+
+    if (keys['ArrowRight'] || keys['d']) { x += speed; targetX = x }
+    if (keys['ArrowLeft']  || keys['q']) { x -= speed; targetX = x }
+    if (keys['ArrowUp']    || keys['z']) { y -= speed; targetY = y }
+    if (keys['ArrowDown']  || keys['s']) { y += speed; targetY = y }
+
+    const dx   = targetX - x
+    const dy   = targetY - y
+    const dist = Math.hypot(dx, dy)
+    if (dist > speed) {
+      x += (dx / dist) * speed
+      y += (dy / dist) * speed
+    }
+
+    x = Math.max(0, Math.min(jeu.offsetWidth  - player.offsetWidth,  x))
+    y = Math.max(0, Math.min(jeu.offsetHeight - player.offsetHeight, y))
+
+    player.style.left = x + 'px'
+    player.style.top  = y + 'px'
+  }
+
+  const pr = player.getBoundingClientRect()
+  let dansZone    = false
+  let typeCourant = null
+
+  document.querySelectorAll('.zone').forEach(zone => {
+    const zr   = zone.getBoundingClientRect()
+    const dans =
+      pr.left < zr.right  && pr.right  > zr.left &&
+      pr.top  < zr.bottom && pr.bottom > zr.top
+
+    zone.classList.toggle('active', dans)
+
+    if (dans) {
+      dansZone    = true
+      typeCourant = zone.dataset.type
+    }
+  })
+
+  zoneActiveType = typeCourant
+
+  const montrerBtn = dansZone && typeCourant !== 'herbe' && !menuOuvert
+  btnInteragir.style.display = montrerBtn ? 'block' : 'none'
+  if (montrerBtn) {
+    btnInteragir.style.left = (x + player.offsetWidth  / 2) + 'px'
+    btnInteragir.style.top  = (y - 50) + 'px'
+  }
+
+  if (dansZone && typeCourant === 'herbe' && !menuOuvert) {
+    const enMouvement =
+      keys['ArrowRight'] || keys['ArrowLeft'] ||
+      keys['ArrowUp']    || keys['ArrowDown'] ||
+      keys['z'] || keys['q'] || keys['s'] || keys['d'] ||
+      Math.hypot(targetX - x, targetY - y) > speed
+
+    const delaiOk = Date.now() - dernierHerbe > 2000
+
+    if (enMouvement && delaiOk && Math.random() < 0.1) {
+      ouvrirOverlay('herbe')
+    }
+  }
+
+  requestAnimationFrame(update)
+}
+
+window.addEventListener('load', () => {
+  x = jeu.offsetWidth  * 0.02 // 0.02
+  y = jeu.offsetHeight * 0.41 // 0.41
+  targetX = x
+  targetY = y
+  player.style.left = x + 'px'
+  player.style.top  = y + 'px'
+})
+
+// ══════════════════════════════════════
+//  PARC — FONCTIONS UTILITAIRES
+// ══════════════════════════════════════
+
+function creerStock(data) {
+  const el = document.createElement('div')
+  el.className = 'stock'
+  el.dataset.id  = data.id
+  el.dataset.nom = data.nom
+  el.dataset.lvl = data.lvl
+  el.dataset.src = data.src
+  el.innerHTML = `<img src="${data.src}">`
+  return el
+}
+
+function creerSlot(data) {
+  const el = document.createElement('div')
+  el.className = 'equipe-slot'
+  el.dataset.id  = data.id
+  el.dataset.nom = data.nom
+  el.dataset.lvl = data.lvl
+  el.dataset.src = data.src
+  el.innerHTML = `
+    <img src="${data.src}">
+    <span class="equipe-lvl">Lv ${data.lvl}</span>
+    <span class="equipe-nom">${data.nom}</span>
+  `
+  return el
+}
+
+function creerSlotVide() {
+  const el = document.createElement('div')
+  el.className = 'equipe-slot vide'
+  return el
+}
+
+function getData(el) {
+  return {
+    id:  el.dataset.id,
+    nom: el.dataset.nom,
+    lvl: el.dataset.lvl,
+    src: el.dataset.src || el.querySelector('img')?.src || ''
+  }
+}
+
+function reordonnerEquipe() {
+  const equipe = document.getElementById('equipe-liste')
+  const slots  = [...equipe.querySelectorAll('.equipe-slot:not(.vide)')]
+  equipe.innerHTML = ''
+  slots.forEach(slot => equipe.appendChild(slot))
+  const manquants = 6 - slots.length
+  for (let i = 0; i < manquants; i++) {
+    equipe.appendChild(creerSlotVide())
+  }
+}
+
+function trierParc(critere) {
+  const stockage = document.getElementById('stockage')
+  const pokemons = [...stockage.querySelectorAll('.stock')]
+
+  pokemons.sort((a, b) => {
+    if (critere === 'id')  return Number(a.dataset.id)  - Number(b.dataset.id)
+    if (critere === 'lvl') return Number(b.dataset.lvl) - Number(a.dataset.lvl)
+    if (critere === 'nom') return a.dataset.nom.localeCompare(b.dataset.nom, 'fr')
+  })
+
+  pokemons.forEach(p => stockage.appendChild(p))
+
+  document.querySelectorAll('.btn-tri').forEach(b => b.classList.remove('actif'))
+  document.querySelector(`.btn-tri[onclick="trierParc('${critere}')"]`).classList.add('actif')
+}
+
+// ══════════════════════════════════════
+//  PARC — INIT DRAG & DROP
+// ══════════════════════════════════════
+
+function initParc() {
+  const stockage    = document.getElementById('stockage')
+  const equipe      = document.getElementById('equipe-liste')
+  const zoneRelacher = document.getElementById('zone-relacher')
+
+  // ── parc ──
+  Sortable.create(stockage, {
+    group: { name: 'pokemon', pull: true, put: true },
+    animation: 150,
+    ghostClass: 'sortable-drag',
+    chosenClass: 'sortable-chosen',
+  })
+
+  // ── équipe ──
+  Sortable.create(equipe, {
+    group: { name: 'pokemon', pull: true, put: true },
+    animation: 150,
+    ghostClass: 'sortable-drag',
+    chosenClass: 'sortable-chosen',
+    filter: '.vide',
+
+    onEnd(evt) {
+      reordonnerEquipe()   // remet les vides à la fin après chaque déplacement
+    },
+
+    onAdd(evt) {
+      const el   = evt.item
+      const data = getData(el)
+      el.remove()
+      const slotVide = equipe.querySelector('.equipe-slot.vide')
+      if (slotVide) {
+        slotVide.replaceWith(creerSlot(data))
+      } else {
+        stockage.appendChild(creerStock(data))
+      }
+    },
+
+    onRemove(evt) {
+      const data     = getData(evt.item)
+      const restants = equipe.querySelectorAll('.equipe-slot:not(.vide)').length
+      evt.item.remove()
+
+      if (restants === 0) {
+        equipe.insertBefore(creerSlot(data), equipe.firstChild)
+        return
+      }
+
+      stockage.appendChild(creerStock(data))
+      equipe.appendChild(creerSlotVide())
+    }
+  })
+
+  // ── zone relâcher ──
+  let elementEnCours = null  // variable globale dans initParc
+
+  document.addEventListener('dragstart', e => {
+    const el = e.target.closest('.equipe-slot:not(.vide), .stock')
+    if (el) {
+      elementEnCours = el   // on sauvegarde la référence directe
+      e.dataTransfer.setData('text/plain',
+        el.dataset.id + '|' + (el.classList.contains('stock') ? 'parc' : 'equipe'))
+    }
+  })
+
+  zoneRelacher.addEventListener('dragover',  e => { e.preventDefault(); zoneRelacher.classList.add('drag-over') })
+  zoneRelacher.addEventListener('dragleave', ()  => { zoneRelacher.classList.remove('drag-over') })
+
+  zoneRelacher.addEventListener('drop', e => {
+    
+    e.preventDefault()
+    zoneRelacher.classList.remove('drag-over')
+
+    const raw = e.dataTransfer.getData('text/plain')
+    if (!raw) return
+    const [id, source] = raw.split('|')
+    
+    const el = elementEnCours
+    elementEnCours = null
+    if (!el) return
+    
+    if (source === 'equipe') {
+      const restants = equipe.querySelectorAll('.equipe-slot:not(.vide)').length
+      if (restants <= 1) {
+        alert('Tu ne peux pas relâcher ton dernier Pokémon !')
+        return
+      }
+    }
+    
+    if (confirm(`Relacher ${el.dataset.nom} définitivement ?`)) {
+      if (source === 'equipe') {
+        el.replaceWith(creerSlotVide())
+        reordonnerEquipe()
+      } else {
+        el.remove()
+      }
+    }
+  })
+}
+
+// ── ouvre le parc et init le drag & drop ──
+const _ouvrirOverlayOriginal = ouvrirOverlay
+
+ouvrirOverlay = function(type) {
+  _ouvrirOverlayOriginal(type)
+  if (type === 'parc') setTimeout(initParc, 50)
+}
+
+update()
+</script>
+</body>
+</html>
