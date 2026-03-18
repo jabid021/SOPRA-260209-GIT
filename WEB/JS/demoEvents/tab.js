@@ -9,12 +9,12 @@
 
   btnAddPersonne.onclick=ajouterPersonneTab;
 
-  document.getElementById("input-add-id").oninput=checkBtnValidate;
-  document.getElementById("input-add-nom").oninput=checkBtnValidate;
-  document.getElementById("input-add-prenom").oninput=checkBtnValidate;
+  document.getElementById("input-add-id").onkeyup=checkBtnValidate;
+  document.getElementById("input-add-nom").onkeyup=checkBtnValidate;
+  document.getElementById("input-add-prenom").onkeyup=checkBtnValidate;
 
 
-  function checkBtnValidate()
+  function checkBtnValidate(event)
   {
     if(document.getElementById("input-add-id").value=="" || document.getElementById("input-add-nom").value=="" || document.getElementById("input-add-prenom").value=="" )
     {
@@ -25,6 +25,10 @@
     {
         btnAddPersonne.disabled=false;
         statutForm.style.backgroundColor="green";
+        if(event.key=="Enter")
+        {
+          ajouterPersonneTab();
+        }
     }
   }
 
@@ -49,4 +53,6 @@
     document.getElementById("input-add-prenom").value="";
 
     btnAddPersonne.disabled=true;
+
+    statutForm.style.backgroundColor="red";
   }
