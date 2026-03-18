@@ -1,0 +1,62 @@
+<script
+  src="https://code.jquery.com/jquery-4.0.0.js"
+  integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+  crossorigin="anonymous"></script>
+
+
+
+  <p id="paragPrinci" class="secondaire">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <p class="secondaire">Parag secondaire</p>
+
+  <p>Parag milieu</p>
+
+  <h3 class="secondaire">Titre secondaire</h3>
+
+  <p class="secondaire">Parag secondaire</p>
+  <p>Parag fin</p>
+
+<script>
+  $(document).ready(function() {
+
+    paragPrinci.style.color="cyan";
+    paragPrinci.style.setProperty("background-color","orange");
+
+    $("#paragPrinci").css("color","salmon");
+    $("#paragPrinci").css("background-color","green");
+
+    for(b of document.getElementsByClassName("secondaire"))
+    {
+      b.style.fontSize="30px";
+    }
+
+    $(".secondaire").css("border","solid green 2px");
+
+
+    paragPrinci.innerHTML="nouveau content";
+
+    $("#paragPrinci").html("Content 2");
+
+    $(".secondaire").hide();
+    $(".secondaire").show();
+
+    paragPrinci.onclick = function(){};
+
+
+    $("#paragPrinci").click(function(){});
+
+    $.ajax("https://www.ajc-formation.fr/post/resultSearch.php", {
+    type: "POST",
+    data: {
+      texte: $("#searchText" ).val()
+    },
+    success: function (resp) {
+      $('#result-search').html(resp);
+      $('#result-search').show();
+    }
+  });
+
+
+
+  });
+</script>
