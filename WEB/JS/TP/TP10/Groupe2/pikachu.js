@@ -4,37 +4,63 @@
 //4) Modifier la position de la div pikachu en fonction de la direction (+-30px par deplacement) et changer l'image
 //5) Verifier que pikachu ne sort pas de la div grass
 
-var posX=0;
-var posY=0;
-var mouvement=30;
-var pokemon="pikachu";
-var direction="Down";
-imgPikachu.setAttribute("src","assets/img/"+pokemon+direction+".png");
+var posX = 0;
+var posY = 0;
+var mouvement = 30;
+var pokemon = "pikachu";
+var direction = "Down";
+imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + ".png");
 
+document.getElementById("inputName").onkeyup = checkBtnValidate;
 
-
-function deplacement(event)
-{
-  if(event.key=="ArrowDown" || event.key=="s" )
-  {
-    
+let btnStart = document.getElementById("btnStart");
+function launchGame() {
+  addTitle();
+  document.getElementById("formStart").style.setProperty("display", "none");
+  document.getElementById("grass").style.setProperty("display", "flex");
+  document.body.onkeydown = deplacement;
+}
+function addTitle() {
+  imgPikachu.setAttribute("title", document.getElementById("inputName").value);
+}
+btnStart.onclick = launchGame;
+function checkBtnValidate(event) {
+  if (document.getElementById("inputName").value == "") {
+    btnStart.disabled = true;
+  } else {
+    btnStart.disabled = false;
+    if (event.key == "Enter") {
+      launchGame();
+    }
   }
-  else if(event.key=="ArrowRight" || event.key=="d" )
-  {
-   
-  }
+}
 
-  else if(event.key=="ArrowLeft" || event.key=="q")
-  {
-    
+function deplacement(event) {
+  if (event.key == "ArrowDown" || event.key == "s") {
+    posY += mouvement;
+    direction = "Down";
+  } else if (event.key == "ArrowRight" || event.key == "d") {
+    posX += mouvement;
+    direction = "Right";
+  } else if (event.key == "ArrowLeft" || event.key == "q") {
+    posX -= mouvement;
+    direction = "Left";
+  } else if (event.key == "ArrowUp" || event.key == "z") {
+    posY -= mouvement;
+    direction = "Up";
   }
+  const grass = document.getElementById("grass");
+  const imgPikachu = document.getElementById("imgPikachu");
+  posX = Math.max(
+    0,
+    Math.min(grass.offsetWidth - imgPikachu.offsetWidth, posX),
+  );
 
-  else if(event.key=="ArrowUp" || event.key=="z")
-  {
-   
-  }
-  pikachu.style.top=posY+"px";
-  pikachu.style.left=posX+"px";
-  imgPikachu.setAttribute("src","assets/img/"+pokemon+direction+".png");
-
+  posY = Math.max(
+    0,
+    Math.min(grass.offsetHeight - imgPikachu.offsetWidth, posY),
+  );
+  pikachu.style.top = posY + "px";
+  pikachu.style.left = posX + "px";
+  imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + ".png");
 }
