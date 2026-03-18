@@ -26,7 +26,7 @@ var topMin = 0;
 //var bottomMax = document.getElementById("grass").clientHeight - document.getElementById("imgPikachu").clientHeight;
 var bottomMax = 600;
 console.log(bottomMax);
-
+var locked = false;
 document.getElementById("inputName").onkeyup=checkBtnValidate;
 
 function checkBtnValidate(event)
@@ -58,7 +58,7 @@ btnStart.onclick=demarrerJeu;
 
 function deplacement(event)
 {
-  if(event.key=="ArrowDown" || event.key=="s" )
+  if((event.key=="ArrowDown" || event.key=="s") && !locked )
   {
     if (posY + mouvement <= bottomMax)
     {
@@ -66,12 +66,13 @@ function deplacement(event)
     }
     else
     {
+      locked = true;
       posY -= mouvement;
-      setTimeout(function(){posY += mouvement;}, 700);
+      setTimeout(function(){posY += mouvement;pikachu.style.top=posY+"px";locked=false;}, 100);
     }
     direction = "Down";
   }
-  else if(event.key=="ArrowRight" || event.key=="d" )
+  else if((event.key=="ArrowRight" || event.key=="d") && !locked)
   {
     if (posX + mouvement <= rightMax)
     {
@@ -79,13 +80,14 @@ function deplacement(event)
     }
     else
     {
+      locked = true;
       posX -= mouvement;
-      setTimeout(function(){posX += mouvement;}, 700);
+      setTimeout(function(){posX += mouvement;pikachu.style.left=posX+"px";locked=false;}, 100);
     }
     direction = "Right";
   }
 
-  else if(event.key=="ArrowLeft" || event.key=="q")
+  else if((event.key=="ArrowLeft" || event.key=="q") && !locked)
   {
     if(posX - mouvement >= leftMin)
       {
@@ -93,21 +95,23 @@ function deplacement(event)
       }
       else
       {
+        locked = true;
         posX += mouvement;
-        setTimeout(function(){posX -= mouvement;}, 700);
+        setTimeout(function(){posX -= mouvement;pikachu.style.left=posX+"px";locked=false;}, 100);
       }
     direction = "Left";
   }
 
-  else if(event.key=="ArrowUp" || event.key=="z")
+  else if((event.key=="ArrowUp" || event.key=="z") && !locked)
   {
     if (posY - mouvement >= topMin){
       posY -= mouvement;
     }
     else
     {
+      locked = true;
       posY += mouvement;
-      setTimeout(function(){posY -= mouvement;}, 700);
+      setTimeout(function(){posY -= mouvement;pikachu.style.top=posY+"px";locked=false;}, 100);
     }
     direction = "Up";
   }
