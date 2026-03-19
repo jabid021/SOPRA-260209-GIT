@@ -14,7 +14,7 @@ var direction = "Down";
 var anim = "1";
 
 let dureeDefense = 5;
-let dureeCooldown = (dureeDefense+2)*1000;
+let dureeCooldown = (dureeDefense + 2) * 1000;
 let invincible = false;
 let lastDefense = 0;
 
@@ -37,7 +37,7 @@ function launchGame() {
   //play audio
   audioStart.play();
   //audioStart.onended = () => {
-    audioTheme.play();
+  audioTheme.play();
   //}
 
   addCoeurs();
@@ -45,6 +45,11 @@ function launchGame() {
   document.getElementById("formStart").style.setProperty("display", "none");
   document.getElementById("grass").style.setProperty("display", "flex");
   document.body.onkeydown = deplacement;
+
+  for (let i = 0; i < virusNumber; i++) {
+    createVirus();
+  }
+
 }
 
 function checkBtnValidate(event) {
@@ -103,16 +108,16 @@ function getDefense(event) {
    * Update the value of invincible to true when countdown start
    */
   let setDuree = dureeDefense;
-  
+
   if (lastDefense >= (Date.now() - dureeCooldown)) {
     console.log("No spam pls");
     return;
   }
   lastDefense = Date.now();
-  
+
   newTimer = setInterval(() => { countdown(setDuree--); }, 1000);
-  invincible=true;
-  console.log("I AM INVINCIBLE - "+ invincible)
+  invincible = true;
+  console.log("I AM INVINCIBLE - " + invincible)
 }
 
 function countdown(seconde) {
@@ -121,18 +126,17 @@ function countdown(seconde) {
    * Update the value of invincible to false when countdown reach zero
    */
   seconde--;
-  
-  timer.style.color="black";
-  cooldown.style.color="black";
+
+  timer.style.color = "black";
+  cooldown.style.color = "black";
   messageAffiche = `${seconde} secondes...`;
-  if(seconde<=0)
-    {
-      messageAffiche="timer"
-      timer.style.color = "red";
-      clearInterval(newTimer);
-      
-      invincible=false;
-      console.log("Oh shit... - "+ invincible)
-    }
+  if (seconde <= 0) {
+    messageAffiche = "timer"
+    timer.style.color = "red";
+    clearInterval(newTimer);
+
+    invincible = false;
+    console.log("Oh shit... - " + invincible)
+  }
   timer.innerHTML = messageAffiche;
 }

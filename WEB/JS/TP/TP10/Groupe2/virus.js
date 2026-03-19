@@ -2,7 +2,6 @@ const grass = document.getElementById("grass");
 const pika = document.getElementById("imgPikachu");
 const speed = 25;
 const virusNumber = 10;
-// TODO: spawn only on game start (maybe need a link with other js ?)
 // TODO: add trigger to tell about the collision
 
 const viruses = [];
@@ -126,10 +125,11 @@ function movement(virus) {
   }
   if (isColliding(virus.img, pika)) {
     console.log("Collision");
+    if(!invincible){
+      perdreCoeur();
+    }
+
     respawn(virus.img);
   }
 }
 
-for (let i = 0; i < virusNumber; i++) {
-  createVirus();
-}
