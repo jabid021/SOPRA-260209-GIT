@@ -57,15 +57,50 @@
       z-index: 9;
   }
 
-  #gameOver {
-      width: 717px;
-      height: 260px;
+  #gameOver, #winner{
       position: fixed;
       left: 50%;
       bottom: -500px;
       transform: translate(-50%, 50%);
       z-index: 100;
   }
+  @keyframes upGameOver {
+      0% {bottom: -500px;}
+      70% {bottom: 80%;}
+      80% {bottom: 66%;}
+      90% {bottom: 73%;}
+      100% {bottom: 70%;}
+  }
+
+  #score {
+    position:fixed;
+    left:50px;
+    top:50px;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+
+  #timer {
+    position:fixed;
+    text-align: center;
+    left:50px;
+    top:120px;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+  #timer em{font-size:16px}
 
   @keyframes wavesUp {
       from {
@@ -77,24 +112,3 @@
       }
   }
 
-  @keyframes upGameOver {
-      0% {
-          bottom: -500px;
-      }
-
-      70% {
-          bottom: 80%;
-      }
-
-      80% {
-          bottom: 66%;
-      }
-
-      90% {
-          bottom: 73%;
-      }
-
-      100% {
-          bottom: 70%;
-      }
-  }

@@ -1,7 +1,7 @@
 const grass = document.getElementById("grass");
 const pika = document.getElementById("imgPikachu");
-const speed = 25;
-const virusNumber = 10;
+const speed = 15;
+const virusNumber = 30;
 
 const viruses = [];
 
@@ -26,7 +26,7 @@ function createVirus() {
 function spawn(img) {
   const h = grass.offsetHeight;
   const w = grass.offsetWidth;
-  const half = grass.offsetHeight / 2;
+  const half = grass.offsetHeight / 4;
   let posX = Math.random() * (w - img.offsetWidth);
   // Spawn in bottom half
   let posY = (Math.random() * h) / 2 + half - img.offsetHeight;
