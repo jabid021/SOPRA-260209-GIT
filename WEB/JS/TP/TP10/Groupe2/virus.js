@@ -29,6 +29,7 @@ function spawn(img) {
   const w = grass.offsetWidth;
   const half = grass.offsetHeight / 2;
   let posX = Math.random() * (w - img.offsetWidth);
+  // Spawn in bottom half
   let posY = (Math.random() * h) / 2 + half - img.offsetHeight;
   console.log(`posX: ${posX} posY: ${posY}`);
   img.style.left = posX + "px";
@@ -41,6 +42,7 @@ function respawn(img) {
   console.log(`wi: ${w}, he: ${h}`);
   let posX;
   let posY;
+  // Do not respawn on Pika
   do {
     posX = Math.random() * (w - img.offsetWidth);
     posY = Math.random() * (h - img.offsetHeight);
@@ -111,13 +113,16 @@ function movement(virus) {
       break;
   }
 
-  posX = Math.max(0, Math.min(grass.offsetWidth - virus.img.offsetWidth, posX));
-  posY = Math.max(
-    0,
-    Math.min(grass.offsetHeight - virus.img.offsetHeight, posY),
-  );
+  const maxX = grass.offsetWidth - virus.img.offsetWidth;
+  const maxY = grass.offsetHeight - virus.img.offsetHeight;
+  posX = Math.max(0, Math.min(maxX, posX));
+  posY = Math.max(0, Math.min(maxY, posY));
   virus.img.style.left = posX + "px";
   virus.img.style.top = posY + "px";
+  if (posX == 0 || posY == 0 || posX == maxX || posY == maxY) {
+    virus.dir = Math.floor(Math.random() * 4);
+    setSpriteDirection(virus);
+  }
   if (isColliding(virus.img, pika)) {
     console.log("Collision");
     respawn(virus.img);
@@ -127,4 +132,3 @@ function movement(virus) {
 for (let i = 0; i < virusNumber; i++) {
   createVirus();
 }
-
