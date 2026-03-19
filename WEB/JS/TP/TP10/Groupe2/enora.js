@@ -1,11 +1,4 @@
-// A AJOUTER DANS LE HTML
-<script defer src="enora.js" charset="utf-8"></script>
-<div id="sachaLancement">
-  <div id="sacha"><img id="imgSacha" src="assets/img/sacha_1.PNG"></div>
-  <div id="ball" ><img id="imgBall" src="assets/img/pokeball.png"></div>
-</div>
-
-// A AJOUTER EN CSS
+// DEPLACER DANS LE CSS
 #sacha
 {
 position: absolute;
@@ -22,6 +15,30 @@ left: 320px; top: 450px;
 transition: left 0.6s, top 0.6s;
 z-index: 9;
 }
+#gameOver {
+width: 717px; height: 260px;
+position:fixed;
+left:50%;
+bottom:-500px;
+transform: translate(-50%, 50%);
+z-index:100;
+}
+@keyframes upGameOver {   
+0% {bottom: -500px;}
+70% {bottom: 80%;}
+80% {bottom: 66%;}
+90% {bottom: 73%;}
+100% { bottom: 70%;}}
+
+// DEPLACER DANS LE HTML AU SOUS L'AUTRE SCRIPT
+<script defer src="enora.js" charset="utf-8"></script>
+
+// DEPLCACER DANS LE HTML N'IMPORTE OU (genre à la toute fin)
+<div id="sachaLancement">
+  <div id="sacha"><img id="imgSacha" src="assets/img/sacha_1.PNG"></div>
+  <div id="ball" ><img id="imgBall" src="assets/img/pokeball.png"></div>
+  <img id="gameOver" src="assets/img/GAME_OVER.png">
+</div>
 
 function death(){
     const ball = document.getElementById("imgBall")
@@ -45,6 +62,7 @@ function death(){
                 ball.style.setProperty("top", (posPikachuEcran.y + imgPikachu.offsetHeight/2 - ball.offsetHeight/2) + "px")
                 ball.addEventListener("transitionend", () => {
                     imgPikachu.style.setProperty("display","none")
+                    gameOver.style.setProperty("animation","upGameOver 1s ease forwards")
                 }, { once: true });
             }
         }
