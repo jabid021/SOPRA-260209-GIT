@@ -1,4 +1,7 @@
 function death(){
+    audioTheme.pause();
+    audioDeath.play();
+
     const ball = document.getElementById("imgBall")
 
     sacha.style.setProperty("left", "0px")

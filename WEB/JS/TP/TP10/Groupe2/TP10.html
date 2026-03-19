@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <title>Pikachu</title>
@@ -13,24 +14,30 @@
 <script defer src="Camille.js" charset="utf-8"></script>
 <script defer src="virus.js" charset="utf-8"></script>
 
-<button onclick="death()"> mort </button>
 
-<div><h1 id="timer">timer</h1></div>
-<div><h1 id="cooldown">cooldown</h1></div>
+<div>
+  <h1 id="timer">timer</h1>
+</div>
+<div>
+  <h1 id="cooldown">cooldown</h1>
+</div>
 
-  <audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
-  <audio id="audioStart" src="assets/audio/start.mp3"></audio>
+<audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
+<audio id="audioStart" src="assets/audio/start.mp3"></audio>
+<audio id="audioDeath" src="assets/audio/death.mp3"></audio>
+<audio id="audioMad" src="assets/audio/pikachu-mad.mp3"></audio>
+<audio id="audioProtect" src="assets/audio/protect.mp3"></audio>
+
 <div id="formStart">
-    <input id="inputName" type="text" placeholder="pikachu"><input id="btnStart" disabled type="button" value="Start !">
+  <input id="inputName" type="text" placeholder="pikachu"><input id="btnStart" disabled type="button" value="Start !">
 </div>
 
 <div id="grass">
-    <div id="pikachu" ><img id="imgPikachu" src="assets/img/pikachuDown1.png"></div>
+  <div id="pikachu"><img id="imgPikachu" src="assets/img/pikachuDown1.png"></div>
 </div>
 
 <div id="sachaLancement">
   <div id="sacha"><img id="imgSacha" src="assets/img/sacha_1.PNG"></div>
-  <div id="ball" ><img id="imgBall" src="assets/img/pokeball.png"></div>
+  <div id="ball"><img id="imgBall" src="assets/img/pokeball.png"></div>
   <img id="gameOver" src="assets/img/GAME_OVER.png">
 </div>
-

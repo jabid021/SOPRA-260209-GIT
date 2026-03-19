@@ -28,6 +28,9 @@ function perdreCoeur() {
     const coeurs = document.querySelectorAll(".coeur");
     coeurs[actualcoeur].textContent = "🤍";
   }
+  if(actualcoeur==0){
+    death();
+  }
 }
 
 // Fonction à appeler à chaque déplacement pour que les coeurs suive Pikachu

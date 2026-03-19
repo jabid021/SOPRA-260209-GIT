@@ -26,6 +26,9 @@ const pikachu = document.getElementById("pikachu");
 
 const audioStart = document.getElementById("audioStart");
 const audioTheme = document.getElementById("themePokemon");
+const audioDeath = document.getElementById("audioDeath");
+const audioMad = document.getElementById("audioMad");
+const audioProtect = document.getElementById("audioProtect")
 
 
 imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");

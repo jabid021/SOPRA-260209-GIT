@@ -127,6 +127,9 @@ function movement(virus) {
     console.log("Collision");
     if(!invincible){
       perdreCoeur();
+      audioMad.play();
+    }else{
+      audioProtect.play();
     }
 
     respawn(virus.img);
