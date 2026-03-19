@@ -1,6 +1,7 @@
 package quest.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -40,7 +41,7 @@ public class FiliereController extends HttpServlet {
 	//insert + update
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//insert car pas d'id
-		if(request.getParameter("id")==null) 
+		if(request.getParameter("id")=="") 
 		{
 			ajouter(request,response);
 		}
@@ -61,22 +62,51 @@ public class FiliereController extends HttpServlet {
 		
 		request.setAttribute("filiere", filiere);
 		request.setAttribute("filieres", filieres);
-		
+		request.setAttribute("messageForm", "Formulaire d'update (Filiere "+filiere.getId()+" - "+filiere.getLibelle()+")");
 		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
 	}
 	
 	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
 	{
 		List<Filiere> filieres = Singleton.getInstance().getDaoFiliere().findAll();
-		
+		request.setAttribute("filiere", new Filiere());
 		request.setAttribute("filieres", filieres);
+		request.setAttribute("messageForm", "Formulaire d'ajout");
 		
 		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
 	}
 	
-	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
-	public void ajouter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
-	public void modifier(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
+	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		Singleton.getInstance().getDaoFiliere().deleteById(id);
+		response.sendRedirect("filiere");
+		
+	}
+	public void ajouter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		String libelle = request.getParameter("libelle");
+		LocalDate debut = LocalDate.parse(request.getParameter("debut"));
+		LocalDate fin = LocalDate.parse(request.getParameter("fin"));
+		
+		Filiere filiere = new Filiere(libelle,debut,fin);
+		Singleton.getInstance().getDaoFiliere().save(filiere);
+		
+		response.sendRedirect("filiere");
+	}
+
+	public void modifier(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		String libelle = request.getParameter("libelle");
+		LocalDate debut = LocalDate.parse(request.getParameter("debut"));
+		LocalDate fin = LocalDate.parse(request.getParameter("fin"));
+		
+		Filiere filiere = new Filiere(id,libelle,debut,fin);
+		Singleton.getInstance().getDaoFiliere().save(filiere);
+		
+		response.sendRedirect("filiere");
+	}
 	
 
 }
