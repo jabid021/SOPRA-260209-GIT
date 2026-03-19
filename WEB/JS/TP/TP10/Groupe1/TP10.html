@@ -1,11 +1,62 @@
 <style>
+  @import url("https://fonts.cdnfonts.com/css/pokemon-solid");
+
   body {
     background-image: url("assets/img/water.png");
-    background-size: 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
+  #welcome {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+
+  #textWelcome,
+  #pikachuDizzy,
+  #btnWelcome,
+  #btnStart,
+  #btnReplay,
+  #textCongratulations,
+  #pikachuHappy {
+    font-family: "Pokemon Solid", sans-serif;
+    color: rgb(255, 221, 108);
+    font-size: 20px;
+    text-shadow:
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      2px 2px 0 #000;
+    background-color: rgba(38, 33, 109, 0.2);
+    box-shadow: 0 5px 5px #000000ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    letter-spacing: 2px;
+  }
+
+  #btnWelcome, #btnStart, #btnReplay {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 10 auto;
+  }
+
+   #congratulations {
+    display: none;
+    grid-template-rows: auto auto;
+  }
+
+  #formStart {
+    display: none;
+    flex-wrap: nowrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
   #grass {
     display: none;
     position: relative;
@@ -18,23 +69,57 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 34px;
+    height: 34px;
+  }
+
+  #star {
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    width: 32px;
+  }
+
+  #pokeball {
+    position: absolute;
+    width: 36px;
+    height: 36px;
   }
 </style>
+
 <body>
   <script defer src="pikachu.js" charset="utf-8"></script>
   <audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
+  <audio id="themeVictory" src="assets/audio/victory_theme.mp3"></audio>
+  <div id="welcome">
+    <p id="textWelcome">
+      J’ai codé trop de JavaScript…<br />...J'ai oublié mon prénom, tu dois m'en
+      choisir un ! <br />...Et je confonds toutes mes directions ◀▲▼▶ , tu dois
+      m'aider à retrouver ma Pokéball !
+    </p>
+    <img id="pikachuDizzy" src="assets/img/pikachuDizzy.png" />
+    <input id="btnWelcome" type="button" value="C'est parti !" />
+  </div>
   <div id="formStart">
-    <input
-      id="inputName"
-      title="test2"
-      type="text"
-      placeholder="pikachu"
-    /><input id="btnStart" disabled type="button" value="Start !" />
+    <input id="inputName" type="text" placeholder="Comment je m'appelle...?" /><input id="btnStart" disabled type="button"
+      value="Start !" />
   </div>
 
   <div id="grass">
     <div id="pikachu">
-      <img id="imgPikachu" src="assets/img/pikachuDown.png" />
+      <img id="imgPikachu" src="assets/img/pikachuDown1.png" />
+      <img id="star" src="assets/img/star1.png" alt="star" />
     </div>
+    <img id="pokeball" src="assets/img/pokeball.png" alt="pokeball" />
+  </div>
+
+  <div id="congratulations">
+    <p id="textCongratulations">
+      Merci pour ton aide ! <br />
+      Grâce à toi je me sens beaucoup mieux ! <br />
+      Je suis prêt à repartir à l’aventure !
+    </p>
+    <img id="pikachuHappy" src="assets/img/pikachuHappy.png" />
+    <input id="btnReplay" type="button" value="Rejouer" />
   </div>
 </body>
