@@ -2,7 +2,6 @@ const grass = document.getElementById("grass");
 const pika = document.getElementById("imgPikachu");
 const speed = 25;
 const virusNumber = 10;
-// TODO: add trigger to tell about the collision
 
 const viruses = [];
 

@@ -6,7 +6,7 @@ function addCoeurs() {
   coeurContainer.id = "coeurContainer";
   coeurContainer.style.position = "absolute";
   coeurContainer.style.display = "flex";
-  coeurContainer.style.top = "-25px";
+  coeurContainer.style.top = "-40px";
   coeurContainer.style.left = "0px";
 
   for (let i = 0; i < maxcoeur; i++) {
@@ -36,7 +36,7 @@ function perdreCoeur() {
 // Fonction à appeler à chaque déplacement pour que les coeurs suive Pikachu
 function updateCoeursPosition() {
   if (coeurContainer) {
-    coeurContainer.style.top = "-25px"; // reste au-dessus
+    coeurContainer.style.top = "-40px"; // reste au-dessus
     coeurContainer.style.left = "0px";
   }
 }

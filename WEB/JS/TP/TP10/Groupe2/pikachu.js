@@ -39,9 +39,7 @@ btnStart.onclick = launchGame;
 function launchGame() {
   //play audio
   audioStart.play();
-  //audioStart.onended = () => {
   audioTheme.play();
-  //}
 
   addCoeurs();
   imgPikachu.setAttribute("title", inputName.value);
@@ -102,6 +100,15 @@ function deplacement(event) {
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
   imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
+  if(invincible){
+    //dysplay condom
+    condom.style.display= "flex";
+    condom.style.position = "absolute";
+    condom.style.width = 16 + pikachu.offsetWidth + "px";
+    condom.style.height = 16 + pikachu.offsetHeight + "px";
+    condom.style.top = posY - 8 + 20 - pikachu.offsetHeight + "px";
+    condom.style.left = posX - 8 + "px";
+  }
   updateCoeursPosition();
 }
 
