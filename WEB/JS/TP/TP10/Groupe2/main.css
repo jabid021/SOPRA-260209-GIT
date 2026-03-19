@@ -1,0 +1,100 @@
+  body {
+      background-image: url("assets/img/water.png");
+      background-repeat: no-repeat;
+      animation: wavesUp 5s ease-in-out infinite alternate;
+
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+  }
+
+  #grass {
+      display: none;
+      position: relative;
+      width: 700px;
+      height: 700px;
+      background-image: url("assets/img/Grass.png")
+  }
+
+  #pikachu {
+      position: absolute;
+      top: 0;
+      left: 0;
+  }
+
+  #timer {
+      position: absolute;
+      top: 0;
+      left: 1%;
+  }
+
+  #cooldown {
+      position: absolute;
+      top: 0;
+      right: 1%
+  }
+
+
+  #sacha {
+      position: absolute;
+      left: -400px;
+      transition: left 1s ease;
+      z-index: 10;
+  }
+
+  #imgBall {
+      display: none;
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      left: 320px;
+      top: 450px;
+      transition: left 0.6s, top 0.6s;
+      z-index: 9;
+  }
+
+  #gameOver {
+      width: 717px;
+      height: 260px;
+      position: fixed;
+      left: 50%;
+      bottom: -500px;
+      transform: translate(-50%, 50%);
+      z-index: 100;
+  }
+
+  @keyframes wavesUp {
+      from {
+          background-position: 0 0;
+      }
+
+      to {
+          background-position: 0 -130px;
+      }
+  }
+
+  @keyframes upGameOver {
+      0% {
+          bottom: -500px;
+      }
+
+      70% {
+          bottom: 80%;
+      }
+
+      80% {
+          bottom: 66%;
+      }
+
+      90% {
+          bottom: 73%;
+      }
+
+      100% {
+          bottom: 70%;
+      }
+  }

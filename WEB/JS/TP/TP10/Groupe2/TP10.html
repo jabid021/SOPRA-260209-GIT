@@ -1,54 +1,25 @@
-<style>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pikachu</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="main.css" />
+</head>
 
-  body
-  {
-    background-image : url("assets/img/water.png");
-    background-repeat: no-repeat;
-
-    background-size:cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    overflow:hidden;
-    margin:0;
-  }
-  #grass
-  {
-    display:none;
-    position:relative;
-    width:700px;
-    height:700px;
-    background-image : url("assets/img/Grass.png")
-  }
-
-  #pikachu
-  {
-    position:absolute;
-    top:0;
-    left:0;
-  }
-
-  #timer {
-      position: absolute;
-      top:0;
-      left:1%;
-  }
-
-  #cooldown {
-      position: absolute;
-      top: 0;
-      right:1%
-  }
-  
-</style>
 
 <script defer src="pikachu.js" charset="utf-8"></script>
+<script defer src="enora.js" charset="utf-8"></script>
+<script defer src="Camille.js" charset="utf-8"></script>
+<script defer src="virus.js" charset="utf-8"></script>
+
+<button onclick="death()"> mort </button>
 
 <div><h1 id="timer">timer</h1></div>
 <div><h1 id="cooldown">cooldown</h1></div>
 
   <audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
+  <audio id="audioStart" src="assets/audio/start.mp3"></audio>
 <div id="formStart">
     <input id="inputName" type="text" placeholder="pikachu"><input id="btnStart" disabled type="button" value="Start !">
 </div>
@@ -56,3 +27,10 @@
 <div id="grass">
     <div id="pikachu" ><img id="imgPikachu" src="assets/img/pikachuDown1.png"></div>
 </div>
+
+<div id="sachaLancement">
+  <div id="sacha"><img id="imgSacha" src="assets/img/sacha_1.PNG"></div>
+  <div id="ball" ><img id="imgBall" src="assets/img/pokeball.png"></div>
+  <img id="gameOver" src="assets/img/GAME_OVER.png">
+</div>
+

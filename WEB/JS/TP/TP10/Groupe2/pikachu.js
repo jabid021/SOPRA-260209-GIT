@@ -1,9 +1,11 @@
+
 //1) saisir le nom du pokemon et valider avec le bouton (le nom ne doit pas etre vide !)
 //2) Masquer la div formStart, Afficher la div grass, mettre le nom du pokemon en title sur la div pikachu
 //3) Gerer les deplacements, pouvoir bouger dans toutes les directions (haut,bas,gauche,droite) => les fleches et / ou zqsd
 //4) Modifier la position de la div pikachu en fonction de la direction (+-30px par deplacement) et changer l'image
 //5) Verifier que pikachu ne sort pas de la div grass
 
+//------------- Variables -------------
 var posX = 0;
 var posY = 0;
 var mouvement = 30;
@@ -16,12 +18,29 @@ let dureeCooldown = (dureeDefense+2)*1000;
 let invincible = false;
 let lastDefense = 0;
 
+const maxcoeur = 3;
+let actualcoeur = 3;
+let coeurContainer;
+
+const pikachu = document.getElementById("pikachu");
+
+const audioStart = document.getElementById("audioStart");
+const audioTheme = document.getElementById("themePokemon");
+
+
 imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
 
 inputName.onkeyup = checkBtnValidate;
 btnStart.onclick = launchGame;
 
 function launchGame() {
+  //play audio
+  audioStart.play();
+  //audioStart.onended = () => {
+    audioTheme.play();
+  //}
+
+  addCoeurs();
   imgPikachu.setAttribute("title", inputName.value);
   document.getElementById("formStart").style.setProperty("display", "none");
   document.getElementById("grass").style.setProperty("display", "flex");
@@ -75,6 +94,7 @@ function deplacement(event) {
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
   imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
+  updateCoeursPosition();
 }
 
 function getDefense(event) {

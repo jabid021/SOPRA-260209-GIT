@@ -6,6 +6,7 @@ const virusNumber = 10;
 // TODO: add trigger to tell about the collision
 
 const viruses = [];
+
 function createVirus() {
   const imgVirus = document.createElement("img");
   imgVirus.width = 48;

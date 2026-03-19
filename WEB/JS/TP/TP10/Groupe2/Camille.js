@@ -1,12 +1,4 @@
-// A AJOUTER DANS LE HTML
-<script defer src="Camille.js" charset="utf-8"></script>
 
-// A AJOUTER DANS pikachu.js
-const maxcoeur = 3;
-let actualcoeur = 3;
-let coeurContainer;
-
-const pikachu = document.getElementById("pikachu");
 
 // Fonction à appeler dans launchGame() du fichier pikachu.js
 function addCoeurs() {
