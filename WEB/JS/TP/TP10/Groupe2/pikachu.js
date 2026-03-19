@@ -28,7 +28,8 @@ const audioStart = document.getElementById("audioStart");
 const audioTheme = document.getElementById("themePokemon");
 const audioDeath = document.getElementById("audioDeath");
 const audioMad = document.getElementById("audioMad");
-const audioProtect = document.getElementById("audioProtect")
+const audioProtect = document.getElementById("audioProtect");
+const audioWin = document.getElementById("audioWin");
 
 let score = 0
 let tempsScore
@@ -54,7 +55,7 @@ function launchGame() {
     createVirus();
   }
 
-  tempsScore = setInterval(gagnerPoints,2000);
+  tempsScore = setInterval(gagnerPoints, 2000);
 }
 
 function checkBtnValidate(event) {
@@ -104,9 +105,9 @@ function deplacement(event) {
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
   imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
-  if(invincible){
+  if (invincible) {
     //dysplay condom
-    condom.style.display= "flex";
+    condom.style.display = "flex";
     condom.style.position = "absolute";
     condom.style.width = 16 + pikachu.offsetWidth + "px";
     condom.style.height = 16 + pikachu.offsetHeight + "px";
@@ -129,7 +130,7 @@ function getDefense(event) {
   }
   lastDefense = Date.now();
 
-  newTimer = setInterval(() => { countdown(setDuree--);}, 1000);
+  newTimer = setInterval(() => { countdown(setDuree--); }, 1000);
   invincible = true;
   console.log("I AM INVINCIBLE - " + invincible)
 }
@@ -153,7 +154,7 @@ function countdown(seconde) {
   timer.innerHTML = messageAffiche;
 }
 
-function gagnerPoints () {
+function gagnerPoints() {
   /*
   Se lance toutes les x secondes pour ajouter un point au score
   */
@@ -161,47 +162,52 @@ function gagnerPoints () {
   console.log("score ?")
   document.getElementById("score").textContent = `💠 ${score}/20 💠`
 
-  if(score === 20) {
-    winner.style.setProperty("animation","upGameOver 1s ease forwards")
+  if (score === 20) {
+    audioTheme.pause();
+    audioWin.play()
+    winner.style.setProperty("animation", "upGameOver 1s ease forwards")
     document.querySelectorAll(".virus").forEach(v => v.remove());
     clearInterval(tempsScore)
   }
 }
 
-function death(){
+function death() {
   /*
   En cas de mort
   Fonction moche à cause des délais d'attente entre les animations
   */
-    audioTheme.pause();
-    audioDeath.play();
+  audioTheme.pause();
+  audioDeath.play();
 
-    clearInterval(tempsScore)
-    const ball = document.getElementById("imgBall")
+  document.querySelectorAll(".virus").forEach(v => v.remove());
 
-    sacha.style.setProperty("left", "0px")
 
-    sachaLancement.addEventListener("transitionend", () => {
-        let i = 2;
-        const tempsEntreFrame = setInterval(() => {
-            console.log("src", "assets/img/sacha_" + i + ".PNG")
-            document.getElementById("imgSacha").setAttribute("src", "assets/img/sacha_" + i + ".PNG")
-            i++;
+  clearInterval(tempsScore)
+  const ball = document.getElementById("imgBall")
 
-            if(i===4) {
-                clearInterval(tempsEntreFrame)
-                document.body.onkeydown = null;
-                const posPikachuEcran = document.getElementById("imgPikachu").getBoundingClientRect()
-                ball.style.setProperty("display","flex")
-                ball.style.setProperty("transform"," rotate(360deg)")
-                ball.style.setProperty("left", (posPikachuEcran.x + imgPikachu.offsetWidth/2 - ball.offsetWidth/2) + "px")
-                ball.style.setProperty("top", (posPikachuEcran.y + imgPikachu.offsetHeight/2 - ball.offsetHeight/2) + "px")
-                ball.addEventListener("transitionend", () => {
-                    imgPikachu.style.setProperty("display","none")
-                    gameOver.style.setProperty("animation","upGameOver 1s ease forwards")
-                }, { once: true });
-            }
-        }
-        ,100)
-    }, { once: true });
+  sacha.style.setProperty("left", "0px")
+
+  sachaLancement.addEventListener("transitionend", () => {
+    let i = 2;
+    const tempsEntreFrame = setInterval(() => {
+      console.log("src", "assets/img/sacha_" + i + ".PNG")
+      document.getElementById("imgSacha").setAttribute("src", "assets/img/sacha_" + i + ".PNG")
+      i++;
+
+      if (i === 4) {
+        clearInterval(tempsEntreFrame)
+        document.body.onkeydown = null;
+        const posPikachuEcran = document.getElementById("imgPikachu").getBoundingClientRect()
+        ball.style.setProperty("display", "flex")
+        ball.style.setProperty("transform", " rotate(360deg)")
+        ball.style.setProperty("left", (posPikachuEcran.x + imgPikachu.offsetWidth / 2 - ball.offsetWidth / 2) + "px")
+        ball.style.setProperty("top", (posPikachuEcran.y + imgPikachu.offsetHeight / 2 - ball.offsetHeight / 2) + "px")
+        ball.addEventListener("transitionend", () => {
+          imgPikachu.style.setProperty("display", "none")
+          gameOver.style.setProperty("animation", "upGameOver 1s ease forwards")
+        }, { once: true });
+      }
+    }
+      , 100)
+  }, { once: true });
 }
