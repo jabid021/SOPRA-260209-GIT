@@ -172,14 +172,14 @@ function gagnerPoints() {
 }
 
 function death() {
+  dureeCooldown = 10000000000000; //avoid protection 
   /*
-  En cas de mort
+  En cas de mort 
   Fonction moche à cause des délais d'attente entre les animations
   */
   audioTheme.pause();
   audioDeath.play();
 
-  document.querySelectorAll(".virus").forEach(v => v.remove());
 
 
   clearInterval(tempsScore)
