@@ -16,6 +16,9 @@ var anim = "1";
 let dureeDefense = 5;
 let dureeCooldown = (dureeDefense + 2) * 1000;
 let invincible = false;
+let protectionCpt = 0;
+let condomDiv = null;
+
 let lastDefense = 0;
 
 const maxcoeur = 3;
@@ -105,14 +108,12 @@ function deplacement(event) {
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
   imgPikachu.setAttribute("src", "assets/img/" + pokemon + direction + anim + ".png");
-  if (invincible) {
-    //dysplay condom
-    condom.style.display = "flex";
-    condom.style.position = "absolute";
-    condom.style.width = 16 + pikachu.offsetWidth + "px";
-    condom.style.height = 16 + pikachu.offsetHeight + "px";
-    condom.style.top = posY - 8 + 20 - pikachu.offsetHeight + "px";
-    condom.style.left = posX - 8 + "px";
+  if (invincible && condomDiv) {
+    //follow position of pikachu
+    condomDiv.style.width = 16 + pikachu.offsetWidth + "px";
+    condomDiv.style.height = 16 + pikachu.offsetHeight + "px";
+    condomDiv.style.top = posY - 8 + 20 - pikachu.offsetHeight + "px";
+    condomDiv.style.left = posX - 8 + "px";
   }
   updateCoeursPosition();
 }
@@ -129,6 +130,17 @@ function getDefense(event) {
     return;
   }
   lastDefense = Date.now();
+  protectionCpt++;
+
+  //Create the condom div on the fly
+  condomDiv = document.createElement('div');
+  condomDiv.id = 'condom' + protectionCpt;
+  condomDiv.style.display = "flex";
+  condomDiv.style.position = "absolute";
+  let img = document.createElement('img');
+  img.src = 'assets/img/condom.png';
+  condomDiv.appendChild(img);
+  grass.appendChild(condomDiv);
 
   newTimer = setInterval(() => { countdown(setDuree--); }, 1000);
   invincible = true;
@@ -149,6 +161,7 @@ function countdown(seconde) {
     clearInterval(newTimer);
 
     invincible = false;
+    condomDiv = null;
     console.log("Oh shit... - " + invincible)
   }
   timer.innerHTML = messageAffiche;
