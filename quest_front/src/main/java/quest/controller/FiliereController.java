@@ -1,6 +1,7 @@
 package quest.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -52,17 +53,27 @@ public class FiliereController extends HttpServlet {
 	
 	/* On adapte pour chaque model a partir d'ici */
 	
-	
-	
 	public void chercherById(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException 
 	{
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		Filiere filiere = Singleton.getInstance().getDaoFiliere().findById(id);
+		List<Filiere> filieres = Singleton.getInstance().getDaoFiliere().findAll();
+		
 		request.setAttribute("filiere", filiere);
+		request.setAttribute("filieres", filieres);
+		
 		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
 	}
 	
-	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
+	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		List<Filiere> filieres = Singleton.getInstance().getDaoFiliere().findAll();
+		
+		request.setAttribute("filieres", filieres);
+		
+		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
+	}
+	
 	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
 	public void ajouter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
 	public void modifier(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}

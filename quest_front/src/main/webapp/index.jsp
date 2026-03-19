@@ -12,7 +12,7 @@
 	<h1>Page d'accueil du projet QUEST Front</h1>
 
 	<ul>
-		<li><a href="filiere?id=1">Gestion des filieres</a></li>
+		<li><a href="filiere">Gestion des filieres</a></li>
 		<li><a href="matiere">Gestion des matieres</a></li>
 	</ul>
 </body>
