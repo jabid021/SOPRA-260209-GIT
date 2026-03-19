@@ -12,6 +12,13 @@
       margin: 0;
   }
 
+  #formStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   #grass {
       display: none;
       position: relative;
