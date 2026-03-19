@@ -40,11 +40,11 @@ function checkBtnValidate(event) {
 }
 
 function animState() {
-  switch(anim){
-    case "1" :anim = "2";break;
-    case "2" :anim ="3";break;
-    case "3" :anim ="4";break;
-    case "4" :anim ="1";break;
+  switch (anim) {
+    case "1": anim = "2"; break;
+    case "2": anim = "3"; break;
+    case "3": anim = "4"; break;
+    case "4": anim = "1"; break;
   }
 }
 
@@ -70,7 +70,7 @@ function deplacement(event) {
   }
 
   posX = Math.max(0, Math.min(grass.offsetWidth - imgPikachu.offsetWidth, posX));
-  posY = Math.max(0, Math.min(grass.offsetHeight - imgPikachu.offsetWidth, posY));
+  posY = Math.max(0, Math.min(grass.offsetHeight - imgPikachu.offsetHeight, posY));
 
   pikachu.style.top = posY + "px";
   pikachu.style.left = posX + "px";
