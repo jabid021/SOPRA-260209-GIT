@@ -163,6 +163,7 @@ function gagnerPoints () {
 
   if(score === 20) {
     winner.style.setProperty("animation","upGameOver 1s ease forwards")
+    document.querySelectorAll(".virus").forEach(v => v.remove());
     clearInterval(tempsScore)
   }
 }

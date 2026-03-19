@@ -7,6 +7,7 @@ const viruses = [];
 
 function createVirus() {
   const imgVirus = document.createElement("img");
+  imgVirus.classList.add("virus");
   imgVirus.width = 48;
   imgVirus.height = 48;
   imgVirus.style.position = "absolute";
