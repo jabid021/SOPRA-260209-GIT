@@ -91,6 +91,7 @@
     font-size: 24px;
     font-family: fantasy;
     letter-spacing: 3px;
+    display: none;
   }
 
   #timer {
@@ -106,6 +107,7 @@
     font-size: 24px;
     font-family: fantasy;
     letter-spacing: 3px;
+    display: none;
   }
   #timer em{font-size:16px}
   

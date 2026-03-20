@@ -53,6 +53,9 @@ function launchGame() {
   document.getElementById("formStart").style.setProperty("display", "none");
   document.getElementById("grass").style.setProperty("display", "flex");
   document.body.onkeydown = deplacement;
+  
+  document.getElementById("timer").style.display= "revert"
+  document.getElementById("score").style.display= "revert"
 
   for (let i = 0; i < virusNumber; i++) {
     createVirus();
