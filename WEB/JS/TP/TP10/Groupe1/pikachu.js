@@ -141,7 +141,7 @@ function restartGame() {
   pikachuYmax = pikachuYmin + 36;
   pikachu.style.top = pikachuYmin + "px";
   pikachu.style.left = pikachuXmin + "px";
-  imgPikachu.setAttribute("src", "assets/img/" + pokemon + "Down.png");
+  imgPikachu.setAttribute("src", "assets/img/" + pokemon + "Down1.png");
 
   congratulations.style.setProperty("display", "none");
   grass.style.setProperty("display", "flex");
