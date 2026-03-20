@@ -1,0 +1,138 @@
+  body {
+      background-image: url("assets/img/water.png");
+      background-repeat: no-repeat;
+      animation: wavesUp 5s ease-in-out infinite alternate;
+
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+  }
+
+  #formStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #grass {
+      display: none;
+      position: relative;
+      width: 700px;
+      height: 700px;
+      background-image: url("assets/img/Grass.png")
+  }
+
+  #pikachu {
+      position: absolute;
+      top: 0;
+      left: 0;
+  }
+
+  #timer {
+      position: absolute;
+      top: 0;
+      left: 1%;
+  }
+
+  #cooldown {
+      position: absolute;
+      top: 0;
+      left: 1%
+  }
+
+
+  #sacha {
+      position: absolute;
+      left: -400px;
+      transition: left 1s ease;
+      z-index: 10;
+  }
+
+  #imgBall {
+      display: none;
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      left: 320px;
+      top: 450px;
+      transition: left 0.6s, top 0.6s;
+      z-index: 9;
+  }
+
+  #gameOver, #winner{
+      position: fixed;
+      left: 50%;
+      bottom: -500px;
+      transform: translate(-50%, 50%);
+      z-index: 100;
+  }
+  @keyframes upGameOver {
+      0% {bottom: -500px;}
+      70% {bottom: 80%;}
+      80% {bottom: 66%;}
+      90% {bottom: 73%;}
+      100% {bottom: 70%;}
+  }
+
+  #score {
+    position:fixed;
+    left:50px;
+    top:50px;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+
+  #timer {
+    position:fixed;
+    text-align: center;
+    left:50px;
+    top:120px;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+  #timer em{font-size:16px}
+  
+  #cooldown {
+    position:fixed;
+    text-align: left;
+    left:50px;
+    top:205px    ;
+    display: none;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+  #cooldown em{font-size:16px}
+
+  @keyframes wavesUp {
+      from {
+          background-position: 0 0;
+      }
+
+      to {
+          background-position: 0 -130px;
+      }
+  }
+
