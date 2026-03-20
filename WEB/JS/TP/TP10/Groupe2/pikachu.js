@@ -120,15 +120,27 @@ function deplacement(event) {
 
 function getDefense(event) {
   /**
-   * Configure the timer and cooldown of the protection of the pokemon
-   * Update the value of invincible to true when countdown start
-   */
+  * Configure the timer and cooldown of the protection of the pokemon
+  * Update the value of invincible to true when countdown start
+  */
   let setDuree = dureeDefense;
-
+ 
   if (lastDefense >= (Date.now() - dureeCooldown)) {
-    console.log("No spam pls");
+    if (lastDefense > (dureeDefense - Date.now()) && invincible==false) {
+      console.log("No spam pls");
+      messageCooldown = `Wait : ${(7000-(Date.now()-lastDefense))/1000}s`
+      
+      cooldown.style.color= "red"
+      cooldown.style.display= "revert"
+      cooldown.innerHTML = messageCooldown
+      return;
+    }
+    cooldown.innerHTML= "Protection dispo"
+    cooldown.style.color = "#365FAC";
+    console.log("Already protected");
     return;
   }
+  
   lastDefense = Date.now();
   protectionCpt++;
 
@@ -149,12 +161,14 @@ function getDefense(event) {
 
 function countdown(seconde) {
   /**
-   * Countdown and values displayed on screen
-   * Update the value of invincible to false when countdown reach zero
-   */
+  * Countdown and values displayed on screen
+  * Update the value of invincible to false when countdown reach zero
+  */
   seconde--;
 
   messageAffiche = `${seconde} secondes...`;
+  timer.style.color = "#365FAC";
+  cooldown.style.display= "none";
   if (seconde <= 0) {
     messageAffiche = "Protection finie"
     timer.style.color = "red";
@@ -221,6 +235,6 @@ function death() {
         }, { once: true });
       }
     }
-      , 100)
+    , 100)
   }, { once: true });
 }

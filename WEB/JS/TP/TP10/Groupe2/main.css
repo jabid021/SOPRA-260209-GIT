@@ -42,7 +42,7 @@
   #cooldown {
       position: absolute;
       top: 0;
-      right: 1%
+      left: 1%
   }
 
 
@@ -108,6 +108,23 @@
     letter-spacing: 3px;
   }
   #timer em{font-size:16px}
+  
+  #cooldown {
+    position:fixed;
+    text-align: left;
+    left:50px;
+    top:205px    ;
+    display: none;
+    background: rgb(255 204 1);
+    color:rgb(54 95 172);
+    border: 10px solid rgb(54 95 172);
+    padding : 8px;
+    border-radius : 16px;
+    font-size: 24px;
+    font-family: fantasy;
+    letter-spacing: 3px;
+  }
+  #cooldown em{font-size:16px}
 
   @keyframes wavesUp {
       from {
