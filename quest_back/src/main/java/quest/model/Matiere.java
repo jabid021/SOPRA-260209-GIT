@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name="matiere")
@@ -16,6 +17,9 @@ public class Matiere {
 	private Integer id;
 	@Column(length = 25,nullable = false)
 	private String libelle;
+	
+	@Version
+	private int version;
 	
 	public Matiere() {}
 	
@@ -38,6 +42,17 @@ public class Matiere {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
+	
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Matiere [id=" + id + ", libelle=" + libelle + "]";

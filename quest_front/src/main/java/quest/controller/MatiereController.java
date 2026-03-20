@@ -15,16 +15,14 @@ import quest.model.Matiere;
 @WebServlet("/matiere")
 public class MatiereController extends HttpServlet {
 
-	//findById + findAll + delete
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//findAll car pas d'id
 		if(request.getParameter("id")==null) 
 		{
 			chercherAll(request,response);
 		}
 		else 
-		{	//findById
+		{
 			if(request.getParameter("delete")==null) 
 			{
 				chercherById(request,response);
@@ -37,10 +35,9 @@ public class MatiereController extends HttpServlet {
 		
 	}
 
-	//insert + update
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//insert car pas d'id
-		if(request.getParameter("id")==null) 
+		if(request.getParameter("id")=="") 
 		{
 			ajouter(request,response);
 		}
@@ -51,7 +48,6 @@ public class MatiereController extends HttpServlet {
 	}
 	
 	
-	/* On adapte pour chaque model a partir d'ici */
 	
 	public void chercherById(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -61,22 +57,48 @@ public class MatiereController extends HttpServlet {
 		
 		request.setAttribute("matiere", matiere);
 		request.setAttribute("matieres", matieres);
-		
+		request.setAttribute("messageForm", "Formulaire d'update (Matiere "+matiere.getId()+" - "+matiere.getLibelle()+")");
 		this.getServletContext().getRequestDispatcher("/matieres.jsp").forward(request, response);
 	}
 	
 	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
 	{
 		List<Matiere> matieres = Singleton.getInstance().getDaoMatiere().findAll();
-		
+		request.setAttribute("matiere", new Matiere());
 		request.setAttribute("matieres", matieres);
+		request.setAttribute("messageForm", "Formulaire d'ajout");
 		
 		this.getServletContext().getRequestDispatcher("/matieres.jsp").forward(request, response);
 	}
 	
-	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
-	public void ajouter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
-	public void modifier(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {}
+	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		Singleton.getInstance().getDaoMatiere().deleteById(id);
+		response.sendRedirect("matiere");
+		
+	}
+	public void ajouter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		String libelle = request.getParameter("libelle");
+		
+		Matiere matiere = new Matiere(libelle);
+		Singleton.getInstance().getDaoMatiere().save(matiere);
+		
+		response.sendRedirect("matiere");
+	}
+
+	public void modifier(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
+	{
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		String libelle = request.getParameter("libelle");
+		Integer version = Integer.parseInt(request.getParameter("version"));
+		Matiere matiere = new Matiere(id,libelle);
+		matiere.setVersion(version);
+		Singleton.getInstance().getDaoMatiere().save(matiere);
+		
+		response.sendRedirect("matiere");
+	}
 	
 
 }

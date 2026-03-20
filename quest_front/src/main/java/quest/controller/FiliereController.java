@@ -2,6 +2,7 @@ package quest.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -62,7 +63,6 @@ public class FiliereController extends HttpServlet {
 		
 		request.setAttribute("filiere", filiere);
 		request.setAttribute("filieres", filieres);
-		request.setAttribute("messageForm", "Formulaire d'update (Filiere "+filiere.getId()+" - "+filiere.getLibelle()+")");
 		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
 	}
 	
@@ -70,8 +70,7 @@ public class FiliereController extends HttpServlet {
 	{
 		List<Filiere> filieres = Singleton.getInstance().getDaoFiliere().findAll();
 		request.setAttribute("filiere", new Filiere());
-		request.setAttribute("filieres", filieres);
-		request.setAttribute("messageForm", "Formulaire d'ajout");
+		request.setAttribute("filieres", new ArrayList());
 		
 		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
 	}
