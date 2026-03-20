@@ -15,7 +15,7 @@
 	<input type="text" name="login" placeholder="Saisir votre login">
 	<input type="password" name="password" placeholder="Saisir votre password">
 	<input type="submit" value="Se connecter">
-	<c:if test="${error!=null}">
+	<c:if test="${param.error==''}">
 		<div class="error" style="color:red">Identifiants Invalide</div>
 	</c:if>
 </form>

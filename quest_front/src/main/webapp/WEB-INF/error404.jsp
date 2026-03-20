@@ -19,6 +19,6 @@
 	<h1>ERROR 404, cette page n'existe pas....</h1>
 	
 
-	<a href="index.jsp">Retour à l'accueil</a>
+	<a href="home">Retour à l'accueil</a>
 </body>
 </html>

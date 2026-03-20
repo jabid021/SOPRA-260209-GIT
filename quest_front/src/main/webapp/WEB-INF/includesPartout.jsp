@@ -10,7 +10,7 @@
  
 
  
- <a href="home.jsp"><img src="assets/image/AJC_Ingenierie.png"></a>
+ <a href="home"><img src="assets/image/AJC_Ingenierie.png"></a>
  
  
  <c:if test="${connected!=null}">
