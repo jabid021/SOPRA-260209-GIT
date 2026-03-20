@@ -2,7 +2,6 @@ package quest.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -63,16 +62,16 @@ public class FiliereController extends HttpServlet {
 		
 		request.setAttribute("filiere", filiere);
 		request.setAttribute("filieres", filieres);
-		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/filieres.jsp").forward(request, response);
 	}
 	
 	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
 	{
 		List<Filiere> filieres = Singleton.getInstance().getDaoFiliere().findAll();
 		request.setAttribute("filiere", new Filiere());
-		request.setAttribute("filieres", new ArrayList());
+		request.setAttribute("filieres", filieres);
 		
-		this.getServletContext().getRequestDispatcher("/filieres.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/filieres.jsp").forward(request, response);
 	}
 	
 	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  

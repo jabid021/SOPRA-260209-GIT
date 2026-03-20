@@ -57,8 +57,7 @@ public class MatiereController extends HttpServlet {
 		
 		request.setAttribute("matiere", matiere);
 		request.setAttribute("matieres", matieres);
-		request.setAttribute("messageForm", "Formulaire d'update (Matiere "+matiere.getId()+" - "+matiere.getLibelle()+")");
-		this.getServletContext().getRequestDispatcher("/matieres.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/matieres.jsp").forward(request, response);
 	}
 	
 	public void chercherAll(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  
@@ -66,9 +65,8 @@ public class MatiereController extends HttpServlet {
 		List<Matiere> matieres = Singleton.getInstance().getDaoMatiere().findAll();
 		request.setAttribute("matiere", new Matiere());
 		request.setAttribute("matieres", matieres);
-		request.setAttribute("messageForm", "Formulaire d'ajout");
 		
-		this.getServletContext().getRequestDispatcher("/matieres.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/matieres.jsp").forward(request, response);
 	}
 	
 	public void supprimer(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  

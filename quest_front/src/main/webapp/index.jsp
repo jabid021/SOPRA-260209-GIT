@@ -14,6 +14,9 @@
 	<ul>
 		<li><a href="filiere">Gestion des filieres</a></li>
 		<li><a href="matiere">Gestion des matieres</a></li>
+		<li><a href="stagiaire">Gestion des stagiaires</a></li>
+		<li><a href="formateur">Gestion des formateurs</a></li>
+		<li><a href="ordinateur">Gestion des ordinateurs</a></li>
 	</ul>
 </body>
 </html>

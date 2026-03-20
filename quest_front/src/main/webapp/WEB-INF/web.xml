@@ -5,4 +5,22 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/WEB-INF/error404.jsp</location>
+  </error-page>
+  
+  
+  
+  <jsp-config>
+  	<jsp-property-group>
+  	<url-pattern>*.jsp</url-pattern>
+  	<include-prelude>/WEB-INF/includesPartout.jsp</include-prelude>
+  	<!-- <include-coda>/footer.jsp</include-coda>   inclut en bas de chaque jsp une page footer.jsp-->
+  	</jsp-property-group>
+  </jsp-config>
+ 
 </web-app>

@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="core" uri="jakarta.tags.core"%>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="style.css">
 <title>Gestion des filieres</title>
 </head>
 <body>
@@ -28,29 +26,29 @@
 			<th>Date Fin</th>
 			<th>Actions</th>
 		</tr>
-		<core:if test="${filieres.isEmpty()}"><tr><td align="center" colspan="5">AUCUNE FILIERE</td></tr></core:if>
+		<c:if test="${filieres.isEmpty()}"><tr><td align="center" colspan="5">AUCUNE FILIERE</td></tr></c:if>
 		
-		<core:forEach items="${filieres}" var="f">
+		<c:forEach items="${filieres}" var="filiere">
 			<tr>
-				<td>${f.id}</td>
-				<td>${f.libelle}</td>
-				<td>${f.debut}</td>
-				<td>${f.fin}</td>
+				<td>${filiere.id}</td>
+				<td>${filiere.libelle}</td>
+				<td>${filiere.debut}</td>
+				<td>${filiere.fin}</td>
 				<td>
-					<a class="btn btn-warning" href="filiere?id=${f.id}">Modifier</a>
-					<a class="btn btn-danger" href="filiere?id=${f.id}&delete">Supprimer</a>
+					<a class="btn btn-warning" href="filiere?id=${filiere.id}">Modifier</a>
+					<a class="btn btn-danger" href="filiere?id=${filiere.id}&delete">Supprimer</a>
 				</td>
 			</tr>
-		</core:forEach>
+		</c:forEach>
 		
 	</table>
-	<core:if test="${filiere.id==null}">
+	<c:if test="${filiere.id==null}">
 		<div class="message-form">Formulaire d'ajout</div>
-	</core:if>
+	</c:if>
 	
-	<core:if test="${filiere.id!=null}">
+	<c:if test="${filiere.id!=null}">
 		<div class="message-form">Formulaire d'update (Filiere ${filiere.id} - ${filiere.libelle})</div>
-	</core:if>
+	</c:if>
 	
 	<form action="filiere" method="post" class="form-clean">
 	  <input type="hidden" name="id" value="${filiere.id}">
