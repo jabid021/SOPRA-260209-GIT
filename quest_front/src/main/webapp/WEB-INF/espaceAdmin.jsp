@@ -8,6 +8,7 @@
 </head>
 <body>
 
+	<p>Welcome ${connected.login}
 
 	<h1>Page d'accueil du projet QUEST Front</h1>
 

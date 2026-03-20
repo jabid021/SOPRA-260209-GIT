@@ -54,4 +54,15 @@ public class DAOMatiere implements IDAOMatiere{
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	@Override
+	public List<Matiere> findByLibelleContaining(String recherche) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Matiere> matieres = em.createQuery("Select m from Matiere m where m.libelle like :recherche")
+				.setParameter("recherche", "%"+recherche+"%")
+				.getResultList();
+		em.close();
+		return matieres;
+	}
+
 }

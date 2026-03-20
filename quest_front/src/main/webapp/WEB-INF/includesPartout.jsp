@@ -8,3 +8,11 @@
 
 <link rel="stylesheet" href="assets/style.css">
  
+
+ 
+ <a href="home.jsp"><img src="assets/image/AJC_Ingenierie.png"></a>
+ 
+ 
+ <c:if test="${connected!=null}">
+ 	<a class="btn" href="login?logout">Se deconnecter</a>
+ </c:if>

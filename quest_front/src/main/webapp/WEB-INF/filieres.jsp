@@ -69,7 +69,7 @@
 	</form>
 	
 	<br><br>
-	<a class="btn btn-info" href="index.jsp">Retour</a>
+	<a class="btn btn-info" href="home.jsp">Retour</a>
 </content>
 </body>
 </html>

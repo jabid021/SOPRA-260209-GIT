@@ -35,8 +35,8 @@
 				<td>${stagiaire.nom}</td>
 				<td>${stagiaire.prenom}</td>
 				<td>${stagiaire.civilite}</td>
-				<td>${stagiaire.adresse.numero} ${stagiaire.adresse.voie}, ${stagiaire.adresse.ville} ${stagiaire.adresse.cp}</td>
 				<td>${stagiaire.email}</td>
+				<td>${stagiaire.adresse.numero} ${stagiaire.adresse.voie}, ${stagiaire.adresse.ville} ${stagiaire.adresse.cp}</td>
 				<td>${stagiaire.filiere.id} - ${stagiaire.filiere.libelle}</td>
 				<td>
 					<a class="btn btn-warning" href="stagiaire?id=${stagiaire.id}">Modifier</a>
@@ -116,7 +116,7 @@
 	</form>
 	
 	<br><br>
-	<a class="btn btn-info" href="index.jsp">Retour</a>
+	<a class="btn btn-info" href="home.jsp">Retour</a>
 </content>
 </body>
 </html>

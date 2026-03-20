@@ -64,6 +64,14 @@ public class DAOPersonne implements IDAOPersonne{
 		em.close();
 		return personnes;
 	}
+	
+	@Override
+	public List<Stagiaire> findAllStagiaireDisponibles() {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		List<Stagiaire> personnes = em.createQuery("SELECT s from Stagiaire s where s.ordinateur is null").getResultList();
+		em.close();
+		return personnes;
+	}
 
 	@Override
 	public List<Formateur> findAllFormateur() {
@@ -71,5 +79,20 @@ public class DAOPersonne implements IDAOPersonne{
 		List<Formateur> personnes = em.createQuery("from Formateur").getResultList();
 		em.close();
 		return personnes;
+	}
+	
+	@Override
+	public Personne findByLoginAndPassword(String login,String password) {
+		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+		Personne personne = null;
+		try {
+		personne = em.createQuery("SELECT p from Personne p where p.login=:login and p.password=:password",Personne.class)
+				.setParameter("login", login)
+				.setParameter("password", password)
+				.getSingleResult();
+		}
+		catch(Exception e) {e.printStackTrace();}
+		em.close();
+		return personne;
 	}
 }
