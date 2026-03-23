@@ -1,5 +1,8 @@
 package demo.composant;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Audio implements IConfig {
 
 	private int volume;
@@ -8,6 +11,7 @@ public class Audio implements IConfig {
 	public Audio() 
 	{
 		this.volume=100;
+		this.typeSortie="Stereo";
 	}
 
 	public int getVolume() {

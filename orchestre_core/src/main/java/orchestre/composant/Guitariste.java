@@ -5,7 +5,10 @@ public class Guitariste implements IMusicien {
 	private String prenom;
 	private IInstrument instrument;
 	
-	public Guitariste() {}
+	public Guitariste() 
+	{
+		this.prenom="Jordan";
+	}
 	
 	public String getPrenom() {
 		return prenom;

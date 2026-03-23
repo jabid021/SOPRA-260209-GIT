@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
+<!--  
 	<bean id="audio" class="demo.composant.Audio">
 		<property name="typeSortie" value="Stereo"/>
 		<property name="volume" value="50"/>
@@ -22,7 +22,7 @@
 	<bean id="beanGraph" class="demo.composant.Graphisme"/>
 
 
-	 <bean id="game1" class="demo.composant.Game">
+	 <bean id="game" class="demo.composant.Game">
 	 	<property name="audio" ref="audio"/>
 	 	<property name="configGraphisme" ref="beanGraph"/>
 	 </bean>
@@ -30,7 +30,8 @@
 	 <bean id="game2" class="demo.composant.Game">
 	 	<property name="audio" ref="audio"/>
 	 </bean>
+-->
 
-
-
+<context:component-scan base-package="demo.composant"/>
+	
 </beans>

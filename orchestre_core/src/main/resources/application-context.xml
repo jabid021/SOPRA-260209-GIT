@@ -15,9 +15,31 @@
 
 
 
-<!-- VOS BEANS ICI ! -->
+<!-- VOS BEANS ICI ! 
+
+<bean id="piano" class="orchestre.composant.Piano"/>
+<bean id="guitare" class="orchestre.composant.Guitare"/>
+<bean id="flute" class="orchestre.composant.Flute"/>
 
 
+<bean id="pianiste" class="orchestre.composant.Pianiste">
+	<property name="instrument" ref="piano"/>
+</bean>
+
+<bean id="guitariste" class="orchestre.composant.Guitariste">
+	<property name="instrument" ref="guitare"/>
+	<property name="prenom" value="Jordan"/>
+</bean>
+
+<bean id="flutiste" class="orchestre.composant.Flutiste">
+	<property name="flute">
+		<bean class="orchestre.composant.Flute"/>
+	</property>
+</bean>
+
+-->
+
+<!-- component-scan -->
 
 
 

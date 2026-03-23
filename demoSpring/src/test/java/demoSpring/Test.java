@@ -17,13 +17,13 @@ public class Test {
 	
 		
 		Audio audio =  ctx.getBean(Audio.class);
-		IConfig graphisme = (IConfig) ctx.getBean("beanGraph");
-		Game game = ctx.getBean("game1",Game.class);
-		Game game2 = ctx.getBean("game2",Game.class);
+		IConfig graphisme = (IConfig) ctx.getBean("graphisme");
+		Game game = ctx.getBean("game",Game.class);
+		//Game game2 = ctx.getBean("game2",Game.class);
 		System.out.println(audio);
 		System.out.println(graphisme);
 		System.out.println(game);
-		System.out.println(game2);
+		//System.out.println(game2);
 		//Game game;
 		
 		//System.out.println(game);
