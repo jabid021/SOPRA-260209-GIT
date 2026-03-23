@@ -1,14 +1,17 @@
 package orchestre.composant;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Pianiste implements IMusicien {
 
 	private String prenom;
+	
+	@Autowired
 	private Piano instrument;
 	
-	public Pianiste() 
-	{
-		this.prenom="Eric";
-	}
+	public Pianiste() {}
 	
 	public String getPrenom() {
 		return prenom;

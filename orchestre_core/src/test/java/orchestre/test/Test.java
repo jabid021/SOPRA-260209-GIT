@@ -10,11 +10,17 @@ import orchestre.composant.Pianiste;
 public class Test {	
 	
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:application-context.xml");
 		
+		
+		//ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:application-context.xml");
+		
+		//Changer la config principale
+		//... ctx...
+		
+	
 		IMusicien pianiste = ctx.getBean(Pianiste.class);
 		
-		IMusicien olivier = (Flutiste) ctx.getBean("flutiste");
+		IMusicien olivier = (Flutiste) ctx.getBean("musicien");
 		
 		IMusicien guitariste = ctx.getBean(Guitariste.class);
 		

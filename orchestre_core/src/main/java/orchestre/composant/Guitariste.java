@@ -1,14 +1,19 @@
 package orchestre.composant;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Guitariste implements IMusicien {
 
 	private String prenom;
+	
+	@Autowired
+	@Qualifier("guitare")
 	private IInstrument instrument;
 	
-	public Guitariste() 
-	{
-		this.prenom="Jordan";
-	}
+	public Guitariste() {}
 	
 	public String getPrenom() {
 		return prenom;
@@ -35,7 +40,7 @@ public class Guitariste implements IMusicien {
 
 	@Override
 	public String toString() {
-		return "Guitariste [prenom=" + prenom + ", instrument=" + instrument + "]";
+		return "Guitariste [prenom=" + prenom +"]";
 	}
 	
 	

@@ -9,10 +9,7 @@ public class Audio implements IConfig {
 	private String typeSortie;
 	
 	public Audio() 
-	{
-		this.volume=100;
-		this.typeSortie="Stereo";
-	}
+	{}
 
 	public int getVolume() {
 		return volume;

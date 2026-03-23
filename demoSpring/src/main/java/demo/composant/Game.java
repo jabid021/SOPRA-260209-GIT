@@ -26,6 +26,7 @@ public class Game {
 		return audio;
 	}
 	public void setAudio(IConfig audio) {
+		System.out.println("ALLOOOOO");
 		this.audio = audio;
 	}
 	public IConfig getConfigGraphisme() {

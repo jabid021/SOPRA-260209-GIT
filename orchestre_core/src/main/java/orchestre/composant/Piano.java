@@ -1,5 +1,8 @@
 package orchestre.composant;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Piano implements IInstrument {
 
 	@Override

@@ -7,8 +7,7 @@ public class Graphisme implements IConfig{
 
 	private boolean fenetre;
 
-	public Graphisme() {
-	}
+	public Graphisme() {}
 	
 	public boolean isFenetre() {
 		return fenetre;
