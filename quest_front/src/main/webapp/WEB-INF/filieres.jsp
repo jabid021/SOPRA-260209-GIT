@@ -10,7 +10,7 @@
 <title>Gestion des filieres</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/securityAdmin.jsp" %>
 <!--
 <c:forEach begin="1" end="10" step="1" var="i">
 	<h2>${i}</h2>

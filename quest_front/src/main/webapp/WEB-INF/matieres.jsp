@@ -8,29 +8,36 @@
 <meta charset="UTF-8">
 
 <title>Gestion des matieres</title>
+<script
+  src="https://code.jquery.com/jquery-4.0.0.js"
+  integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+  crossorigin="anonymous"></script>
+
 </head>
 <body>
-
+<%@ include file="/WEB-INF/securityAdmin.jsp" %>
 <content>
+<form class="form-clean"> <label for="filtrerLibelle">Filtrer</label><input id="filtrerLibelle" type="text" placeholder="Filtre matiere"></form>
 	<table>
 		<tr>
 			<th>Id</th>
 			<th>Libelle</th>
 			<th>Actions</th>
 		</tr>
-		<c:if test="${matieres.isEmpty()}"><tr><td align="center" colspan="3">AUCUNE MATIERE</td></tr></c:if>
-		<c:forEach items="${matieres}" var="matiere">
-		
-			<tr>
-				<td>${matiere.id}</td>
-				<td>${matiere.libelle}</td>
-				<td>
-					<a class="btn btn-warning" href="matiere?id=${matiere.id}">Modifier</a>
-					<a class="btn btn-danger" href="matiere?id=${matiere.id}&delete">Supprimer</a>
-				</td>
-			</tr>
-		</c:forEach>
-		
+		<tbody id="tbodyMatiere">
+			<c:if test="${matieres.isEmpty()}"><tr><td align="center" colspan="3">AUCUNE MATIERE</td></tr></c:if>
+			<c:forEach items="${matieres}" var="matiere">
+			
+				<tr>
+					<td>${matiere.id}</td>
+					<td>${matiere.libelle}</td>
+					<td>
+						<a class="btn btn-warning" href="matiere?id=${matiere.id}">Modifier</a>
+						<a class="btn btn-danger" href="matiere?id=${matiere.id}&delete">Supprimer</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 
 	<c:choose>
@@ -55,3 +62,27 @@
 </content>
 </body>
 </html>
+
+<script>
+
+filtrerLibelle.oninput = filtreAjax;
+
+
+function filtreAjax()
+{
+
+	  $.ajax("matiere", {
+		    type: "GET",
+		    data: {
+		      recherche: $("#filtrerLibelle" ).val()
+		    },
+		    success: function (resp) {
+		    	$("#tbodyMatiere").html(resp);
+		    	//tbodyMatiere.innerHTML=resp;
+		    }
+		  });
+
+}
+
+
+</script>

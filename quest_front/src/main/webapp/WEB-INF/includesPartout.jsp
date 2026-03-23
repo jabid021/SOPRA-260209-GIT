@@ -14,5 +14,5 @@
  
  
  <c:if test="${connected!=null}">
- 	<a class="btn" href="login?logout">Se deconnecter</a>
+ 	<a class="btn btn-success btn-deconnecter" href="login?logout">Se deconnecter</a>
  </c:if>

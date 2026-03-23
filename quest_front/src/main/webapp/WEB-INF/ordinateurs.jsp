@@ -10,7 +10,7 @@
 <title>Gestion des ordinateurs</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/securityAdmin.jsp" %>
 <content>
 	<table>
 		<tr>

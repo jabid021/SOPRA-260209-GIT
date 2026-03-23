@@ -10,7 +10,7 @@
 <title>Gestion des stagiaires</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/securityAdmin.jsp" %>
 <content>
 	<table>
 		<tr>
@@ -70,13 +70,23 @@
 	  <input required="required" id="prenom" type="text" name="prenom" placeholder="Saisir le prenom" value="${stagiaire.prenom}">
 	  
 	  
-	  	Civilite
-	 	<c:forEach items="${civilites}" var="civ">
-	 	 <c:choose>
-	 	 	<c:when test="${stagiaire.civilite==civ}"><input type="radio" checked id="civilite-${civ}" name="civilite" value="${civ}"> <label for="civilite-${civ}">${civ}</label></c:when>
-	 		<c:otherwise><input type="radio" id="civilite-${civ}" name="civilite" value="${civ}"> <label for="civilite-${civ}">${civ}</label></c:otherwise>
-	 	 </c:choose>
-	 	</c:forEach>
+	  	<label>Civilite</label>
+		<div class="choice-group">
+			<c:forEach items="${civilites}" var="civ">
+				<div class="choice-item">
+					<c:choose>
+						<c:when test="${stagiaire.civilite==civ}">
+							<input type="radio" checked id="civilite-${civ}" name="civilite" value="${civ}">
+							<label for="civilite-${civ}">${civ}</label>
+						</c:when>
+						<c:otherwise>
+							<input type="radio" id="civilite-${civ}" name="civilite" value="${civ}">
+							<label for="civilite-${civ}">${civ}</label>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</c:forEach>
+		</div>
 	  
 	   <label for="email">Email</label>
 	  <input required="required" id="email" type="email" name="email" placeholder="Saisir l'email" value="${stagiaire.email}">

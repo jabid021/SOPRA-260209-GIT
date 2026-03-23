@@ -19,7 +19,28 @@ public class MatiereController extends HttpServlet {
 		
 		if(request.getParameter("id")==null) 
 		{
-			chercherAll(request,response);
+			if(request.getParameter("recherche")==null) 
+			{
+				chercherAll(request,response);
+			}
+			else 
+			{
+				String recherche = request.getParameter("recherche");
+				List<Matiere> matieresRecherche = Singleton.getInstance().getDaoMatiere().findByLibelleContaining(recherche);
+				
+				if(matieresRecherche.isEmpty()) 
+				{
+					response.getWriter().println("<tr><td align='center' colspan='3'>AUCUNE MATIERE</td></tr>");
+				}
+				else 
+				{
+					for(Matiere m : matieresRecherche) 
+					{
+						response.getWriter().println("<tr><td>"+m.getId()+"</td><td>"+m.getLibelle()+"</td><td><a class='btn btn-warning' href='matiere?id="+m.getId()+"'>Modifier</a><a class='btn btn-danger' href='matiere?id="+m.getId()+"&delete'>Supprimer</a></td></tr>");
+					}
+				}
+			}
+			
 		}
 		else 
 		{

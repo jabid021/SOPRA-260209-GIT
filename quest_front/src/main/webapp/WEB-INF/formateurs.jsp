@@ -10,7 +10,7 @@
 <title>Gestion des formateurs</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/securityAdmin.jsp" %>
 <content>
 	<table>
 		<tr>
@@ -58,27 +58,39 @@
 	
 	  <label for="password">Password</label>
 	  <input required="required" id="password" type="password" name="password" placeholder="Saisir le password" value="${formateur.password}">
-	  
-	   <label for="nom">Nom</label>
+	
+	  <label for="nom">Nom</label>
 	  <input required="required" id="nom" type="text" name="nom" placeholder="Saisir le nom" value="${formateur.nom}">
-	  
-	   <label for="prenom">Prenom</label>
+	
+	  <label for="prenom">Prenom</label>
 	  <input required="required" id="prenom" type="text" name="prenom" placeholder="Saisir le prenom" value="${formateur.prenom}">
-	  
-	  
-	  	Civilite
-	 	<c:forEach items="${civilites}" var="civ">
-	 	 <c:choose>
-	 	 	<c:when test="${formateur.civilite==civ}"><input type="radio" checked id="civilite-${civ}" name="civilite" value="${civ}"> <label for="civilite-${civ}">${civ}</label></c:when>
-	 		<c:otherwise><input type="radio" id="civilite-${civ}" name="civilite" value="${civ}"> <label for="civilite-${civ}">${civ}</label></c:otherwise>
-	 	 </c:choose>
-	 	</c:forEach>
-	  
-	   <label for="admin">Admin ?</label>
-	   
-	  <input id="admin" type="checkbox" name="admin" ${(formateur.admin) ? "checked":""}>Est Admin
-	  
-	 
+	
+	  <label>Civilite</label>
+	  <div class="choice-group">
+	    <c:forEach items="${civilites}" var="civ">
+	      <div class="choice-item">
+	        <c:choose>
+	          <c:when test="${formateur.civilite==civ}">
+	            <input type="radio" checked id="civilite-${civ}" name="civilite" value="${civ}">
+	            <label for="civilite-${civ}">${civ}</label>
+	          </c:when>
+	          <c:otherwise>
+	            <input type="radio" id="civilite-${civ}" name="civilite" value="${civ}">
+	            <label for="civilite-${civ}">${civ}</label>
+	          </c:otherwise>
+	        </c:choose>
+	      </div>
+	    </c:forEach>
+	  </div>
+	
+	  <label>Administration</label>
+	  <div class="choice-group">
+	    <div class="choice-item">
+	      <input id="admin" type="checkbox" name="admin" ${(formateur.admin) ? "checked" : ""}>
+	      <label for="admin">Est Admin</label>
+	    </div>
+	  </div>
+	
 	  <div class="form-actions">
 	    <input type="submit" value="Sauvegarder" class="btn btn-success">
 	    <a href="formateur" class="btn btn-primary">Annuler</a>
