@@ -11,10 +11,8 @@ public class Flutiste implements IMusicien {
 	@Autowired
 	private IInstrument flute;
 	
-	public Flutiste(Flute flute) 
-	{
-		System.out.println("Olivier equipe son instrument : "+flute.getClass().getSimpleName());
-	}
+	public Flutiste() 
+	{}
 	
 	public String getPrenom() {
 		return prenom;

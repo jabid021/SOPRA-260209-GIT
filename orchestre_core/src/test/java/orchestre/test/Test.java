@@ -1,34 +1,37 @@
 package orchestre.test;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import orchestre.composant.Flutiste;
-import orchestre.composant.Guitariste;
+import ochestre.config.AppConfig;
 import orchestre.composant.IMusicien;
-import orchestre.composant.Pianiste;
 
 public class Test {	
 	
-	public static void main(String[] args) {
+	 @Autowired
+	 IMusicien pianiste;
+	 
+	 @Autowired
+	 IMusicien guitariste;
+	 
+	 @Autowired
+	 IMusicien flutiste;
+	 
+	 @Autowired
+	 IMusicien olivier;
+	
+	public void main(String[] args) {
 		
 		
 		//ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:application-context.xml");
 		
 		//Changer la config principale
-		//... ctx...
-		
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 	
-		IMusicien pianiste = ctx.getBean(Pianiste.class);
-		
-		IMusicien olivier = (Flutiste) ctx.getBean("musicien");
-		
-		IMusicien guitariste = ctx.getBean(Guitariste.class);
-		
-		
+	
 		pianiste.jouer();
-		
 		olivier.jouer();
-		
+		flutiste.jouer();
 		guitariste.jouer();
 		
 		

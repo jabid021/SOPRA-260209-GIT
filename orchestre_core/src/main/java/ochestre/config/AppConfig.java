@@ -1,33 +1,44 @@
 package ochestre.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import orchestre.composant.Flutiste;
 import orchestre.composant.Guitariste;
 import orchestre.composant.IMusicien;
 import orchestre.composant.Pianiste;
 
-//Preciser que c'est une page de config
-//Preciser ou se trouvent les composants
-//Remplir les 2 beans manquants avec leur prenom
+@Configuration
+@ComponentScan("orchestre.composant")
 public class AppConfig {
 
-
-	
 	@Bean
 	public IMusicien guitariste() 
 	{
-		Guitariste g = new Guitariste();
-		g.setPrenom("Jordan");
-		return g;
+		Guitariste guitariste = new Guitariste();
+		guitariste.setPrenom("Jordan");
+		return guitariste;
 		
 	}
 	
 	@Bean
-	public IMusicien pianiste(){}
+	public IMusicien pianiste()
+	{
+		Pianiste pianiste = new Pianiste();
+		pianiste.setPrenom("Eric");
+		return pianiste;
+	}
 	
-	
-	//Bean du flutiste
+	//Generer un bean (id=musicien qui est de type Flutiste)
 	@Bean
-	public IMusicien musicien(){}
+	public IMusicien musicien()
+	{
+		Flutiste flutiste = new Flutiste();
+		flutiste.setPrenom("Olivier");
+		return flutiste;
+	}
+	
+	
+	
 }
