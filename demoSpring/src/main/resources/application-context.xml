@@ -42,7 +42,7 @@
 
 -->
 
-
+<!--  
 <aop:config>
 <aop:pointcut id="monPointcut" expression="execution(public void demo.aop.ClassMetier.demo())" />
 
@@ -54,7 +54,7 @@
 		<aop:around method="lancerAutoursDemo" pointcut-ref="monPointcut"/>
 	</aop:aspect>
 </aop:config>
-
+-->
 
 	
 </beans>

@@ -3,7 +3,7 @@ package orchestre.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import orchestre.aop.PublicAspect;
 import orchestre.composant.Flutiste;
@@ -13,7 +13,8 @@ import orchestre.composant.Pianiste;
 
 @Configuration
 @ComponentScan("orchestre.composant")
-@ImportResource("classpath:application-context.xml")
+@EnableAspectJAutoProxy
+//@ImportResource("classpath:application-context.xml")
 public class AppConfig {
 
 	@Bean

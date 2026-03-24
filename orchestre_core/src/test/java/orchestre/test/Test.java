@@ -6,33 +6,42 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import orchestre.composant.IMusicien;
 
 public class Test {	
-	
-	 @Autowired
-	 IMusicien pianiste;
-	 
-	 @Autowired
-	 IMusicien guitariste;
-	 
-	 @Autowired
-	 IMusicien flutiste;
-	 
-	 @Autowired
-	 @Qualifier("musicien")
-	 IMusicien olivier;
-	
+
+	@Autowired
+	IMusicien pianiste;
+
+	@Autowired
+	IMusicien guitariste;
+
+	@Autowired
+	IMusicien flutiste;
+
+	@Autowired
+	@Qualifier("musicien")
+	IMusicien olivier;
+
 	public void run() {
+
+
+		//	pianiste.jouer();
+		//	olivier.jouer();
+		//	flutiste.jouer();
+
+
+
+
+		//guitariste.toString();
 		
-	
-	//	pianiste.jouer();
-	//	olivier.jouer();
-	//	flutiste.jouer();
+		System.out.println("DEBUT DU CONCERT");
+
+		try {
+			guitariste.jouer();
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+		}
 		
-		
-		
-		//guitariste.jouer();
-		
-		
-		guitariste.toString();
+		System.out.println("FIN DU CONCERT");
 
 	}
 

@@ -39,7 +39,7 @@
 
 
 <context:component-scan base-package="orchestre.composant"/>
--->
+
 
 
 
@@ -47,11 +47,11 @@
 
 <aop:config>
 	<aop:aspect id="monAspect" ref="publicAspect">
-		<aop:? method="afterToStringGuitariste"  pointcut="execution(public String orchestre.composant.Guitariste.toString())"/>
+		<aop:after-returning returning="phrase" method="afterToStringGuitariste"  pointcut="execution(public String orchestre.composant.Guitariste.toString())"/>
 	</aop:aspect>
 </aop:config>
 
-
+-->
 
 
 </beans>
