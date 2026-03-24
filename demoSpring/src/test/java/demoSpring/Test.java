@@ -2,12 +2,11 @@ package demoSpring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import demo.aop.ClassMetier;
 import demo.composant.Audio;
 import demo.composant.Game;
 import demo.composant.IConfig;
-import demo.config.AppConfig;
 
 public class Test {
 
@@ -29,6 +28,11 @@ public class Test {
 	@Autowired
 	@Qualifier("graphismeCustom")
 	IConfig graphisme2;
+	
+	
+	
+	 @Autowired
+	 ClassMetier classMetier;
 	
 	public void run() {
 	
@@ -53,10 +57,18 @@ public class Test {
 		System.out.println(graphisme2);
 		
 		
-	
-		//Game game;
+		System.out.println("-----------DEMO AOP Before + After-----------------");
 		
-		//System.out.println(game);
+		
+		classMetier.demo();
+		
+		System.out.println("-----------DEMO AOP Succes / Echec-----------------");
+		
+		try {
+		classMetier.demo2("Message envoyé en param à demo2");
+		}
+		catch(Exception e) {}
+		
 	}
 
 }

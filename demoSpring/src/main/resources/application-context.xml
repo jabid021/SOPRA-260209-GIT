@@ -30,8 +30,31 @@
 	 <bean id="game2" class="demo.composant.Game">
 	 	<property name="audio" ref="audio"/>
 	 </bean>
+	 
+	 
+	 
+<context:component-scan base-package="demo.composant"/>
+
+
+
+
+
+
 -->
 
-<context:component-scan base-package="demo.composant"/>
+
+<aop:config>
+<aop:pointcut id="monPointcut" expression="execution(public void demo.aop.ClassMetier.demo())" />
+
+	<aop:aspect id="monAspect" ref="aspectDemo">
+		<aop:before method="lancerAvantDemo"  pointcut-ref="monPointcut"/>
+		<aop:after method="lancerApresDemo" pointcut-ref="monPointcut"/>
+		<aop:after-returning method="lancerDemo2Succes" returning="resultFonctionEcoute" pointcut="execution(public String demo.aop.ClassMetier.demo2(String))"/>
+		<aop:after-throwing method="lancerDemo2Echec" throwing="exception" pointcut="execution(public String demo.aop.ClassMetier.demo2(String))"/>
+		<aop:around method="lancerAutoursDemo" pointcut-ref="monPointcut"/>
+	</aop:aspect>
+</aop:config>
+
+
 	
 </beans>

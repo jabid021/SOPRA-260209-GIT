@@ -13,6 +13,7 @@ public class SpringApplication {
 	//Config principale en JAVA
 		
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+		
 		ctx.getBeanFactory().createBean(Test.class).run();
 		ctx.close();
 

@@ -1,9 +1,8 @@
 package orchestre.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import ochestre.config.AppConfig;
 import orchestre.composant.IMusicien;
 
 public class Test {	
@@ -18,24 +17,22 @@ public class Test {
 	 IMusicien flutiste;
 	 
 	 @Autowired
+	 @Qualifier("musicien")
 	 IMusicien olivier;
 	
-	public void main(String[] args) {
+	public void run() {
 		
-		
-		//ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-		
-		//Changer la config principale
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 	
-	
-		pianiste.jouer();
-		olivier.jouer();
-		flutiste.jouer();
-		guitariste.jouer();
+	//	pianiste.jouer();
+	//	olivier.jouer();
+	//	flutiste.jouer();
 		
 		
 		
+		//guitariste.jouer();
+		
+		
+		guitariste.toString();
 
 	}
 
