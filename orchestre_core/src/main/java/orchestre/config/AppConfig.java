@@ -49,5 +49,4 @@ public class AppConfig {
 		return new PublicAspect();
 	}
 	
-	
 }

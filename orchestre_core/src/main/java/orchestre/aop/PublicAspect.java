@@ -1,7 +1,11 @@
 package orchestre.aop;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class PublicAspect {
@@ -13,14 +17,19 @@ public class PublicAspect {
 		System.out.println("Le guitariste vient de se presenter");
 	}
 	
-	//public void monPointCutJouer() {}
+	@Pointcut("execution(public void orchestre.composant.Guitariste.jouer())")
+	public void monPointCutJouer() {}
 	
+	@Before("monPointCutJouer()")
 	public void installer(){System.out.println("Le public s'installe");}
 	
-	
+	@AfterReturning("monPointCutJouer()")
 	public void applaudir(){System.out.println("Le public applaudit");}
 	
-	
-	public void huer(){System.out.println("Le public jette des tomates");}
-	
+	@AfterThrowing(throwing = "e" , pointcut = "monPointCutJouer()")
+	public void huer(Exception e)
+	{
+		System.out.println(e.getMessage());
+		System.out.println("Le public jette des tomates");
+	}
 }

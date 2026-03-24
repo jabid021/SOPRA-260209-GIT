@@ -25,10 +25,7 @@ public class Test {
 
 		//	pianiste.jouer();
 		//	olivier.jouer();
-		//	flutiste.jouer();
-
-
-
+		//	flutiste.jouer()
 
 		//guitariste.toString();
 		
@@ -36,10 +33,7 @@ public class Test {
 
 		try {
 			guitariste.jouer();
-		}catch(Exception e) 
-		{
-			System.out.println(e.getMessage());
-		}
+		}catch(Exception e) {}
 		
 		System.out.println("FIN DU CONCERT");
 
