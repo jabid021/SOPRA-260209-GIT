@@ -2,30 +2,28 @@ package quest.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import quest.context.Singleton;
-import quest.dao.DAOModule;
-import quest.dao.DAOOrdinateur;
-import quest.dao.DAOPersonne;
+import quest.dao.IDAOModule;
+import quest.dao.IDAOOrdinateur;
+import quest.dao.IDAOPersonne;
 
 public class App {
 
 	@Autowired
-	DAOPersonne daoPersonne;
+	IDAOPersonne daoPersonne;
 	
 	@Autowired
-	DAOModule daoModule;
+	IDAOModule daoModule;
 	
 	@Autowired
-	DAOOrdinateur daoOrdinateur;
+	IDAOOrdinateur daoOrdinateur;
 	
 	public void run() {
-	
 		
 		System.out.println(daoPersonne.findAllStagiaire());
 		
 		System.out.println(daoOrdinateur.findByMarque("Asuss"));
 	
-		System.out.println(daoModule.findByQuest(777));
+		System.out.println(daoModule.findByQuest(6865));
 	
 		System.out.println("TOUT EST OK");
 	}

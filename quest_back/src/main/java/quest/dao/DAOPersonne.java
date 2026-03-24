@@ -2,94 +2,76 @@ package quest.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManager;
-import quest.context.Singleton;
+import jakarta.persistence.PersistenceContext;
 import quest.model.Formateur;
 import quest.model.Personne;
 import quest.model.Stagiaire;
 
+@Repository
+@Transactional
 public class DAOPersonne implements IDAOPersonne{
+
+	@PersistenceContext
+	private EntityManager em;
+
 
 	@Override
 	public Personne findById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Personne personne = em.find(Personne.class, id); 
-		em.close();
-		return personne;
+		return em.find(Personne.class, id); 
 	}
 
 	@Override
 	public List<Personne> findAll() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Personne> personnes = em.createQuery("from Personne").getResultList();
-		em.close();
-		return personnes;
+		return em.createQuery("from Personne").getResultList();
 	}
 
 	@Override
 	public Personne save(Personne personne) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		em.getTransaction().begin();
-			personne=em.merge(personne);
-		em.getTransaction().commit();
-		em.close();
-		return personne;
+		return em.merge(personne);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		Personne personne = em.find(Personne.class, id);
-		em.getTransaction().begin();
-			em.remove(personne);
-		em.getTransaction().commit();
-		em.close();
+		em.remove(personne);
 	}
 
 	@Override
 	public void delete(Personne personne) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-	
-		em.getTransaction().begin();
-			personne=em.merge(personne);
-			em.remove(personne);
-		em.getTransaction().commit();
-		em.close();
+		personne=em.merge(personne);
+		em.remove(personne);
 	}
 
 	@Override
 	public List<Stagiaire> findAllStagiaire() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
+
 		List<Stagiaire> personnes = em.createQuery("from Stagiaire").getResultList();
-		em.close();
-		return personnes;
-	}
-	
-	@Override
-	public List<Stagiaire> findAllStagiaireDisponibles() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Stagiaire> personnes = em.createQuery("SELECT s from Stagiaire s where s.ordinateur is null").getResultList();
 		em.close();
 		return personnes;
 	}
 
 	@Override
-	public List<Formateur> findAllFormateur() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Formateur> personnes = em.createQuery("from Formateur").getResultList();
-		em.close();
-		return personnes;
+	public List<Stagiaire> findAllStagiaireDisponibles() {
+		return em.createQuery("SELECT s from Stagiaire s where s.ordinateur is null").getResultList();
 	}
-	
+
+	@Override
+	public List<Formateur> findAllFormateur() {
+		return em.createQuery("from Formateur").getResultList();
+	}
+
 	@Override
 	public Personne findByLoginAndPassword(String login,String password) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		Personne personne = null;
 		try {
-		personne = em.createQuery("SELECT p from Personne p where p.login=:login and p.password=:password",Personne.class)
-				.setParameter("login", login)
-				.setParameter("password", password)
-				.getSingleResult();
+			personne = em.createQuery("SELECT p from Personne p where p.login=:login and p.password=:password",Personne.class)
+					.setParameter("login", login)
+					.setParameter("password", password)
+					.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
 		em.close();

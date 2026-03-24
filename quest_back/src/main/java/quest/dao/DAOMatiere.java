@@ -2,67 +2,57 @@ package quest.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManager;
-import quest.context.Singleton;
+import jakarta.persistence.PersistenceContext;
 import quest.model.Matiere;
 
+@Repository
+@Transactional
 public class DAOMatiere implements IDAOMatiere{
+
+	@PersistenceContext
+	private EntityManager em;
+
 
 	@Override
 	public Matiere findById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Matiere matiere = em.find(Matiere.class, id); 
-		em.close();
-		return matiere;
+
+		return em.find(Matiere.class, id);
 	}
 
 	@Override
 	public List<Matiere> findAll() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Matiere> matieres = em.createQuery("from Matiere").getResultList();
-		em.close();
-		return matieres;
+		return em.createQuery("from Matiere").getResultList();
 	}
 
 	@Override
 	public Matiere save(Matiere matiere) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		em.getTransaction().begin();
-			matiere=em.merge(matiere);
-		em.getTransaction().commit();
-		em.close();
-		return matiere;
+
+		return em.merge(matiere);
+
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		Matiere matiere = em.find(Matiere.class, id);
-		em.getTransaction().begin();
-			em.remove(matiere);
-		em.getTransaction().commit();
-		em.close();
+		em.remove(matiere);
 	}
 
 	@Override
 	public void delete(Matiere matiere) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-	
-		em.getTransaction().begin();
-			matiere=em.merge(matiere);
-			em.remove(matiere);
-		em.getTransaction().commit();
-		em.close();
+		matiere=em.merge(matiere);
+		em.remove(matiere);
 	}
-	
+
 	@Override
 	public List<Matiere> findByLibelleContaining(String recherche) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Matiere> matieres = em.createQuery("Select m from Matiere m where m.libelle like :recherche")
+
+		return em.createQuery("Select m from Matiere m where m.libelle like :recherche")
 				.setParameter("recherche", "%"+recherche+"%")
 				.getResultList();
-		em.close();
-		return matieres;
 	}
 
 }

@@ -2,68 +2,54 @@ package quest.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManager;
-import quest.context.Singleton;
+import jakarta.persistence.PersistenceContext;
 import quest.model.Filiere;
 
+@Repository
+@Transactional
 public class DAOFiliere implements IDAOFiliere{
+
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public Filiere findById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		Filiere filiere = em.find(Filiere.class, id); 
-		em.close();
-		return filiere;
+		return em.find(Filiere.class, id); 
 	}
 
 	@Override
 	public List<Filiere> findAll() {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		List<Filiere> filieres = em.createQuery("from Filiere").getResultList();
-		em.close();
-		return filieres;
+		return em.createQuery("from Filiere").getResultList();
 	}
 
 	@Override
 	public Filiere save(Filiere filiere) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-		em.getTransaction().begin();
-			filiere=em.merge(filiere);
-		em.getTransaction().commit();
-		em.close();
-		return filiere;
+		return em.merge(filiere);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		Filiere filiere = em.find(Filiere.class, id);
-		em.getTransaction().begin();
-			em.remove(filiere);
-		em.getTransaction().commit();
-		em.close();
+		em.remove(filiere);
 	}
 
 	@Override
 	public void delete(Filiere filiere) {
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
-	
-		em.getTransaction().begin();
-			filiere=em.merge(filiere);
-			em.remove(filiere);
-		em.getTransaction().commit();
-		em.close();
+		filiere=em.merge(filiere);
+		em.remove(filiere);
 	}
 
 	@Override
 	public Filiere findByIdWithEleves(Integer idFiliere) {
 		Filiere filiere =null;
-		EntityManager em = Singleton.getInstance().getEmf().createEntityManager();
 		try {
-		filiere = em.createQuery("SELECT f from Filiere f LEFT JOIN FETCH f.eleves where f.id=:id",Filiere.class).setParameter("id", idFiliere).getSingleResult();
+			filiere = em.createQuery("SELECT f from Filiere f LEFT JOIN FETCH f.eleves where f.id=:id",Filiere.class).setParameter("id", idFiliere).getSingleResult();
 		}catch(Exception e) {e.printStackTrace();};
-		
-		em.close();
+
 		return filiere;
 	}
 }
