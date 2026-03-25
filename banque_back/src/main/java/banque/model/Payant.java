@@ -14,6 +14,16 @@ public class Payant extends Compte{
 		if(this.solde+montant-taxe+decouvert>=0) {return true;}
 		else {return false;}
 	}
+	
+	
+
+	public double getDecouvert() {
+		return decouvert;
+	}
+
+	public void setDecouvert(double decouvert) {
+		this.decouvert = decouvert;
+	}
 
 	@Override
 	public String toString() {

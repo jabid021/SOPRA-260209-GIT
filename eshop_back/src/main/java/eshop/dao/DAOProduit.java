@@ -16,52 +16,36 @@ public class DAOProduit implements IDAOProduit{
 	
 	@Override
 	public Produit findById(Integer id) {
-		Produit produit = em.find(Produit.class, id); 
-		em.close();
-		return produit;
+		return em.find(Produit.class, id); 
 	}
 
 	@Override
 	public List<Produit> findAll() {
-		List<Produit> produits = em.createQuery("from Produit").getResultList();
-		em.close();
-		return produits;
+		return em.createQuery("from Produit").getResultList();
 	}
 
 	@Override
 	public Produit save(Produit produit) {
-		em.getTransaction().begin();
-			produit=em.merge(produit);
-		em.getTransaction().commit();
-		em.close();
-		return produit;
+		return em.merge(produit);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		Produit produit = em.find(Produit.class, id);
-		em.getTransaction().begin();
-			em.remove(produit);
-		em.getTransaction().commit();
-		em.close();
+		em.remove(produit);
 	}
 
 	@Override
 	public void delete(Produit produit) {
-		em.getTransaction().begin();
-			produit=em.merge(produit);
-			em.remove(produit);
-		em.getTransaction().commit();
-		em.close();
+		produit=em.merge(produit);
+		em.remove(produit);
 	}
 
 	@Override
 	public List<Produit> findByLibLike(String lib) {
-		List<Produit> produits = em.createQuery("SELECT p from Produit p where p.libelle like :libelle")
+		return em.createQuery("SELECT p from Produit p where p.libelle like :libelle")
 				.setParameter("libelle", "%"+lib+"%")
 				.getResultList();
-		em.close();
-		return produits;
 	}
 
 	@Override
@@ -73,7 +57,6 @@ public class DAOProduit implements IDAOProduit{
 				.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		em.close();
 		return produit;
 	}
 }

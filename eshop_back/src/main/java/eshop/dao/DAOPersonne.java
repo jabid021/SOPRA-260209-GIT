@@ -18,57 +18,39 @@ public class DAOPersonne implements IDAOPersonne{
 	
 	@Override
 	public Personne findById(Integer id) {
-		Personne personne = em.find(Personne.class, id); 
-		em.close();
-		return personne;
+		return em.find(Personne.class, id); 
 	}
 
 	@Override
 	public List<Personne> findAll() {
-		List<Personne> personnes = em.createQuery("from Personne").getResultList();
-		em.close();
-		return personnes;
+		return em.createQuery("from Personne").getResultList();
 	}
 
 	@Override
 	public Personne save(Personne personne) {
-		em.getTransaction().begin();
-			personne=em.merge(personne);
-		em.getTransaction().commit();
-		em.close();
-		return personne;
+		return em.merge(personne);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		Personne personne = em.find(Personne.class, id);
-		em.getTransaction().begin();
-			em.remove(personne);
-		em.getTransaction().commit();
-		em.close();
+		em.remove(personne);
 	}
 
 	@Override
 	public void delete(Personne personne) {
-		em.getTransaction().begin();
-			personne=em.merge(personne);
-			em.remove(personne);
-		em.getTransaction().commit();
-		em.close();
+		personne=em.merge(personne);
+		em.remove(personne);
 	}
 
 	@Override
 	public List<Fournisseur> findAllFournisseur() {
-		List<Fournisseur> fournisseurs = em.createQuery("from Fournisseur").getResultList();
-		em.close();
-		return fournisseurs;
+		return em.createQuery("from Fournisseur").getResultList();
 	}
 
 	@Override
 	public List<Client> findAllClient() {
-		List<Client> clients = em.createQuery("from Client").getResultList();
-		em.close();
-		return clients;
+		return em.createQuery("from Client").getResultList();
 	}
 
 	@Override
@@ -80,7 +62,6 @@ public class DAOPersonne implements IDAOPersonne{
 				.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		em.close();
 		return client;
 	}
 
@@ -93,7 +74,6 @@ public class DAOPersonne implements IDAOPersonne{
 				.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		em.close();
 		return fournisseur;
 	}
 }
