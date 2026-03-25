@@ -1,15 +1,15 @@
-package quest.dao;
+package eshop.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import eshop.model.Client;
+import eshop.model.Fournisseur;
+import eshop.model.Personne;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import quest.model.Formateur;
-import quest.model.Personne;
-import quest.model.Stagiaire;
 
 @Repository
 @Transactional
@@ -17,8 +17,7 @@ public class DAOPersonne implements IDAOPersonne{
 
 	@PersistenceContext
 	private EntityManager em;
-
-
+	
 	@Override
 	public Personne findById(Integer id) {
 		return em.find(Personne.class, id); 
@@ -47,31 +46,36 @@ public class DAOPersonne implements IDAOPersonne{
 	}
 
 	@Override
-	public List<Stagiaire> findAllStagiaire() {
-
-		return em.createQuery("from Stagiaire").getResultList();
+	public List<Fournisseur> findAllFournisseur() {
+		return em.createQuery("from Fournisseur").getResultList();
 	}
 
 	@Override
-	public List<Stagiaire> findAllStagiaireDisponibles() {
-		return em.createQuery("SELECT s from Stagiaire s where s.ordinateur is null").getResultList();
+	public List<Client> findAllClient() {
+		return em.createQuery("from Client").getResultList();
 	}
 
 	@Override
-	public List<Formateur> findAllFormateur() {
-		return em.createQuery("from Formateur").getResultList();
-	}
-
-	@Override
-	public Personne findByLoginAndPassword(String login,String password) {
-		Personne personne = null;
+	public Client findByIdWithAchats(Integer idClient) {
+		Client client = null;
 		try {
-			personne = em.createQuery("SELECT p from Personne p where p.login=:login and p.password=:password",Personne.class)
-					.setParameter("login", login)
-					.setParameter("password", password)
-					.getSingleResult();
+		client = em.createQuery("SELECT c from Client c LEFT JOIN FETCH c.achats where c.id=:id",Client.class)
+				.setParameter("id",idClient)
+				.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		return personne;
+		return client;
+	}
+
+	@Override
+	public Fournisseur findByIdWithStock(Integer idFournisseur) {
+		Fournisseur fournisseur = null;
+		try {
+		fournisseur = em.createQuery("SELECT f from Fournisseur f JOIN FETCH f.stock where f.id=:id",Fournisseur.class)
+				.setParameter("id",idFournisseur)
+				.getSingleResult();
+		}
+		catch(Exception e) {e.printStackTrace();}
+		return fournisseur;
 	}
 }

@@ -51,7 +51,7 @@ public class DAOProduitTest {
 		
 		//Assert
 		id= produit.getId();
-		produitBdd = daoProduit.findById(id).orElse(null);
+		produitBdd = daoProduit.findById(id);
 		
 		assertNotNull(id);
 		assertNotNull(produitBdd);
@@ -71,7 +71,7 @@ public class DAOProduitTest {
 		Integer idInsert = produit.getId();
 		Produit produitBdd;
 		
-		produitBdd = daoProduit.findById(idInsert).orElse(null);
+		produitBdd = daoProduit.findById(idInsert);
 		
 		assertNotNull(produitBdd);
 	}
@@ -89,7 +89,7 @@ public class DAOProduitTest {
 		
 		daoProduit.deleteById(idInsert);
 		
-		produitBdd=daoProduit.findById(idInsert).orElse(null);
+		produitBdd=daoProduit.findById(idInsert);
 		assertNull(produitBdd);
 	}
 
@@ -106,7 +106,7 @@ public class DAOProduitTest {
 		
 		daoProduit.delete(produit);
 		
-		produitBdd=daoProduit.findById(idInsert).orElse(null);
+		produitBdd=daoProduit.findById(idInsert);
 		assertNull(produitBdd);
 	}
 	

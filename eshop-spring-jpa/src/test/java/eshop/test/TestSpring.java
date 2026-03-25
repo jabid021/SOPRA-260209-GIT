@@ -37,9 +37,6 @@ public class TestSpring {
 			System.out.println("---------");
 			System.out.println("Voici les achats du client 2 : ");
 			System.out.println(daoPersonne.findByIdWithAchats(2).getAchats());
-			
-			
-			
 					
 			
 	}

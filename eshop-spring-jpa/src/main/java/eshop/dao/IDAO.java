@@ -1,4 +1,4 @@
-package quest.dao;
+package eshop.dao;
 
 import java.util.List;
 

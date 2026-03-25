@@ -1,15 +1,15 @@
-package quest.config;
+package eshop.config;
 
 import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,13 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
 
-
 @Configuration
-//@ComponentScan("quest.dao")
+@ComponentScan("eshop.dao")
 @EnableTransactionManagement 
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("quest.dao")
 public class AppConfig {
+
 
 	@Autowired
 	private Environment env;
@@ -45,7 +44,7 @@ public class AppConfig {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("quest.model");
+		emf.setPackagesToScan("eshop.model");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;
@@ -71,6 +70,7 @@ public class AppConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+
 
 
 }
