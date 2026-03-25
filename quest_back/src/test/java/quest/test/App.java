@@ -32,7 +32,9 @@ public class App {
 		System.out.println(daoModule.findByQuest(6865));
 
 		Matiere m =daoMatiere.findById(1).orElse(null);
-		/*if(opt.isEmpty()) 
+		/*
+		 Optional<Matiere> opt = daoMatiere.findById(1);
+		 * if(opt.isEmpty()) 
 		{
 			System.out.println("Pas de matiere");
 			m=null;

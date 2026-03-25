@@ -39,7 +39,13 @@ public class TestSpring {
 			System.out.println(daoPersonne.findByIdWithAchats(2).getAchats());
 			
 			
+			System.out.println(daoProduit.findByPrixBetween(100, 1000));
+
+			System.out.println(daoProduit.findByLibLike("%SQL%"));
 			
+			System.out.println(daoProduit.findByLibelle("Formation sql"));
+
+			System.out.println(daoProduit.findByPrixLessThan(2000));
 					
 			
 	}

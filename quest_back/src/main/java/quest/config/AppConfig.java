@@ -14,14 +14,13 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
 
 
 @Configuration
 //@ComponentScan("quest.dao")
-@EnableTransactionManagement 
+//@EnableTransactionManagement 
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("quest.dao")
 public class AppConfig {
