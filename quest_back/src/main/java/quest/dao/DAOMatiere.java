@@ -19,7 +19,6 @@ public class DAOMatiere implements IDAOMatiere{
 
 	@Override
 	public Matiere findById(Integer id) {
-
 		return em.find(Matiere.class, id);
 	}
 
@@ -30,9 +29,7 @@ public class DAOMatiere implements IDAOMatiere{
 
 	@Override
 	public Matiere save(Matiere matiere) {
-
 		return em.merge(matiere);
-
 	}
 
 	@Override
@@ -49,7 +46,6 @@ public class DAOMatiere implements IDAOMatiere{
 
 	@Override
 	public List<Matiere> findByLibelleContaining(String recherche) {
-
 		return em.createQuery("Select m from Matiere m where m.libelle like :recherche")
 				.setParameter("recherche", "%"+recherche+"%")
 				.getResultList();

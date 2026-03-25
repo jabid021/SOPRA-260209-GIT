@@ -3,6 +3,7 @@ package eshop.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import eshop.model.Client;
 import eshop.model.Fournisseur;
@@ -11,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
+@Transactional
 public class DAOPersonne implements IDAOPersonne{
 
 	@PersistenceContext

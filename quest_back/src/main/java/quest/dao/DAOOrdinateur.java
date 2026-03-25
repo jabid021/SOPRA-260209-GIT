@@ -42,7 +42,6 @@ public class DAOOrdinateur implements IDAOOrdinateur{
 
 	@Override
 	public void delete(Ordinateur ordinateur) {
-
 		ordinateur=em.merge(ordinateur);
 		em.remove(ordinateur);
 	}

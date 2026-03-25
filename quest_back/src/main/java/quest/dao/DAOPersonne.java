@@ -49,9 +49,7 @@ public class DAOPersonne implements IDAOPersonne{
 	@Override
 	public List<Stagiaire> findAllStagiaire() {
 
-		List<Stagiaire> personnes = em.createQuery("from Stagiaire").getResultList();
-		em.close();
-		return personnes;
+		return em.createQuery("from Stagiaire").getResultList();
 	}
 
 	@Override
@@ -74,7 +72,6 @@ public class DAOPersonne implements IDAOPersonne{
 					.getSingleResult();
 		}
 		catch(Exception e) {e.printStackTrace();}
-		em.close();
 		return personne;
 	}
 }

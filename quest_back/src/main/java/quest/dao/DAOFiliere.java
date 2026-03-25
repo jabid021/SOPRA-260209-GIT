@@ -49,7 +49,6 @@ public class DAOFiliere implements IDAOFiliere{
 		try {
 			filiere = em.createQuery("SELECT f from Filiere f LEFT JOIN FETCH f.eleves where f.id=:id",Filiere.class).setParameter("id", idFiliere).getSingleResult();
 		}catch(Exception e) {e.printStackTrace();};
-
 		return filiere;
 	}
 }
