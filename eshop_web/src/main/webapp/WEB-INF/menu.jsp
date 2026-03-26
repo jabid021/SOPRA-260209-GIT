@@ -8,10 +8,6 @@
 </head>
 <body>
 
-PAge avec la liste des matieres
-
-${uneData}
-
-Mon login est : ${login}
+<h1>Bonjour ${login} vous êtes connecté en tant que ${role}</h1>
 </body>
 </html>
