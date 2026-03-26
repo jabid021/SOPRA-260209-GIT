@@ -32,12 +32,23 @@
 
 
 	</dependencies>
-
-
+	
 	<properties>
 		<spring.version>6.1.7</spring.version>
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.source>21</maven.compiler.source>
 	</properties>
+	
+	<build>
+	<plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	           <parameters>true</parameters>
+	        </configuration>
+	      </plugin>
+   	</plugins>
+</build>
 	
 </project>
