@@ -4,7 +4,9 @@
   {
     background-image : url("assets/img/water.png");
     background-size:100% 100%;
-    display:flex;
+    display:grid;
+    grid-template-columns: 1fr calc(700px/5) calc(700px/5) calc(700px/5) calc(700px/5) calc(700px/5) 1fr;
+    grid-template-rows: 400px 700px 1fr;
     justify-content:center;
     align-items:center;
   }
@@ -17,6 +19,20 @@
     background-image : url("assets/img/Grass.png")
   }
 
+  #gigamaxDiv
+  {
+    display: grid;
+    grid-area: 1 / 3 / 2 / 6;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 70%;
+    background-image: url("assets/img/gigamax.png");
+    background-size: 100% 100%;
+  }
+
   #pikachu
   {
     position:absolute;
@@ -24,16 +40,30 @@
     left:0;
   }
 
+  #formStart
+  {
+    display: grid;
+    grid-area: 2 / 4 / 3 / 5;
+    align-self: start;
+  }
+
 </style>
 
 
 <script defer src="pikachu.js" charset="utf-8"></script>
   <audio id="themePokemon" src="assets/audio/theme.mp3"></audio>
+  <audio id="pikaille" src="assets/audio/exclamative-pikaille_cut.wav"></audio>
+
+ <div id="gigamaxDiv">
+
+  <!-- Le mode gigamax est disponible. À vous de trouver le moyen de l'actionner !-->
+
+ </div>
+
 <div id="formStart">
   <input id="inputName" type="text" placeholder="pikachu"><input id="btnStart" disabled type="button" value="Start !">
 </div>
 
 <div id="grass">
   <div id="pikachu"><img id="imgPikachu" src="assets/img/pikachuDown.png"></div>
-
 </div>

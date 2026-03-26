@@ -10,23 +10,15 @@ var mouvement=30;
 var pokemon="pikachu";
 var direction="Down";
 imgPikachu.setAttribute("src","assets/img/"+pokemon+direction+".png");
-imgPikachu.setAttribute("height","100px");
-imgPikachu.setAttribute("width","100px");
-grass.setAttribute("height","700px");
-grass.setAttribute("width","700px");
 
-var leftMin = 0;
-//var rightMax = document.getElementById("grass").clientWidth - document.getElementById("imgPikachu").clientWidth;
-var rightMax = 600;
-//console.log(document.getElementById("grass").getAttribute("width"));
-//console.log(document.getElementById("imgPikachu").getAttribute("width"));
-//console.log(rightMax);
+var pikaWidth;
+var pikaHeight;
+var leftMin;
+var rightMax;
+var topMin;
+var bottomMax;
+var locked;
 
-var topMin = 0;
-//var bottomMax = document.getElementById("grass").clientHeight - document.getElementById("imgPikachu").clientHeight;
-var bottomMax = 600;
-console.log(bottomMax);
-var locked = false;
 document.getElementById("inputName").onkeyup=checkBtnValidate;
 
 function checkBtnValidate(event)
@@ -48,8 +40,36 @@ function checkBtnValidate(event)
 function demarrerJeu()
 {
   let name = document.getElementById("inputName").value;
-  imgPikachu.setAttribute("title",name);
-  grass.style.display="inline";
+  grass.setAttribute("height","700px");
+  grass.setAttribute("width","700px");
+
+  if(name == "gigamax")
+  {
+    imgPikachu.setAttribute("height","200px");
+    imgPikachu.setAttribute("width","200px");
+  }
+  else
+  {
+    imgPikachu.setAttribute("height","40px");
+    imgPikachu.setAttribute("width","40px");
+  }
+
+
+  pikaWidth = parseInt(document.getElementById("imgPikachu").getAttribute("width").slice(0,-2));
+  pikaHeight = parseInt(document.getElementById("imgPikachu").getAttribute("height").slice(0,-2));
+
+  leftMin = 0;
+  //var rightMax = document.getElementById("grass").clientWidth - document.getElementById("imgPikachu").clientWidth;
+  rightMax = 700-pikaWidth;
+  topMin = 0;
+  //var bottomMax = document.getElementById("grass").clientHeight - document.getElementById("imgPikachu").clientHeight;
+  bottomMax = 700-pikaHeight;
+  locked = false;
+
+
+  pikachu.setAttribute("title",name);
+  grass.style.display="grid";
+  grass.style.gridArea="2 / 2 / 3 / 7";
   formStart.style.display="none";
   document.body.onkeydown=deplacement;
 }
@@ -58,7 +78,7 @@ btnStart.onclick=demarrerJeu;
 
 function deplacement(event)
 {
-  if((event.key=="ArrowDown" || event.key=="s") && !locked )
+  if((event.key=="ArrowDown" || event.key=="s") && !locked)
   {
     if (posY + mouvement <= bottomMax)
     {
@@ -66,6 +86,7 @@ function deplacement(event)
     }
     else
     {
+      pikaille.play()
       locked = true;
       posY -= mouvement;
       setTimeout(function(){posY += mouvement;pikachu.style.top=posY+"px";locked=false;}, 100);
@@ -80,6 +101,7 @@ function deplacement(event)
     }
     else
     {
+      pikaille.play();
       locked = true;
       posX -= mouvement;
       setTimeout(function(){posX += mouvement;pikachu.style.left=posX+"px";locked=false;}, 100);
@@ -95,6 +117,7 @@ function deplacement(event)
       }
       else
       {
+        pikaille.play();
         locked = true;
         posX += mouvement;
         setTimeout(function(){posX -= mouvement;pikachu.style.left=posX+"px";locked=false;}, 100);
@@ -109,6 +132,7 @@ function deplacement(event)
     }
     else
     {
+      pikaille.play();
       locked = true;
       posY += mouvement;
       setTimeout(function(){posY -= mouvement;pikachu.style.top=posY+"px";locked=false;}, 100);
