@@ -37,7 +37,7 @@
 				<td>${stagiaire.civilite}</td>
 				<td>${stagiaire.email}</td>
 				<td>${stagiaire.adresse.numero} ${stagiaire.adresse.voie}, ${stagiaire.adresse.ville} ${stagiaire.adresse.cp}</td>
-				<td>${stagiaire.filiere.id} - ${stagiaire.filiere.libelle}</td>
+				<td>${stagiaire.filiere.infoFiliere}</td>
 				<td>
 					<a class="btn btn-warning" href="stagiaire?id=${stagiaire.id}">Modifier</a>
 					<a class="btn btn-danger" href="stagiaire?id=${stagiaire.id}&delete">Supprimer</a>
@@ -113,7 +113,7 @@
 	 	  <c:forEach items="${filieres}" var="filiere">
 	 	  	<c:choose>
 		 	  	<c:when test="${filiere.id==stagiaire.filiere.id}"> <option selected value="${filiere.id}">Filiere ${filiere.id} - ${filiere.libelle}</option></c:when>
-		 	  	<c:otherwise><option value="${filiere.id}">Filiere ${filiere.id} - ${filiere.libelle}</option></c:otherwise>
+		 	  	<c:otherwise><option value="${filiere.id}">${filiere.infoFiliere}</option></c:otherwise>
 	 	  	</c:choose>
 	 	  </c:forEach>
 	  </select>
