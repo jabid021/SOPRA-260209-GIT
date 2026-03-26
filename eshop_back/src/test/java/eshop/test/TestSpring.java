@@ -37,6 +37,15 @@ public class TestSpring {
 			System.out.println("---------");
 			System.out.println("Voici les achats du client 2 : ");
 			System.out.println(daoPersonne.findByIdWithAchats(2).getAchats());
+			
+			
+			System.out.println(daoProduit.findByPrixBetween(100, 1000));
+
+			System.out.println(daoProduit.findByLibLike("%SQL%"));
+			
+			System.out.println(daoProduit.findByLibelle("Formation sql"));
+
+			System.out.println(daoProduit.findByPrixLessThan(2000));
 					
 			
 	}

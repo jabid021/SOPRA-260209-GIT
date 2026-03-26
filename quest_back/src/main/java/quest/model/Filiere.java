@@ -86,7 +86,8 @@ public class Filiere {
 		this.cours = cours;
 	}
 	
-	
+	public String getInfoFiliere() 
+	{return "Filiere "+id+" - "+libelle;}
 	
 	public List<Stagiaire> getEleves() {
 		return eleves;
