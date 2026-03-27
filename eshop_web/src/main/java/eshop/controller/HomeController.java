@@ -14,7 +14,7 @@ public class HomeController {
 	@RequestMapping(value={"/home","/"},method = RequestMethod.GET)
 	public String home() 
 	{
-		return "forward:/WEB-INF/home.jsp";
+		return "forward:/WEB-INF/views/home.jsp";
 	}
 	
 	@RequestMapping(value="/home",method = RequestMethod.POST)
@@ -22,7 +22,7 @@ public class HomeController {
 	{
 		model.addAttribute("role","admin");
 		session.setAttribute("login", login);
-		return "/WEB-INF/menu.jsp";
+		return "menu.jsp";
 	}
 
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,18 +54,15 @@ public class FiliereController{
 	}
 	
 	@PostMapping
-	public String ajouter(@RequestParam String libelle,@RequestParam LocalDate debut,@RequestParam LocalDate fin)  
+	public String ajouter(@RequestParam String libelle,@ModelAttribute Filiere filiere)  
 	{
-		Filiere filiere = new Filiere(libelle,debut,fin);
 		daoFiliere.save(filiere);
 		return "redirect:/filiere";
 	}
 
 	@PostMapping("/{id}")
-	public String modifier(@PathVariable Integer id,@RequestParam String libelle,@RequestParam LocalDate debut,@RequestParam LocalDate fin)  
+	public String modifier(@PathVariable Integer id,@ModelAttribute Filiere filiere)  
 	{
-	
-		Filiere filiere = new Filiere(id,libelle,debut,fin);
 		daoFiliere.save(filiere);
 		return "redirect:/filiere";
 	}

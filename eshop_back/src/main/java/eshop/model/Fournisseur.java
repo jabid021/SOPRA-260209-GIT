@@ -30,6 +30,10 @@ public class Fournisseur extends Personne {
 	public void setSociete(String societe) {
 		this.societe = societe;
 	}
+	public String getInfos() 
+	{
+		return "Fournisseur "+id+" - "+prenom+" "+nom;
+	}
 
 	@Override
 	public String toString() {
