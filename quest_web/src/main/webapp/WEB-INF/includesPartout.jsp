@@ -1,5 +1,5 @@
  <%@ taglib prefix="c" uri="jakarta.tags.core"%>
- 
+
 <base href="${pageContext.request.contextPath}/">
 <!-- <base href="/quest_front/"> -->
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 
 <!DOCTYPE html>
 <html>
@@ -48,83 +47,65 @@
 	</table>
 	<c:if test="${stagiaire.id==null}">
 		<div class="message-form">Formulaire d'ajout</div>
-		<c:set var="path" value="stagiaire"/>
+		<c:set var="chemin" value="stagiaire"/>
 	</c:if>
 	
 	<c:if test="${stagiaire.id!=null}">
 		<div class="message-form">Formulaire d'update (Stagiaire ${stagiaire.id})</div>
-		<c:set var="path" value="stagiaire/${stagiaire.id}"/>
+		<c:set var="chemin" value="stagiaire/${stagiaire.id}"/>
 	</c:if>
-	<form action="${path}" method="post" class="form-clean">
-	  <input type="hidden" name="id" value="${stagiaire.id}">
-	
+	<form:form action="${chemin}" method="post" class="form-clean" modelAttribute="stagiaire">
+	  <form:hidden path="id"/>
+
 	  <label for="login">Login</label>
-	  <input required="required" id="login" type="text" name="login" placeholder="Saisir le login" value="${stagiaire.login}">
+	  <form:input required="required" type="text" path="login" placeholder="Saisir le login"/>
 	
 	  <label for="password">Password</label>
-	  <input required="required" id="password" type="password" name="password" placeholder="Saisir le password" value="${stagiaire.password}">
+	  <form:password required="required" path="password" placeholder="Saisir le password"/>
 	  
 	   <label for="nom">Nom</label>
-	  <input required="required" id="nom" type="text" name="nom" placeholder="Saisir le nom" value="${stagiaire.nom}">
+	  <form:input required="required" type="text" path="nom" placeholder="Saisir le nom"/>
 	  
 	   <label for="prenom">Prenom</label>
-	  <input required="required" id="prenom" type="text" name="prenom" placeholder="Saisir le prenom" value="${stagiaire.prenom}">
+	  <form:input required="required"  type="text" path="prenom" placeholder="Saisir le prenom" />
 	  
 	  
 	  	<label>Civilite</label>
 		<div class="choice-group">
-			<c:forEach items="${civilites}" var="civ">
-				<div class="choice-item">
-					<c:choose>
-						<c:when test="${stagiaire.civilite==civ}">
-							<input type="radio" checked id="civilite-${civ}" name="civilite" value="${civ}">
-							<label for="civilite-${civ}">${civ}</label>
-						</c:when>
-						<c:otherwise>
-							<input type="radio" id="civilite-${civ}" name="civilite" value="${civ}">
-							<label for="civilite-${civ}">${civ}</label>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:forEach>
+			<form:radiobuttons required="required" items="${civilites}"  path="civilite"/>
 		</div>
 	  
 	   <label for="email">Email</label>
-	  <input required="required" id="email" type="email" name="email" placeholder="Saisir l'email" value="${stagiaire.email}">
+	  <form:input required="required" type="email" path="email" placeholder="Saisir l'email" />
 	  
 	 
 	  
 	 
 	  <h2>Adresse</h2>
-	  <label for="numero">Numero</label>
-	  <input required="required" id="numero" type="text" name="adresse.numero" placeholder="Saisir le numero" value="${stagiaire.adresse.numero}">
+	  <form:label path="adresse.numero">Numero</form:label>
+	  <form:input required="required" type="text" path="adresse.numero" placeholder="Saisir le numero" />
 	  
-	   <label for="voie">Voie</label>
-	  <input required="required" id="voie" type="text" name="adresse.voie" placeholder="Saisir la voie" value="${stagiaire.adresse.voie}">
+	   <form:label path="adresse.voie">Voie</form:label>
+	  <form:input required="required" type="text" path="adresse.voie" placeholder="Saisir la voie" />
 	  
-	   <label for="ville">Ville</label>
-	  <input required="required" id="ville" type="text" name="adresse.ville" placeholder="Saisir la ville" value="${stagiaire.adresse.ville}">
+	   <form:label path="adresse.ville">Ville</form:label>
+	  <form:input required="required"  type="text" path="adresse.ville" placeholder="Saisir la ville" />
 	  
-	   <label for="cp">CP</label>
-	  <input required="required" id="cp" type="text" name="adresse.cp" placeholder="Saisir le cp" value="${stagiaire.adresse.cp}">
+	   <form:label path="adresse.cp">CP</form:label>
+	  <form:input required="required" type="text" path="adresse.cp" placeholder="Saisir le cp" />
 	  
-	  <label for="filiere">Filiere</label>
-	  <select id="filiere" required="required" name="filiere.id">
-	 	  <option value="">Choisir une filiere</option>
-	 	  <c:forEach items="${filieres}" var="filiere">
-	 	  	<c:choose>
-		 	  	<c:when test="${filiere.id==stagiaire.filiere.id}"> <option selected value="${filiere.id}">Filiere ${filiere.id} - ${filiere.libelle}</option></c:when>
-		 	  	<c:otherwise><option value="${filiere.id}">${filiere.infoFiliere}</option></c:otherwise>
-	 	  	</c:choose>
-	 	  </c:forEach>
-	  </select>
+	  <form:label path="filiere.id">Filiere</form:label>
 	 
-	
+	 <form:select required="required" path="filiere.id">
+		 <form:option value="">Choisir une filiere</form:option>
+		 <form:options items="${filieres}" itemValue="id" itemLabel="infoFiliere"/>
+	 </form:select>
+	 
 	  <div class="form-actions">
 	    <input type="submit" value="Sauvegarder" class="btn btn-success">
 	    <a href="stagiaire" class="btn btn-primary">Annuler</a>
 	  </div>
-	</form>
+	</form:form>
 	
 	<br><br>
 	<a class="btn btn-info" href="home">Retour</a>

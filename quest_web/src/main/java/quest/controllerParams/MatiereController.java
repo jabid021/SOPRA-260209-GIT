@@ -1,23 +1,20 @@
-package quest.controller;
+package quest.controllerParams;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import quest.dao.IDAOMatiere;
 import quest.model.Matiere;
 
-@Controller
-@RequestMapping("/matiere")
+/*@Controller
+@RequestMapping("/matiere")*/
 public class MatiereController{
 
 	@Autowired
@@ -76,15 +73,19 @@ public class MatiereController{
 	}
 	
 	@PostMapping
-	public String ajouter(@ModelAttribute Matiere matiere)  
+	public String ajouter(@RequestParam String libelle)  
 	{
+		Matiere matiere = new Matiere(libelle);
 		daoMatiere.save(matiere);
 		return "redirect:/matiere";
 	}
 
 	@PostMapping("/{id}")
-	public String modifier(@PathVariable Integer id, @ModelAttribute Matiere matiere)  
+	public String modifier(@PathVariable Integer id,@RequestParam String libelle,@RequestParam int version)  
 	{
+	
+		Matiere matiere = new Matiere(id,libelle);
+		matiere.setVersion(version);
 		daoMatiere.save(matiere);
 		return "redirect:/matiere";
 	}

@@ -1,23 +1,21 @@
-package quest.controller;
+package quest.controllerParams;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import quest.dao.IDAOPersonne;
 import quest.model.Formateur;
 import quest.model.Genre;
 
-@Controller
-@RequestMapping("/formateur")
-public class FormateurController{
+/*@Controller
+@RequestMapping("/formateur")*/
+public class FormateurController {
 
 	@Autowired
 	IDAOPersonne daoPersonne;
@@ -55,15 +53,17 @@ public class FormateurController{
 	}
 	
 	@PostMapping
-	public String ajouter(@ModelAttribute Formateur formateur)  
+	public String ajouter(@RequestParam String login,@RequestParam String password,@RequestParam String nom, @RequestParam String prenom, @RequestParam Genre civilite,@RequestParam(required = false, defaultValue = "false") boolean admin )  
 	{
+		Formateur formateur = new Formateur(login, password, nom, prenom, civilite, admin);
 		daoPersonne.save(formateur);
 		return "redirect:/formateur";
 	}
 
 	@PostMapping("/{id}")
-	public String modifier(@PathVariable Integer id,@ModelAttribute Formateur formateur)  
+	public String modifier(@PathVariable Integer id,@RequestParam String login,@RequestParam String password,@RequestParam String nom, @RequestParam String prenom, @RequestParam Genre civilite,@RequestParam(required = false, defaultValue = "false") boolean admin)  
 	{
+		Formateur formateur = new Formateur(id,login, password, nom, prenom, civilite, admin);
 		daoPersonne.save(formateur);
 		return "redirect:/formateur";
 	}

@@ -56,7 +56,6 @@
 	
 	  <label for="marque">Marque</label>
 	  <input required="required" id="marque" type="text" name="marque" placeholder="Saisir la marque" value="${ordinateur.marque}">
-	
 	  <label for="ram">Ram</label>
 	  <input required="required" id="ram" type="number" name="ram" min="0"  value="${ordinateur.ram}">
 	  

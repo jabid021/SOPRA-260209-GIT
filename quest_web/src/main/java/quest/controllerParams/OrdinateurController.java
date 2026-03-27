@@ -1,24 +1,22 @@
-package quest.controller;
+package quest.controllerParams;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import quest.dao.IDAOOrdinateur;
 import quest.dao.IDAOPersonne;
 import quest.model.Ordinateur;
 import quest.model.Stagiaire;
 
-@Controller
-@RequestMapping("/ordinateur")
-public class OrdinateurController {
+/*@Controller
+@RequestMapping("/ordinateur")*/
+public class OrdinateurController{
 
 	@Autowired
 	IDAOOrdinateur daoOrdinateur;
@@ -65,15 +63,30 @@ public class OrdinateurController {
 	}
 	
 	@PostMapping
-	public String ajouter(@ModelAttribute Ordinateur ordinateur)  
-	{	
+	public String ajouter(@RequestParam String marque,@RequestParam Integer ram,@RequestParam(name="utilisateur.id", required = false) Integer idStagiaire)  
+	{
+		Ordinateur ordinateur = new Ordinateur(marque, ram);
+		if(idStagiaire!=null) 
+		{
+			Stagiaire stagiaire = new Stagiaire();
+			stagiaire.setId(idStagiaire);
+			ordinateur.setUtilisateur(stagiaire);
+		}
+		
 		daoOrdinateur.save(ordinateur);
 		return "redirect:/ordinateur";
 	}
 
 	@PostMapping("/{id}")
-	public String modifier(@PathVariable Integer id,@ModelAttribute Ordinateur ordinateur)  
+	public String modifier(@PathVariable Integer id,@RequestParam String marque,@RequestParam Integer ram,@RequestParam(name="utilisateur.id", required = false) Integer idStagiaire)  
 	{
+		Ordinateur ordinateur = new Ordinateur(id,marque, ram);
+		if(idStagiaire!=null) 
+		{
+			Stagiaire stagiaire = new Stagiaire();
+			stagiaire.setId(idStagiaire);
+			ordinateur.setUtilisateur(stagiaire);
+		}
 		daoOrdinateur.save(ordinateur);
 		return "redirect:/ordinateur";
 	}
