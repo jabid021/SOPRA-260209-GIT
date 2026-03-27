@@ -43,40 +43,35 @@
 	</table>
 	<c:if test="${ordinateur.numero==null}">
 		<div class="message-form">Formulaire d'ajout</div>
-		<form action="ordinateur" method="post" class="form-clean">
+		<c:set var="chemin" value="ordinateur"/>
 	</c:if>
 	
 	<c:if test="${ordinateur.numero!=null}">
 		<div class="message-form">Formulaire d'update (Ordinateur ${ordinateur.numero})</div>
-		<form action="ordinateur/${ordinateur.numero}" method="post" class="form-clean">
+		<c:set var="chemin" value="ordinateur/${ordinateur.numero}"/>
 	</c:if>
 	
-	
-	  <input type="hidden" name="numero" value="${ordinateur.numero}">
+	<form:form action="ordinateur" method="post" class="form-clean" modelAttribute="ordinateur">
+	  <form:hidden path="numero"/>
 	
 	  <label for="marque">Marque</label>
-	  <input required="required" id="marque" type="text" name="marque" placeholder="Saisir la marque" value="${ordinateur.marque}">
+	  <form:input required="required" type="text" path="marque" placeholder="Saisir la marque"/>
 	  <label for="ram">Ram</label>
-	  <input required="required" id="ram" type="number" name="ram" min="0"  value="${ordinateur.ram}">
+	  <form:input required="required" type="number" path="ram" min="0" />
 	  
 	 
-	  <label for="utilisateur">Utilisateur</label>
-	  <select id="utilisateur" name="utilisateur.id">
-	 	  <option value="">Choisir un stagiaire</option>
-	 	  <c:forEach items="${stagiaires}" var="stagiaire">
-	 	  	<c:choose>
-		 	  	<c:when test="${stagiaire.id==ordinateur.utilisateur.id}"> <option selected value="${stagiaire.id}">Stagiaire ${stagiaire.id} - ${stagiaire.prenom} ${stagiaire.nom}</option></c:when>
-		 	  	<c:otherwise><option value="${stagiaire.id}">Stagiaire ${stagiaire.id} - ${stagiaire.prenom} ${stagiaire.nom}</option></c:otherwise>
-	 	  	</c:choose>
-	 	  </c:forEach>
-	  </select>
+	  <form:label path="utilisateur.id">Utilisateur</form:label>
+	  <form:select path="utilisateur.id">
+	 	  <form:option value="" label="Choisir un stagiaire"/>
+	 	  <form:options items="${stagiaires}" itemValue="id" itemLabel="infosSelect"/>
+	  </form:select>
 	 
 	
 	  <div class="form-actions">
-	    <input type="submit" value="Sauvegarder" class="btn btn-success">
+	    <form:button class="btn btn-success">Sauvegarder</form:button>
 	    <a href="ordinateur" class="btn btn-primary">Annuler</a>
 	  </div>
-	</form>
+	</form:form>
 	
 	<br><br>
 	<a class="btn btn-info" href="home">Retour</a>

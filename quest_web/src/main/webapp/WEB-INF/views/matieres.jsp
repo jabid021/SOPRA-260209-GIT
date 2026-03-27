@@ -45,17 +45,17 @@
 		<c:otherwise><div class="message-form">Formulaire d'update (Matiere ${matiere.id} - ${matiere.libelle})</div></c:otherwise>
 	</c:choose>
 	
-	<form action="matiere${path}" method="post" class="form-clean">
-	  <input type="hidden" name="id" value="${matiere.id}">
-	  <input type="hidden" name="version" value="${matiere.version}">
+	<form:form action="matiere${path}" method="post" class="form-clean" modelAttribute="matiere">
+	  <form:hidden  path="id"/>
+	  <form:hidden path="version"/>
 	  <label for="libelle">Libellé</label>
-	  <input required="required" id="libelle" type="text" name="libelle" placeholder="Saisir le libellé" value="${matiere.libelle}">
+	  <form:input required="required" type="text" path="libelle" placeholder="Saisir le libellé"/>
 	
 	  <div class="form-actions">
 	    <input type="submit" value="Sauvegarder" class="btn btn-success">
 	    <a href="matiere" class="btn btn-primary">Annuler</a>
 	  </div>
-	</form>
+	</form:form>
 	
 	<br><br>
 	<a class="btn btn-info" href="home">Retour</a>

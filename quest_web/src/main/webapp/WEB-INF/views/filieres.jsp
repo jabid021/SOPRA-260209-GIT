@@ -44,31 +44,31 @@
 	</table>
 	<c:if test="${filiere.id==null}">
 		<div class="message-form">Formulaire d'ajout</div>
-		<form action="filiere" method="post" class="form-clean">
+		<c:set value="filiere" var="chemin"/> 
 	</c:if>
 	
 	<c:if test="${filiere.id!=null}">
 		<div class="message-form">Formulaire d'update (Filiere ${filiere.id} - ${filiere.libelle})</div>
-		<form action="filiere/${filiere.id}" method="post" class="form-clean">
+		<c:set value="filiere/${filiere.id}" var="chemin"/> 
 	</c:if>
 	
-	
-	  <input type="hidden" name="id" value="${filiere.id}">
+	<form:form action="${chemin}" method="post" class="form-clean" modelAttribute="filiere">
+	  <form:hidden  path="id"/>
 	
 	  <label for="libelle">Libellé</label>
-	  <input required="required" id="libelle" type="text" name="libelle" placeholder="Saisir le libellé" value="${filiere.libelle}">
+	  <form:input required="required" type="text" path="libelle" placeholder="Saisir le libellé"/>
 	
 	  <label for="debut">Date de début</label>
-	  <input required="required" id="debut" type="date" name="debut" value="${filiere.debut}">
+	  <form:input required="required" type="date" path="debut"/>
 	
 	  <label for="fin">Date de fin</label>
-	  <input required="required" id="fin" type="date" name="fin" value="${filiere.fin}">
+	  <form:input required="required" type="date" path="fin"/>
 	
 	  <div class="form-actions">
 	    <input type="submit" value="Sauvegarder" class="btn btn-success">
 	    <a href="filiere" class="btn btn-primary">Annuler</a>
 	  </div>
-	</form>
+	</form:form>
 	
 	<br><br>
 	<a class="btn btn-info" href="home">Retour</a>

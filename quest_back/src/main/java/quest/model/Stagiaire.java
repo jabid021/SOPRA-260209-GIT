@@ -74,6 +74,10 @@ public class Stagiaire extends Personne {
 		this.ordinateur = ordinateur;
 	}
 
+	public String getInfosSelect() 
+	{
+		return "Stagiaire "+id+" - "+prenom+" "+nom;
+	}
 	@Override
 	public String toString() {
 		return "Stagiaire [id=" + id + ", login=" + login + ", password=" + password + ", nom=" + nom + ", prenom="

@@ -62,7 +62,7 @@
 	  <form:input required="required" type="text" path="login" placeholder="Saisir le login"/>
 	
 	  <label for="password">Password</label>
-	  <form:password required="required" path="password" placeholder="Saisir le password"/>
+	  <form:input required="required" path="password" placeholder="Saisir le password"/>
 	  
 	   <label for="nom">Nom</label>
 	  <form:input required="required" type="text" path="nom" placeholder="Saisir le nom"/>

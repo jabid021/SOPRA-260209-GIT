@@ -67,6 +67,10 @@ public class OrdinateurController {
 	@PostMapping
 	public String ajouter(@ModelAttribute Ordinateur ordinateur)  
 	{	
+		if(ordinateur.getUtilisateur().getId()==null) 
+		{
+			ordinateur.setUtilisateur(null);
+		}
 		daoOrdinateur.save(ordinateur);
 		return "redirect:/ordinateur";
 	}
@@ -74,6 +78,10 @@ public class OrdinateurController {
 	@PostMapping("/{id}")
 	public String modifier(@PathVariable Integer id,@ModelAttribute Ordinateur ordinateur)  
 	{
+		if(ordinateur.getUtilisateur().getId()==null) 
+		{
+			ordinateur.setUtilisateur(null);
+		}
 		daoOrdinateur.save(ordinateur);
 		return "redirect:/ordinateur";
 	}
