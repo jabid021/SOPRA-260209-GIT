@@ -39,8 +39,8 @@
 				<td>${stagiaire.adresse.numero} ${stagiaire.adresse.voie}, ${stagiaire.adresse.ville} ${stagiaire.adresse.cp}</td>
 				<td>${stagiaire.filiere.infoFiliere}</td>
 				<td>
-					<a class="btn btn-warning" href="stagiaire?id=${stagiaire.id}">Modifier</a>
-					<a class="btn btn-danger" href="stagiaire?id=${stagiaire.id}&delete">Supprimer</a>
+					<a class="btn btn-warning" href="stagiaire/${stagiaire.id}">Modifier</a>
+					<a class="btn btn-danger" href="stagiaire/delete/${stagiaire.id}">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -48,13 +48,14 @@
 	</table>
 	<c:if test="${stagiaire.id==null}">
 		<div class="message-form">Formulaire d'ajout</div>
+		<c:set var="path" value="stagiaire"/>
 	</c:if>
 	
 	<c:if test="${stagiaire.id!=null}">
 		<div class="message-form">Formulaire d'update (Stagiaire ${stagiaire.id})</div>
+		<c:set var="path" value="stagiaire/${stagiaire.id}"/>
 	</c:if>
-	
-	<form action="stagiaire" method="post" class="form-clean">
+	<form action="${path}" method="post" class="form-clean">
 	  <input type="hidden" name="id" value="${stagiaire.id}">
 	
 	  <label for="login">Login</label>

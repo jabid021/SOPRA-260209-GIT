@@ -35,8 +35,8 @@
 				<td>${formateur.civilite}</td>
 				<td>${(formateur.admin) ? "ADMIN" : "FORMATEUR STANDARD"}</td>
 				<td>
-					<a class="btn btn-warning" href="formateur?id=${formateur.id}">Modifier</a>
-					<a class="btn btn-danger" href="formateur?id=${formateur.id}&delete">Supprimer</a>
+					<a class="btn btn-warning" href="formateur/${formateur.id}">Modifier</a>
+					<a class="btn btn-danger" href="formateur/delete/${formateur.id}">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -50,7 +50,7 @@
 		<div class="message-form">Formulaire d'update (Formateur ${formateur.id})</div>
 	</c:if>
 	
-	<form action="formateur" method="post" class="form-clean">
+	<form action="formateur${formateur.id == null ? '' : '/'.concat(formateur.id)}" method="post" class="form-clean">
 	  <input type="hidden" name="id" value="${formateur.id}">
 	
 	  <label for="login">Login</label>

@@ -32,7 +32,7 @@ public class FiliereController extends HttpServlet {
 
 		model.addAttribute("filiere", filiere);
 		model.addAttribute("filieres", filieres);
-		return "/WEB-INF/filieres.jsp";
+		return "filieres.jsp";
 	}
 
 	@GetMapping
@@ -42,7 +42,7 @@ public class FiliereController extends HttpServlet {
 		model.addAttribute("filiere", new Filiere());
 		model.addAttribute("filieres", filieres);
 
-		return "/WEB-INF/filieres.jsp";
+		return "filieres.jsp";
 	}
 
 	@GetMapping("/delete/{id}")

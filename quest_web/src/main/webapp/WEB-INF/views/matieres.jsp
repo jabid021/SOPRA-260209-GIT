@@ -32,8 +32,8 @@
 					<td>${matiere.id}</td>
 					<td>${matiere.libelle}</td>
 					<td>
-						<a class="btn btn-warning" href="matiere?id=${matiere.id}">Modifier</a>
-						<a class="btn btn-danger" href="matiere?id=${matiere.id}&delete">Supprimer</a>
+						<a class="btn btn-warning" href="matiere/${matiere.id}">Modifier</a>
+						<a class="btn btn-danger" href="matiere/delete/${matiere.id}">Supprimer</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -45,7 +45,7 @@
 		<c:otherwise><div class="message-form">Formulaire d'update (Matiere ${matiere.id} - ${matiere.libelle})</div></c:otherwise>
 	</c:choose>
 	
-	<form action="matiere" method="post" class="form-clean">
+	<form action="matiere${path}" method="post" class="form-clean">
 	  <input type="hidden" name="id" value="${matiere.id}">
 	  <input type="hidden" name="version" value="${matiere.version}">
 	  <label for="libelle">Libellé</label>
@@ -71,7 +71,7 @@ filtrerLibelle.oninput = filtreAjax;
 function filtreAjax()
 {
 
-	  $.ajax("matiere", {
+	  $.ajax("matiere/recherche", {
 		    type: "GET",
 		    data: {
 		      recherche: $("#filtrerLibelle" ).val()

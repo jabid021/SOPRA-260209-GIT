@@ -1,6 +1,5 @@
 package quest.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class OrdinateurController extends HttpServlet {
 		model.addAttribute("ordinateur", ordinateur);
 		model.addAttribute("ordinateurs", ordinateurs);
 		model.addAttribute("stagiaires",stagiaires);
-		return "/WEB-INF/ordinateurs.jsp";
+		return "ordinateurs.jsp";
 	}
 
 	@GetMapping
@@ -55,7 +54,7 @@ public class OrdinateurController extends HttpServlet {
 		model.addAttribute("ordinateur", new Ordinateur());
 		model.addAttribute("ordinateurs", ordinateurs);
 		model.addAttribute("stagiaires",stagiaires);
-		return "/WEB-INF/ordinateurs.jsp";
+		return "ordinateurs.jsp";
 	}
 
 	@GetMapping("/delete/{id}")
