@@ -1,0 +1,200 @@
+body {
+  font-family: "Segoe UI";
+  background-color: #1e2a3a; /* bleu foncé */
+  color: #fff6db; /* beige */
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 250%;
+  background: linear-gradient(90deg, #EBB866, #fff6db, #EBB866); /* dégradé horizontal doré-crème-doré avec un angle 90° : gradient de gauche à droite */
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  animation: gradientMove 3s linear infinite; /* répétition infini linéraire */
+  margin-bottom: 30px;
+}
+
+h1:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 10px #EBB866, 0 0 20px #EBB866; /* Ajoute un glow doré autour du texte : 2 ombres superposées */
+  transition: transform 0.3s, text-shadow 0.3s;
+}
+
+/* Définit le mouvement du dégradé sur le texte */
+@keyframes gradientMove {
+  0% {background-position: 0%;}
+  100% {background-position: 200%;}
+  /* 0% = position de départ du gradient
+  100% = gradient déplacé de gauche à droite */
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Ajoute une ombre portée sous le tableau : Ombre douce et subtile (30% opaque) */
+}
+
+th {
+  background-color: #EBB866; /* doré */
+  color: #1e2a3a; /* bleu foncé */
+  padding: 15px;
+  text-align: center;
+}
+
+td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td:first-child {
+  text-align: center;
+  font-weight: bold;
+  color: #a48d47; /* dore/brun */
+}
+
+td:last-child {
+  font-style: italic;
+}
+
+/* cible les lignes paires du tableau pour faire un effet de zebrage */
+tr:nth-child(even) {
+  background-color: rgba(255,255,255,0.05);
+}
+
+tr.premiere-course {
+  background-color: #EBB866; /* doré */
+}
+
+tr.deuxieme-course {
+  background-color: silver; /* argenté */
+  color: #1e2a3a;
+}
+
+tr.troisieme-course {
+  background-color: #a16b41; /* bronze */
+  color: #fff6db;
+}
+
+tr:hover {
+  background-color: rgba(235,184,102,0.2); /* orange/dore */
+  transition: background-color 0.3s;
+}
+
+/* L’animation fait des aller-retour (0% 100%...) à l'infini */
+tr.premiere-course {
+  animation: pulseBackground 2s infinite alternate;
+}
+
+/* L'annimation fait au début une couleur légère (0.2)
+& à la fin une couleur plus intense (0.5) */
+@keyframes pulseBackground {
+  0% {background-color: rgba(235,184,102,0.2);}
+  100% {background-color: rgba(235,184,102,0.5);}
+}
+
+
+td img {
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* ease = animation naturelle */
+  cursor: pointer;
+}
+
+/* Zoom des images au clic */
+td img.zoomable:hover,
+td img.zoomable:active {
+  transform: scale(1.5);
+  z-index: 10; /* met l’image au-dessus des autres éléments */
+  position: relative; /* pour que le z-index fonctionne correctement */
+}
+
+/* Glow doré pour la première image */
+tr.premiere-course img.zoomable:hover {
+  box-shadow: 0 0 20px #EBB866, 0 0 40px #EBB866; /* 2 ombres halo proche & holo large */
+}
+
+img.drapeau {
+  border-radius: 50%; /* Pour avoir les drapeaux dans des cercles */
+  width: 50px;
+  height: 50px;
+  object-fit: cover;  /* Pour ajuster les cercles */
+}
+
+.pays-cell {
+  text-align: center;
+}
+
+.pays-cell img.drapeau {
+  display: block;
+  margin: 5px auto 0;
+}
+
+.course-cell,
+.distance-cell,
+.denivele-cell {
+  text-align: center;
+}
+
+/* Jauges des distances */
+.jauge-container {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  height: 12px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.jauge-bar {
+  background-color: #EBB866; /* doré/orange */
+  height: 100%;
+  border-radius: 5px;
+  width: 0%;
+  transition: width 1s ease;
+}
+
+/* Overlay pour zoom */
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%; /* pour couvrir tout l'écran */
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* pour le placer au dessus de tous les éléments */
+}
+
+#overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+#fireworks-container {
+  position:absolute;
+  top:180px;
+  left:0;
+  width:100%;
+  height:150px;
+  pointer-events:none;
+  z-index:1000;
+}
+
+/* Bouton musique */
+#toggle-music {
+  font-family: "Segoe UI";
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+}
