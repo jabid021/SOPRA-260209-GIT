@@ -1,0 +1,79 @@
+body {
+  background: #0080c0;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.amiga-terminal {
+  background: #b8b8b8;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid #404040;
+  box-shadow: 4px 4px 0 #606060, inset 1px 1px 0 #FFF, inset -2px -2px 0 #404040;
+  width: 600px;
+  margin: 40px auto;
+  padding: 24px 18px;
+  border-radius: 3px;
+}
+
+.title-bar {
+  background: #606060;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 16px;
+  margin-bottom: 12px;
+  border-radius: 2px 2px 0 0;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-bottom: 2px solid #a0a0a0;
+  box-shadow: 0 2px 0 #404040;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  font-size: 16px;
+}
+
+td.prompt {
+  color: #fada38;
+  font-weight: bold;
+  width: 40px;
+}
+
+td.cmd {
+  color: #383838;
+}
+
+td.output {
+  color: #383838;
+}
+
+input.shell-input {
+  border: none;
+  background: transparent;
+  color: #383838;
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  width: 95%;
+  padding: 0;
+  margin: 0;
+}
+
+.blink {
+  color: #fada38;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
