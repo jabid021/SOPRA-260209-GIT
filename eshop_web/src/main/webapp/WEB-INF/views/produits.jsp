@@ -50,9 +50,10 @@
 	
 	  <label for="libelle">Libelle</label>
 	  <form:input required="required" type="text" path="libelle" placeholder="Saisir le libelle"/>
+	  <form:errors cssClass="errors" path="libelle"/>
 	  <label for="prix">Prix</label>
 	  <form:input required="required" type="number" path="prix" min="0" step="0.01" />
-	  
+	  <form:errors cssClass="errors"  path="prix"/>
 	 
 	  <form:label path="fournisseur.id">Fournisseur</form:label>
 	  <form:select required="required" path="fournisseur.id">

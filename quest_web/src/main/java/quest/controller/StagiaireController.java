@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import quest.dao.IDAOFiliere;
-import quest.dao.IDAOPersonne;
 import quest.model.Filiere;
 import quest.model.Genre;
 import quest.model.Stagiaire;
+import quest.service.StagiaireService;
 
 @Controller
 @RequestMapping("/stagiaire")
 public class StagiaireController {
 
 	@Autowired
-	IDAOPersonne daoPersonne;
+	StagiaireService stagiaireSrv;
 	
 	@Autowired
 	IDAOFiliere daoFiliere;
@@ -31,8 +31,8 @@ public class StagiaireController {
 	@GetMapping("/{id}")
 	public String chercherById(@PathVariable Integer id,Model model) 
 	{
-		Stagiaire stagiaire = (Stagiaire) daoPersonne.findById(id).orElse(null);
-		List<Stagiaire> stagiaires = daoPersonne.findAllStagiaire();
+		Stagiaire stagiaire = stagiaireSrv.getById(id);
+		List<Stagiaire> stagiaires = stagiaireSrv.getAll();
 		List<Filiere> filieres = daoFiliere.findAll();
 
 		model.addAttribute("stagiaire", stagiaire);
@@ -45,7 +45,7 @@ public class StagiaireController {
 	@GetMapping
 	public String chercherAll(Model model)  
 	{
-		List<Stagiaire> stagiaires = daoPersonne.findAllStagiaire();
+		List<Stagiaire> stagiaires = stagiaireSrv.getAll();
 		List<Filiere> filieres = daoFiliere.findAll();
 		model.addAttribute("stagiaire", new Stagiaire());
 		model.addAttribute("stagiaires", stagiaires);
@@ -58,7 +58,7 @@ public class StagiaireController {
 	@GetMapping("/delete/{id}")
 	public String supprimer(@PathVariable Integer id)  
 	{
-		daoPersonne.deleteById(id);
+		stagiaireSrv.deleteById(id);
 		return "redirect:/stagiaire";
 
 	}
@@ -66,14 +66,14 @@ public class StagiaireController {
 	@PostMapping
 	public String ajouter(@ModelAttribute Stagiaire stagiaire)  
 	{
-		daoPersonne.save(stagiaire);
+		stagiaireSrv.insert(stagiaire);
 		return "redirect:/stagiaire";
 	}
 
 	@PostMapping("/{id}")
 	public String modifier(@PathVariable Integer id,@ModelAttribute Stagiaire stagiaire)  
 	{
-		daoPersonne.save(stagiaire);
+		stagiaireSrv.update(stagiaire);
 		return "redirect:/stagiaire";
 	}
 

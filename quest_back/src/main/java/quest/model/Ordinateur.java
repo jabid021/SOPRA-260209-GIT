@@ -21,7 +21,7 @@ public class Ordinateur {
 	private Integer numero;
 	@Column(nullable = false, columnDefinition = "VARCHAR(25) default 'Asus'")
 	@Size(min = 4,max = 25,message = "La marque doit faire entre 4 et 25")
-	@NotBlank(message="La marque d'un ordinateur ne peut pas etre vide")
+	@NotBlank(message="La marque ne peut pas etre vide")
 	private String marque;
 	@Column(nullable=false,columnDefinition = "int default 8")
 	@PositiveOrZero

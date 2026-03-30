@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import eshop.dao.IDAOPersonne;
 import eshop.dao.IDAOProduit;
 import eshop.model.Fournisseur;
 import eshop.model.Produit;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/produit")
@@ -59,15 +61,36 @@ public class ProduitController {
 	}
 	
 	@PostMapping
-	public String ajouter(@ModelAttribute Produit produit)  
+	public String ajouter(@Valid @ModelAttribute Produit produit, BindingResult result,Model model)  
 	{	
+		if(result.hasErrors()) 
+		{
+			List<Produit> produits = daoProduit.findAll();
+			List<Fournisseur> fournisseurs = daoPersonne.findAllFournisseur();
+			model.addAttribute("produit", produit);
+			model.addAttribute("produits", produits);
+			model.addAttribute("fournisseurs",fournisseurs);
+			return "produits.jsp";
+		}
+		
+		
 		daoProduit.save(produit);
 		return "redirect:/produit";
 	}
 
 	@PostMapping("/{id}")
-	public String modifier(@PathVariable Integer id,@ModelAttribute Produit produit)  
+	public String modifier(@PathVariable Integer id,@Valid @ModelAttribute Produit produit,BindingResult result,Model model)  
 	{
+		if(result.hasErrors()) 
+		{
+			List<Produit> produits = daoProduit.findAll();
+			List<Fournisseur> fournisseurs = daoPersonne.findAllFournisseur();
+			model.addAttribute("produit", produit);
+			model.addAttribute("produits", produits);
+			model.addAttribute("fournisseurs",fournisseurs);
+			return "produits.jsp";
+		}
+		
 		daoProduit.save(produit);
 		return "redirect:/produit";
 	}

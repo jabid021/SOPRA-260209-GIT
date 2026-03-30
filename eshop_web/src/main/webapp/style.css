@@ -92,6 +92,7 @@ form.form-clean {
   border-radius: 14px;
 }
 
+form .errors{color:red;}
 form.form-clean input[type="text"],
 form.form-clean input[type="date"],
 form.form-clean input[type="email"],
