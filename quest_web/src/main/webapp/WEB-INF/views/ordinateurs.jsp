@@ -51,13 +51,15 @@
 		<c:set var="chemin" value="ordinateur/${ordinateur.numero}"/>
 	</c:if>
 	
-	<form:form action="ordinateur" method="post" class="form-clean" modelAttribute="ordinateur">
+	<form:form action="${chemin}" method="post" class="form-clean" modelAttribute="ordinateur">
 	  <form:hidden path="numero"/>
 	
 	  <label for="marque">Marque</label>
 	  <form:input required="required" type="text" path="marque" placeholder="Saisir la marque"/>
+	   <form:errors path="marque"><span style="color:red">Message marque error custom</span></form:errors>
 	  <label for="ram">Ram</label>
-	  <form:input required="required" type="number" path="ram" min="0" />
+	  <form:input required="required" type="number" path="ram" />
+	  <form:errors path="ram" style="color:red"/>
 	  
 	 
 	  <form:label path="utilisateur.id">Utilisateur</form:label>

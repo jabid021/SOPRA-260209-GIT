@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 
 @Entity
 @Table(name="module")
@@ -19,6 +20,7 @@ public class Module {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(unique=true)
+	@Digits(integer = 4,fraction = 0)
 	private int quest;
 	private LocalDate debut;
 	private LocalDate fin;

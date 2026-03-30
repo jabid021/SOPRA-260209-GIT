@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
 import quest.dao.IDAOPersonne;
 import quest.model.Formateur;
 import quest.model.Genre;
@@ -67,6 +69,16 @@ public class FormateurController{
 		daoPersonne.save(formateur);
 		return "redirect:/formateur";
 	}
-
-
+	
+	//Update partiel // PATCH
+	@PostMapping("/identifiants")
+	public String modifierIdentifiants(@RequestParam String login,String password,HttpSession session) 
+	{
+		Formateur formateur = (Formateur) session.getAttribute("connected");
+		formateur.setLogin(login);
+		formateur.setPassword(password);
+		session.setAttribute("connected", formateur);
+		daoPersonne.save(formateur);
+		return "redirect:/home";
+	}
 }

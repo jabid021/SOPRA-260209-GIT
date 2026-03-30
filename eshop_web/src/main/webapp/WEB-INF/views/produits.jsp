@@ -45,7 +45,7 @@
 		<c:set var="chemin" value="produit/${produit.id}"/>
 	</c:if>
 	
-	<form:form action="produit" method="post" class="form-clean" modelAttribute="produit">
+	<form:form action="${chemin}" method="post" class="form-clean" modelAttribute="produit">
 	  <form:hidden path="id"/>
 	
 	  <label for="libelle">Libelle</label>

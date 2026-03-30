@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.validation.Valid;
 import quest.dao.IDAOOrdinateur;
 import quest.dao.IDAOPersonne;
 import quest.model.Ordinateur;
@@ -65,8 +67,19 @@ public class OrdinateurController {
 	}
 	
 	@PostMapping
-	public String ajouter(@ModelAttribute Ordinateur ordinateur)  
-	{	
+	public String ajouter(@Valid @ModelAttribute Ordinateur ordinateur, BindingResult result,Model model)  
+	{	 
+		
+		if(result.hasErrors()) 
+		{
+			List<Ordinateur> ordinateurs = daoOrdinateur.findAll();
+			List<Stagiaire> stagiaires = daoPersonne.findAllStagiaireDisponibles();
+			model.addAttribute("ordinateur", ordinateur);
+			model.addAttribute("ordinateurs", ordinateurs);
+			model.addAttribute("stagiaires",stagiaires);
+			return "ordinateurs.jsp";
+		}
+		
 		if(ordinateur.getUtilisateur().getId()==null) 
 		{
 			ordinateur.setUtilisateur(null);

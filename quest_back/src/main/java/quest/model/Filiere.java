@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="filiere")
@@ -19,8 +21,12 @@ public class Filiere {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(length = 35,nullable = false)
+	@NotBlank 
+	@Size(min =10) 
 	private String libelle;
+	
 	@Column(nullable = false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate debut;
