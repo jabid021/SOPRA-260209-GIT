@@ -12,50 +12,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import quest.dao.IDAOMatiere;
-import quest.model.Matiere;
+import quest.model.Stagiaire;
+import quest.service.StagiaireService;
 
 @RestController
-@RequestMapping("/api/matiere")
-public class MatiereRestController{
+@RequestMapping("/api/stagiaire")
+public class StagiaireRestController{
 
 	@Autowired
-	IDAOMatiere daoMatiere;
+	StagiaireService stagiaireSrv;
 
 	
 	@GetMapping("/{id}")
-	public Matiere chercherById(@PathVariable Integer id) 
+	public Stagiaire chercherById(@PathVariable Integer id) 
 	{
-		Matiere matiere = daoMatiere.findById(id).orElse(null);
+		Stagiaire stagiaire = stagiaireSrv.getById(id);
 		return  null;
 	}
 
 	@GetMapping
-	public List<Matiere> chercherAll()  
+	public List<Stagiaire> chercherAll()  
 	{
-		List<Matiere> matieres = daoMatiere.findAll();
+		List<Stagiaire> stagiaires = stagiaireSrv.getAll();
 		return null;
 	}
 
 	@DeleteMapping("/{id}")
 	public void supprimer(@PathVariable Integer id)  
 	{
-		daoMatiere.deleteById(id);
+		stagiaireSrv.deleteById(id);
 	}
 	
 	@PostMapping
-	public Matiere ajouter(@RequestBody Matiere matiere)  
+	public Stagiaire ajouter(@RequestBody Stagiaire stagiaire)  
 	{
-		daoMatiere.save(matiere);
-		return matiere;
+		stagiaireSrv.insert(stagiaire);
+		return stagiaire;
 	}
 
 	@PutMapping("/{id}")
-	public Matiere modifier(@PathVariable Integer id,@RequestBody Matiere matiere)  
+	public Stagiaire modifier(@PathVariable Integer id,@RequestBody Stagiaire stagiaire)  
 	{
-		matiere.setId(id);
-		daoMatiere.save(matiere);
-		return matiere;
+		stagiaire.setId(id);
+		stagiaireSrv.update(stagiaire);
+		return stagiaire;
 	}
 
 

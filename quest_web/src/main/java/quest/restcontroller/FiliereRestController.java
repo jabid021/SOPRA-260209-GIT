@@ -12,50 +12,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import quest.dao.IDAOMatiere;
-import quest.model.Matiere;
+import quest.dao.IDAOFiliere;
+import quest.model.Filiere;
 
 @RestController
-@RequestMapping("/api/matiere")
-public class MatiereRestController{
+@RequestMapping("/api/filiere")
+public class FiliereRestController{
 
 	@Autowired
-	IDAOMatiere daoMatiere;
+	IDAOFiliere daoFiliere;
 
 	
 	@GetMapping("/{id}")
-	public Matiere chercherById(@PathVariable Integer id) 
+	public Filiere chercherById(@PathVariable Integer id) 
 	{
-		Matiere matiere = daoMatiere.findById(id).orElse(null);
+		Filiere filiere = daoFiliere.findById(id).orElse(null);
 		return  null;
 	}
 
 	@GetMapping
-	public List<Matiere> chercherAll()  
+	public List<Filiere> chercherAll()  
 	{
-		List<Matiere> matieres = daoMatiere.findAll();
+		List<Filiere> filieres = daoFiliere.findAll();
 		return null;
 	}
 
 	@DeleteMapping("/{id}")
 	public void supprimer(@PathVariable Integer id)  
 	{
-		daoMatiere.deleteById(id);
+		daoFiliere.deleteById(id);
 	}
 	
 	@PostMapping
-	public Matiere ajouter(@RequestBody Matiere matiere)  
+	public Filiere ajouter(@RequestBody Filiere filiere)  
 	{
-		daoMatiere.save(matiere);
-		return matiere;
+		daoFiliere.save(filiere);
+		return filiere;
 	}
 
 	@PutMapping("/{id}")
-	public Matiere modifier(@PathVariable Integer id,@RequestBody Matiere matiere)  
+	public Filiere modifier(@PathVariable Integer id,@RequestBody Filiere filiere)  
 	{
-		matiere.setId(id);
-		daoMatiere.save(matiere);
-		return matiere;
+		filiere.setId(id);
+		daoFiliere.save(filiere);
+		return filiere;
 	}
 
 

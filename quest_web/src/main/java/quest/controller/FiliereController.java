@@ -54,7 +54,7 @@ public class FiliereController{
 	}
 	
 	@PostMapping
-	public String ajouter(@RequestParam String libelle,@ModelAttribute Filiere filiere)  
+	public String ajouter(@ModelAttribute Filiere filiere)  
 	{
 		daoFiliere.save(filiere);
 		return "redirect:/filiere";

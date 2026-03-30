@@ -31,6 +31,10 @@ public class FormateurService {
 	
 	public Formateur update(Formateur formateur) 
 	{
+		if(daoPersonne.findById(formateur.getId()).isEmpty()) 
+		{
+			throw new RuntimeException();
+		}
 		return daoPersonne.save(formateur);
 	}
 	
