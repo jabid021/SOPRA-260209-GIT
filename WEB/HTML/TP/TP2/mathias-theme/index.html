@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+
+<title> Accueil </title>
+
+<style>
+
+/* ---------------------- HEADER ---------------------- */
+
+header{
+    background-color:#7ea5be;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    margin:0;
+    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+/* ---------------------- BODY ---------------------- */
+
+body{
+    margin:0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: linear-gradient(to bottom, #3a7bd5, #000000);
+    color:white;
+}
+
+
+
+/* ACCUEIL */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 40px;
+}
+
+/* Carte */
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Image */
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Texte dans l'image */
+.card-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Liens normaux */
+a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Liens visités */
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: #ffd700;
+}
+
+/* Les cartes/Menus */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Effet au clic */
+.card:active {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+    box-shadow: 0 0 25px rgba(255,215,0,0.8);
+}
+
+/* ---------------------- Bulle Texte d'Introduction (Si vous tombez sur ceci, voici un easter-egg ... Votre formateur adore le module UML !) ---------------------- */
+/* - Si jamais vous voulez me contacter, je mets pas mon Discord sur le repo d'un GitHub public, mais demandez à mon formateur ça me dérange pas -*/
+/* -------------------------------------------- Ah oui, il adore TomCat aussi c'est cadeau ---------------------------------- */
+
+.bulle {
+    margin: 40px auto;
+    width: 70%;
+    padding: 25px;
+
+    background: linear-gradient(to bottom, #0d2a45, #000000);
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    text-align: center;
+
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ---------------------- FOOTER ---------------------- */
+
+footer{
+    margin-top:40px;
+    padding:20px;
+    text-align:center;
+    text-shadow: 0 0 5px rgba(255,215,0,0.6);
+
+    background: linear-gradient(to top, #000000, #0d2a45);
+    color:#ffd700;
+
+    border-top: 3px solid #ffd700;
+    box-shadow: 0px -5px 15px rgba(0,0,0,0.8);
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+footer p{
+    margin:5px;
+}
+
+footer img{
+    vertical-align:middle;
+    border-radius:50%;
+    border:2px solid #ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Bienvenue sur mon univers World of Warcraft</h1>
+    <p style="margin-top:10px; font-style: italic; opacity:0.8;">
+        Choisissez votre aventure, et amusez-vous !
+    </p>    
+</header>
+
+<!-- ------------- GRILLE 2x2 --------------- -->
+
+<div class="grid">
+
+    <a href="Mascotte.html">
+        <div class="card">
+            <img src="assets/xu-fu-petit-de-xuen.jpg">
+            <div class="card-title">Top 5 Mascottes</div>
+        </div>
+    </a>
+
+    <a href="top5-montures.html">
+        <div class="card">
+            <img src="assets/panthere-onyx-ornee-de-joyaux.jpg"> <!-- 👉 CHANGE IMAGE -->
+            <div class="card-title">Top 5 Montures</div>
+        </div>
+    </a>
+
+    <a href="top5-raids.html">
+        <div class="card">
+            <img src="assets/nyalotha.jpg"> <!-- 👉 CHANGE IMAGE -->
+            <div class="card-title">Top 5 Raids</div>
+        </div>
+    </a>
+
+    <a href="top5-personnages.html">
+        <div class="card">
+            <img src="assets/Valeera_Accueil.jpg"> <!-- 👉 CHANGE IMAGE -->
+            <div class="card-title">Top 5 Personnages</div>
+        </div>
+    </a>
+
+</div>
+
+<!-- ---------------------- BULLE TEXTE ---------------------- -->
+
+<div class="bulle">
+
+    Bienvenue à vous aventuriers et futurs légendes de ce monde !  
+    Ce site est dédié à mes classements personnels sur World of Warcraft.  
+    Tu y trouveras mes mascottes préférées, mes montures favorites, ainsi que les raids et personnages qui m'ont marqué.  
+    <br>
+    Puisse la bonne fortune, le courage d'analyser chaque élément et votre soif de connaissance vous guider vers le chemin de la réussite.
+    Que les conseils avisés de votre plus tout jeune sensei vous guide car de sa sagesse, vous vous en abreuverez.
+    <br>
+    Bonne exploration en Azeroth !
+
+</div>
+
+<footer>
+    <p>
+        Réalisé par 
+        <img src="assets/valunistar.jpg" style="width:30px;height:30px;">
+        <strong>Valunistar</strong>
+    </p>
+
+    <p>© 2026 - Site fan World of Warcraft</p>
+</footer>
+
+</body>
+</html>

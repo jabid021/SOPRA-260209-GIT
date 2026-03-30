@@ -51,7 +51,9 @@ nav {
 .menu li:hover .sous-menu {
     display: block;
 }
+
 /* ------------------------------------------------Body-----------------------------------*/
+
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -94,6 +96,77 @@ body{
 
 .tableau-mascottes a{
     color:#ffd700;
+}
+
+/* ------------------------------------------------Tableau_Classement-----------------------------------*/
+
+.rank {
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.rank-1::before {
+    content: "👑 ";
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, #ffd700, #b8860b);
+    color: black;
+    box-shadow: 0 0 10px rgba(255,215,0,0.7);
+}
+
+.rank-2::before {
+    content: "🥈 ";
+}
+
+.rank-2 {
+    background: linear-gradient(135deg, #c0c0c0, #808080);
+    color: black;
+    box-shadow: 0 0 8px rgba(192,192,192,0.7);
+}
+
+.rank-3::before {
+    content: "🥉 ";
+}
+
+.rank-3 {
+    background: linear-gradient(135deg, #cd7f32, #8b4513);
+    color: white;
+    box-shadow: 0 0 8px rgba(205,127,50,0.7);
+}
+
+.rank:hover {
+    transform: scale(1.1);
+}
+
+.first-place:hover,
+.second-place:hover,
+.third-place:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+/* Effet brillance sur la ligne */
+
+.first-place {
+    animation: glow 2s infinite;
+}
+
+.second-place {
+    animation: glow 3s infinite;
+}
+
+.third-place {
+    animation: glow 4s infinite;
+}
+
+/* Animation de brillance */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+    100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
 }
 
 /* Info-Bulle */
@@ -150,6 +223,26 @@ body{
     visibility: visible;
     opacity: 1;
 }
+
+/* Images du tableau */
+.tableau-mascottes img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 10px;
+}
+
+/* Effet zoom */
+.tableau-mascottes img:hover {
+    transform: scale(1.8) rotate(1deg);
+    z-index: 100;
+    position: relative;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.8),
+                0 0 15px rgba(255,215,0,0.6);
+
+    border: 2px solid #ffd700;
+}
+
+
 
 /*-------------------------- Footer ------------------------*/
 
@@ -212,7 +305,6 @@ footer a:hover{
         <a href="#">Top 5</a>
         
         <ul class="sous-menu">
-        <li><a href="top5-mascottes.html">Top 5 Mascottes</a></li>
         <li><a href="top5-montures.html">Top 5 Montures</a></li>
         <li><a href="top5-raids.html">Top 5 Raids</a></li>
         <li><a href="top5-personnages.html">Top 5 Personnages</a></li>
@@ -233,6 +325,8 @@ footer a:hover{
     
 </header>
 
+
+
 <body>
     <table class="tableau-mascottes" border align="center" width="80%">
         <tr>
@@ -243,8 +337,8 @@ footer a:hover{
             <th>Mode d'obtention</th>
         </tr>
     
-        <tr align="center">
-            <td>1° Place</td>
+        <tr align="center" class="first-place">
+            <td class="rank rank-1">1° Place</td>
             <td>
                 <span class="tooltip">
                 Xu Fu, petit de Xuen
@@ -266,8 +360,8 @@ footer a:hover{
             </td>
         </tr>
 
-        <tr align="center">
-            <td>2° Place</td>
+        <tr align="center" class="second-place">
+            <td class="rank rank-2">2° Place</td>
             <td>
                 <span class="tooltip">
                     Val'kyr en herbe
@@ -288,8 +382,8 @@ footer a:hover{
             </td>
         </tr>
 
-        <tr align="center">
-            <td>3° Place</td>
+        <tr align="center" class="third-place">
+            <td class="rank rank-3">3° Place</td>
             <td>
                 <span class="tooltip">
                 Groopy
