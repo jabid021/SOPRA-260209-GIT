@@ -592,8 +592,8 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
 .pkmtype-roche      { color: #b8a040; background: radial-gradient(circle at 35% 35%, rgba(184,160,64,0.15),  rgba(184,160,64,0.05));  border: 3px solid rgba(184,160,64,0.8); }
 .pkmtype-acier      { color: #aaaacc; background: radial-gradient(circle at 35% 35%, rgba(170,170,204,0.15), rgba(170,170,204,0.05)); border: 3px solid rgba(170,170,204,0.8); }
 
-#pokedex-visu-stats { padding-top:12px; width:100%; border-top:1px solid rgba(230,57,70,0.3);}
-#pokedex-visu-stats th, #pokedex-visu-stats td{padding:0 12px 0 12px; border-radius:6px; border:1px dashed rgba(255,255,255,0.2);}
+.pokedex-visu-stats { padding-top:12px; width:100%; border-top:1px solid rgba(230,57,70,0.3);}
+.pokedex-visu-stats th, .pokedex-visu-stats td{padding:0 12px 0 12px; border-radius:6px; border:1px dashed rgba(255,255,255,0.2);}
 
 #pokedex-visu-attaques {display:flex;flex-direction: column;padding:24px;   max-height: 500px; overflow-y: auto; overflow-x: hidden;}
 .attaque-row {
@@ -905,16 +905,20 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
   align-items: center;
 }
 
+#herbe-panel button:active {
+  transform: translateY(2px); 
+}
+
 /* Zone images et pokémons */
 .todo-herbe-combat {
   background:rgba(255,255,255,0.05);
   border:1px dashed rgba(255,255,255,0.2);
   border-radius:10px;
   padding:18px;
+  margin-bottom:6px;
   text-align:center;
   color:rgba(255,255,255,0.45);
   font-size:13px;
-  margin-bottom:18px;
   line-height:1.9;
   font-family:'Press Start 2P',monospace; line-height:1.4;
   min-height: 200px;
@@ -926,9 +930,24 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
   radial-gradient(ellipse 100% 40% at 50% 90%, rgba(0, 0, 0, 0.2) 0%, transparent 100%),
   radial-gradient(ellipse 90% 25% at 50% 90%, rgba(181, 255, 177, 0.1) 0%, transparent 100%);
 }
+
+#vie-joueur .combat-sprite{animation: slideLeft 1.2s ease;}
+#vie-ennemy .combat-sprite{animation: slideRight 1.2s ease;}
+@keyframes slideRight {   
+  0% {transform: translateX(300px) scale(0.8); opacity: 1; }
+  30% { transform: translateX(-8px)    scale(1.2); opacity: 1; }
+  100% { transform: translateX(0)      scale(1);    opacity: 1; }}
+@keyframes slideLeft {
+  0% { transform: translateX(-300px) scale(0.1); opacity: 1; }
+  30% { transform: translateX(8px)    scale(1.5); opacity: 1; }
+  100% { transform: translateX(0)      scale(1);    opacity: 1; }
+}
 .combat-nom-lvl {
   display: flex;
   justify-content: space-between;
+}
+.combat-nom-lvl span:first-child {
+  color:#e63946; text-shadow:0 0 8px rgba(230,57,70,0.6);
 }
 .combat-pv-vie {
   display: flex;
@@ -948,8 +967,9 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
   width: 128px; height: 128px;
 }
 
-/* Zone attaques */
+/* Zone attaques 
 #herbe-panel button:hover {filter: brightness(1.5);transform: scale(1.05);}
+*/
 
 .btn-attaque {
   cursor:pointer;
@@ -957,28 +977,292 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
   justify-content: space-between;
   display: flex;
   border-radius:10px;
-  padding:12px 18px;
+  padding:8px 18px;
   margin-bottom:6px;
   background:transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255,255,255,0.2);
   outline: none;
+  font-size: 18px;
 }
-.att-icon {
-  padding:6px;
-  font-size: 36px;
+.btn-attaque:hover {
+  color: rgba(0, 0, 0, 0.8);
+  background:rgba(255, 255, 255, 0.7);
+  border: none;
+}
+.btn-attaque:hover .att-infos-detail-tag {color: rgba(255, 255, 255, 0.5); background:rgba(0, 0, 0, 0.8)}
+
+.att-icon { padding:4px; font-size: 28px; border-radius: 6px;}
+.att-infos { display: flex; flex-direction: column; gap:6px;}
+.att-pp { display: flex; flex-direction: column; gap:6px;}
+
+.att-infos-detail-tag {
+  border-radius: 18px;
+  background:rgba(255, 255, 255, 0.5);
+  padding:3px 9px;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+}
+.att-pp-bar {background: rgba(0, 0, 0, 0.5); width: 64px; height: 6px; border-radius:12px; }
+.att-pp-fill { background: rgba(255, 255, 255, 0.5); width: 28px; height: 100%; border-radius:12px;}
+
+/* Zone equipe et balls */
+#herbe-equipe-ball {
+  display: grid;
+  grid-template-columns:7fr 1fr;
+  column-gap: 16px;
+  font-size:13px;
+  line-height:1.9;
+  font-family:'Press Start 2P',monospace; line-height:1.4;
+  color:rgba(255,255,255,0.45);
+}
+
+#combat-pkm-change {
+  display: flex; align-items: center; justify-content: space-around;
+  background:transparent;
+  border:1px dashed rgba(255,255,255,0.2); border-radius: 18px;
+  margin-bottom:12px;
+  padding:8px 18px;
+}
+.combat-equipe {
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  background: rgba(255, 255, 255, 0.03);
+  border: none; border-radius: 18px;
+  padding: 3px;
+  cursor: pointer;
+}
+.combat-equipe.actif{background: rgba(255, 255, 255, 0.1);box-shadow: 0 0 10px rgba(45, 198, 83, 0.3); cursor: not-allowed;}
+.combat-equipe.mort, .combat-equipe.vide {filter: grayscale(1) brightness(0.1); cursor: default;}
+.combat-equipe.actif:hover { transform: none; }
+.combat-equipe.mort:hover, .combat-equipe.vide:hover{transform: none;}
+.combat-equipe:hover{transform: translateY(-3px);}
+#combat-pkm-change button:active {transform: translateY(2px);}
+
+.combat-equipe .combat-barre-vie {
+  width:80%; height: 4px;
+  margin-bottom:2px;
+}
+
+.combat-balls {
+  flex-direction: column;
+  gap:5px;
+  border:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  outline: none;
+  border-radius: 10px;
+  cursor:pointer;
+  font-size:13px;
+  line-height:1.9;
+  padding: 3px;
+  font-family:'Press Start 2P',monospace; line-height:1.4;
+  color:rgba(255,255,255,0.45);
+}
+.combat-balls:hover {transform: translateY(-3px); filter: brightness(2);}
+.combat-balls:active {transform: translateY(2px);}
+.combat-balls img {width: 64px; height: 64px;filter: drop-shadow(0 0 8px rgb(255 22 22));}
+#nbrBalls {font-size:8px;white-space: nowrap;}
+
+/* ══════════════════════════════
+   TEAM ON START
+══════════════════════════════ */
+#overlay-team .panel {
+  max-height: 95vh;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
+
+#team-global {
+  display: flex;
+  padding :6px;
+  margin:6px;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── team 6 ── */
+#team-liste {
+  display: flex;
+  flex-direction: column;
+  padding:14px 16px 14px 0;
+  gap: 6px;
+  overflow-y: auto;
+  justify-content: space-around;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.team-box {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  outline: none;
+  -webkit-appearance: none;
+}
+.team-box:hover {
+  background: rgba(230,57,70,0.12);
+  border-color: rgba(230,57,70,0.4);
+}
+.team-box:active {
+  transform: translateY(2px);
+}
+.team-box .combat-barre-vie {
+  width:80%; height: 4px;
+  margin-bottom:2px;
+}
+
+.team-box-infos {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.team-num {
+  font-size: 9px;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Press Start 2P', monospace;
+  flex-shrink: 0;
+  text-wrap: nowrap;
+}
+
+.team-sprite img {
+  width: 48px; height: 48px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.team-name {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── pokemon choisis ── */
+#team-detail {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+#team-visu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  overflow-y: hidden;
+}
+
+#team-visu-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: #e63946;
+  text-shadow: 0 0 16px rgba(230,57,70,0.5);
+}
+
+#team-visu img {
+  width: 100px; height: 100px;
+  object-fit: contain;
+}
+
+#team-visu-evol {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+#team-visu-types {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+#team-visu .team-section-titre {text-align: center;}
+
+/* attaques */
+#team-att-four {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.team-att {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 12px 12px;
+  border-radius: 10px;
+  gap: 6px;
+}
+
+.team-att-nom {
+  font-size: 12px;
+  font-weight: bold;
+  margin-right:50px;
+}
+
+.team-att-details {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.team-att-tag {
+  text-align: center;
+  padding: 2px 8px;
   border-radius: 6px;
+  background: rgba(0,0,0,0.3);
+  font-size: 9px;
 }
-.att-infos {
+
+/* titres sections */
+.team-section-titre {
+  font-family: 'Press Start 2P', monospace;
+  width: 100%;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(230,57,70,0.2);
+}
+
+/* stats */
+.team-table { padding:6px 0 20px 0; width:100%; font-size:12px;color: rgba(255,255,255,0.4);}
+.team-table:last-child {padding:6px 0 6px 0;}
+.team-table th, .team-table td{padding:2px 12px; border-radius:6px; border:1px dashed rgba(255,255,255,0.2);text-wrap: nowrap;text-align: center;}
+
+#team-stats {
+  margin-left:20px;
   display: flex;
   flex-direction: column;
-  gap:6px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
 }
-.att-pp {
-  display: flex;
-  flex-direction: column;
-  gap:6px;
-}
+
 
 </style>
 </head>
@@ -1166,18 +1450,20 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
           <div class="att-pp-bar"><div class="att-pp-fill" style="width:80%"></div></div>
         </div>
       </button>
+    </div>
 
+    <div id="herbe-equipe-ball">
       <div id="combat-pkm-change">
         <span>EQUIPE</span>
-        <button class="combat-equipe actif"><img src="../img/pkmAnim/Spr_3e_025.png"></button>
-        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_343.png"></button>
-        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_230.png"></button>
-        <button class="combat-equipe"><img src="../img/pkmAnim/Spr_3e_116.png"></button>
-        <button class="combat-equipe vide"><img src=""></button>
-        <button class="combat-equipe vide"><img src=""></button>
+        <button class="combat-equipe actif" data-vie="5" data-vie-max="100"><img src="../img/pkmAnim/Spr_3e_025.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
+        <button class="combat-equipe" data-vie="80" data-vie-max="80"><img src="../img/pkmAnim/Spr_3e_343.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
+        <button class="combat-equipe" data-vie="12" data-vie-max="66"><img src="../img/pkmAnim/Spr_3e_230.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
+        <button class="combat-equipe mort" data-vie="0" data-vie-max="220"><img src="../img/pkmAnim/Spr_3e_116.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
+        <button class="combat-equipe vide" data-vie="0" data-vie-max="0"><img src="../img/pkmAnim/Spr_3e_000.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
+        <button class="combat-equipe vide" data-vie="0" data-vie-max="0"><img src="../img/pkmAnim/Spr_3e_000.png"><div class="combat-barre-vie"><div class="barre-interne"></div></div></button>
       </div>
 
-      <button class="combat-balls"><img src="../img/pokeball.png">5</button>
+      <button class="combat-balls"><img src="../img/pokeball.png" width="48px"><span id="nbrBalls">Pokéball : 5</span></button>
     </div>
 
 
@@ -1258,7 +1544,7 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
               <div class="pkmtype pkmtype-electrique">Electrique</div>
               <div class="pkmtype pkmtype-plante">Plante</div>
             </div>
-            <table id="pokedex-visu-stats">
+            <table class="pokedex-visu-stats">
               <tr>
                 <th>Vie</th>
                 <td>80</th>
@@ -1346,7 +1632,7 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
         <div class="todo-box soin-texte">
           <strong>Bonjour !</strong>
           Veux tu soigner tes pokémons ?<br><br><br>
-          <em>(Tu gagnes 1 pillule toutes les x secondes de jeu)</em>
+          <em>(Tu gagnes 1 pillule toutes les 30 secondes de jeu)</em>
         </div>
         <div class="soin-panel-choix">
           <button class="soin-panel-btn">Oui merci !</button>
@@ -1514,6 +1800,150 @@ background: linear-gradient(90deg, #e63946, #ff6b35, #ffc832, #2dc653, #00b4d8, 
   </div>
 </div>
 
+<!-- ══ OVERLAY TEAM ON START ══ -->
+ <div id="overlay-team" class="overlay">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-icon">⚔️</span>
+      <div>
+        <div class="panel-title">Mon équipe</div>
+        <div class="panel-sub">LES MEILLEURS ÉVIDEMMENT !</div>
+      </div>
+    </div>
+
+    <div id="team-global">
+
+      <!-- liste des 6 pokémons -->
+      <div id="team-liste">
+        <button class="team-box " data-vie="180" data-vie-max="180">
+          <div class="team-box-infos">          
+            <div class="team-num">LvL 20</div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_025.png"></div>
+            <div class="team-name">Petit</div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        </button>
+        <button class="team-box" data-vie="50" data-vie-max="100">
+          <div class="team-box-infos">
+            <div class="team-num">LvL 100</div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_044.png"></div>
+            <div class="team-name">Raichu</div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        </button>
+        <button class="team-box" data-vie="10" data-vie-max="180">
+          <div class="team-box-infos">         
+            <div class="team-num">LvL 5</div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_320.png"></div>
+            <div class="team-name">Graaaaaaaaaaand</div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        </button>
+        <button class="team-box" data-vie="200" data-vie-max="220">
+          <div class="team-box-infos">          
+            <div class="team-num">LeL 99</div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_273.png"></div>
+            <div class="team-name">Bloup</div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>
+        </button>
+        <button class="team-box" data-vie="0" data-vie-max="0">
+          <div class="team-box-infos">          
+            <div class="team-num"></div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_000.png"></div>
+            <div class="team-name"></div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>          
+        </button>
+        <button class="team-box" data-vie="0" data-vie-max="0">
+          <div class="team-box-infos">          
+            <div class="team-num"></div>
+            <div class="team-sprite"><img src="../img/pkmAnim/Spr_3e_000.png"></div>
+            <div class="team-name"></div>
+          </div>
+          <div class="combat-barre-vie"><div class="barre-interne"></div></div>          
+        </button>
+      </div>
+
+      <!-- fiche détail -->
+      <div id="team-detail">
+
+        <div id="team-visu">
+          <div id="team-visu-name">Pikachu - Lvl 20</div>
+          <div><img id="team-visu-sprite" src="../img/pkmAnim/Spr_3e_025.png"></div>
+          <div id="team-visu-evol">Capturé Route 3</div>
+          <div id="team-visu-types">
+            <div class="pkmtype pkmtype-electrique">Electrique</div>
+            <div class="pkmtype pkmtype-normal">Normal</div>
+          </div>
+
+          <div class="team-section-titre">ATTAQUES</div>
+          <div id="team-att-four">
+            <div class="team-att pkmtype pkmtype-electrique">
+              <span class="team-att-nom">Eclair</span>
+                <span class="team-att-tag">Pui 40</span>
+                <span class="team-att-tag">Pré 100</span>
+                <span class="team-att-tag">Spécial</span>
+                <span class="team-att-tag">PP 20/25</span>
+            </div>
+            <div class="team-att pkmtype pkmtype-normal">
+              <span class="team-att-nom">Charge</span>
+                <span class="team-att-tag">Pui 40</span>
+                <span class="team-att-tag">Pré 100</span>
+                <span class="team-att-tag">Physique</span>
+                <span class="team-att-tag">PP 5/30</span>
+            </div>
+            <div class="team-att pkmtype pkmtype-dragon">
+              <span class="team-att-nom">Griffe Dragon</span>
+                <span class="team-att-tag">Pui 100</span>
+                <span class="team-att-tag">Pré 100</span>
+                <span class="team-att-tag">Physique</span>
+                <span class="team-att-tag">PP 14/15</span>
+            </div>
+            <div class="team-att pkmtype pkmtype-electrique">
+              <span class="team-att-nom">Fatal-Foudre</span>
+                <span class="team-att-tag">Pui 120</span>
+                <span class="team-att-tag">Pré 70</span>
+                <span class="team-att-tag">Spécial</span>
+                <span class="team-att-tag">PP 9/10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- stats / EVs / IVs -->
+        <div id="team-stats">
+          <div class="team-section-titre">STATS</div>
+          <table class="team-table">
+            <tr><th>Vie</th><td>80</td><th>Vitesse</th><td>110</td></tr>
+            <tr><th>Attaque</th><td>150</td><th>Att. Spé</th><td>150</td></tr>
+            <tr><th>Défense</th><td>20</td><th>Déf. Spé</th><td>50</td></tr>
+            <tr><th colspan="3">Total</th><td>620</td></tr>
+          </table>
+
+          <div class="team-section-titre">EVs</div>
+          <table class="team-table">
+            <tr><th>Vie</th><td>6</td><th>Vitesse</th><td>256</td></tr>
+            <tr><th>Attaque</th><td>0</td><th>Att. Spé</th><td>256</td></tr>
+            <tr><th>Défense</th><td>0</td><th>Déf. Spé</th><td>6</td></tr>
+            <tr><th colspan="3">Total</th><td>320</td></tr>
+          </table>
+
+          <div class="team-section-titre">IVs</div>
+          <table class="team-table">
+            <tr><th>Vie</th><td>12</td><th>Vitesse</th><td>31</td></tr>
+            <tr><th>Attaque</th><td>1</td><th>Att. Spé</th><td>31</td></tr>
+            <tr><th>Défense</th><td>12</td><th>Déf. Spé</th><td>24</td></tr>
+            <tr><th colspan="3">Total</th><td>120</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="btn-fermer" onclick="fermerOverlay('team')">✕ REPARTIR À L'AVENTURE</button>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════
 //  TESTS
@@ -1542,20 +1972,42 @@ setInterval(() => {
 // Mettre à jour les barres de vie
 
 
-function actualiserBarreVie(bv) {
-  const elVie = document.querySelector(`${bv} .vie`)
-  const elBarre = document.querySelector(`${bv} .barre-interne`)
+function actualiserBarreVie(bv, quoi) {
+  let elVie
+  let elBarre
+  switch (quoi) {
+    case "duel":
+      elVie = document.querySelector(`${bv} .vie`)
+      elBarre = document.querySelector(`${bv} .barre-interne`)
+      break;
+    case "team":
+      elVie = bv
+      elBarre = bv.querySelector(".barre-interne")
+      break;
+  }
   const vie = parseInt(elVie.dataset.vie)
   const vieMax = parseInt(elVie.dataset.vieMax)
   const percVie = Math.ceil(vie/vieMax*100)
 
-  elVie.textContent = `${vie}/${vieMax}`
+  if(quoi === "duel"){elVie.textContent = `${vie}/${vieMax}`}
+  
   elBarre.style.setProperty("width",`${percVie}%`)
-  elBarre.style.setProperty("background",`hsl(${percVie}, 80%, 45%)`)
+  if(vieMax === 0 | vie === 0){
+    elBarre.style.setProperty("background",`transparent`)
+  } else {
+    elBarre.style.setProperty("background",`hsl(${percVie}, 80%, 45%)`)
+  }
 }
 
-actualiserBarreVie('#vie-ennemy')
-actualiserBarreVie('#vie-joueur')
+actualiserBarreVie('#vie-ennemy', "duel")
+actualiserBarreVie('#vie-joueur', "duel")
+
+document.querySelectorAll('.combat-equipe').forEach(btn => {
+  actualiserBarreVie(btn, "team")
+})
+document.querySelectorAll('.team-box').forEach(btn => {
+  actualiserBarreVie(btn, "team")
+})
 
 // ══════════════════════════════════════
 //  ÉTAT DU JEU
@@ -1623,6 +2075,10 @@ jeu.addEventListener('touchmove', e => {
 
 btnInteragir.addEventListener('click', () => {
   if (zoneActiveType && !menuOuvert) ouvrirOverlay(zoneActiveType)
+})
+
+document.querySelector('.btn-team').addEventListener('click', () => {
+  ouvrirOverlay('team')
 })
 
 // ══════════════════════════════════════
