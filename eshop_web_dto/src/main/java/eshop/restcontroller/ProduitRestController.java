@@ -1,5 +1,6 @@
 package eshop.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,21 @@ public class ProduitRestController {
 	}
 	
 	@GetMapping("/{id}/ventes")
-	public Produit chercherByIdWithVentes(@PathVariable Integer id) 
+	public ProduitDTO chercherByIdWithVentes(@PathVariable Integer id) 
 	{
-		return daoProduit.findByIdWithVentes(id);
+		return ProduitDTO.convertWithVentes(daoProduit.findByIdWithVentes(id));
 	}
 
 	@GetMapping
-	public List<Produit> chercherAll()  
+	public List<ProduitDTO> chercherAll()  
 	{
-		return daoProduit.findAll();
+		/*List<ProduitDTO> produitsDTO = new ArrayList();
+		for(Produit p : daoProduit.findAll()) 
+		{
+			produitsDTO.add(ProduitDTO.convert(p));
+		}*/
+		List<ProduitDTO> produitsDTO = daoProduit.findAll().stream().map(p->ProduitDTO.convert(p)).toList();
+		return produitsDTO; 
 	}
 
 	@DeleteMapping("/{id}")

@@ -21,7 +21,6 @@ public class Achat {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="date_achat", nullable = false)
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateAchat;
 	private int quantite;
 	

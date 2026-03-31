@@ -6,6 +6,8 @@ import duckflix.context.Singleton;
 import duckflix.dao.IDAOCompte;
 import duckflix.dao.IDAOMedia;
 import duckflix.model.Film;
+import duckflix.model.Genre;
+import duckflix.model.Plan;
 import duckflix.model.Utilisateur;
 
 public class ExercicesStream {
@@ -36,8 +38,8 @@ public class ExercicesStream {
 		//Rappel d'utilisation de stream / filter / toList
 
 		List<Film> filmId1ou2 = films.stream().filter(f->f.getId()==1 || f.getId()==2).toList();
-		
-		
+
+
 
 
 		// =========================================================
@@ -45,12 +47,7 @@ public class ExercicesStream {
 		// Objectif : créer une liste filmsLongs contenant les films de durée >= 120.
 		// Indice : utiliser stream() + filter() + toList()
 		// =========================================================
-		// List<Film> filmsLongs = ...
-
-
-
-
-
+		List<Film> filmsLongs = films.stream().filter(f->f.getDuree()>=120).toList();
 
 
 
@@ -59,10 +56,7 @@ public class ExercicesStream {
 		// Objectif : créer une liste filmsAvecDuck contenant les films dont le titre contient "Duck" (ignore case).
 		// Indice : filter() + toLowerCase() + contains()
 		// =========================================================
-		// List<Film> filmsAvecDuck = ...
-
-
-
+		List<Film> filmsAvecDuck = films.stream().filter(f->f.getTitre().toLowerCase().contains("duck")).toList();
 
 
 
@@ -71,11 +65,7 @@ public class ExercicesStream {
 		// Objectif : créer une liste titresFilms contenant uniquement les titres de tous les films.
 		// Indice : map(f -> f.getTitre())
 		// =========================================================
-		// List<String> titresFilms = ...
-
-
-
-
+		List<String> titresFilms = films.stream().map(f->f.getTitre()).toList();
 
 
 		// =========================================================
@@ -83,25 +73,14 @@ public class ExercicesStream {
 		// Objectif : créer une liste filmsTriesParTitre triée par titre A -> Z.
 		// Indice : sorted((a,b) -> a.getTitre().compareTo(b.getTitre()))
 		// =========================================================
-		// List<Film> filmsTriesParTitre = ...
-
-
-
-
-
-
+		List<Film> filmsTriesParTitre = films.stream().sorted((a,b)-> a.getTitre().compareTo(b.getTitre())).toList();
 
 		// =========================================================
 		// EXERCICE 5 — tri décroissant 
 		// Objectif : créer une liste filmsTriesParDureeDesc triée par durée décroissante.
 		// Indice : sorted((a,b) -> Integer.compare(a.getDuree(), b.getDuree())).toList().reversed()
 		// =========================================================
-		// List<Film> filmsTriesParDureeDesc = ...
-
-
-
-
-
+		List<Film> filmsTriesParDureeDesc = films.stream().sorted((a,b) ->Integer.compare(a.getDuree(), b.getDuree())).toList().reversed();
 
 
 
@@ -110,12 +89,7 @@ public class ExercicesStream {
 		// Objectif : trouver filmLePlusLong (film de durée maximale), ou null si la liste est vide.
 		// Indice : max((a,b)->...) + orElse(null)
 		// =========================================================
-		// Film filmLePlusLong = ...
-
-
-
-
-
+		Film filmLePlusLong = films.stream().max((a,b)->Integer.compare(a.getDuree(), b.getDuree())).orElse(null);
 
 
 		// =========================================================
@@ -123,7 +97,13 @@ public class ExercicesStream {
 		// Objectif : calculer dureeMaxWatchlistU1 : durée max parmi les FILMS de la watchlist de u1.
 		// Si u1 est null => 0. Si aucun film dans watchlist => 0.
 		// =========================================================
-		// int dureeMaxWatchlistU1 = ...
+		int dureeMaxWatchlistU1=0;
+		if(u1!=null) {
+			if(!u1.getWatchlist().isEmpty()) {
+				dureeMaxWatchlistU1 = u1.getWatchlist().stream().filter(m-> m instanceof Film).map(m-> (Film) m).mapToInt(m->m.getDuree()).max().orElse(0);
+			}
+		}
+		
 
 
 
@@ -136,13 +116,7 @@ public class ExercicesStream {
 		//  - ET (Genre.Horreur OU Genre.Policier)
 		// Indice : filter() + count() + getGenres().contains(...)
 		// =========================================================
-		// long nbFilmsCriteres = ...
-
-
-
-
-
-
+		long nbFilmsCriteres = films.stream().filter(f->f.getTitre().length()>=10).filter(f->f.getGenres().contains(Genre.Horreur)||f.getGenres().contains(Genre.Policier)).count();
 
 		// =========================================================
 		// EXERCICE 9 — allMatch / anyMatch / noneMatch 
@@ -154,26 +128,26 @@ public class ExercicesStream {
 		// 3) aucunEmailGmail : aucun utilisateur n'a un email finissant par "@gmail.com"
 		//    Indice :.endsWith("@gmail.com")
 		// =========================================================
-		// boolean tousOntUneWatchlistNonVide = ...
-		// boolean auMoinsUnPremium = ...
-		// boolean aucunEmailGmail = ...
+		boolean tousOntUneWatchlistNonVide = users.stream().allMatch(u->!u.getWatchlist().isEmpty());
+		boolean auMoinsUnPremium = users.stream().anyMatch(u->u.getAbonnement().getPlan().equals(Plan.Premium));
+		boolean aucunEmailGmail = users.stream().noneMatch(u->u.getEmail().endsWith("@gmail.com"));
 
 
 		// =========================================================
 		// Affichage rapide 
 		// =========================================================
 
-		//System.out.println("Ex1 filmsLongs = " + filmsLongs.size());
-		//System.out.println("Ex2 filmsAvecDuck = " + filmsAvecDuck.size());
-		//System.out.println("Ex3 titresFilms = " + titresFilms);
-		//System.out.println("Ex4 filmsTriesParTitre first = " + (filmsTriesParTitre.isEmpty() ? "none" : filmsTriesParTitre.get(0).getTitre()));
-		//System.out.println("Ex5 filmsTriesParDureeDesc first = " + (filmsTriesParDureeDesc.isEmpty() ? "none" : filmsTriesParDureeDesc.get(0).getTitre()));
-		//System.out.println("Ex6 filmLePlusLong = " + (filmLePlusLong == null ? "null" : filmLePlusLong.getTitre()));
-		//System.out.println("Ex7 dureeMaxWatchlistU1 = " + dureeMaxWatchlistU1);
-		//System.out.println("Ex8 nbFilmsCriteres = " + nbFilmsCriteres);
-		//System.out.println("Ex9 tousOntUneWatchlistNonVide = " + tousOntUneWatchlistNonVide);
-		//System.out.println("Ex9 auMoinsUnPremium = " + auMoinsUnPremium);
-		//System.out.println("Ex9 aucunEmailGmail = " + aucunEmailGmail);
+		System.out.println("Ex1 filmsLongs = " + filmsLongs.size());
+		System.out.println("Ex2 filmsAvecDuck = " + filmsAvecDuck.size());
+		System.out.println("Ex3 titresFilms = " + titresFilms);
+		System.out.println("Ex4 filmsTriesParTitre first = " + (filmsTriesParTitre.isEmpty() ? "none" : filmsTriesParTitre.get(0).getTitre()));
+		System.out.println("Ex5 filmsTriesParDureeDesc first = " + (filmsTriesParDureeDesc.isEmpty() ? "none" : filmsTriesParDureeDesc.get(0).getTitre()));
+		System.out.println("Ex6 filmLePlusLong = " + (filmLePlusLong == null ? "null" : filmLePlusLong.getTitre()));
+		System.out.println("Ex7 dureeMaxWatchlistU1 = " + dureeMaxWatchlistU1);
+		System.out.println("Ex8 nbFilmsCriteres = " + nbFilmsCriteres);
+		System.out.println("Ex9 tousOntUneWatchlistNonVide = " + tousOntUneWatchlistNonVide);
+		System.out.println("Ex9 auMoinsUnPremium = " + auMoinsUnPremium);
+		System.out.println("Ex9 aucunEmailGmail = " + aucunEmailGmail);
 
 
 	}
