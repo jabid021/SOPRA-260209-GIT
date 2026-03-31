@@ -1,5 +1,7 @@
 package quest.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
+import quest.view.Views;
 
 @Entity
 @Table(name="matiere")
@@ -14,11 +17,15 @@ public class Matiere {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.Common.class)
 	private Integer id;
+	
 	@Column(length = 25,nullable = false)
+	@JsonView(Views.Common.class)
 	private String libelle;
 	
 	@Version
+	@JsonView(Views.Common.class)
 	private int version;
 	
 	public Matiere() {}

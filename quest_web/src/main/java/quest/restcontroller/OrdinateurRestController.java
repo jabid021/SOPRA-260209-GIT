@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import quest.dao.IDAOOrdinateur;
 import quest.model.Ordinateur;
+import quest.view.Views;
 
 @RestController
 @RequestMapping("/api/ordinateur")
@@ -27,17 +30,17 @@ public class OrdinateurRestController{
 
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.Ordinateur.class)
 	public Ordinateur chercherById(@PathVariable Integer id) 
 	{
-		Ordinateur ordinateur = daoOrdinateur.findById(id).orElse(null);
-		return  null;
+		return daoOrdinateur.findById(id).orElse(null);
 	}
 
 	@GetMapping
+	@JsonView(Views.Ordinateur.class)
 	public List<Ordinateur> chercherAll()  
 	{
-		List<Ordinateur> ordinateurs = daoOrdinateur.findAll();
-		return null;
+		return daoOrdinateur.findAll();
 	}
 
 	@DeleteMapping("/{id}")

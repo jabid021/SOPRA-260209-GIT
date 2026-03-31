@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import quest.dao.IDAOFiliere;
 import quest.model.Filiere;
+import quest.view.Views;
 
 @RestController
 @RequestMapping("/api/filiere")
@@ -24,17 +27,32 @@ public class FiliereRestController{
 
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.Filiere.class)
 	public Filiere chercherById(@PathVariable Integer id) 
 	{
-		Filiere filiere = daoFiliere.findById(id).orElse(null);
-		return  null;
+		return  daoFiliere.findById(id).orElse(null);
+	}
+	
+	@GetMapping("/{id}/eleves")
+	@JsonView(Views.FiliereWithEleves.class)
+	public Filiere chercherByIdAvecEleves(@PathVariable Integer id) 
+	{
+		return  daoFiliere.findByIdWithEleves(id);
+	}
+
+	
+	@GetMapping("/{id}/cours")
+	@JsonView(Views.FiliereWithModules.class)
+	public Filiere chercherByIdAvecModules(@PathVariable Integer id) 
+	{
+		return  daoFiliere.findByIdWithCours(id);
 	}
 
 	@GetMapping
+	@JsonView(Views.Filiere.class)
 	public List<Filiere> chercherAll()  
 	{
-		List<Filiere> filieres = daoFiliere.findAll();
-		return null;
+		return  daoFiliere.findAll();
 	}
 
 	@DeleteMapping("/{id}")

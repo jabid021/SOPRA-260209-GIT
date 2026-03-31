@@ -1,9 +1,13 @@
 package quest.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Entity;
+import quest.view.Views;
 
 @Entity
 public class Formateur extends Personne {
+	@JsonView(Views.Common.class)
 	private boolean admin;
 
 	public Formateur() {}

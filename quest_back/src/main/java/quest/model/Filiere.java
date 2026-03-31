@@ -3,11 +3,11 @@ package quest.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,31 +15,41 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import quest.view.Views;
 
 @Entity
 @Table(name="filiere")
 public class Filiere {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.Common.class)
 	private Integer id;
 	
 	@Column(length = 35,nullable = false)
 	@NotBlank 
 	@Size(min =10) 
+	@JsonView(Views.Common.class)
 	private String libelle;
 	
 	@Column(nullable = false)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonView(Views.Common.class)
 	private LocalDate debut;
+	
 	@Column(nullable = false)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	//@DateTimeFormat(pattern="yyyy-MM-dd") pour les jsp
+	@JsonFormat(pattern = "yyyy-MM-dd") //pour les api en json
+	@JsonView(Views.Common.class)
 	private LocalDate fin;
 	
 	
 	@OneToMany(mappedBy="filiere")
+	@JsonView(Views.FiliereWithModules.class)
 	private List<Module> cours;
 	
 	@OneToMany(mappedBy="filiere")
+	@JsonView(Views.FiliereWithEleves.class)
 	private List<Stagiaire> eleves;
 	
 	

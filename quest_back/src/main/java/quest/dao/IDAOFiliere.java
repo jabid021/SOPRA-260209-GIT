@@ -10,4 +10,7 @@ public interface IDAOFiliere extends JpaRepository<Filiere,Integer> {
 	
 	@Query("SELECT f from Filiere f LEFT JOIN FETCH f.eleves where f.id=:id")
 	public Filiere findByIdWithEleves(@Param("id") Integer idFiliere);
+	
+	@Query("SELECT f from Filiere f LEFT JOIN FETCH f.cours where f.id=:id")
+	public Filiere findByIdWithCours(@Param("id") Integer idFiliere);
 }

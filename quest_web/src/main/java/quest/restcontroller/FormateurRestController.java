@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import jakarta.servlet.http.HttpSession;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import quest.model.Formateur;
 import quest.service.FormateurService;
+import quest.view.Views;
 
 @RestController
 @RequestMapping("/api/formateur")
@@ -27,19 +29,18 @@ public class FormateurRestController{
 	@Autowired
 	FormateurService formateurSrv;
 
-	
 	@GetMapping("/{id}")
+	@JsonView(Views.Formateur.class)
 	public Formateur chercherById(@PathVariable Integer id) 
 	{
-		Formateur formateur = formateurSrv.getById(id);
-		return  null;
+		return formateurSrv.getById(id);
 	}
 
 	@GetMapping
+	@JsonView(Views.Formateur.class)
 	public List<Formateur> chercherAll()  
 	{
-		List<Formateur> formateurs = formateurSrv.getAll();
-		return null;
+		return formateurSrv.getAll();
 	}
 
 	@DeleteMapping("/{id}")
@@ -69,14 +70,14 @@ public class FormateurRestController{
 		return formateur;
 	}
 
-	
 	@PatchMapping("/{id}")
-	public void modifierIdentifiants(@PathVariable Integer id,@RequestParam String login,String password) 
+	public void modifierIdentifiants(@PathVariable Integer id,@RequestBody Formateur formateur) 
 	{
-		Formateur formateur = formateurSrv.getById(id);
-		formateur.setLogin(login);
-		formateur.setPassword(password);
-		formateurSrv.update(formateur);
+		formateur.setId(id);
+		Formateur formateurBdd = formateurSrv.getById(id);
+		formateurBdd.setLogin(formateur.getLogin());
+		formateurBdd.setPassword(formateur.getPassword());
+		formateurSrv.update(formateurBdd);
 	}
-
+	
 }

@@ -1,5 +1,7 @@
 package quest.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import quest.view.Views;
 
 @Entity
 @Table(name="ordinateur")
@@ -18,17 +21,21 @@ public class Ordinateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.Common.class)
 	private Integer numero;
 	@Column(nullable = false, columnDefinition = "VARCHAR(25) default 'Asus'")
 	@Size(min = 4,max = 25,message = "La marque doit faire entre 4 et 25")
 	@NotBlank(message="La marque ne peut pas etre vide")
+	@JsonView(Views.Common.class)
 	private String marque;
 	@Column(nullable=false,columnDefinition = "int default 8")
 	@PositiveOrZero
+	@JsonView(Views.Common.class)
 	private int ram;
 	
 	@OneToOne
 	@JoinColumn(name="utilisateur")
+	@JsonView(Views.Ordinateur.class)
 	private Stagiaire utilisateur;
 	
 	public Ordinateur() {}

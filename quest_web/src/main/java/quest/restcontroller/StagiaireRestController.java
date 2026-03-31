@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import quest.model.Stagiaire;
 import quest.service.StagiaireService;
+import quest.view.Views;
 
 @RestController
 @RequestMapping("/api/stagiaire")
@@ -24,17 +27,17 @@ public class StagiaireRestController{
 
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.Stagiaire.class) // id + prenom + nom + civ + adresse + email + Ordinateur (id + marque + ram)
 	public Stagiaire chercherById(@PathVariable Integer id) 
 	{
-		Stagiaire stagiaire = stagiaireSrv.getById(id);
-		return  null;
+		return stagiaireSrv.getById(id);
 	}
 
 	@GetMapping
+	@JsonView(Views.Stagiaire.class)
 	public List<Stagiaire> chercherAll()  
 	{
-		List<Stagiaire> stagiaires = stagiaireSrv.getAll();
-		return null;
+		return stagiaireSrv.getAll();
 	}
 
 	@DeleteMapping("/{id}")

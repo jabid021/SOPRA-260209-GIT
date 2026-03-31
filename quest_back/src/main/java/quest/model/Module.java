@@ -2,6 +2,9 @@ package quest.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
+import quest.view.Views;
 
 @Entity
 @Table(name="module")
@@ -18,19 +22,27 @@ public class Module {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.Common.class)
 	private Integer id;
 	@Column(unique=true)
 	@Digits(integer = 4,fraction = 0)
+	@JsonView(Views.Common.class)
 	private int quest;
+	@JsonView(Views.Common.class)
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate debut;
+	@JsonView(Views.Common.class)
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fin;
 	
 	@ManyToOne
+	@JsonView(Views.MatiereWithModules.class)
 	@JoinColumn(name="filiere",nullable = false)
 	private Filiere filiere;
 	
 	@ManyToOne
 	@JoinColumn(name="matiere",nullable = false)
+	@JsonView(Views.FiliereWithModules.class)
 	private Matiere matiere;
 	
 	

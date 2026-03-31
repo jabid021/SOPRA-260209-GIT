@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import quest.dao.IDAOMatiere;
 import quest.model.Matiere;
+import quest.view.Views;
 
 @RestController
 @RequestMapping("/api/matiere")
@@ -24,17 +27,17 @@ public class MatiereRestController{
 
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.Matiere.class)
 	public Matiere chercherById(@PathVariable Integer id) 
 	{
-		Matiere matiere = daoMatiere.findById(id).orElse(null);
-		return  null;
+		return daoMatiere.findById(id).orElse(null);
 	}
 
 	@GetMapping
+	@JsonView(Views.Matiere.class)
 	public List<Matiere> chercherAll()  
 	{
-		List<Matiere> matieres = daoMatiere.findAll();
-		return null;
+		return daoMatiere.findAll();
 	}
 
 	@DeleteMapping("/{id}")

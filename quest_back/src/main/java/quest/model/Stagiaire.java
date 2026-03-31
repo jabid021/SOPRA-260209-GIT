@@ -1,5 +1,7 @@
 package quest.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -7,21 +9,26 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import quest.view.Views;
 
 @Entity
 public class Stagiaire extends Personne {
 
 	@Column(length = 30)
+	@JsonView(Views.Common.class)
 	private String email;
 	@Embedded
+	@JsonView(Views.Stagiaire.class)
 	private Adresse adresse;
 	
 	@ManyToOne
 	@JoinColumn(name="filiere")
+	@JsonView(Views.Stagiaire.class)
 	private Filiere filiere;
 	
 	
 	@OneToOne(mappedBy = "utilisateur")
+	@JsonView(Views.Stagiaire.class)
 	private Ordinateur ordinateur;
 	
 	
