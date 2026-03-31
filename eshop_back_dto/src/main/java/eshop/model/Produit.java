@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import eshop.view.Views;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,26 +21,19 @@ public class Produit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.Common.class)
 	private Integer id;
-	
 	@Column(name="label",nullable = false,length = 30)
 	@NotBlank
-	@JsonView(Views.Common.class)
 	private String libelle;
-	
 	@Column(name="price", columnDefinition = "DECIMAL(7,2)")
 	@Range(min =100 ,max=10000)
-	@JsonView(Views.Common.class)
 	private double prix;
 	
 	@ManyToOne
 	@JoinColumn(name="vendeur",nullable = false)
-	@JsonView(Views.Produit.class)
 	private Fournisseur fournisseur;
 	
 	@OneToMany(mappedBy="produit")
-	@JsonView(Views.ProduitWithVentes.class)
 	private List<Achat> ventes;
 	
 	public Produit() {}

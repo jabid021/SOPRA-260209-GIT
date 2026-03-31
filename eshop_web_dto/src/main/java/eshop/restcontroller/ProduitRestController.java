@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import eshop.dao.IDAOProduit;
+import eshop.dto.ProduitDTO;
 import eshop.model.Produit;
-import eshop.view.Views;
 
 @RestController
 @RequestMapping("/api/produit")
@@ -25,23 +23,22 @@ public class ProduitRestController {
 	@Autowired
 	IDAOProduit daoProduit;
 	
-	
 	@GetMapping("/{id}")
-	@JsonView(Views.Produit.class)
-	public Produit chercherById(@PathVariable Integer id) 
+	public ProduitDTO chercherById(@PathVariable Integer id) 
 	{
-		return daoProduit.findById(id).orElse(null);
+		
+		Produit produit = daoProduit.findById(id).orElse(null);
+		System.out.println(ProduitDTO.convert(produit));
+		return ProduitDTO.convert(produit);
 	}
 	
 	@GetMapping("/{id}/ventes")
-	@JsonView(Views.ProduitWithVentes.class)
 	public Produit chercherByIdWithVentes(@PathVariable Integer id) 
 	{
 		return daoProduit.findByIdWithVentes(id);
 	}
 
 	@GetMapping
-	@JsonView(Views.Produit.class)
 	public List<Produit> chercherAll()  
 	{
 		return daoProduit.findAll();
@@ -63,9 +60,7 @@ public class ProduitRestController {
 	public Produit modifier(@PathVariable Integer id,@RequestBody Produit produit)  
 	{
 		produit.setId(id);
-		daoProduit.save(produit);
-		return produit;
+		return daoProduit.save(produit);
 	}
-
 
 }
