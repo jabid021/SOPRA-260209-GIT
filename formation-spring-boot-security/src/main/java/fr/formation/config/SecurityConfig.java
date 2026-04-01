@@ -12,7 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
+    // @Bean
     UserDetailsService inMemory() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 
