@@ -15,22 +15,41 @@ public class JpaUserDetailsService implements UserDetailsService {
     @Autowired
     private IDAOUtilisateur daoUtilisateur;
 
+    // @Override
+    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    //     Utilisateur utilisateur = this.daoUtilisateur.findByUsername(username);
+
+    //     if (utilisateur == null) {
+    //         throw new UsernameNotFoundException("L'utilisateur n'existe pas!");
+    //     }
+
+    //     UserDetails ud = User.builder()
+    //         .username(username)
+    //         // .password("$2a$10$wZppzN.nawtOTtOFaunubeAYHNCWvOrwsNfKStb8n/5L3bTwpxWUW")
+    //         .password(utilisateur.getPassword())
+    //         .roles(utilisateur.isAdmin() ? "ADMIN" : "USER")
+    //         .build()
+    //     ;
+
+    //     return ud;
+    // }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateur utilisateur = this.daoUtilisateur.findByUsername(username);
+        // Utilisateur utilisateur = this.daoUtilisateur
+        //     .findByUsernameOptional(username)
+        //     .orElseThrow(() -> new UsernameNotFoundException("L'utilisateur n'existe pas!"))
+        // ;
 
-        if (utilisateur == null) {
-            throw new UsernameNotFoundException("L'utilisateur n'existe pas!");
-        }
-
-        UserDetails ud = User.builder()
-            .username(username)
-            // .password("$2a$10$wZppzN.nawtOTtOFaunubeAYHNCWvOrwsNfKStb8n/5L3bTwpxWUW")
-            .password(utilisateur.getPassword())
-            .roles(utilisateur.isAdmin() ? "ADMIN" : "USER")
-            .build()
+        return this.daoUtilisateur
+            .findByUsernameOptional(username)
+            .map(u -> User.builder()
+                .username(username)
+                .password(u.getPassword())
+                .roles(u.isAdmin() ? "ADMIN" : "USER")
+                .build()
+            )
+            .orElseThrow(() -> new UsernameNotFoundException("L'utilisateur n'existe pas!"))
         ;
-
-        return ud;
     }
 }
