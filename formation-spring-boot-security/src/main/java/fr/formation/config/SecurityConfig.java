@@ -2,7 +2,9 @@ package fr.formation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true) // Activer les annotation @PreAuthorize / @PostAuthorize
 public class SecurityConfig {
 
     @Bean
@@ -24,7 +27,15 @@ public class SecurityConfig {
             // auth.requestMatchers("/matiere").permitAll();
 
             // auth.requestMatchers("/matiere").permitAll();
-            auth.requestMatchers("/matiere").hasRole("ADMIN");
+            // auth.requestMatchers("/matiere").hasRole("ADMIN");
+
+            // auth.requestMatchers("/matiere", "/utilisateur").hasRole("ADMIN");
+            // auth.requestMatchers("/matiere", "/utilisateur").hasAnyRole("ADMIN", "USER");
+            // auth.requestMatchers("/matiere", "/utilisateur").hasAuthority("ROLE_ADMIN");
+
+            // auth.requestMatchers(HttpMethod.POST, "/matiere", "/utilisateur").hasRole("ADMIN");
+
+            // auth.requestMatchers("/matiere").hasAnyRole("ADMIN", "USER");
 
             // Uniquement les utilisateurs authentifiés partout sur l'application
             auth.requestMatchers("/**").authenticated();
