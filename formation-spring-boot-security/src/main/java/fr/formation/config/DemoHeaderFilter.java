@@ -20,20 +20,27 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DemoHeaderFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String ajcHeader = request.getHeader("Authorization");
+        String ajcHeader = request.getHeader("AJC");
 
         System.out.println("DEMONSTRATION FILTRE : " + ajcHeader);
 
-        // GrantedAuthority => Classe d'autorisation Spring Security
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        if ("admin".equalsIgnoreCase(ajcHeader) || "user".equalsIgnoreCase(ajcHeader)) {
+            // GrantedAuthority => Classe d'autorisation Spring Security
+            List<GrantedAuthority> authorities = new ArrayList<>();
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + ajcHeader.toUpperCase()));
 
-        // Authentification Spring Security => Utilisateur connecté, avec son nom, et sa liste d'autorisations
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken("un username", null, authorities);
+            // authorities.add(new SimpleGrantedAuthority("ROLE_BABAR"));
+            // authorities.add(new SimpleGrantedAuthority("MATIERE_DELETE"));
+            // authorities.add(new SimpleGrantedAuthority("MATIERE_WRITE"));
+            // authorities.add(new SimpleGrantedAuthority(RoleEnum.ADMIN.getRole()));
 
-        // On récupère le contexte de Spring Security, et on injecte l'Authentification qu'on vient de créer : on simule une connexion OK
-        SecurityContextHolder.getContext().setAuthentication(auth);
+            // Authentification Spring Security => Utilisateur connecté, avec son nom, et sa liste d'autorisations
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken("un username", null, authorities);
+
+            // On récupère le contexte de Spring Security, et on injecte l'Authentification qu'on vient de créer : on simule une connexion OK
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
 
         // ATTENTION, obligatoire pour passer à la suite
         filterChain.doFilter(request, response);
