@@ -2,7 +2,9 @@ package fr.formation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -36,6 +38,8 @@ public class SecurityConfig {
             // auth.requestMatchers(HttpMethod.POST, "/matiere", "/utilisateur").hasRole("ADMIN");
 
             // auth.requestMatchers("/matiere").hasAnyRole("ADMIN", "USER");
+
+            auth.requestMatchers("/api/auth").permitAll();
 
             // Uniquement les utilisateurs authentifiés partout sur l'application
             auth.requestMatchers("/**").authenticated();
@@ -85,4 +89,9 @@ public class SecurityConfig {
         return passwordEncoder;
     }
 
+    // Permet d'ajouter l'AuthenticationManager de Spring Security dans le contexte de Spring, pour pouvoir le récupérer
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }
