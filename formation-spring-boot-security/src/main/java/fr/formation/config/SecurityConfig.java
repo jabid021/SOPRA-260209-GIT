@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http, DemoHeaderFilter demoHeaderFilter) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
         // Configuration des accès : qui a droit de voir quoi
         http.authorizeHttpRequests(auth -> {
             // On commence toujours par le plus spécifique, pour terminer par le plus général
@@ -52,6 +52,7 @@ public class SecurityConfig {
 
         // On intègre le filtre Demo Header Filter AVANT le filtre UsernamePasswordAuthenticationFilter
         // http.addFilterBefore(demoHeaderFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtHeaderFilter, UsernamePasswordAuthenticationFilter.class);
 
         // On désactive la protection CSRF (Cross-Site Request Forgery)
         // http.csrf(csrf -> csrf.disable());
