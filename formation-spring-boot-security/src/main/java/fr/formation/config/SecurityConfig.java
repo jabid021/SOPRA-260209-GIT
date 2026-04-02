@@ -12,13 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true) // Activer les annotation @PreAuthorize / @PostAuthorize
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, DemoHeaderFilter demoHeaderFilter) throws Exception {
         // Configuration des accès : qui a droit de voir quoi
         http.authorizeHttpRequests(auth -> {
             // On commence toujours par le plus spécifique, pour terminer par le plus général
@@ -44,6 +45,9 @@ public class SecurityConfig {
         http.formLogin(Customizer.withDefaults());
 
         http.httpBasic(Customizer.withDefaults());
+
+        // On intègre le filtre Demo Header Filter AVANT le filtre UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(demoHeaderFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
