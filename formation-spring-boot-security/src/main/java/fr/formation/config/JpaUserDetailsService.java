@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import fr.formation.dao.IDAOUtilisateur;
-import fr.formation.model.Utilisateur;
 
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
