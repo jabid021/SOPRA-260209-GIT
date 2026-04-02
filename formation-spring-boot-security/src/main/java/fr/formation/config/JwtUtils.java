@@ -23,7 +23,7 @@ public class JwtUtils {
         return Jwts.builder()
             .subject(auth.getName()) // Souvent, c'est le username ici
             .issuedAt(now)
-            .expiration(new Date(now.getTime() + 300_000)) // Durée de validité = 5 mins
+            .expiration(new Date(now.getTime() + 3_600_000)) // Durée de validité = 1 heure
             .signWith(secretKey)
             .compact() // Le jeton JWT sous forme de String
         ;

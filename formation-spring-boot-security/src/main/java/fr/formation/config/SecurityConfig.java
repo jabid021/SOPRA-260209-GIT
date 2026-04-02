@@ -51,7 +51,7 @@ public class SecurityConfig {
         http.httpBasic(Customizer.withDefaults());
 
         // On intègre le filtre Demo Header Filter AVANT le filtre UsernamePasswordAuthenticationFilter
-        http.addFilterBefore(demoHeaderFilter, UsernamePasswordAuthenticationFilter.class);
+        // http.addFilterBefore(demoHeaderFilter, UsernamePasswordAuthenticationFilter.class);
 
         // On désactive la protection CSRF (Cross-Site Request Forgery)
         // http.csrf(csrf -> csrf.disable());
