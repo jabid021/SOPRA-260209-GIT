@@ -1,6 +1,7 @@
 package fr.formation.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -58,4 +59,45 @@ public class HelloRestControllerTest {
         Mockito.verify(this.daoHello).findAll();
     }
 
+    @Test
+    @WithMockUser
+    void shouldHelloByIdStatusOk() throws Exception {
+        // given
+        int id = 5;
+
+        Mockito
+            .when(this.daoHello.findById(id))
+            .thenReturn(Optional.of(new Hello(id, "Le contenu du message")))
+        ;
+
+        // when
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/hello/" + id));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+
+        // On demande à Mockito de vérifier si daoHello.findAll() a été appelée une et une seule fois
+        Mockito.verify(this.daoHello).findById(id);
+    }
+
+    @Test
+    @WithMockUser
+    void shouldHelloByIdStatusNotFound() throws Exception {
+        // given
+        int id = 5;
+
+        Mockito
+            .when(this.daoHello.findById(id))
+            .thenReturn(Optional.empty())
+        ;
+
+        // when
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/hello/" + id));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        // On demande à Mockito de vérifier si daoHello.findAll() a été appelée une et une seule fois
+        Mockito.verify(this.daoHello).findById(id);
+    }
 }
