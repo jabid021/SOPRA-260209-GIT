@@ -1,5 +1,11 @@
 package fr.formation;
 
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 import fr.formation.exception.CantDivideByZero;
 import fr.formation.exception.NegativeNotAllowedException;
 
@@ -36,31 +42,73 @@ public class Calculatrice {
         // return 12;
     }
 
+    private boolean demoFilter(String value) {
+        return "toto".equals(value);
+    }
+
     public int addition(String value) {
         if (value == null || value.isBlank()) {
             return 0;
         }
 
         String[] values = value.split("[,;\\n]+");
-        int total = 0;
+        // int total = 0;
 
-        for (String val : values) {
-            int intVal = 0;
+        Predicate<String> maFonctionFiltre = this::demoFilter;
+        Predicate<String> maFonctionFiltre2 = val -> "toto".equals(val);
 
-            try {
-                intVal = Integer.parseInt(val);
-            }
+        List.of("toto", "titi", "tata").stream()
+            // .filter(val -> val.equals("4"))
+            // .filter(this::demoFilter)
+            .filter(maFonctionFiltre2)
+            .map(String::toUpperCase)
+            .forEach(System.out::println);
 
-            catch (NumberFormatException e) { }
+        return Stream.of(values)
+            // Map => permet de transformer
+            // .map(val -> Integer.parseInt(val))
+            // .map(Integer::parseInt)
 
-            if (intVal < 0) {
-                throw new NegativeNotAllowedException();
-            }
+            .map(val -> {
+                int intVal = 0;
 
-            total += intVal;
-        }
+                try {
+                    intVal = Integer.parseInt(val);
+                }
 
-        return total;
+                catch (NumberFormatException e) { }
+
+                if (intVal < 0) {
+                    throw new NegativeNotAllowedException();
+                }
+
+                return intVal;
+            })
+
+            // Reduce => Permet de passer d'un ensemble d'éléments à UN élément
+            // > 0 == la valeur initiale de l'accumulateur
+            // > total == accumulateur, sa valeur sera transmise à chaque passage
+            // > val == la valeur de la liste
+            .reduce(0, (total, val) -> total + val)
+        ;
+
+        // for (String val : values) {
+        //     int intVal = 0;
+
+        //     try {
+        //         intVal = Integer.parseInt(val);
+        //     }
+
+        //     catch (NumberFormatException e) { }
+
+        //     if (intVal < 0) {
+        //         throw new NegativeNotAllowedException();
+        //     }
+
+        //     total += intVal;
+        // }
+
+        // return total;
     }
 
     public float division(int a, int b) {
