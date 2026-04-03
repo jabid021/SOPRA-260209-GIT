@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import fr.formation.exception.CantDivideByZero;
+import fr.formation.exception.NegativeNotAllowedException;
 
 public class CalculatriceTest {
     private Calculatrice calculatrice;
@@ -147,5 +148,155 @@ public class CalculatriceTest {
 
         // then
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldReturn0WhenNull() {
+        // given
+        String value = null;
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    void shouldReturn0WhenEmpty() {
+        // given
+        String value = "";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    void shouldReturn2When2() {
+        // given
+        String value = "2";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(2, result);
+    }
+
+    @Test
+    void shouldReturn5When5() {
+        // given
+        String value = "5";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(5, result);
+    }
+
+    @Test
+    void shouldReturn36When12And5And19() {
+        // given
+        String value = "12,5,19";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(36, result);
+    }
+
+    @Test
+    void shouldReturn31When12And19() {
+        // given
+        String value = "12,19";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(31, result);
+    }
+
+    @Test
+    void shouldThrowNegativeExceptionWhenNegative() {
+        // given
+        String value = "12,-5,19";
+
+        // when & then
+        Assertions.assertThrows(
+            NegativeNotAllowedException.class,
+            () -> this.calculatrice.addition(value)
+        );
+    }
+
+    @Test
+    void shouldReturn31When12And19WithSemiColon() {
+        // given
+        String value = "12;19";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(31, result);
+    }
+
+    @Test
+    void shouldReturn31When12And19WithNewLine() {
+        // given
+        String value = """
+                12
+                19""";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(31, result);
+    }
+
+    @Test
+    void shouldReturn36When12And5And19WithMixin() {
+        // given
+        String value = """
+                12,5
+                19""";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(36, result);
+    }
+
+    @Test
+    void shouldReturn46When12And5And19And10WithMixin() {
+        // given
+        String value = """
+                12,5
+                19;10""";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(46, result);
+    }
+
+    @Test
+    void shouldReturn15WhenAAnd5And10() {
+        // given
+        String value = "A,5,10";
+
+        // when
+        int result = this.calculatrice.addition(value);
+
+        // then
+        Assertions.assertEquals(15, result);
     }
 }

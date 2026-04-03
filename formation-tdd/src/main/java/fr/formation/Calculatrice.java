@@ -1,6 +1,7 @@
 package fr.formation;
 
 import fr.formation.exception.CantDivideByZero;
+import fr.formation.exception.NegativeNotAllowedException;
 
 public class Calculatrice {
     public int addition(int a, int b) {
@@ -33,6 +34,33 @@ public class Calculatrice {
         // }
 
         // return 12;
+    }
+
+    public int addition(String value) {
+        if (value == null || value.isBlank()) {
+            return 0;
+        }
+
+        String[] values = value.split("[,;\\n]+");
+        int total = 0;
+
+        for (String val : values) {
+            int intVal = 0;
+
+            try {
+                intVal = Integer.parseInt(val);
+            }
+
+            catch (NumberFormatException e) { }
+
+            if (intVal < 0) {
+                throw new NegativeNotAllowedException();
+            }
+
+            total += intVal;
+        }
+
+        return total;
     }
 
     public float division(int a, int b) {
