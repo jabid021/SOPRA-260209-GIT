@@ -13,6 +13,13 @@ public class Hello {
 
     private String message;
 
+    public Hello() { }
+
+    public Hello(int id, String message) {
+        this.id = id;
+        this.message = message;
+    }
+
     public int getId() {
         return id;
     }
