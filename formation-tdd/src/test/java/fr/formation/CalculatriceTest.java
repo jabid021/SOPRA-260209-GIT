@@ -87,4 +87,65 @@ public class CalculatriceTest {
             () -> this.calculatrice.division(a, b)
         );
     }
+
+    @Test
+    void shouldReturn12When4And8() {
+        // given
+        String a = "4";
+        String b = "8";
+
+        // when
+        int result = this.calculatrice.addition(a, b);
+
+        // then
+        Assertions.assertEquals(12, result);
+    }
+
+    @Test
+    void shouldReturn22When14And8() {
+        // given
+        String a = "14";
+        String b = "8";
+
+        // when
+        int result = this.calculatrice.addition(a, b);
+
+        // then
+        Assertions.assertEquals(22, result);
+    }
+
+    @Test
+    void shouldReturn36When12And24() {
+        // given
+        String a = "12";
+        String b = "24";
+
+        // when
+        int result = this.calculatrice.addition(a, b);
+
+        // then
+        Assertions.assertEquals(36, result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "5,6,11",
+        "6,9,15",
+        "7,9,16",
+        "2,8,10",
+        "-54,20,-34",
+        "a,b,0",
+        "5,b,0",
+        "a,5,0",
+        ",,0"
+    })
+    void shouldAdditionStringOk(String a, String b, int expected) {
+        // given
+
+        // when
+        int result = this.calculatrice.addition(a, b);
+
+        // then
+        Assertions.assertEquals(expected, result);
+    }
 }
