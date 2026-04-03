@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import fr.formation.exception.CantDivideByZero;
+
 public class CalculatriceTest {
     private Calculatrice calculatrice;
 
@@ -71,5 +73,18 @@ public class CalculatriceTest {
 
         // then
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldThrowArithmeticExceptionWhenDividedBy0() {
+        // given
+        int a = 5;
+        int b = 0;
+
+        // when
+        Assertions.assertThrows(
+            CantDivideByZero.class,
+            () -> this.calculatrice.division(a, b)
+        );
     }
 }
