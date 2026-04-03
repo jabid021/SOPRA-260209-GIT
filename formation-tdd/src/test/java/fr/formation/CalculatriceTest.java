@@ -9,6 +9,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import fr.formation.exception.CantDivideByZero;
 import fr.formation.exception.NegativeNotAllowedException;
 
+// Charge TOUT le contexte de Spring Boot
+// @SpringBootTest
+
+// Charge UNIQUEMENT la partie Web + Securité
+// @WebMvcTest
+
+// Charge UNIQUEMENT la partie Data-JPA
+// @DataJpaTest
+
+// Exécuter le test dans un context Mockito pour simuler les interactions avec plusieurs instances
+// @ExtendWith(MockitoExtension.class)
 public class CalculatriceTest {
     private Calculatrice calculatrice;
 
