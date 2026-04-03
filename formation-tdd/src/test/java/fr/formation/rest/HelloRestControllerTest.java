@@ -20,7 +20,7 @@ import fr.formation.model.Hello;
 // @SpringBootTest
 // @AutoConfigureMockMvc // Permet d'injecter, si on utilise SpringBootTest, un MockMvc dans le contexte
 
-@WebMvcTest
+@WebMvcTest(controllers = HelloRestController.class)
 public class HelloRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
