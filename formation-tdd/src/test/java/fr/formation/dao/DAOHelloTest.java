@@ -25,7 +25,7 @@ public class DAOHelloTest {
         // given
 
         // when
-        Optional<Hello> optHello = this.daoHello.findById(1);
+        Optional<Hello> optHello = this.daoHello.findById(2);
 
         // then
         Assertions.assertTrue(optHello.isPresent());
@@ -36,7 +36,7 @@ public class DAOHelloTest {
         // given
 
         // when
-        Optional<Hello> optHello = this.daoHello.findById(1);
+        Optional<Hello> optHello = this.daoHello.findById(2);
 
         // then
         Assertions.assertTrue(optHello.isEmpty());
