@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.formation.exception.CantDivideByZero;
 import fr.formation.exception.NegativeNotAllowedException;
 
 public class Calculatrice {
+    private static Logger log = LoggerFactory.getLogger(Calculatrice.class);
+
     public int addition(int a, int b) {
         if (a == 5 || a == 7) {
-            System.out.println("truc ici");
+            log.debug("truc ici");
         }
 
         return a + b;

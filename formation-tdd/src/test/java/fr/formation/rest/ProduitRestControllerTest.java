@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.formation.config.SecurityConfig;
 import fr.formation.dao.IDAOProduit;
 import fr.formation.model.Produit;
-import fr.formation.rest.dto.response.request.CreateProduitRequest;
+import fr.formation.rest.dto.response.request.CreateOrUpdateProduitRequest;
 
 @WebMvcTest(controllers = ProduitRestController.class)
 // @EnableMethodSecurity(prePostEnabled = true)
@@ -215,15 +216,147 @@ public class ProduitRestControllerTest {
         Mockito.verify(this.daoProduit, Mockito.never()).save(Mockito.any());
     }
 
+    @Test
+    void shouldUpdateStatusUnauthorized() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.createAndPut(PRODUIT_NAME, PRODUIT_CODE);
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void shouldUpdateStatusForbidden() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.createAndPut(PRODUIT_NAME, PRODUIT_CODE);
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isForbidden());
+
+        Mockito.verify(this.daoProduit, Mockito.never()).save(Mockito.any());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldUpdateStatusNotFound() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.createAndPut(PRODUIT_NAME, PRODUIT_CODE);
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        Mockito.verify(this.daoProduit, Mockito.never()).save(Mockito.any());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldUpdateStatusOkAndSave() throws Exception {
+        // given
+        Produit p1 = new Produit(PRODUIT_ID, PRODUIT_NAME, PRODUIT_CODE);
+
+        Mockito.when(this.daoProduit.findById(PRODUIT_ID)).thenReturn(Optional.of(p1));
+
+        // when
+        ResultActions result = this.createAndPut(PRODUIT_NAME, PRODUIT_CODE);
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+
+        Mockito.verify(this.daoProduit).save(Mockito.any());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "'',code",
+        "'  ',code",
+        ",code",
+        "nom,",
+        "nom,''",
+        "nom,'     '",
+    })
+    @WithMockUser(roles = "ADMIN")
+    void shouldUpdateStatusBadRequest(String nom, String code) throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.createAndPut(nom, code);
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        Mockito.verify(this.daoProduit, Mockito.never()).save(Mockito.any());
+    }
+
+    @Test
+    void shouldDeleteStatusUnauthorized() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.delete(API_URL_BY_ID));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void shouldDeleteStatusForbidden() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.delete(API_URL_BY_ID));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isForbidden());
+
+        Mockito.verify(this.daoProduit, Mockito.never()).deleteById(Mockito.any());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldDeleteStatusOkAndDelete() throws Exception {
+        // given
+
+        // when
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.delete(API_URL_BY_ID));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+
+        Mockito.verify(this.daoProduit).deleteById(PRODUIT_ID);
+    }
+
     private ResultActions createAndPost(String nom, String code) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        CreateProduitRequest request = new CreateProduitRequest();
+        CreateOrUpdateProduitRequest request = new CreateOrUpdateProduitRequest();
 
         request.setNom(nom);
         request.setCode(code);
 
         return this.mockMvc.perform(MockMvcRequestBuilders
             .post(API_URL)
+            // .with(SecurityMockMvcRequestPostProcessors.csrf())
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .content(mapper.writeValueAsString(request))
+        );
+    }
+
+    private ResultActions createAndPut(String nom, String code) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        CreateOrUpdateProduitRequest request = new CreateOrUpdateProduitRequest();
+
+        request.setNom(nom);
+        request.setCode(code);
+
+        return this.mockMvc.perform(MockMvcRequestBuilders
+            .put(API_URL_BY_ID)
             // .with(SecurityMockMvcRequestPostProcessors.csrf())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .content(mapper.writeValueAsString(request))

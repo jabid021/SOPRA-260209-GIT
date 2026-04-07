@@ -2,7 +2,7 @@ package fr.formation.rest.dto.response.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class CreateProduitRequest {
+public class CreateOrUpdateProduitRequest {
     @NotBlank
     private String nom;
 
