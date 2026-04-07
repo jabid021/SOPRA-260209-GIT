@@ -2,6 +2,8 @@ package fr.formation.rest;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitRestController {
+    private static Logger log = LoggerFactory.getLogger(ProduitRestController.class);
+
     // @Autowired / @Inject
     // "final" permet l'immuabilité (pas de nouvelle valeur == constante)
     // "final" oblige à avoir une instance == pas de NullPointer possible
@@ -34,6 +38,8 @@ public class ProduitRestController {
 
     @GetMapping
     public List<ProduitResponse> findAll() {
+        log.debug("Je passe dans le find All");
+
         return this.daoProduit.findAll()
             .stream()
             .map(ProduitResponse::convert)
@@ -43,6 +49,8 @@ public class ProduitRestController {
 
     @GetMapping("/{id}")
     public ProduitResponse findById(@PathVariable int id) {
+        log.error("Je passe dans le find by id avec l'id {} - {} - {}", id, "123", "456");
+
         return this.daoProduit.findById(id)
             .map(ProduitResponse::convert)
             .orElseThrow(ProduitNotFoundException::new)
