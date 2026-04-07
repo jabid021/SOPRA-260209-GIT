@@ -2,7 +2,6 @@ package fr.formation.rest;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +20,17 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitRestController {
-    @Autowired
-    private IDAOProduit daoProduit;
+    // @Autowired / @Inject
+    // "final" permet l'immuabilité (pas de nouvelle valeur == constante)
+    // "final" oblige à avoir une instance == pas de NullPointer possible
+    // "final" ne peut pas s'utiliser avec @Autowired / @Inject => Injection par Constructeur
+    private final IDAOProduit daoProduit;
+
+    // Injection de dépendance via Constructeur
+    // Le @Autowired est implicite
+    public ProduitRestController(IDAOProduit daoProduit) {
+        this.daoProduit = daoProduit;
+    }
 
     @GetMapping
     public List<ProduitResponse> findAll() {
