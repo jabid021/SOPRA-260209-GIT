@@ -6,8 +6,7 @@ docker run image:tag
 
 # Exécuter un nouveau container avec un binding de port
 docker run -p portlocal:portcontainer image:tag
-# Exemple port local 8080 vers port container 80
-docker run -p 8080:80 --name nom_container image:tag
+docker run -p 8080:80 --name nom_container image:tag # Exemple port local 8080 vers port container 80
 
 # Exécuter un nouveau container avec un binding de port, un nom, en arrière plan (l'ordre des options n'a pas d'importance)
 docker run -p portlocal:portcontainer -d --name nom_container image:tag
@@ -18,18 +17,21 @@ docker run -v D:/repertoire/du/systeme:/chemin/dans/container --name nom_contain
 
 # Exécuter un nouveau container à partir d'une image, en changeant la commande de base
 docker run --name nom_container image:tag commande
-docker run --name nom_container image:tag bash
+docker run --name nom_container image:tag bash # Exemple
 
 # Même chose avec le mode interactif
-docker run -it --name nom_container image:tag bash
+docker run -it --name nom_container image:tag commande
+docker run -it --name nom_container image:tag bash # Exemple
 
 # Exécuter une commande sur le container
 docker exec nom_container commande
 docker exec id_container commande
+docker exec nom_container bash # Exemple
 
 # Exécuter une commande sur le container en mode interactif
 docker exec -it nom_container commande
 docker exec -it id_container commande
+docker exec -it nom_container bash # Exemple
 
 # Arrêter un container
 docker stop nom_container
