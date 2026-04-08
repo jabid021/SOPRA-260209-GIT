@@ -41,3 +41,7 @@ docker rm id_container
 # Supprimer un container démarré
 docker rm -f nom_container
 docker rm -f id_container
+
+# Copier un fichier local vers un container
+docker cp chemin/vers/fichier/local nom_container:/chemin/vers/fichier/dans/container
+docker cp chemin/vers/fichier/local id_container:/chemin/vers/fichier/dans/container
