@@ -45,3 +45,7 @@ docker rm -f id_container
 # Copier un fichier local vers un container
 docker cp chemin/vers/fichier/local nom_container:/chemin/vers/fichier/dans/container
 docker cp chemin/vers/fichier/local id_container:/chemin/vers/fichier/dans/container
+
+# Copier un fichier du container vers le local
+docker cp nom_container:/chemin/vers/fichier/dans/container chemin/vers/fichier/local
+docker cp id_container:/chemin/vers/fichier/dans/container chemin/vers/fichier/local
