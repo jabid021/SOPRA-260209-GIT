@@ -20,7 +20,7 @@ EXPOSE 80
 
 # CMD ou ENTRYPOINT => La commande a exécuter au démarrage du container
 # CMD => On peut remplacer complètement la commande dans "docker run"
-# CMD [ "nginx" "-g" "daemon off;" ]
+# CMD [ "nginx", "-g", "daemon off;" ]
 
 # ENTRYPOINT => On ne peut pas remplacer la commande dans "docker run", ce sera forcément "nginx"
-ENTRYPOINT [ "nginx" "-g" "daemon off;" ]
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
