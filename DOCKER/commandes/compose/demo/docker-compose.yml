@@ -15,7 +15,11 @@ services:
       MYSQL_ROOT_PASSWORD: root
 
     volumes:
+      # Pour initialiser la base
       - ./demo-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+      # Pour persister les données après suppression / mise à jour du container
+      - mysql_data:/var/lib/mysql
 
     networks:
       - cledemorso
@@ -47,3 +51,6 @@ networks:
   cledemorso:
     name: demo-nom-rso
 
+volumes:
+  mysql_data:
+    name: demo-mysql-data
