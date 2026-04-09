@@ -1,0 +1,49 @@
+# Le nom du compose, optionel
+name: demo-compose
+
+# Décrire tous les services, volumes, network, etc. nécessaire au bon fonctionnement
+
+# Descrription des différents containers
+services:
+  # Description du container "mysql"
+  # docker run -d -e MYSQL_ROOT_PASSWORD=root --name quest-mysql --network quest -v "D:/ajc/quest-init.sql":/docker-entrypoint-initdb.d/init.sql mysql:8.0.45
+  mysql:
+    image: mysql:8.0.45
+    container_name: demo-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+    volumes:
+      - ./demo-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - cledemorso
+
+    # ports:
+    #   - 3308:3306
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
+  java:
+    image: XXX
+    container_name: XXXXX
+
+    networks:
+      - cledemorso
+
+    depends_on:
+      # - mysql
+
+      # On va attendre que mysql démarre ET qu'il soit prêt à être utilisé
+      mysql:
+        condition: service_healthy
+
+networks:
+  cledemorso:
+    name: demo-nom-rso
+
