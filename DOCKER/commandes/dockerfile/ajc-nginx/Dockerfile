@@ -16,3 +16,11 @@ COPY index.html index.html
 
 # Optionel - permet de dire à Docker le ou les ports qui pourront être bindés
 EXPOSE 80
+
+
+# CMD ou ENTRYPOINT => La commande a exécuter au démarrage du container
+# CMD => On peut remplacer complètement la commande dans "docker run"
+# CMD [ "nginx" "-g" "daemon off;" ]
+
+# ENTRYPOINT => On ne peut pas remplacer la commande dans "docker run", ce sera forcément "nginx"
+ENTRYPOINT [ "nginx" "-g" "daemon off;" ]
