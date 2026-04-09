@@ -27,7 +27,12 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
 COPY src src
-RUN mvn package -DskipTests -B
+
+RUN mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DskipTests \
+  -Dsonar.projectKey=quest-boot \
+  -Dsonar.projectName='quest boot' \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=sqp_034ef3b1066bb32ab3b9e8669db8eafdd1022a15
 
 
 # Image finale, sans les sources, juste avec le fichier JAR qu'on récupère du builder au dessus
