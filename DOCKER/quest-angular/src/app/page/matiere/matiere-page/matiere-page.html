@@ -1,0 +1,43 @@
+<h1>Liste des matières</h1>
+
+<form (ngSubmit)="creerOuModifier()" [formGroup]="matiereForm">
+    <div>
+        <input type="text" formControlName="label" />
+
+        @if (labelCtrl.hasError('required')) {
+            <span>Le libellé est obligatoire</span>
+        }
+    </div>
+
+    @if (editingMatiere) {
+        <input type="submit" [disabled]="matiereForm.invalid" value="Modifier" />
+    }
+
+    @else {
+        <input type="submit" [disabled]="matiereForm.invalid" value="Créer" />
+    }
+</form>
+
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>Libellé</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let matiere of matieres$ | async; trackBy: trackMatiere">
+            <td>
+                <a [routerLink]="[ '/matiere', matiere.id ]">{{ matiere.libelle }}</a>
+            </td>
+
+            <td>
+                <button (click)="editer(matiere)">Modifier</button>
+                <button (click)="supprimer(matiere)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
