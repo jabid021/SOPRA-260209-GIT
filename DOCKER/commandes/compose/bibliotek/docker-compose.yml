@@ -1,0 +1,88 @@
+name: bibliotek
+
+services:
+  mysql:
+    image: mysql:8.0.45
+    container_name: bibliotek-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+    volumes:
+      - ./bibliotek-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+    networks:
+      - bibliotek
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
+  postgres:
+    image: postgres:18.3
+    container_name: bibliotek-postgres
+
+    environment:
+      POSTGRES_PASSWORD: root
+
+    volumes:
+      - ./bibliotek-pginit.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/18/docker
+
+    networks:
+      - bibliotek
+
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "bibliotek" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
+  java:
+    image: ascadis/ajc-bibliotek:boot
+    container_name: bibliotek-boot
+
+    networks:
+      - bibliotek
+
+    environment:
+      # SPRING_DATASOURCE_URL: jdbc:mysql://bibliotek-mysql:3306/bibliotek
+      # SPRING_DATASOURCE_USERNAME: root
+      # SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:postgresql://bibliotek-postgres:5432/bibliotek
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+      postgres:
+        condition: service_healthy
+
+  angular:
+    image: ascadis/ajc-bibliotek:angular
+    container_name: bibliotek-angular
+
+    networks:
+      - bibliotek
+
+    ports:
+      - 80:80
+
+    depends_on:
+      - java
+
+networks:
+  bibliotek:
+    name: bibliotek
+
+volumes:
+  mysql_data:
+    name: bibliotek-mysql-data
+
+  postgres_data:
+    name: bibliotek-postgres-data
