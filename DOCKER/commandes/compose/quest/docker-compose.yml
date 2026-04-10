@@ -29,6 +29,34 @@ services:
       retries: 10
       interval: 5s
 
+  postgres:
+    image: postgres:18.3
+    container_name: quest-postgres
+
+    environment:
+      # Par défaut, le user de PostgreSQL est "postgres"
+      # POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+
+      # Permet de créer une base "projet_quest" par défaut
+      # POSTGRES_DB: projet_quest
+
+    volumes:
+      # Pour initialiser la base
+      - ./quest-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+      # Pour persister les données après suppression / mise à jour du container
+      - postgres_data:/var/lib/postgresql/18/docker
+
+    networks:
+      - quest
+
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "projet_quest" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
   java:
     image: ajc-quest-boot
     container_name: quest-boot
@@ -40,11 +68,16 @@ services:
       - 8080:8080
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://quest-mysql:3306/projet_quest
+      # SPRING_DATASOURCE_URL: jdbc:mysql://quest-mysql:3306/projet_quest
+      SPRING_DATASOURCE_URL: jdbc:postgresql://quest-postgres:5432/projet_quest
+      SPRING_DATASOURCE_USERNAME: postgres
 
     depends_on:
       # On va attendre que mysql démarre ET qu'il soit prêt à être utilisé
       mysql:
+        condition: service_healthy
+
+      postgres:
         condition: service_healthy
 
 networks:
@@ -54,3 +87,6 @@ networks:
 volumes:
   mysql_data:
     name: quest-mysql-data
+
+  postgres_data:
+    name: quest-postgres-data
