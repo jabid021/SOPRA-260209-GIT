@@ -34,12 +34,7 @@ services:
     container_name: quest-postgres
 
     environment:
-      # Par défaut, le user de PostgreSQL est "postgres"
-      # POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-
-      # Permet de créer une base "projet_quest" par défaut
-      # POSTGRES_DB: projet_quest
 
     volumes:
       # Pour initialiser la base
@@ -52,7 +47,7 @@ services:
       - quest
 
     healthcheck:
-      test: [ "CMD", "pg_isready", "-d", "projet_quest" ]
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "projet_quest" ]
       timeout: 3s
       retries: 10
       interval: 5s
@@ -79,6 +74,19 @@ services:
 
       postgres:
         condition: service_healthy
+
+  angular:
+    image: ajc-quest-angular
+    container_name: quest-angular
+
+    networks:
+      - quest
+
+    ports:
+      - 80:80
+
+    depends_on:
+      - java
 
 networks:
   quest:
