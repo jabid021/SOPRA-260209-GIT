@@ -34,7 +34,18 @@ services:
       interval: 5s
 
   java:
-    image: XXX
+    # image: XXX
+
+    # Refabriquer une image à partir d'un Dockerfile
+    build:
+      # Donner le chemin relatif vers le répertoire dans lequel se trouve le Dockerfile
+      context: .
+
+      # Si on veut utiliser "localhost" dans le Dockerfile
+      # A associer avec RUN --network=host
+      # entitlements:
+      #   - network.host
+
     container_name: XXXXX
 
     networks:
