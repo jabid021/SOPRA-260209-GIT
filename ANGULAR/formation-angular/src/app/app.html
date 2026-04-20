@@ -62,7 +62,7 @@ Hello {{ prenom }}
   </thead>
 
   <tbody>
-    <tr *ngFor="let todo of todos">
+    <tr *ngFor="let todo of todos; trackBy todoById">
       <td>{{ todo.id }}</td>
       <td>{{ todo.title }}</td>
 

@@ -24,6 +24,10 @@ export class App {
     this.prenom = event.target.value;
   }
 
+  public todoById(index: number, todo: Todo) {
+    return todo.id;
+  }
+
   public addTodo() {
     // this.todos.push(this.formTodo);
     // this.formTodo = new Todo(0, "", false);
