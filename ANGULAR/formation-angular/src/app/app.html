@@ -33,6 +33,18 @@ Hello {{ prenom }}
 <input type="checkbox" [(ngModel)]="formTodo.completed" />
 <input type="number" [(ngModel)]="formTodo.userId" />
 
-<p>
+<!-- <ng-template [ngIf]="formTodo.id > 0">
+  <p>
+    Le titre du Todo : {{ formTodo.title }}
+  </p>
+</ng-template> -->
+
+<p *ngIf="formTodo.id > 0">
   Le titre du Todo : {{ formTodo.title }}
 </p>
+
+<!-- @if (formTodo.id > 0) {
+  <p>
+    Le titre du Todo : {{ formTodo.title }}
+  </p>
+} -->
