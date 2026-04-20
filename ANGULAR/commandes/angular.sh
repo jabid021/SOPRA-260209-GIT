@@ -5,3 +5,10 @@ ng new nom_projet
 # Le serveur HTTP de développement écoute sur le port 4200
 ng serve
 ng s
+
+# Générer une nouvelle classe
+ng generate class nom_classe
+ng g class nom_classe
+
+
+
