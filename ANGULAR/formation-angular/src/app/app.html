@@ -33,18 +33,56 @@ Hello {{ prenom }}
 <input type="checkbox" [(ngModel)]="formTodo.completed" />
 <input type="number" [(ngModel)]="formTodo.userId" />
 
-<!-- <ng-template [ngIf]="formTodo.id > 0">
+<button (click)="addTodo()">Ajouter le Todo</button>
+
+<ng-template [ngIf]="formTodo.id > 0">
   <p>
     Le titre du Todo : {{ formTodo.title }}
   </p>
-</ng-template> -->
+</ng-template>
 
 <p *ngIf="formTodo.id > 0">
   Le titre du Todo : {{ formTodo.title }}
 </p>
 
-<!-- @if (formTodo.id > 0) {
+@if (formTodo.id > 0) {
   <p>
     Le titre du Todo : {{ formTodo.title }}
   </p>
-} -->
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Complété V1</th>
+      <th>Complété V2</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let todo of todos">
+      <td>{{ todo.id }}</td>
+      <td>{{ todo.title }}</td>
+
+      <td *ngIf="todo.completed == true; else pas_termine">Terminé !</td>
+      <!-- <td *ngIf="todo.completed != true">Pas terminé !</td> -->
+
+      <ng-template #pas_termine>
+        <td>Pas terminé !</td>
+      </ng-template>
+
+      <td>
+        @if (todo.completed) {
+          Terminé !
+        }
+
+        @else {
+          Pas terminé !
+        }
+      </td>
+    </tr>
+  </tbody>
+</table>
+
