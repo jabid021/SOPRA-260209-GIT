@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Todo } from './model/todo';
+import { AjcBold } from './component/ajc-bold/ajc-bold';
 
 @Component({
   selector: 'app-root',
-  imports: [ FormsModule, CommonModule ],
+  imports: [
+    FormsModule,
+    CommonModule,
+    AjcBold
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
