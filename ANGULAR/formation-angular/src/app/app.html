@@ -8,3 +8,20 @@ Hello {{ prenom }}
 <hr />
 
 <input type="text" [(ngModel)]="prenom" />
+
+<hr />
+
+<select [(ngModel)]="couleur">
+  <option value="black">Noir</option>
+  <option value="blue">Bleu</option>
+  <option value="red">Rouge</option>
+  <option value="#d2138b">Rose flashy</option>
+</select>
+
+<input type="color" [(ngModel)]="couleur">
+
+{{ couleur }}
+
+<p [style.color]="couleur">
+  Le paragraphe qui change de couleur
+</p>

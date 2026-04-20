@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class App {
   protected prenom: string = "Jérémy";
+  protected couleur: string = "black";
 
   public resetPrenom() {
     this.prenom = "Nouveau";
