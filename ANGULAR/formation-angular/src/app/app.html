@@ -4,3 +4,7 @@ Hello {{ prenom }}
 <input type="text" [value]="prenom" (input)="updatePrenom($event)" />
 
 <button (click)="resetPrenom()">Changer</button>
+
+<hr />
+
+<input type="text" [(ngModel)]="prenom" />
