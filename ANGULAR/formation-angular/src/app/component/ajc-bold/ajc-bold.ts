@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ajc-bold',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './ajc-bold.css',
 })
 export class AjcBold {
-
+  // @Input('titre') public titre: string = "";
+  @Input() public titre: string = "";
 }
