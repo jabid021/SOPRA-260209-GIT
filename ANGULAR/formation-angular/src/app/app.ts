@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class App {
   protected prenom: string = "Jérémy";
+
+  public resetPrenom() {
+    this.prenom = "Nouveau";
+  }
 }
