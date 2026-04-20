@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Todo } from './model/todo';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class App {
   protected prenom: string = "Jérémy";
   protected couleur: string = "black";
+  protected formTodo: Todo = new Todo(1, "Cours Angular", false);
 
   public resetPrenom() {
     this.prenom = "Nouveau";

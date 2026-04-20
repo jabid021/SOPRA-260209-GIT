@@ -25,3 +25,14 @@ Hello {{ prenom }}
 <p [style.color]="couleur">
   Le paragraphe qui change de couleur
 </p>
+
+<hr />
+
+<input type="number" [(ngModel)]="formTodo.id" />
+<input type="text" [(ngModel)]="formTodo.title" />
+<input type="checkbox" [(ngModel)]="formTodo.completed" />
+<input type="number" [(ngModel)]="formTodo.userId" />
+
+<p>
+  Le titre du Todo : {{ formTodo.title }}
+</p>
