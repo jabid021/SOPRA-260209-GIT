@@ -11,4 +11,9 @@ export class App {
   public resetPrenom() {
     this.prenom = "Nouveau";
   }
+
+  public updatePrenom(event: any) {
+    // console.log(event.target.value);
+    this.prenom = event.target.value;
+  }
 }
