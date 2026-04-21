@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-todo-list-page',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './todo-list-page.html',
   styleUrl: './todo-list-page.css',
 })
-export class TodoListPage {}
+export class TodoListPage implements OnInit {
+  private titleService: Title = inject(Title);
+
+  // Instructions exécutées juste à l'initialisation du composant
+  ngOnInit(): void {
+    this.titleService.setTitle("Liste des todos");
+  }
+}
