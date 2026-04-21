@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../model/todo';
+import { TodoStatePipe } from '../../todo-state-pipe';
 
 @Component({
   selector: 'ajc-todo-list',
-  imports: [ CommonModule ],
+  imports: [
+    CommonModule,
+    TodoStatePipe
+  ],
   templateUrl: './ajc-todo-list.html',
   styleUrl: './ajc-todo-list.css',
 })

@@ -16,7 +16,7 @@
   <tbody>
     <tr *ngFor="let todo of todos; trackBy todoById">
       <td>{{ todo.id }}</td>
-      <td>{{ todo.title }}</td>
+      <td>{{ todo.title | todoState }}</td>
 
       <td *ngIf="todo.completed == true; else pas_termine">Terminé !</td>
       <!-- <td *ngIf="todo.completed != true">Pas terminé !</td> -->
