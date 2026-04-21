@@ -8,6 +8,7 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './todo-list-page.css',
 })
 export class TodoListPage implements OnInit {
+  // Injection de dépendance par méthode inject
   private titleService: Title = inject(Title);
 
   // Instructions exécutées juste à l'initialisation du composant
