@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Todo } from './model/todo';
 import { AjcBold } from './component/ajc-bold/ajc-bold';
+import { AjcTodoList } from './component/ajc-todo-list/ajc-todo-list';
 
 @Component({
   selector: 'app-root',
   imports: [
     FormsModule,
     CommonModule,
-    AjcBold
+    AjcBold,
+    AjcTodoList
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -27,10 +29,6 @@ export class App {
   public updatePrenom(event: any) {
     // console.log(event.target.value);
     this.prenom = event.target.value;
-  }
-
-  public todoById(index: number, todo: Todo) {
-    return todo.id;
   }
 
   public addTodo() {
