@@ -10,6 +10,10 @@ ng s
 ng generate class nom_classe
 ng g class nom_classe
 
+# Générer une nouvelle interface
+ng generate interface nom_interface
+ng g i nom_interface
+
 # Générer une nouvelle Directive
 ng generate directive nom_directive
 ng g d nom_directive
@@ -22,3 +26,6 @@ ng g c nom_composant
 ng generate pipe nom_pipe
 ng g p nom_pipe
 
+# Générer un nouveau Service
+ng generate service nom_service
+ng g s nom_service
