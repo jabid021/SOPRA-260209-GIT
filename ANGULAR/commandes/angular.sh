@@ -17,3 +17,8 @@ ng g d nom_directive
 # Générer un nouveau Composant
 ng generate component nom_composant
 ng g c nom_composant
+
+# Générer un nouveau Pipe
+ng generate pipe nom_pipe
+ng g p nom_pipe
+
