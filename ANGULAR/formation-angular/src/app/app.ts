@@ -37,4 +37,10 @@ export class App {
 
     this.todos.push(new Todo(this.formTodo.id, this.formTodo.title, this.formTodo.completed, this.formTodo.userId));
   }
+
+  public onTodoDeleted(todo: Todo) {
+    const index = this.todos.indexOf(todo);
+
+    this.todos.splice(index, 1);
+  }
 }

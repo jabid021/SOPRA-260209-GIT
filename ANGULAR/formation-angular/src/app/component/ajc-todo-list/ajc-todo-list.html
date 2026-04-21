@@ -9,6 +9,7 @@
       <th>Titre</th>
       <th>Complété V1</th>
       <th>Complété V2</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -32,6 +33,10 @@
         @else {
           Pas terminé !
         }
+      </td>
+
+      <td>
+        <button (click)="onDelete(todo)">Supprimer</button>
       </td>
     </tr>
   </tbody>

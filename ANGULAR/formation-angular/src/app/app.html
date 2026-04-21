@@ -51,7 +51,7 @@ Hello {{ prenom }}
   </p>
 }
 
-<ajc-todo-list [todos]="todos">Liste des choses à faire</ajc-todo-list>
+<ajc-todo-list [todos]="todos" (deleted)="onTodoDeleted($event)">Liste des choses à faire</ajc-todo-list>
 
 <hr />
 
