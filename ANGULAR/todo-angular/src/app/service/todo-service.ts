@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../model/todo';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  private todos: Array<Todo> = new Array<Todo>();
+  constructor(private http: HttpClient) { }
 
-  public findAll(): Todo[] {
-    return this.todos;
+  public findAll(): Observable<Todo[]> {
+    return this.http.get<Todo[]>("https://jsonplaceholder.typicode.com/todos");
   }
 
-  public add(todo: Todo) {
-    this.todos.push(todo);
+  public add(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>("https://jsonplaceholder.typicode.com/todos", todo);
   }
 }

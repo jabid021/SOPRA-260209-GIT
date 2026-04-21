@@ -1,1 +1,15 @@
 <h1>Liste des Todos</h1>
+
+
+<input type="number" [(ngModel)]="formTodo.id" />
+<input type="text" [(ngModel)]="formTodo.title" />
+<input type="checkbox" [(ngModel)]="formTodo.completed" />
+<input type="number" [(ngModel)]="formTodo.userId" />
+
+<button (click)="addTodo()">Ajouter le Todo</button>
+
+<hr />
+
+<ul>
+    <li *ngFor="let todo of todos$ | async">{{ todo.title }}</li>
+</ul>
