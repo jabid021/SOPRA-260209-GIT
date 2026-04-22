@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponse } from '../dto/auth-response';
+import { Observable } from 'rxjs';
 import { AuthRequest } from '../dto/auth-request';
+import { AuthResponse } from '../dto/auth-response';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,14 @@ export class AuthService {
     return this._token;
   }
 
+  public set token(value: string) {
+    this._token = value;
+  }
+
   constructor(private http: HttpClient) { }
 
-  public auth(authRequest: AuthRequest) {
-    this.http.post<AuthResponse>("/auth", authRequest).subscribe(resp => {
-      this._token = resp.token;
-    });
+  public auth(authRequest: AuthRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>("/auth", authRequest);
   }
 
 }
