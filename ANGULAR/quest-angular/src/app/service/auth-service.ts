@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponse } from '../dto/auth-response';
+import { AuthRequest } from '../dto/auth-request';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public auth() {
-    this.http.post<AuthResponse>("/auth", {
-      "username": "jeremy",
-      "password": "123456"
-    }).subscribe(resp => {
+  public auth(authRequest: AuthRequest) {
+    this.http.post<AuthResponse>("/auth", authRequest).subscribe(resp => {
       this._token = resp.token;
     });
   }
