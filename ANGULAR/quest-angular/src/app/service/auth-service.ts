@@ -25,4 +25,8 @@ export class AuthService {
     return this.http.post<AuthResponse>("/auth", authRequest);
   }
 
+  public isLogged(): boolean {
+    // return this._token != "";
+    return !!this._token;
+  }
 }
