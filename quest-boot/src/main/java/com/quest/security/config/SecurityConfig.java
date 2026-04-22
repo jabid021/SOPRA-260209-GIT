@@ -24,6 +24,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
         http.authorizeHttpRequests(authorization -> {
             authorization.requestMatchers("/api/auth", "/api/inscription").permitAll();
+            authorization.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
             authorization.requestMatchers("/**").authenticated();
         });
 
