@@ -1,17 +1,19 @@
 <h1>Liste des matières</h1>
 
-<div>
+<form (submit)="addMatiere()" [formGroup]="formMatiere">
     <div class="mb-3 row">
         <label for="libelle" class="col-sm-2 col-form-label">Libellé</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="libelle" [(ngModel)]="formMatiere.libelle" />
+            <input type="text" class="form-control" id="libelle" formControlName="libelle" />
         </div>
+
+        <div *ngIf="formLibelleCtrl?.hasError('required')">Le libellé est obligatoire</div>
     </div>
 
     <div>
-        <button class="btn btn-success" (click)="addMatiere()">Ajouter</button>
+        <input [disabled]="formMatiere.invalid" type="submit" class="btn btn-success" value="Ajouter" />
     </div>
-</div>
+</form>
 
 <hr />
 
