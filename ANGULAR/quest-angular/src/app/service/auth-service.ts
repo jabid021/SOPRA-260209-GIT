@@ -8,7 +8,7 @@ import { AuthResponse } from '../dto/auth-response';
   providedIn: 'root',
 })
 export class AuthService {
-  private _token: string = "";
+  private _token: string = sessionStorage.getItem("token") ?? "";
 
   public get token() : string {
     return this._token;
@@ -16,6 +16,7 @@ export class AuthService {
 
   public set token(value: string) {
     this._token = value;
+    sessionStorage.setItem("token", value);
   }
 
   constructor(private http: HttpClient) { }
