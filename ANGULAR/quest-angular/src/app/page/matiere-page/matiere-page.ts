@@ -33,7 +33,7 @@ export class MatierePage implements OnInit {
     );
 
     // Fabrication du formulaire avec le FormBuilder
-    this.formLibelleCtrl = this.formBuilder.control("Valeur par défaut", Validators.required);
+    this.formLibelleCtrl = this.formBuilder.control("", Validators.required);
 
     this.formMatiere = this.formBuilder.group({
       // Description des contrôles du formulaire

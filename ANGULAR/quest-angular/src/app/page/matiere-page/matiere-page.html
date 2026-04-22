@@ -4,10 +4,9 @@
     <div class="mb-3 row">
         <label for="libelle" class="col-sm-2 col-form-label">Libellé</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="libelle" formControlName="libelle" />
+            <input type="text" class="form-control" id="libelle" formControlName="libelle" [class.is-invalid]="formLibelleCtrl.invalid" />
+            <div *ngIf="formLibelleCtrl.hasError('required')" class="invalid-feedback">Le libellé est obligatoire</div>
         </div>
-
-        <div *ngIf="formLibelleCtrl?.hasError('required')">Le libellé est obligatoire</div>
     </div>
 
     <div>
