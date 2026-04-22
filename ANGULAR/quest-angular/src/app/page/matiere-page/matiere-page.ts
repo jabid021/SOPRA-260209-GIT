@@ -5,6 +5,7 @@ import { Observable, startWith, Subject, switchMap } from 'rxjs';
 import { Matiere } from '../../model/matiere';
 import { MatiereService } from '../../service/matiere-service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-matiere-page',
@@ -15,6 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class MatierePage implements OnInit {
   private titleService: Title = inject(Title);
   private matiereService: MatiereService = inject(MatiereService);
+  private router: Router = inject(Router);
 
   protected matieres$!: Observable<Matiere[]>;
   private refresh$: Subject<void> = new Subject<void>();
@@ -31,6 +33,11 @@ export class MatierePage implements OnInit {
 
   private reload() {
     this.refresh$.next();
+
+    // Sinon, rechargement de la page
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([ '/matiere' ]);
+    // });
   }
 
   public addMatiere() {
