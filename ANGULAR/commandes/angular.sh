@@ -29,3 +29,7 @@ ng g p nom_pipe
 # Générer un nouveau Service
 ng generate service nom_service
 ng g s nom_service
+
+# Générer un nouvel Intercepteur
+ng generate interceptor nom_intercepteur
+ng g interceptor nom_intercepteur
