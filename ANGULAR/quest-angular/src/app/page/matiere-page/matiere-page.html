@@ -1,0 +1,36 @@
+<h1>Liste des matières</h1>
+
+<div>
+    <div class="mb-3 row">
+        <label for="libelle" class="col-sm-2 col-form-label">Libellé</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="libelle" [(ngModel)]="formMatiere.libelle" />
+        </div>
+    </div>
+
+    <div>
+        <button class="btn btn-success" (click)="addMatiere()">Ajouter</button>
+    </div>
+</div>
+
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Libellé</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let matiere of matieres$ | async">
+            <td>{{ matiere.id }}</td>
+            <td>{{ matiere.libelle }}</td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteMatiere(matiere)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
