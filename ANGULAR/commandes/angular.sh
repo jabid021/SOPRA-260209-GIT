@@ -33,3 +33,7 @@ ng g s nom_service
 # Générer un nouvel Intercepteur
 ng generate interceptor nom_intercepteur
 ng g interceptor nom_intercepteur
+
+# Générer un nouvel Guard
+ng generate guard nom_guard
+ng g g nom_guard
