@@ -10,14 +10,14 @@ export class MatiereService {
   constructor(private http: HttpClient) { }
 
   public findAll(): Observable<Matiere[]> {
-    return this.http.get<Matiere[]>("http://localhost:8080/api/matiere");
+    return this.http.get<Matiere[]>("/matiere");
   }
 
   public add(matiere: Matiere): Observable<Matiere> {
-    return this.http.post<Matiere>("http://localhost:8080/api/matiere", matiere);
+    return this.http.post<Matiere>("/matiere", matiere);
   }
 
   public deleteById(id: number): Observable<void> {
-    return this.http.delete<void>(`http://localhost:8080/api/matiere/${ id }`);
+    return this.http.delete<void>(`/matiere/${ id }`);
   }
 }
