@@ -1,3 +1,5 @@
+//Audric
+
 package biblio.model;
 
 import jakarta.persistence.*;
