@@ -1,3 +1,7 @@
+package biblio.model;
+
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="auteur")
@@ -7,73 +11,65 @@ public class Auteur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="nom", nullable = false,length = 30)
+    @Column(name="nom", nullable = false, length = 30)
     private String nom;
 
-    @Column(name="prenom", nullable = false,length = 30)
+    @Column(name="prenom", nullable = false, length = 30)
     private String prenom;
 
-    @Column(name="nationalite", nullable = false,length = 30)
+    @Column(name="nationalite", nullable = false, length = 30)
     private String nationalite;
 
-    @OneToMany
-    @JoinColumn(name="livre", nullable = false,length = 30)
-    private Livre livres;
+    @OneToMany(mappedBy = "auteur")
+    private List<Livre> livres;
 
-    public Auteur(){}
+    public Auteur() {}
 
-    public Auteur(String nom, String prenom, String nationalite, Livre livres){
-        this.nom=nom;
-        this.prenom=prenom;
-        this.nationalite=nationalite;
-        this.livres=livres;
+    public Auteur(String nom, String prenom, String nationalite) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nationalite = nationalite;
     }
 
-    public Auteur(Integer id, String nom, String prenom, String nationalite, Livre livres){
-        this.id=id;
-        this.nom=nom;
-        this.prenom=prenom;
-        this.nationalite=nationalite;
-        this.livres=livres;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public Auteur(Integer id, String nom, String prenom, String nationalite) {
         this.id = id;
-    }
-    
-    public Integer getNom() {
-        return nom;
-    }
-
-    public void setNom(Integer id) {
-        this.id = nom;
-    }
-    
-    public Integer getPrenom() {
-        return prenom;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nationalite = nationalite;
     }
 
-    public void setPrenom(Integer id) {
-        this.id = prenom;
+    public Integer getId() { 
+        return id; 
     }
-    
-    public Integer getNationalite() {
-        return Nationalite;
-    }
-
-    public void setNationalite(Integer id) {
-        this.id = nationalite;
+    public void setId(Integer id) { 
+        this.id = id; 
     }
 
-    public Integer getLivres() {
-        return livres;
+    public String getNom() { 
+        return nom; 
+    }
+    public void setNom(String nom) { 
+        this.nom = nom; 
     }
 
-    public void setLivres(Integer id) {
-        this.id = livres;
+    public String getPrenom() { 
+        return prenom; 
+    }
+    public void setPrenom(String prenom) { 
+        this.prenom = prenom; 
+    }
+
+    public String getNationalite() { 
+        return nationalite; 
+    }
+    public void setNationalite(String nationalite) { 
+        this.nationalite = nationalite; 
+    }
+
+    public List<Livre> getLivres() { 
+        return livres; 
+    }
+    public void setLivres(List<Livre> livres) { 
+        this.livres = livres; 
     }
 }
