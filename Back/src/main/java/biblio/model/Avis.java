@@ -18,13 +18,13 @@ public class Avis {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="note", nullable = false)
+	@Column(name = "note", nullable = false)
 	private Integer note;
 	
-	@Column(name="commentaire", nullable = true)
+	@Column(name = "commentaire", nullable = true)
 	private String commentaire;
 	
-	@Column(name="date", nullable = false)
+	@Column(name = "date", nullable = false)
 	private LocalDate date;
 	
 	@OneToOne
@@ -33,7 +33,6 @@ public class Avis {
 	public Avis() {}
 	
 	public Avis(Integer note, String commentaire, LocalDate date, Livre livre) {
-		this.id = id;
 		this.note = note;
 		this.commentaire = commentaire;
 		this.date = date;
