@@ -1,4 +1,4 @@
-package biblio.restcontroller;
+package biblio.api;
 
 import biblio.dao.IDAOLivre;
 import biblio.model.Livre;
