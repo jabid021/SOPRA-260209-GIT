@@ -21,11 +21,11 @@ public class Livre {
     private LocalDate annee;
 
     @ManyToOne
-    @Column(name="auteur", nullable = false)
+    @JoinColumn(name ="auteur_Id")
     private Auteur auteur;
 
     @ManyToOne
-    @JoinColumn(name = "editeurId")
+    @JoinColumn(name = "editeur_Id")
     private Editeur editeur;
 
     @Column(name="collection", nullable = true,length = 30)
