@@ -28,12 +28,13 @@ public class Livre {
     @JoinColumn(name = "editeur_Id")
     private Editeur editeur;
 
-    @Column(name="collection", nullable = true,length = 30)
-    private String collection;
+    @ManyToOne
+    @JoinColumn(name = "collection_Id")
+    private Collection collection;
 
     public Livre(){}
 
-    public Livre(String titre, String resume, LocalDate annee, Editeur editeur, String collection){
+    public Livre(String titre, String resume, LocalDate annee, Editeur editeur, Collection collection){
         this.titre = titre;
         this.resume = resume;
         this.annee = annee;
@@ -41,7 +42,7 @@ public class Livre {
         this.collection = collection;
     }
 
-    public Livre(Integer id, String titre, String resume, LocalDate annee, Editeur editeur, String collection){
+    public Livre(Integer id, String titre, String resume, LocalDate annee, Editeur editeur, Collection collection){
         this.id = id;
         this.titre = titre;
         this.resume = resume;
@@ -88,11 +89,11 @@ public class Livre {
         this.editeur = editeur;
     }
 
-    public String getCollection() {
+    public Collection getCollection() {
         return collection;
     }
 
-    public void setCollection(String collection) {
+    public void setCollection(Collection collection) {
         this.collection = collection;
     }
 }
