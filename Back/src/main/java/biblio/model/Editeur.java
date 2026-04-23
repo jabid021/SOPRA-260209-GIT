@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 @Table(name="editeur")
@@ -15,11 +18,15 @@ public class Editeur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nom", nullable = false)
+    @Column(name = "nom", nullable = false, length = 30)
     private String nom;
 
-    @Column(name = "pays", nullable = false)
+    @Column(name = "pays", nullable = false, length = 30)
     private String pays;
+
+    @OneToMany
+    @JoinColumn(name="livre", nullable = false)
+	private Livre livre;
 
     public Editeur() {}
 
