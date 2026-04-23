@@ -18,7 +18,7 @@ public class Editeur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nom", nullable = false, length = 30)
+    @Column(name = "nom", nullable = false, unique = true, length = 30)
     private String nom;
 
     @Column(name = "pays", nullable = false, length = 30)
