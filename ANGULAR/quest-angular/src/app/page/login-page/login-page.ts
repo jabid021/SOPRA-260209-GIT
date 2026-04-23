@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthRequest } from '../../dto/auth-request';
 import { AuthService } from '../../service/auth-service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +23,33 @@ export class LoginPage implements OnInit {
   protected formPasswordCtrl!: FormControl;
 
   ngOnInit(): void {
-    this.formUsernameCtrl = this.formBuilder.control("", Validators.required);
+    const customValidator = (arg: string): ValidatorFn => {
+      return (control: AbstractControl): ValidationErrors | null => {
+        // Si erreur
+        const isValid = control.value === arg;
+
+        if (!isValid) {
+          return { compare: true };
+        }
+
+        // Si pas d'erreur
+        return null;
+      };
+    };
+
+    const customValidatorV2 = (control: AbstractControl): ValidationErrors | null => {
+      // Si erreur
+      const isValid = /^[a-z]+$/.test(control.value);
+
+      if (!isValid) {
+        return { minusculeV2: true };
+      }
+
+      // Si pas d'erreur
+      return null;
+    };
+
+    this.formUsernameCtrl = this.formBuilder.control("", [ Validators.required, customValidator("test"), customValidatorV2 ]);
     this.formPasswordCtrl = this.formBuilder.control("", Validators.required);
 
     this.formAuth = this.formBuilder.group({
