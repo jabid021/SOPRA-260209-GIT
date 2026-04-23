@@ -16,7 +16,7 @@ public class Editeur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "nom", nullable = false, unique = true, length = 30)
     private String nom;
@@ -35,7 +35,13 @@ public class Editeur {
         this.pays = pays;
     }
 
-    public Long getId() {
+    public Editeur(Integer id, String nom, String pays) {
+        this.id = id;
+        this.nom = nom;
+        this.pays = pays;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -47,7 +53,7 @@ public class Editeur {
         return pays;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/editeurs")
+@RequestMapping("/api/editeur")
 @CrossOrigin(origins = "http://localhost:4200")
 public class EditeurController {
 
@@ -18,12 +18,12 @@ public class EditeurController {
     private EditeurService editeurService;
 
     @GetMapping
-    public List<Editeur> getAll() {
+    public List<Editeur> findAll() {
         return this.editeurService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Editeur getById(@PathVariable Integer id) {
+    public Editeur findById(@PathVariable Integer id) {
         return this.editeurService.findById(id);
     }
 
