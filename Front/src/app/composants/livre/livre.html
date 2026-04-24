@@ -1,29 +1,49 @@
 <!-- livre.component.html -->
+<div class="container">
+  <h2>Liste des Livres</h2>
 
-<h2>Liste des Livres</h2>
+  <button class="btn-primary" (click)="openAddForm()">Ajouter un livre</button>
 
-<ul>
-  <li *ngFor="let livre of livres">
-    <strong>{{ livre.titre }}</strong> ({{ livre.annee }})
-    <button (click)="edit(livre)">Edit</button>
-    <button (click)="delete(livre.id!)">Delete</button>
-  </li>
-</ul>
+  <div *ngIf="showForm" class="mt-3">
+    <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un livre</h3>
+    <form>
+      <input type="text" placeholder="Titre" [(ngModel)]="formLivre.titre" name="titre" /><br>
+      <input type="text" placeholder="Résumé" [(ngModel)]="formLivre.resume" name="resume" /><br>
+      <input type="text" placeholder="Année" [(ngModel)]="formLivre.annee" name="anne" /><br>
+      <input type="text" placeholder="Auteur" [(ngModel)]="formLivre.auteur" name="auteur" /><br>
+      <input type="text" placeholder="Editeur" [(ngModel)]="formLivre.editeur" name="editeur" /><br>
+      <input type="text" placeholder="Collection" [(ngModel)]="formLivre.collection" name="collection" /><br>
+      <button type="button" class="btn-primary mt-3" (click)="submit()">
+        {{ isEditing ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <button type="button" class="btn-delete mx-1 mt-3" (click)="cancel()">Annuler</button>
+    </form>
+  </div>
 
-<hr>
-
-<h2>{{ selectedId ? 'Modifier' : 'Ajouter' }} un Livre</h2>
-
-<form (ngSubmit)="submit()">
-  <input [(ngModel)]="formLivre.titre" name="titre" placeholder="Titre" required>
-
-  <input [(ngModel)]="formLivre.resume" name="resume" placeholder="Résumé" required>
-
-  <input [(ngModel)]="formLivre.annee" name="annee" type="date" required>
-
-  <button type="submit">
-    {{ selectedId ? 'Update' : 'Create' }}
-  </button>
-
-  <button type="button" (click)="resetForm()">Reset</button>
-</form>
+  <table class="mt-3">
+    <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Résumé</th>
+      <th>Année</th>
+      <th>Editeur</th>
+      <th>Auteur</th>
+      <th>Collection</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let livre of livres">
+      <td>{{ livre.titre }}</td>
+      <td>{{ livre.resume }}</td>
+      <td>{{ livre.annee }}</td>
+      <td>{{ livre.auteur }}</td>
+      <td>{{ livre.editeur }}</td>
+      <td>{{ livre.collection }}</td>
+      <td>
+        <button class="btn-edit" (click)="openEditForm(livre)">Modifier</button>
+        <button class="btn-delete mx-1" (click)="delete(livre.id!)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

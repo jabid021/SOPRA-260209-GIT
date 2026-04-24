@@ -69,4 +69,25 @@ export class EditeurComponent implements OnInit {
       };
       this.selectedId = null;
     }
+
+  showForm = false;
+
+  get isEditing(): boolean {
+    return this.selectedId !== null;
+  }
+
+  openAddForm(): void {
+    this.resetForm();
+    this.showForm = true;
+  }
+
+  openEditForm(editeur: Editeur): void {
+    this.edit(editeur);
+    this.showForm = true;
+  }
+
+  cancel(): void {
+    this.resetForm();
+    this.showForm = false;
+  }
 }

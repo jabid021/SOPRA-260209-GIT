@@ -11,13 +11,17 @@ import { Livre } from '../../model/livre';
   styleUrl: './livre.css',
 })
 export class LivreComponent implements OnInit {
-
   livres: Livre[] = [];
+  showForm = false;
+  isEditing = false;
 
   formLivre: Livre = {
     titre: '',
     resume: '',
-    annee: ''
+    annee: '',
+    auteur: '',
+    editeur: '',
+    collection: ''
   };
 
   selectedId: number | null = null;
@@ -30,7 +34,6 @@ export class LivreComponent implements OnInit {
 
   loadLivres() {
     this.livreService.getAll().subscribe((data: Livre[]) => {
-      console.log("DATA RECEIVED:", data);
       this.livres = data;
       this.cdr.detectChanges(); // Force le refresh de l'ui pour l'affichage des livres
     });
@@ -65,9 +68,28 @@ export class LivreComponent implements OnInit {
     this.formLivre = {
       titre: '',
       resume: '',
-      annee: ''
+      annee: '',
+      auteur: '',
+      editeur: '',
+      collection: ''
     };
     this.selectedId = null;
   }
 
+  openAddForm() {
+      this.showForm = true;
+      this.isEditing = false;
+      this.formLivre = { titre: '', resume: '', annee: '',  auteur: '', editeur: '', collection: '' };
+    }
+
+  openEditForm(livre: any) {
+      this.showForm = true;
+      this.isEditing = true;
+      this.selectedId = livre.id;
+      this.formLivre = { titre: livre.titre, resume: livre.resume, annee: livre.annee, auteur: livre.auteur, editeur: livre.editeur, collection: livre.collection};
+  }
+
+   cancel() {
+      this.showForm = false;
+    }
 }

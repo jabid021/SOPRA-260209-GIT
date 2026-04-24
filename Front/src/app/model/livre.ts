@@ -3,7 +3,7 @@ export interface Livre {
   titre: string;
   resume: string;
   annee: string;
-  auteur?: any;
-  editeur?: any;
-  collection?: any;
+  auteur: any;
+  editeur: any;
+  collection: any;
 }
