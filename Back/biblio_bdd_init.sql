@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 23, 2026 at 01:57 PM
+-- Generation Time: Apr 24, 2026 at 08:49 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   `date` date NOT NULL,
   `note` int NOT NULL,
   `livre_id` int DEFAULT NULL,
+  `livre` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKkuy2rlix4tlqhrmueiyijbxtr` (`livre_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
@@ -66,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `avis` (
 -- Dumping data for table `avis`
 --
 
-INSERT INTO `avis` (`id`, `commentaire`, `date`, `note`, `livre_id`) VALUES
-(1, 'Très Très bon livre', '2026-04-23', 10, 1);
+INSERT INTO `avis` (`id`, `commentaire`, `date`, `note`, `livre_id`, `livre`) VALUES
+(1, 'Très Très bon livre', '2026-04-23', 10, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -99,8 +100,8 @@ INSERT INTO `collection` (`id`, `nom`) VALUES
 DROP TABLE IF EXISTS `editeur`;
 CREATE TABLE IF NOT EXISTS `editeur` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) NOT NULL,
-  `pays` varchar(255) NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `pays` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
@@ -126,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `livre` (
   `auteur_id` int DEFAULT NULL,
   `collection_id` int DEFAULT NULL,
   `editeur_id` bigint DEFAULT NULL,
+  `livre` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKh0pb6pxv3ubtgo1s3ev4gebgj` (`auteur_id`),
   KEY `FKtdie3rsbf0cer3n22mhp4to53` (`collection_id`),
@@ -136,8 +138,8 @@ CREATE TABLE IF NOT EXISTS `livre` (
 -- Dumping data for table `livre`
 --
 
-INSERT INTO `livre` (`id`, `annee`, `resume`, `titre`, `auteur_id`, `collection_id`, `editeur_id`) VALUES
-(1, '2026-04-01', 'Comment j\'ai perdu ma femme au casino', 'Addiction gambling: l\'histoire', 1, 1, 1);
+INSERT INTO `livre` (`id`, `annee`, `resume`, `titre`, `auteur_id`, `collection_id`, `editeur_id`, `livre`) VALUES
+(1, '2026-04-01', 'Comment j\'ai perdu ma femme au casino', 'Addiction gambling: l\'histoire', 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -153,7 +155,14 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `username` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKkq7nt5wyq9v9lpcpgxag2f24a` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `admin`, `password`, `username`) VALUES
+(1, b'1', '$2a$12$a.E/4yHj8gXfMiDllMQXR.jMzrSTLV5HpDcr9Gq5TBAX7v0W3.gEi', 'user');
 
 --
 -- Constraints for dumped tables

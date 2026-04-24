@@ -26,9 +26,9 @@ public class Editeur {
     @Column(name = "pays", nullable = false, length = 30)
     private String pays;
 
-    @OneToMany
+    /*@OneToMany
     @JoinColumn(name="livre", nullable = false)
-	private List<Livre> livre;
+	private List<Livre> livre;*/
 
     public Editeur() {}
 
