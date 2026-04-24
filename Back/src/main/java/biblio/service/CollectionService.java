@@ -37,10 +37,15 @@ public class CollectionService
         return this.daoCollection.save(collection);
     }
 
-    public Collection update(Integer id, Collection collection) 
+    public Collection update(Integer id, Collection collection)
     {
         Collection existing = this.findById(id);
-        existing.setNom(collection.getNom());
+        String nouveauNom = collection.getNom();
+        if (!existing.getNom().equals(nouveauNom) && this.daoCollection.existsByNom(nouveauNom))
+        {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Une collection avec ce nom existe déjà");
+        }
+        existing.setNom(nouveauNom);
         return this.daoCollection.save(existing);
     }
 

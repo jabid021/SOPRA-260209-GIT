@@ -123,12 +123,36 @@ class CollectionServiceTest
     }
 
     @Test
-    void update_leve404SiCollectionInexistante() 
+    void update_leve404SiCollectionInexistante()
     {
         Mockito.when(this.daoCollection.findById(99)).thenReturn(Optional.empty());
         assertThatThrownBy(() -> this.collectionService.update(99, new Collection()))
                 .isInstanceOf(ResponseStatusException.class)
                 .hasMessageContaining("Collection introuvable");
+    }
+
+    @Test
+    void update_leve409SiNomDejaUtilise()
+    {
+        Mockito.when(this.daoCollection.findById(1)).thenReturn(Optional.of(this.SF));
+        Mockito.when(this.daoCollection.existsByNom("Jeunesse")).thenReturn(true);
+
+        assertThatThrownBy(() -> this.collectionService.update(1, new Collection("Jeunesse")))
+                .isInstanceOf(ResponseStatusException.class)
+                .hasMessageContaining("existe déjà");
+
+        verify(this.daoCollection, never()).save(Mockito.any());
+    }
+
+    @Test
+    void update_accepteLeMemNomSansConflitPourLaMemeCollection()
+    {
+        Mockito.when(this.daoCollection.findById(1)).thenReturn(Optional.of(this.SF));
+        Mockito.when(this.daoCollection.save(this.SF)).thenReturn(this.SF);
+
+        Collection result = this.collectionService.update(1, new Collection("SF"));
+        assertThat(result.getNom()).isEqualTo("SF");
+        verify(this.daoCollection, never()).existsByNom(Mockito.any());
     }
 
     // ── deleteById ────────────────────────────────────────────────────────────

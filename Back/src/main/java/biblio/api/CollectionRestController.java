@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import biblio.model.Collection;
 import biblio.service.CollectionService;
@@ -40,13 +41,13 @@ public class CollectionRestController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Collection add(@RequestBody Collection collection) 
+    public Collection add(@Valid @RequestBody Collection collection) 
     {
         return this.collectionService.add(collection);
     }
 
     @PutMapping("/{id}")
-    public Collection update(@PathVariable Integer id, @RequestBody Collection collection) 
+    public Collection update(@PathVariable Integer id, @Valid @RequestBody Collection collection) 
     {
         return this.collectionService.update(id, collection);
     }

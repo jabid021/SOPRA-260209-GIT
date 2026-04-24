@@ -1,7 +1,6 @@
 // MARTIN
 
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Collection } from '../model/collection';
 import { CollectionService } from '../service/collection-service';
@@ -9,7 +8,7 @@ import { CollectionService } from '../service/collection-service';
 @Component({
   selector: 'app-collection',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './collection.html',
   styleUrl: './collection.css',
 })
@@ -62,7 +61,7 @@ export class CollectionComponent implements OnInit {
     const nom = this.newNom.trim();
     if (!nom) return;
 
-    this.collectionService.add({ nom } as Collection).subscribe({
+    this.collectionService.add({ nom }).subscribe({
       next: (created) => {
         this.collections.push(created);
         this.isAdding = false;
@@ -137,7 +136,7 @@ export class CollectionComponent implements OnInit {
     setTimeout(() => (this.successMessage = ''), 3000);
   }
 
-  clearMessages(): void {
+  private clearMessages(): void {
     this.errorMessage = '';
     this.successMessage = '';
   }
