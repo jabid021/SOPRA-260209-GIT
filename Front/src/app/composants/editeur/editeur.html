@@ -1,1 +1,27 @@
-<p>editeur works!</p>
+<!-- editeur.component.html -->
+
+<h2>Liste des Editeurs</h2>
+
+<ul>
+  <li *ngFor="let editeur of editeurs">
+    <strong>{{ editeur.nom }}</strong> ({{ editeur.pays }})
+    <button (click)="edit(editeur)">Edit</button>
+    <button (click)="delete(editeur.id!)">Delete</button>
+  </li>
+</ul>
+
+<hr>
+
+<h2>{{ selectedId ? 'Modifier' : 'Ajouter' }} Editeur</h2>
+
+<form (ngSubmit)="submit()">
+  <input [(ngModel)]="formEditeur.nom" name="nom" placeholder="Nom" required>
+
+  <input [(ngModel)]="formEditeur.pays" name="pays" placeholder="Pays" required>
+
+  <button type="submit">
+    {{ selectedId ? 'Update' : 'Create' }}
+  </button>
+
+  <button type="button" (click)="resetForm()">Reset</button>
+</form>

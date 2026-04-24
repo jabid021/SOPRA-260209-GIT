@@ -1,0 +1,49 @@
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #2f2f4f;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+thead {
+  background: #6c5ce7;
+}
+
+thead th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 500;
+}
+
+tbody tr {
+  background: #3b3b5c;
+  transition: 0.3s;
+}
+
+tbody tr:nth-child(even) {
+  background: #343454;
+}
+
+tbody tr:hover {
+  background: #4b4b75;
+}
+
+td {
+  padding: 12px;
+}

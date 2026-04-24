@@ -1,1 +1,42 @@
-<p>auteur works!</p>
+<div class="container">
+  <h2>Liste des auteurs</h2>
+
+  <button class="btn-primary" (click)="openAddForm()">Ajouter un auteur</button>
+
+  <div *ngIf="showForm" class="mt-3">
+    <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un auteur</h3>
+    <form>
+      <input type="text" placeholder="Nom" [(ngModel)]="formData.nom" name="nom" /><br>
+      <input type="text" placeholder="Prénom" [(ngModel)]="formData.prenom" name="prenom" /><br>
+      <input type="text" placeholder="Nationalité" [(ngModel)]="formData.nationalite" name="nationalite" /><br>
+      <button type="button" class="btn-primary mt-3" (click)="submit()">
+        {{ isEditing ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <button type="button" class="btn-delete mx-1 mt-3" (click)="cancel()">Annuler</button>
+    </form>
+  </div>
+
+  <table class="mt-3">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Nationalité</th>
+        <th>Nb Livres</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let auteur of auteurs">
+        <td>{{ auteur.nom }}</td>
+        <td>{{ auteur.prenom }}</td>
+        <td>{{ auteur.nationalite }}</td>
+        <td>{{ auteur.livres.length }}</td>
+        <td>
+          <button class="btn-edit" (click)="openEditForm(auteur)">Modifier</button>
+          <button class="btn-delete mx-1" (click)="delete(auteur.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
