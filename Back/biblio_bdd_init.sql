@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 23, 2026 at 01:07 PM
+-- Generation Time: Apr 23, 2026 at 01:57 PM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bibliosql`
 --
+CREATE DATABASE IF NOT EXISTS `bibliosql` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+USE `bibliosql`;
 
 -- --------------------------------------------------------
 
