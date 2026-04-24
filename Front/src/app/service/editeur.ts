@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EditeurService {
-    private apiUrl = 'http://localhost:8080/api/editeur';
+    private apiUrl = '/api/editeur';
 
     constructor(private http: HttpClient) {}
 

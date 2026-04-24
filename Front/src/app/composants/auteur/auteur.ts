@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuteurService } from '../../service/auteur';
@@ -10,6 +10,7 @@ import { Auteur } from '../../model/auteur';
   templateUrl: './auteur.html',
   styleUrl: './auteur.css'
 })
+
 export class AuteurComponent implements OnInit {
   auteurs: any[] = [];
   showForm = false;
@@ -18,7 +19,7 @@ export class AuteurComponent implements OnInit {
   formData = { nom: '', prenom: '', nationalite: '' };
   selectedId: number | null = null;
 
-  constructor(private auteurService: AuteurService) {}
+  constructor(private auteurService: AuteurService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadAuteurs();
@@ -27,6 +28,7 @@ export class AuteurComponent implements OnInit {
   loadAuteurs() {
     this.auteurService.getAll().subscribe(data => {
       this.auteurs = data;
+      this.cdr.detectChanges(); // Force le refresh
     });
   }
 
