@@ -1,0 +1,57 @@
+name: biblio
+
+services:
+  # ── Étape 1 : MySQL ─────────────────────────────────────────
+  mysql:
+    image: mysql:8.0.45
+    container_name: biblio-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+    volumes:
+      # Pour initialiser la base
+      - ./biblio_bdd_init.sql:/docker-entrypoint-initdb.d/init.sql
+
+      # Pour persister les données après suppression / mise à jour du container
+      - mysql_data:/var/lib/mysql
+
+    networks:
+      - biblio
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 3s
+      retries: 3
+      interval: 3s
+      start_period: 5s
+
+  # ── Étape 2 : Spring Boot ────────────────────────────────────────
+  java:
+    image: biblio_backend
+    container_name: biblio_backend
+    build:
+      context: .
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - biblio
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://biblio-mysql:3306/bibliosql
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  biblio:
+    name: biblio
+
+volumes:
+  mysql_data:
+    name: biblio-mysql-data
