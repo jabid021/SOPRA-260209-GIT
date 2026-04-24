@@ -1,27 +1,38 @@
 <!-- editeur.component.html -->
+<div class="container">
+  <h2>Liste des editeurs</h2>
 
-<h2>Liste des Editeurs</h2>
+  <button class="btn-primary" (click)="openAddForm()">Ajouter un editeur</button>
 
-<ul>
-  <li *ngFor="let editeur of editeurs">
-    <strong>{{ editeur.nom }}</strong> ({{ editeur.pays }})
-    <button (click)="edit(editeur)">Edit</button>
-    <button (click)="delete(editeur.id!)">Delete</button>
-  </li>
-</ul>
+  <div *ngIf="showForm" class="mt-3">
+    <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un editeur</h3>
+    <form>
+      <input type="text" placeholder="Nom" [(ngModel)]="formData.nom" name="nom" /><br>
+      <input type="text" placeholder="Pays" [(ngModel)]="formData.pays" name="pays" /><br>
+      <button type="button" class="btn-primary mt-3" (click)="submit()">
+        {{ isEditing ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <button type="button" class="btn-delete mx-1 mt-3" (click)="cancel()">Annuler</button>
+    </form>
+  </div>
 
-<hr>
-
-<h2>{{ selectedId ? 'Modifier' : 'Ajouter' }} Editeur</h2>
-
-<form (ngSubmit)="submit()">
-  <input [(ngModel)]="formEditeur.nom" name="nom" placeholder="Nom" required>
-
-  <input [(ngModel)]="formEditeur.pays" name="pays" placeholder="Pays" required>
-
-  <button type="submit">
-    {{ selectedId ? 'Update' : 'Create' }}
-  </button>
-
-  <button type="button" (click)="resetForm()">Reset</button>
-</form>
+  <table class="mt-3">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Pays</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let editeur of editeurs">
+        <td>{{ auteur.nom }}</td>
+        <td>{{ auteur.pays }}</td>
+        <td>
+          <button class="btn-edit" (click)="openEditForm(editeur)">Modifier</button>
+          <button class="btn-delete mx-1" (click)="delete(editeur.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
