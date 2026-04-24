@@ -31,6 +31,7 @@ public class SecurityConfig
         http.authorizeHttpRequests(authorization -> 
         {
             authorization.requestMatchers("/api/auth").permitAll();
+            authorization.requestMatchers("/actuator/**").permitAll();
             authorization.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll();
             authorization.requestMatchers("/**").authenticated();
         });
