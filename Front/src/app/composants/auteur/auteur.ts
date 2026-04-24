@@ -10,7 +10,7 @@ import { Auteur } from '../../model/auteur';
   templateUrl: './auteur.html',
   styleUrl: './auteur.css'
 })
-export class Auteur implements OnInit {
+export class AuteurComponent implements OnInit {
   auteurs: any[] = [];
   showForm = false;
   isEditing = false;
