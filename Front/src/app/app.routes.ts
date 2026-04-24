@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { Login } from './auth/login/login';
 
-import { Auteur } from './composants/auteur/auteur';
+import { AuteurComponent } from './composants/auteur/auteur';
 import { LivreComponent } from './composants/livre/livre';
 import { CollectionComponent } from './composants/collection/collection';
 import { EditeurComponent } from './composants/editeur/editeur';
@@ -13,7 +13,7 @@ import { alreadyAuthGuard } from './auth/already-auth-guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [alreadyAuthGuard] },
-  { path: 'auteurs', component: Auteur, canActivate: [authGuard] },
+  { path: 'auteurs', component: AuteurComponent, canActivate: [authGuard] },
   { path: 'livres', component: LivreComponent, canActivate: [authGuard] },
   { path: 'collections', component: CollectionComponent, canActivate: [authGuard] },
   { path: 'editeurs', component: EditeurComponent, canActivate: [authGuard] },

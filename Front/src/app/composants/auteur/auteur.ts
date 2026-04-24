@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuteurService } from '../../service/auteur';
+import { Auteur } from '../../model/auteur';
 
 @Component({
   selector: 'app-auteur',
