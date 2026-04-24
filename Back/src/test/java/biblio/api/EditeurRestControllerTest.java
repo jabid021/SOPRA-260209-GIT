@@ -26,8 +26,8 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
-@WebMvcTest(EditeurController.class)
-public class EditeurControllerTest {
+@WebMvcTest(EditeurRestController.class)
+public class EditeurRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

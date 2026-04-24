@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/editeur")
 @CrossOrigin(origins = "http://localhost:4200")
-public class EditeurController {
+public class EditeurRestController {
 
     @Autowired
     private EditeurService editeurService;

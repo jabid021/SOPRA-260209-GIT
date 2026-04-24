@@ -4,6 +4,7 @@ import biblio.dao.IDAOAvis;
 import biblio.model.Avis;
 import biblio.model.Livre;
 
+import biblio.service.AvisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/avis")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AvisRestController {
     
     @Autowired
-    IDAOAvis daoAvis;
+    private AvisService avisService;
 
     @GetMapping("/{id}")
     public Avis findById(@PathVariable Integer id){
-        return daoAvis.findById(id).orElse(null);
+        return avisService.findById(id);
     }
 
     /* 
@@ -30,26 +32,26 @@ public class AvisRestController {
    
     @GetMapping
     public List<Avis> findAll(){
-        return daoAvis.findAll();
+        return avisService.findAll();
     }
 
      @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id)
     {
-        daoAvis.deleteById(id);
+        avisService.deleteById(id);
     }
 
     @PostMapping
     public Avis add(@RequestBody Avis avis)
     {
-        return daoAvis.save(avis);
+        return avisService.create(avis);
     }
 
     @PutMapping("/{id}")
     public Avis update(@PathVariable Integer id, @RequestBody Avis avis)
     {
         avis.setId(id);
-        daoAvis.save(avis);
+        avisService.create(avis);
         return avis;
     }
 }

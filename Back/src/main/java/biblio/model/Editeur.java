@@ -68,8 +68,8 @@ public class Editeur {
     }
 
     @Override
-	public String toString() {
-		return "Editeur [id=" + id + ", nom=" + nom + ", pays=" + pays + "]";
-	}
+    public String toString() {
+        return "Editeur [id=" + id + ", nom=" + nom + ", pays=" + pays + "]";
+    }
 
 }

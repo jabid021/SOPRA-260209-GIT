@@ -27,8 +27,8 @@ import biblio.service.CollectionService;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
-@WebMvcTest(CollectionController.class)
-class CollectionControllerTest 
+@WebMvcTest(CollectionRestController.class)
+class CollectionRestControllerTest
 {
 
     @Autowired

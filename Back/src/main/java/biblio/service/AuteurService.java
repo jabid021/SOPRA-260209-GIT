@@ -1,5 +1,5 @@
 //Audric
-/*
+
 package biblio.service;
 
 import java.util.List;
@@ -51,4 +51,3 @@ public class AuteurService {
         this.daoAuteur.deleteById(id);
     }
 }
-*/

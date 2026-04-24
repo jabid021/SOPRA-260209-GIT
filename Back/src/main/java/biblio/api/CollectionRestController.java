@@ -23,7 +23,7 @@ import biblio.service.CollectionService;
 @RestController
 @RequestMapping("/api/collection")
 @CrossOrigin(origins = "http://localhost:4200")
-public class CollectionController 
+public class CollectionRestController
 {
     @Autowired
     private CollectionService collectionService;
