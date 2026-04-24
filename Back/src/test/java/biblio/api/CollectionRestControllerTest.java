@@ -106,6 +106,65 @@ class CollectionRestControllerTest
         result.andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Thriller"));
     }
 
+    // ── PUT /api/collection/{id} ──────────────────────────────────────────────
+
+    @Test
+    @WithMockUser
+    void update_retourne200AvecCorps() throws Exception
+    {
+        Collection modifiee = new Collection(1, "Science-Fiction");
+        Mockito.when(this.collectionService.update(Mockito.eq(1), Mockito.any())).thenReturn(modifiee);
+        ResultActions result = this.mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/collection/1")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nom\":\"Science-Fiction\"}")
+        );
+        result.andExpect(MockMvcResultMatchers.status().isOk());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.nom").value("Science-Fiction"));
+    }
+
+    @Test
+    @WithMockUser
+    void update_retourne409SiNomDejaUtilise() throws Exception
+    {
+        Mockito.when(this.collectionService.update(Mockito.eq(1), Mockito.any()))
+                .thenThrow(new ResponseStatusException(org.springframework.http.HttpStatus.CONFLICT, "existe déjà"));
+        ResultActions result = this.mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/collection/1")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nom\":\"Jeunesse\"}")
+        );
+        result.andExpect(MockMvcResultMatchers.status().isConflict());
+    }
+
+    @Test
+    @WithMockUser
+    void update_retourne400SiNomVide() throws Exception
+    {
+        ResultActions result = this.mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/collection/1")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nom\":\"\"}")
+        );
+        result.andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @WithMockUser
+    void add_retourne400SiNomVide() throws Exception
+    {
+        ResultActions result = this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/collection")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nom\":\"\"}")
+        );
+        result.andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
     // ── DELETE /api/collection/{id} ───────────────────────────────────────────
 
     @Test
