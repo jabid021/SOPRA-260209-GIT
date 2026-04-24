@@ -25,7 +25,8 @@ public class AvisRestController {
     public List<Livre> findByLivre(@PathVariable String titre){
         return daoAvis.findByLivre(titre);
     }
-    
+    */
+   
     @GetMapping
     public List<Avis> findAll(){
         return daoAvis.findAll();

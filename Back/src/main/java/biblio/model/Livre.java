@@ -3,6 +3,7 @@ package biblio.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="livre")
@@ -31,6 +32,9 @@ public class Livre {
     @ManyToOne
     @JoinColumn(name = "collection_Id")
     private Collection collection;
+
+    @OneToMany(mappedBy = "livre")
+    private List<Avis> avis;
 
     public Livre(){}
 

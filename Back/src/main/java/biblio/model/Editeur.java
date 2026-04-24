@@ -1,5 +1,7 @@
 package biblio.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ public class Editeur {
 
     @OneToMany
     @JoinColumn(name="livre", nullable = false)
-	private Livre livre;
+	private List<Livre> livre;
 
     public Editeur() {}
 
