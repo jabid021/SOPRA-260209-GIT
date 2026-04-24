@@ -11,5 +11,5 @@ export const routes: Routes = [
   { path: 'collections', component: Collection },
   { path: 'editeurs', component: Editeur },
   { path: 'avis', component: Avis },
-  { path: '', redirectTo: 'auteurs', pathMatch: 'full' }
-];
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
+];  
