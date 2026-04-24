@@ -82,17 +82,17 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <scope>compile</scope>
         </dependency>
-<<<<<<< HEAD
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-=======
+        </dependency>
 
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
->>>>>>> origin/Groupe4
         </dependency>
+        
     </dependencies>
 
     <build>
