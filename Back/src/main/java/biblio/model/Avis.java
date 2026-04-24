@@ -38,13 +38,15 @@ public class Avis {
 		this.note = note;
 		this.commentaire = commentaire;
 		this.date = date;
-	}
+		this.livre = livre;
+		}
 
 	public Avis(Integer id, Integer note, String commentaire, LocalDate date, Livre livre) {
 		this.id = id;
 		this.note = note;
 		this.commentaire = commentaire;
 		this.date = date;
+		this.livre = livre;
 	}
 
 	public Integer getId() {
