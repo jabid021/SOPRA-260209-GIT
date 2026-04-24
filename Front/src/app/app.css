@@ -1,0 +1,62 @@
+body {
+  background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f5f6fa;
+  margin: 0;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 14px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn-primary {
+  background: #6c5ce7;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5a4bcf;
+}
+
+.btn-view {
+  background: #00cec9;
+  color: white;
+}
+
+.btn-edit {
+  background: #fdcb6e;
+  color: #2d3436;
+}
+
+.btn-delete {
+  background: #d63031;
+  color: white;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mx-1 {
+  margin: 0 5px;
+}
+
+.text-success {
+  color: #00b894;
+  font-weight: bold;
+}
+
+.text-delete {
+  color: #ff7675;
+  font-weight: bold;
+}
