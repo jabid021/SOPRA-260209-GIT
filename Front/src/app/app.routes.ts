@@ -4,7 +4,7 @@ import { Login } from './auth/login/login';
 
 import { Auteur } from './composants/auteur/auteur';
 import { LivreComponent } from './composants/livre/livre';
-import { Collection } from './composants/collection/collection';
+import { CollectionComponent } from './composants/collection/collection';
 import { EditeurComponent } from './composants/editeur/editeur';
 import { Avis } from './composants/avis/avis';
 
@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [alreadyAuthGuard] },
   { path: 'auteurs', component: Auteur, canActivate: [authGuard] },
   { path: 'livres', component: LivreComponent, canActivate: [authGuard] },
-  { path: 'collections', component: Collection, canActivate: [authGuard] },
+  { path: 'collections', component: CollectionComponent, canActivate: [authGuard] },
   { path: 'editeurs', component: EditeurComponent, canActivate: [authGuard] },
   { path: 'avis', component: Avis, canActivate: [authGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
