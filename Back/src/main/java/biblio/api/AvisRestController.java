@@ -2,6 +2,8 @@ package biblio.api;
 
 import biblio.dao.IDAOAvis;
 import biblio.model.Avis;
+import biblio.model.Livre;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,11 @@ public class AvisRestController {
         return daoAvis.findById(id).orElse(null);
     }
 
+    @GetMapping("/livre/{id}")
+    public List<Livre> findByLivre(@PathVariable Integer id){
+        return daoAvis.findByLivre(id);
+    }
+    
     @GetMapping
     public List<Avis> findAll(){
         return daoAvis.findAll();
