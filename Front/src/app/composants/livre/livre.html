@@ -1,1 +1,29 @@
-<p>livre works!</p>
+<!-- livre.component.html -->
+
+<h2>Liste des Livres</h2>
+
+<ul>
+  <li *ngFor="let livre of livres">
+    <strong>{{ livre.titre }}</strong> ({{ livre.annee }})
+    <button (click)="edit(livre)">Edit</button>
+    <button (click)="delete(livre.id!)">Delete</button>
+  </li>
+</ul>
+
+<hr>
+
+<h2>{{ selectedId ? 'Modifier' : 'Ajouter' }} un Livre</h2>
+
+<form (ngSubmit)="submit()">
+  <input [(ngModel)]="formLivre.titre" name="titre" placeholder="Titre" required>
+
+  <input [(ngModel)]="formLivre.resume" name="resume" placeholder="Résumé" required>
+
+  <input [(ngModel)]="formLivre.annee" name="annee" type="date" required>
+
+  <button type="submit">
+    {{ selectedId ? 'Update' : 'Create' }}
+  </button>
+
+  <button type="button" (click)="resetForm()">Reset</button>
+</form>
