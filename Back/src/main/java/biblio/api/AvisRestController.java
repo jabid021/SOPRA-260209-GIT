@@ -1,14 +1,21 @@
 package biblio.api;
 
-import biblio.dao.IDAOAvis;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import biblio.model.Avis;
 import biblio.model.Livre;
-
 import biblio.service.AvisService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/avis")
@@ -23,12 +30,10 @@ public class AvisRestController {
         return avisService.findById(id);
     }
 
-    /* 
-    @GetMapping("/livre/{titre}")
-    public List<Livre> findByLivre(@PathVariable String titre){
-        return daoAvis.findByLivre(titre);
+    @GetMapping("/livre/{livreId}")
+    public List<Avis> findByLivreId(@PathVariable Integer livreId){
+        return avisService.findByLivreId(livreId);
     }
-    */
    
     @GetMapping
     public List<Avis> findAll(){

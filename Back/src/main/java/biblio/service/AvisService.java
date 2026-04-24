@@ -25,6 +25,11 @@ public class AvisService {
         return this.daoAvis.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Avis introuvable : id=" + id));
     }
+    
+    public List<Avis> findByLivreId(Integer livreId)
+    {
+        return this.daoAvis.findByLivreId(livreId);
+    }
 
     public Avis create(Avis avis)
     {

@@ -29,7 +29,7 @@ public class Avis {
 	private LocalDate date;
 	
 	@ManyToOne
-	@JoinColumn(name="livre_id",nullable=false)
+	@JoinColumn(name = "livre_id", nullable=false)
 	private Livre livre;
 	
 	public Avis() {}
