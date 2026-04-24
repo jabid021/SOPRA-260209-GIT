@@ -9,6 +9,6 @@ import biblio.model.Livre;
 
 public interface IDAOAvis extends JpaRepository<Avis,Integer> {
 	
-	public List<Livre> findByLivre(Integer livre);
+	public List<Livre> findByLivre(String livre);
 	
 }
