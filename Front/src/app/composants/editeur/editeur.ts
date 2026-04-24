@@ -24,7 +24,7 @@ export class EditeurComponent implements OnInit {
 
   constructor (private editeurService: EditeurService, private cdr : ChangeDetectorRef) {}
 
-  ngOnIniti(): void{
+  ngOnInit(): void{
     this.loadEditeurs();
   }
 
