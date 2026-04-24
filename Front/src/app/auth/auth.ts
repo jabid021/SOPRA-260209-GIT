@@ -13,7 +13,7 @@ export class Auth {
   login(username: string, password: string) {
   return this.http.post<{ success: boolean, token: string }>(this.apiUrl, { username, password });
   }
-  
+
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }

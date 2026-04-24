@@ -1,5 +1,4 @@
-export interface Collection 
-{
-  id: number;
+export interface Collection {
+  id?: number;
   nom: string;
 }

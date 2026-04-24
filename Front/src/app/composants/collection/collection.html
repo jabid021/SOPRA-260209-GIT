@@ -1,120 +1,34 @@
-<section class="collection-page">
+<div class="container">
+  <h2>Liste des collections</h2>
 
-  <!-- En-tête -->
-  <div class="page-header">
-    <div class="page-header__title">
-      <span class="page-header__icon">📚</span>
-      <h1>Collections</h1>
-    </div>
-    <button class="btn btn--primary" (click)="openAddForm()" [disabled]="isAdding">
-      + Nouvelle collection
-    </button>
+  <button class="btn-primary" (click)="openAddForm()">Ajouter une collection</button>
+
+  <div *ngIf="showForm" class="mt-3">
+    <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} une collection</h3>
+    <form>
+      <input type="text" placeholder="Nom" [(ngModel)]="formCollection.nom" name="nom" /><br>
+      <button type="button" class="btn-primary mt-3" (click)="submit()">
+        {{ isEditing ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <button type="button" class="btn-delete mx-1 mt-3" (click)="cancel()">Annuler</button>
+    </form>
   </div>
 
-  <!-- Messages de retour -->
-  @if (successMessage) {
-    <div class="alert alert--success">{{ successMessage }}</div>
-  }
-  @if (errorMessage) {
-    <div class="alert alert--error">{{ errorMessage }}</div>
-  }
-
-  <!-- Formulaire d'ajout -->
-  @if (isAdding) {
-    <div class="add-form">
-      <h2 class="add-form__title">Nouvelle collection</h2>
-      <div class="add-form__row">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom de la collection"
-          [(ngModel)]="newNom"
-          (keyup.enter)="submitAdd()"
-          autofocus
-        />
-        <button class="btn btn--primary" (click)="submitAdd()" [disabled]="!newNom.trim()">
-          Ajouter
-        </button>
-        <button class="btn btn--ghost" (click)="cancelAdd()">Annuler</button>
-      </div>
-    </div>
-  }
-
-  <!-- Tableau des collections -->
-  @if (collections.length === 0) {
-    <div class="empty-state">
-      <span class="empty-state__icon">🗂️</span>
-      <p>Aucune collection enregistrée pour l'instant.</p>
-    </div>
-  } @else {
-    <div class="table-wrapper">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="table__th table__th--id">#</th>
-            <th class="table__th">Nom</th>
-            <th class="table__th table__th--actions">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (collection of collections; track collection.id) {
-            <tr class="table__row">
-              <td class="table__td table__td--id">{{ collection.id }}</td>
-
-              <!-- Cellule nom : lecture ou édition inline -->
-              <td class="table__td">
-                @if (editingId === collection.id) {
-                  <input
-                    class="input input--inline"
-                    type="text"
-                    [(ngModel)]="editingNom"
-                    (keyup.enter)="submitEdit(collection)"
-                    (keyup.escape)="cancelEdit()"
-                    autofocus
-                  />
-                } @else {
-                  <span class="collection-name">{{ collection.nom }}</span>
-                }
-              </td>
-
-              <!-- Actions -->
-              <td class="table__td table__td--actions">
-                @if (editingId === collection.id) {
-                  <button
-                    class="btn btn--sm btn--primary"
-                    (click)="submitEdit(collection)"
-                    [disabled]="!editingNom.trim()"
-                    title="Valider"
-                  >
-                    ✓
-                  </button>
-                  <button class="btn btn--sm btn--ghost" (click)="cancelEdit()" title="Annuler">
-                    ✕
-                  </button>
-                } @else {
-                  <button
-                    class="btn btn--sm btn--secondary"
-                    (click)="startEdit(collection)"
-                    [disabled]="isAdding"
-                    title="Modifier"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    class="btn btn--sm btn--danger"
-                    (click)="deleteCollection(collection)"
-                    [disabled]="isAdding"
-                    title="Supprimer"
-                  >
-                    🗑️
-                  </button>
-                }
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  }
-
-</section>
+  <table class="mt-3">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let collection of collections">
+        <td>{{ collection.nom }}</td>
+        <td>
+          <button class="btn-edit" (click)="openEditForm(collection)">Modifier</button>
+          <button class="btn-delete mx-1" (click)="delete(collection.id!)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

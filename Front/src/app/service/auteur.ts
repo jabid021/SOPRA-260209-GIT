@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuteurService {
-  private apiUrl = 'http://localhost:8080/api/auteur';
+  private apiUrl = '/api/auteur';
 
   constructor(private http: HttpClient) {}
 
