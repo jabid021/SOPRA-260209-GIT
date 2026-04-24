@@ -2,8 +2,8 @@
 
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Collection } from '../model/collection';
-import { CollectionService } from '../service/collection-service';
+import { Collection } from '../../model/collection';
+import { CollectionService } from '../../service/collection-service';
 
 @Component({
   selector: 'app-collection',
