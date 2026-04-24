@@ -1,0 +1,7 @@
+<div>
+  <h2>Connexion</h2>
+  <input type="text" placeholder="Username" [(ngModel)]="username" /><br>
+  <input type="password" placeholder="Password" [(ngModel)]="password" /><br>
+  <button (click)="onLogin()">Se connecter</button>
+  <p *ngIf="erreur">{{ erreur }}</p>
+</div>

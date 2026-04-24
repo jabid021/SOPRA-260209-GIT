@@ -1,9 +1,9 @@
-<nav>
+<nav *ngIf="isLoggedIn()">
   <a routerLink="/auteurs">Auteurs</a><br>
   <a routerLink="/livres">Livres</a><br>
   <a routerLink="/collections">Collections</a><br>
   <a routerLink="/editeurs">Editeurs</a><br>
-  <a routerLink="/avis">Avis</a>
+  <a routerLink="/avis">Avis</a><br>
 </nav>
 
 <router-outlet />
