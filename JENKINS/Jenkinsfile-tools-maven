@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    // Configuration des outils à utiliser : disponibles pour TOUS les stages
+    tools {
+        // On veut l'outil "maven" qui s'appelle "maven-3.9"
+        maven 'maven-3.9'
+    }
+
+    stages {
+        stage('Github checkout') {
+            steps {
+                script {
+                    git credentialsId: 'github-login',
+                        url: 'git@github.com:jabid021/SOPRA-260209-GIT.git',
+                        branch: 'main'
+                }
+            }
+        }
+
+        stage('Maven Version 3.8') {
+            // On change d'outil maven pour ces étapes
+            tools {
+                maven 'maven-3.8'
+            }
+
+            steps {
+                sh 'mvn -version'
+            }
+        }
+
+        stage('Maven package') {
+            steps {
+                // Se placer dans le répertoire quest-boot du repo git
+                dir('quest-boot') {
+                    sh 'mvn -version'
+                    sh 'mvn package -DskipTests'
+                }
+            }
+        }
+    }
+}
