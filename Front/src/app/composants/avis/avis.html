@@ -54,7 +54,7 @@
     <tbody>
       <tr *ngFor="let avis of avisList">
         <td>{{ avis.note }}/5</td>
-        <td>{{ avis.livre?.titre }}</td>
+        <td>{{ avis.livreId }}</td>
         <td>{{ avis.commentaire }}</td>
         <td>{{ avis.date | date:'shortDate' }}</td>
         <td>
@@ -62,7 +62,7 @@
             Modifier
           </button>
 
-          <button class="btn-delete mx-1" (click)="delete(avis.id)">
+          <button class="btn-delete mx-1" (click)="delete(avis.id!)">
             Supprimer
           </button>
         </td>

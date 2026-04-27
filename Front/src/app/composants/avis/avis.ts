@@ -12,13 +12,13 @@ import { Avis } from '../../model/avis';
 })
 
 export class AvisComponent implements OnInit{
-  avisList: AvisModel[] = [];
+  avisList: Avis[] = [];
     livres: { id: number; titre: string }[] = []; // à adapter selon votre modèle Livre
 
     showForm = false;
     isEditing = false;
 
-    formData: AvisModel = {
+    formData: Avis = {
       note: 0,
       livreId: 0,
       date: '',
@@ -32,8 +32,8 @@ export class AvisComponent implements OnInit{
     }
 
   loadAvis(): void {
-      this.editeurService.getAll().subscribe((data: Avis[]) => {
-            this.avis = data;
+      this.avisService.getAll().subscribe((data: Avis[]) => {
+            this.avisList = data;
             this.cdr.detectChanges();
           });
     }
@@ -45,7 +45,7 @@ export class AvisComponent implements OnInit{
       this.showForm = true;
     }
 
-    openEditForm(avis: AvisModel): void {
+    openEditForm(avis: Avis): void {
       this.isEditing = true;
       this.editingId = avis.id ?? null;
       this.formData = { ...avis };
