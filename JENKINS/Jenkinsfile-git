@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+        stages {
+            stage('Github checkout'){
+                steps {
+                    script {
+                        git credentialsId: 'github-login',
+                            url: 'git@github.com:jabid021/SOPRA-260209-GIT.git',
+                            branch: 'main'
+                }
+            }
+        }
+    }
+}
