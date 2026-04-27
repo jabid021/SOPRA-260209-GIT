@@ -1,0 +1,87 @@
+<h1>Liste des produits</h1>
+
+<button *ngIf="!showForm" (click)="showForm = true" class="btn btn-light">Cliquer ici pour ajouter</button>
+
+<form *ngIf="showForm" (ngSubmit)="creerOuModifier()" [formGroup]="produitForm">
+    <div class="mb-3 row">
+        <label for="label" class="col-sm-2 col-form-label">Libellé</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="label" formControlName="label" [class.is-invalid]="labelCtrl.invalid && (labelCtrl.dirty || labelCtrl.touched)" />
+
+            @if (labelCtrl.hasError('required')) {
+                <div class="invalid-feedback">Le libellé est obligatoire</div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="price" class="col-sm-2 col-form-label">Prix</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="price" formControlName="price" [class.is-invalid]="priceCtrl.invalid && (priceCtrl.dirty || priceCtrl.touched)" />
+
+            @if (priceCtrl.hasError('required')) {
+                <div class="invalid-feedback">Le prix est obligatoire</div>
+            }
+
+            @else if (priceCtrl.hasError('min')) {
+                <div class="invalid-feedback">Le prix doit être supérieur à 0</div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="fournisseurId" class="col-sm-2 col-form-label">Fournisseur</label>
+        <div class="col-sm-10">
+            <select class="form-select" id="fournisseurId" formControlName="fournisseur" [class.is-invalid]="priceCtrl.invalid && (priceCtrl.dirty || priceCtrl.touched)">
+                <option *ngFor="let fournisseur of fournisseurs$ | async" [value]="fournisseur.id">{{ fournisseur.nom }}</option>
+            </select>
+
+            @if (fournisseurCtrl.hasError('required')) {
+                <div class="invalid-feedback">Le fournisseur est obligatoire</div>
+            }
+        </div>
+    </div>
+
+    <div class="btn-group">
+        @if (editingProduit) {
+            <input type="submit" [disabled]="produitForm.invalid" class="btn btn-warning" value="Modifier" />
+        }
+
+        @else {
+            <input type="submit" [disabled]="produitForm.invalid" class="btn btn-success" value="Créer" />
+        }
+
+        <button type="button" class="btn btn-danger" (click)="annulerEditer()">Annuler</button>
+    </div>
+</form>
+
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Fournisseur</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let produit of produits$ | async; trackBy: trackProduit">
+            <td>
+                <a [routerLink]="[ '/produit', produit.id ]">{{ produit.nom }}</a>
+            </td>
+
+            <td>{{ produit.prix }} euros</td>
+            <td>{{ produit.fournisseurNom }}</td>
+
+            <td>
+                <div class="btn-group" >
+                    <button class="btn btn-warning" (click)="editer(produit)">Modifier</button>
+                    <button class="btn btn-danger" (click)="supprimer(produit)">Supprimer</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

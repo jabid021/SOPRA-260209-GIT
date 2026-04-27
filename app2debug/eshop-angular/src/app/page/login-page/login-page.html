@@ -1,0 +1,35 @@
+<h1>Se connecter</h1>
+
+@if (loginError) {
+    <div class="alert alert-danger">Nom d'utilisateur ou mot de passe incorrect</div>
+}
+
+<form (ngSubmit)="connecter()" [formGroup]="userForm">
+    <div class="mb-3 row">
+        <label for="username" class="col-sm-2 col-form-label">Libellé</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="usernameCtrl.invalid && (usernameCtrl.dirty || usernameCtrl.touched)" />
+
+            @if (usernameCtrl.hasError('required')) {
+                <div class="invalid-feedback">Le nom d'utilisateur est obligatoire</div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="password" class="col-sm-2 col-form-label">Prix</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" formControlName="password" [class.is-invalid]="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)" />
+
+            @if (passwordCtrl.hasError('required')) {
+                <div class="invalid-feedback">Le mot de passe est obligatoire</div>
+            }
+
+            @else if (passwordCtrl.hasError('minlength')) {
+                <div class="invalid-feedback">Le mot de passe doit faire 6 caractères minimum</div>
+            }
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-success" [disabled]="userForm.invalid" value="Se connecter" />
+</form>
