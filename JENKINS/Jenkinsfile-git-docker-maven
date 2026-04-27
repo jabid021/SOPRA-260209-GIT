@@ -26,13 +26,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Docker build') {
-            steps {
-                dir('quest-boot') {
-                    sh 'docker build -t ajc/quest-boot .'
-                }
-            }
-        }
     }
 }
