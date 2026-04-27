@@ -1,0 +1,30 @@
+pipeline {
+    // Demander à Jenkins d'exécuter le builder dans un container Docker
+    agent {
+        docker {
+            image 'maven:3.9.11-eclipse-temurin-21'
+        }
+    }
+
+    // Ces stages seront exécutés dans le container Docker
+    stages {
+        stage('Github checkout') {
+            steps {
+                script {
+                    git credentialsId: 'github-login',
+                        url: 'git@github.com:jabid021/SOPRA-260209-GIT.git',
+                        branch: 'main'
+                }
+            }
+        }
+
+        stage('Maven version') {
+            steps {
+                dir('quest-boot') {
+                    sh 'mvn -version'
+                    sh 'mvn package -DskipTests'
+                }
+            }
+        }
+    }
+}
