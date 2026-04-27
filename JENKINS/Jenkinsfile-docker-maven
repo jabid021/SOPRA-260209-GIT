@@ -1,7 +1,9 @@
 pipeline {
     // Demander à Jenkins d'exécuter le builder dans un container Docker
-    agent docker {
-        image 'maven:3.9.11-eclipse-temurin-21'
+    agent {
+        docker {
+            image 'maven:3.9.11-eclipse-temurin-21'
+        }
     }
 
     // Ces stages seront exécutés dans le container Docker
