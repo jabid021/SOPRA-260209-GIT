@@ -18,11 +18,19 @@ pipeline {
             }
         }
 
-        stage('Maven version') {
+        stage('Maven build') {
             steps {
                 dir('quest-boot') {
                     sh 'mvn -version'
-                    sh 'mvn package -DskipTests'
+                    sh 'mvn package'
+                }
+            }
+        }
+
+        stage('Docker build') {
+            steps {
+                dir('quest-boot') {
+                    sh 'docker build -t ajc/quest-boot .'
                 }
             }
         }
