@@ -1,0 +1,55 @@
+name: quest-app
+
+services:
+
+  mysql:
+    image: mysql:8.0.45
+    container_name: quest-mysql
+    environment:
+      MYSQL_DATABASE: quest
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - quest
+    ports:
+      - 3305:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
+  back:
+    image: ajc/quest-boot:latest
+    container_name: quest-boot
+    networks:
+      - quest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/quest
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - 8080:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  front:
+    image: ajc/quest-app:latest
+    build: ./quest-angular
+    container_name: quest-angular
+    networks:
+      - quest
+    ports:
+      - 4200:80
+    depends_on:
+      - back
+
+networks:
+  quest:
+    name: quest-app
+
+volumes:
+  mysql-data:
+    name: quest-data
