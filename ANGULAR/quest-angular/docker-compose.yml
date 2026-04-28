@@ -37,7 +37,6 @@ services:
 
   front:
     image: ajc/quest-app:latest
-    build: ./quest-angular
     container_name: quest-angular
     networks:
       - quest
