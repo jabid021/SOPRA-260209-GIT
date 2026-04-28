@@ -40,5 +40,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker deploy') {
+            steps {
+                // Se placer dans le répertoire (éventuellement) dans lequel se trouve le docker-compose.yml
+                // dir('ANGULAR/quest-angular') {
+                sh 'docker compose up -d --no-deps angular'
+                // }
+            }
+        }
     }
 }
