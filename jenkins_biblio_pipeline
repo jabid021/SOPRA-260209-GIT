@@ -44,7 +44,7 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                dir('Front/) {
+                dir('Front/') {
                     sh 'docker build -t jenkins/biblio-front .'
                 }
             }
