@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:lts-bullseye'
+                    args '''
+                        -v $HOME/.npm:/root/.npm:z
+                        -u root
+                        --network devops
+                    '''
+                    reuseNode true // Sans ça, il y aura un 2eme workspace
+                }
+            }
+
+            stages {
+                stage('Installation dependances') {
+                    steps {
+                        dir('bibliotek/bibliotek-angular') {
+                            sh 'npm install'
+                        }
+                    }
+                }
+
+                stage('Analyse Sonar') {
+                    steps {
+                        dir('bibliotek/bibliotek-angular') {
+                            withSonarQubeEnv('sonar-id') {
+                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=bibliotek-angular'
+                            }
+                        }
+                    }
+                }
+
+                stage('Build Angular') {
+                    steps {
+                        dir('bibliotek/bibliotek-angular') {
+                            sh './node_modules/.bin/ng build'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('bibliotek/bibliotek-angular') {
+                    sh 'docker build -t ajc/bibliotek:angular .'
+                }
+            }
+        }
+
+        stage('Docker Deploy') {
+            steps {
+                dir('bibliotek') {
+                    sh 'docker compose up -d --no-deps angular'
+                }
+            }
+        }
+    }
+}
