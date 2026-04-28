@@ -1,0 +1,25 @@
+<h1>Se connecter</h1>
+
+<form (submit)="connexion()" [formGroup]="formAuth">
+    <div class="mb-3 row">
+        <label for="username" class="col-sm-2 col-form-label">Nom d'utilisateur</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" formControlName="username" [class.is-invalid]="formUsernameCtrl.invalid" />
+            <div *ngIf="formUsernameCtrl.hasError('required')" class="invalid-feedback">Le nom d'utilisateur est obligatoire</div>
+            <div *ngIf="formUsernameCtrl.hasError('compare')" class="invalid-feedback">Le nom d'utilisateur doit être égal à 'test'</div>
+            <div *ngIf="formUsernameCtrl.hasError('minusculeV2')" class="invalid-feedback">Le nom d'utilisateur doit être en minuscules V2</div>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" formControlName="password" [class.is-invalid]="formPasswordCtrl.invalid" />
+            <div *ngIf="formPasswordCtrl.hasError('required')" class="invalid-feedback">Le mot de passe est obligatoire</div>
+        </div>
+    </div>
+
+    <div>
+        <input [disabled]="formAuth.invalid" type="submit" class="btn btn-success" value="Se connecter" />
+    </div>
+</form>

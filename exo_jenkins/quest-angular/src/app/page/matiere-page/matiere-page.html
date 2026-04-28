@@ -1,0 +1,37 @@
+<h1>Liste des matières</h1>
+
+<form (submit)="addMatiere()" [formGroup]="formMatiere">
+    <div class="mb-3 row">
+        <label for="libelle" class="col-sm-2 col-form-label">Libellé</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="libelle" formControlName="libelle" [class.is-invalid]="formLibelleCtrl.invalid" />
+            <div *ngIf="formLibelleCtrl.hasError('required')" class="invalid-feedback">Le libellé est obligatoire</div>
+        </div>
+    </div>
+
+    <div>
+        <input [disabled]="formMatiere.invalid" type="submit" class="btn btn-success" value="Ajouter" />
+    </div>
+</form>
+
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Libellé</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let matiere of matieres$ | async">
+            <td>{{ matiere.id }}</td>
+            <td>{{ matiere.libelle }}</td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteMatiere(matiere)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

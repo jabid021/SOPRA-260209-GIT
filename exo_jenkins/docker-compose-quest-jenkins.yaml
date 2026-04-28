@@ -1,0 +1,57 @@
+name: quest-angular-jenkins
+
+services:
+
+  mysql:
+    image: mysql:8.0.45
+    container_name: quest-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+    volumes:
+      - ./quest-init2.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+    networks:
+      - quest
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+  java:
+    image: ajc/quest-boot
+    container_name : quest-boot
+    ports:
+      - 8080:8080
+    networks:
+      - quest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://quest-mysql:3306/projet_quest
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: always
+  angular:
+    image: ajc/quest-angular
+    container_name : quest-angular
+    ports:
+      - 4200:80
+    networks:
+      - quest
+    depends_on:
+      - java
+
+
+networks:
+  quest:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    name: quest-mysql-data
