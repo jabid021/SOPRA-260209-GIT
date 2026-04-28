@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Front') {
+            // Demander à Jenkins d'exécuter le builder dans un container Docker
+            agent {
+                docker {
+                    image 'node:lts-bullseye'
+                    args '''
+                        -v $HOME/.npm:/root/.npm:z
+                        -u root
+                    '''
+                    reuseNode true // Permet de garder le même workspace entre les différents agents (any & docker)
+                }
+            }
+
+            stages {
+                stage('Install dependencies') {
+                    steps {
+                        dir('Front/') {
+                            sh 'npm install'
+                        }
+                    }
+                }
+
+                stage('Sonar analysis') {
+                    steps {
+                        dir('Front/') {
+                            sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=Biblio'
+                        }
+                    }
+                }
+
+                stage('NPM Build') {
+                    steps {
+                        dir('Front/') {
+                            sh './node_modules/.bin/ng build'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Docker build') {
+            steps {
+                dir('Front/) {
+                    sh 'docker build -t jenkins/biblio-front .'
+                }
+            }
+        }
+
+        stage('Docker deploy') {
+            steps {
+                // Se placer dans le répertoire (éventuellement) dans lequel se trouve le docker-compose.yml
+                // dir('ANGULAR/quest-angular') {
+                sh 'docker compose up -d --no-deps angular'
+                // }
+            }
+        }
+    }
+}
