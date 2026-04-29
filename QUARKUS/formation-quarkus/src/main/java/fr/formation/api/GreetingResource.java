@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.api;
 
 import fr.formation.musique.Guitariste;
 import fr.formation.request.HelloRequest;
