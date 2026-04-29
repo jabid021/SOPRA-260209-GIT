@@ -1,8 +1,10 @@
 package fr.formation;
 
 import fr.formation.musique.Guitariste;
+import fr.formation.request.HelloRequest;
 import fr.formation.response.ExempleRecordResponse;
 import fr.formation.response.ExempleResponse;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -55,5 +57,11 @@ public class GreetingResource {
     @Path("/path-param/{id}")
     public String pathParam(@PathParam("id") Integer id) {
         return "Le paramètre (path param) = " + id;
+    }
+
+    @GET
+    @Path("/bean-param")
+    public String beanParam(@BeanParam HelloRequest request) {
+        return "Le message est " + request.getMessage();
     }
 }
