@@ -5,7 +5,9 @@ import fr.formation.response.ExempleRecordResponse;
 import fr.formation.response.ExempleResponse;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/hello")
@@ -41,5 +43,17 @@ public class GreetingResource {
     @Path("/exemple-record")
     public ExempleRecordResponse exempleRecord() {
         return new ExempleRecordResponse("Le message");
+    }
+
+    @GET
+    @Path("/query-param")
+    public String queryParam(@QueryParam("id") Integer id) {
+        return "Le paramètre = " + id;
+    }
+
+    @GET
+    @Path("/path-param/{id}")
+    public String pathParam(@PathParam("id") Integer id) {
+        return "Le paramètre (path param) = " + id;
     }
 }
