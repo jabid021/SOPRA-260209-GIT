@@ -42,9 +42,9 @@
 
 		<!-- JJWT pour générer et valider un jeton JWT -->
 		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.13.0</version>
+			<groupId>org.bitbucket.b_c</groupId>
+			<artifactId>jose4j</artifactId>
+			<version>0.9.6</version>
 		</dependency>
 
 		<dependency>
