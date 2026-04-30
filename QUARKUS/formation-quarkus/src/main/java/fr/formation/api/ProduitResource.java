@@ -31,6 +31,12 @@ public class ProduitResource {
         return this.repository.findAll().stream().map(ProduitResponse::convert).toList();
     }
 
+    @GET
+    @Path("/{id}")
+    public ProduitResponse findById(@PathParam("id") Integer id) {
+        return ProduitResponse.convert(this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new));
+    }
+
     @Transactional
     @POST
     @Path("/create")
