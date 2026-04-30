@@ -7,6 +7,8 @@ import fr.formation.repository.ProduitRepository;
 import fr.formation.request.CreateOrUpdateProduitRequest;
 import fr.formation.request.CreateProduitRequest;
 import fr.formation.response.ProduitResponse;
+import io.quarkus.security.jpa.Roles;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.DELETE;
@@ -33,6 +35,8 @@ public class ProduitResource {
 
     @GET
     @Path("/{id}")
+    // @RolesAllowed({ "user", "admin" })
+    @RolesAllowed("user")
     public ProduitResponse findById(@PathParam("id") Integer id) {
         return ProduitResponse.convert(this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new));
     }
@@ -40,6 +44,7 @@ public class ProduitResource {
     @Transactional
     @POST
     @Path("/create")
+    @RolesAllowed("admin")
     public int createBeanParam(@BeanParam CreateProduitRequest request) {
         Produit produit = new Produit();
 
@@ -53,6 +58,7 @@ public class ProduitResource {
 
     @Transactional
     @POST
+    @RolesAllowed("admin")
     public Response create(CreateOrUpdateProduitRequest request) {
         Produit produit = new Produit();
 
@@ -70,6 +76,7 @@ public class ProduitResource {
     @Transactional
     @PUT
     @Path("/{id}")
+    @RolesAllowed("admin")
     public int update(@PathParam("id") Integer id, CreateOrUpdateProduitRequest request) {
         Produit produit = this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
@@ -84,6 +91,7 @@ public class ProduitResource {
     @Transactional
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("admin")
     public int deleteById(@PathParam("id") Integer id) {
         this.repository.deleteById(id);
 
